@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -25,101 +25,9 @@
 <meta name="theme-color" content="#121213" media="(prefers-color-scheme: dark)">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preload" as="fetch" href="/src/dict/en/5.txt?v=36cc6679d6" crossorigin>
-<link rel="stylesheet" href="/src/wordle.css?v=36cc6679d6">
-<style>
-/* Page shell. The game's own styles live in wordle.css. */
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);
-  font:16px/1.65 "Helvetica Neue",Arial,sans-serif;overflow-x:hidden}
-a{color:var(--accent)}
-.wrap{max-width:760px;margin:0 auto;padding:0 18px}
-.eyebrow{text-transform:uppercase;letter-spacing:1.6px;font-size:11px;font-weight:800;color:var(--accent);margin:0 0 6px}
-h1{font-size:clamp(26px,6vw,38px);line-height:1.15;margin:0 0 14px;letter-spacing:-.5px}
-h2{font-size:clamp(21px,4.6vw,27px);line-height:1.25;margin:0 0 12px;letter-spacing:-.3px}
-h3{font-size:17px;margin:0 0 8px}
-p{margin:0 0 14px}
-
-.topnav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:saturate(1.6) blur(10px);-webkit-backdrop-filter:saturate(1.6) blur(10px);
-  border-bottom:1px solid var(--border)}
-.topnav .wrap{display:flex;align-items:center;gap:14px;height:56px}
-.logo{display:inline-flex;align-items:baseline;gap:4px;font-weight:800;font-size:17px;text-decoration:none;color:inherit}
-.logo b{color:var(--green)}
-.topnav nav{margin-left:auto;display:flex;gap:4px;align-items:center}
-.topnav nav a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 9px;border-radius:8px;white-space:nowrap}
-.topnav nav a:hover{background:var(--bg2);color:var(--text)}
-.topnav nav a[aria-current]{color:var(--accent)}
-
-.hero{padding:26px 0 4px;text-align:center}
-.hero p{color:var(--muted);max-width:56ch;margin:0 auto 6px}
-.badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0 0}
-.badges span{font-size:11.5px;font-weight:700;background:var(--bg2);border:1px solid var(--border);
-  border-radius:20px;padding:5px 11px;color:var(--muted)}
-
-.gamehost{padding:6px 0 10px}
-
-section{padding:34px 0;border-top:1px solid var(--border)}
-section:first-of-type{border-top:none}
-.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--accent);
-  color:#fff;font-size:12px;font-weight:800;margin-right:9px;vertical-align:2px}
-
-.toc{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin:22px 0}
-.toc h2{font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin:0 0 10px}
-.toc ol{margin:0;padding-left:20px;columns:2;column-gap:22px}
-.toc li{margin:0 0 5px;font-size:14px;break-inside:avoid}
-.toc a{color:var(--text);text-decoration:none}
-.toc a:hover{color:var(--accent);text-decoration:underline}
-
-.demo{display:flex;gap:5px;margin:12px 0 6px;flex-wrap:wrap}
-.demo i{width:38px;height:38px;display:grid;place-items:center;border:2px solid var(--tile-border);
-  border-radius:3px;font-style:normal;font-weight:700;font-size:19px}
-.demo i.g{background:var(--green);border-color:var(--green);color:#fff}
-.demo i.y{background:var(--yellow);border-color:var(--yellow);color:#fff}
-.demo i.b{background:var(--absent);border-color:var(--absent);color:#fff}
-.demo-note{font-size:13.5px;color:var(--muted);margin:0 0 18px}
-
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px}
-.card{border:1px solid var(--border);border-radius:14px;padding:16px;background:var(--bg2)}
-.card .k{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-.card h3{margin:0 0 4px}
-.card p{font-size:13.5px;color:var(--muted);margin:0}
-
-.cta{text-align:center;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px 18px;margin:26px 0}
-.cta h2{margin-bottom:6px}
-.cta p{color:var(--muted);margin-bottom:16px}
-.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none}
-.btn.primary{background:var(--accent);color:#fff}
-.btn.ghost{background:var(--key);color:var(--key-text)}
-
-.tlist{list-style:none;padding:0;margin:14px 0 0}
-.tlist li{border-top:1px solid var(--border);padding:13px 0;font-size:14.5px}
-.tlist li:first-child{border-top:none}
-.tlist b{color:var(--accent)}
-
-details.faq{border-top:1px solid var(--border);padding:2px 0}
-details.faq summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:15px;list-style:none;
-  display:flex;justify-content:space-between;gap:12px;align-items:center}
-details.faq summary::-webkit-details-marker{display:none}
-details.faq summary::after{content:"+";font-size:20px;color:var(--accent);font-weight:800;flex:none}
-details.faq[open] summary::after{content:"\2212"}
-details.faq p{margin:0 0 14px;color:var(--muted);font-size:14.5px}
-
-.topicstrip{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px;margin-top:14px}
-.topicstrip a{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:10px;
-  padding:10px;text-decoration:none;color:var(--text);background:var(--bg2);font-size:13px;font-weight:600}
-.topicstrip a:hover{border-color:var(--accent)}
-.topicstrip .e{font-size:17px}
-
-.sitefoot{border-top:1px solid var(--border);padding:26px 0 40px;text-align:center;color:var(--muted);font-size:13px}
-.sitefoot nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
-.sitefoot a{color:var(--muted);text-decoration:none}
-.sitefoot a:hover{color:var(--text);text-decoration:underline}
-
-@media (max-width:560px){.toc ol{columns:1}}
-</style>
+<link rel="preload" as="fetch" href="/src/dict/en/5.txt?v=562b72d1ef" crossorigin>
+<link rel="stylesheet" href="/src/wordle.css?v=562b72d1ef">
+<link rel="stylesheet" href="/src/site.css?v=562b72d1ef">
 </head>
 <body>
 
@@ -165,7 +73,7 @@ details.faq p{margin:0 0 14px;color:var(--muted);font-size:14.5px}
       <button class="tab" data-mode="unlimited"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8a4 4 0 0 0 0 8c2 0 3.2-1.5 5-4s3-4 5-4a4 4 0 0 1 0 8c-2 0-3.2-1.5-5-4S9 8 7 8z"></path></svg><span>Unlimited</span></button>
       <button class="tab" data-mode="time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg><span>Time</span></button>
       <button class="tab" data-mode="topic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Topics</span></button>
-      <button class="tab" data-mode="multiplayer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Versus</span></button>
+      <button class="tab" data-mode="multiplayer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Versus</span><span class="tab-live" id="mpLive" aria-live="polite"></span></button>
     </div>
 
     <div id="banner"></div>
@@ -422,10 +330,10 @@ details.faq p{margin:0 0 14px;color:var(--muted);font-size:14.5px}
 </footer>
 
 <script>window.WU_CONFIG={region:"en",ns:"",name:"Wordle Unlimited",url:"https://wordleunlimited.dev/"};document.getElementById("yr").textContent=new Date().getFullYear();</script>
-<script src="/src/wordle.js?v=36cc6679d6" defer></script>
-<script src="/src/topics-strip.js?v=36cc6679d6" defer></script>
-<script src="/src/multiplayer.js?v=36cc6679d6" defer></script>
-<script src="/src/cloudsave.js?v=36cc6679d6" defer></script>
+<script src="/src/wordle.js?v=562b72d1ef" defer></script>
+<script src="/src/topics-strip.js?v=562b72d1ef" defer></script>
+<script src="/src/multiplayer.js?v=562b72d1ef" defer></script>
+<script src="/src/cloudsave.js?v=562b72d1ef" defer></script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[
 {"@type":"WebSite","@id":"https://wordleunlimited.dev/#website","url":"https://wordleunlimited.dev/","name":"Wordle Unlimited","inLanguage":"en","publisher":{"@id":"https://wordleunlimited.dev/#org"}},

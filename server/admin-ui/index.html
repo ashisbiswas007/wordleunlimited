@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Admin — Wordle Unlimited</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#1a1a1b;--muted:#6e767d;--border:#dfe3e8;
+  --accent:#6aaa64;--danger:#d9534f;--warn:#c9b458;--radius:12px}
+@media (prefers-color-scheme:dark){:root{--bg:#121213;--card:#1d1e1f;--text:#e4e6e7;
+  --muted:#8b8f93;--border:#3a3a3c;--accent:#538d4e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:940px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:20px;margin:0}
+h2{font-size:16px;margin:0 0 12px}
+a{color:var(--accent)}
+.hidden{display:none!important}
+
+header{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--card);
+  border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;flex-wrap:wrap}
+header .sp{margin-left:auto;display:flex;gap:8px;align-items:center}
+.logo{display:inline-flex;gap:4px;align-items:baseline;font-weight:800}
+.logo b{color:var(--accent)}
+.pill{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;
+  padding:3px 9px;border-radius:20px;background:var(--bg);color:var(--muted);border:1px solid var(--border)}
+.pill.ok{background:var(--accent);color:#fff;border-color:transparent}
+.pill.bad{background:var(--danger);color:#fff;border-color:transparent}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.stat{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px}
+.stat .n{font-size:24px;font-weight:800;line-height:1.1}
+.stat .l{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+input[type=text],input[type=password],input[type=number],textarea,select{
+  width:100%;padding:10px;border:1px solid var(--border);border-radius:9px;
+  background:var(--bg);color:var(--text);font:inherit}
+textarea{min-height:130px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px}
+.field{margin-bottom:14px}
+
+button{font:inherit;font-weight:700;border:none;border-radius:9px;padding:10px 16px;
+  cursor:pointer;background:var(--accent);color:#fff}
+button.ghost{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+button.danger{background:var(--danger)}
+button[disabled]{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px 0;border-bottom:1px solid var(--border)}
+.toggle:last-child{border-bottom:none}
+.toggle .t{font-weight:600;font-size:14px}
+.toggle .d{font-size:12px;color:var(--muted)}
+.sw{position:relative;width:46px;height:26px;flex:none}
+.sw input{opacity:0;width:0;height:0}
+.sw span{position:absolute;inset:0;background:var(--border);border-radius:26px;transition:.18s;cursor:pointer}
+.sw span:before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;
+  background:#fff;border-radius:50%;transition:.18s}
+.sw input:checked+span{background:var(--accent)}
+.sw input:checked+span:before{transform:translateX(20px)}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border)}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.msg{padding:11px 14px;border-radius:9px;margin-bottom:14px;font-size:14px}
+.msg.ok{background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid var(--accent)}
+.msg.err{background:color-mix(in srgb,var(--danger) 14%,transparent);border:1px solid var(--danger)}
+.msg.warn{background:color-mix(in srgb,var(--warn) 18%,transparent);border:1px solid var(--warn)}
+
+#login{max-width:380px;margin:70px auto}
+.tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.tabs button{background:var(--card);color:var(--muted);border:1px solid var(--border);
+  padding:8px 14px;font-size:13.5px}
+.tabs button.on{background:var(--accent);color:#fff;border-color:transparent}
+code{background:var(--bg);padding:2px 5px;border-radius:4px;font-size:12.5px}
+</style>
+</head>
+<body>
+
+<div id="login" class="hidden">
+  <div class="card">
+    <div class="logo" style="margin-bottom:14px"><b>Wordle</b>Unlimited &nbsp;<span class="pill">Admin</span></div>
+    <div id="loginMsg"></div>
+    <form id="loginForm">
+      <div class="field"><label for="u">Username</label><input id="u" type="text" autocomplete="username" required></div>
+      <div class="field"><label for="p">Password</label><input id="p" type="password" autocomplete="current-password" required></div>
+      <button type="submit" style="width:100%">Sign in</button>
+    </form>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <header>
+    <div class="logo"><b>Wordle</b>Unlimited</div>
+    <span class="pill">Admin</span>
+    <span class="pill" id="dbPill">db</span>
+    <span class="pill" id="maintPill"></span>
+    <div class="sp">
+      <button class="ghost" id="refreshBtn">Refresh</button>
+      <button class="ghost" id="logoutBtn">Sign out</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div id="notice"></div>
+
+    <div class="tabs">
+      <button data-tab="overview" class="on">Overview</button>
+      <button data-tab="settings">Settings</button>
+      <button data-tab="topics">Topics</button>
+      <button data-tab="security">Security</button>
+      <button data-tab="audit">Audit log</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section data-panel="overview">
+      <div class="card">
+        <h2>Live now</h2>
+        <div class="grid" id="statGrid"></div>
+      </div>
+      <div class="card">
+        <h2>Rooms</h2>
+        <div class="scroll"><table id="roomTable"><thead><tr>
+          <th>Room</th><th>Kind</th><th>Phase</th><th>Topic</th><th class="num">Players</th><th class="num">Full</th>
+        </tr></thead><tbody></tbody></table></div>
+      </div>
+      <div class="card">
+        <h2>Word lists</h2>
+        <div class="scroll"><table id="wordTable"><thead><tr>
+          <th>Region</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th>
+        </tr></thead><tbody></tbody></table></div>
+        <p style="font-size:12.5px;color:var(--muted);margin:10px 0 0">
+          Answers / accepted guesses. Edit the lexicons in <code>data/</code> and run <code>npm run words</code> to change these.</p>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section data-panel="settings" class="hidden">
+      <div class="card">
+        <h2>Maintenance mode</h2>
+        <div class="toggle">
+          <div><div class="t">Take the site offline</div>
+            <div class="d">Returns 503 with a branded page and blocks crawlers. <b>/admin stays reachable.</b></div></div>
+          <label class="sw"><input type="checkbox" id="setMaint"><span></span></label>
+        </div>
+        <div class="field" style="margin-top:14px">
+          <label for="maintMsg">Message shown to visitors</label>
+          <input id="maintMsg" type="text" maxlength="300">
+        </div>
+        <button id="saveMaint">Save message</button>
+      </div>
+
+      <div class="card">
+        <h2>Game modes</h2>
+        <div id="modeToggles"></div>
+      </div>
+
+      <div class="card">
+        <h2>Features</h2>
+        <div id="featureToggles"></div>
+      </div>
+
+      <div class="card">
+        <h2>Multiplayer</h2>
+        <div id="mpToggles"></div>
+        <div class="grid" style="margin-top:14px">
+          <div class="field"><label for="mpRooms">Max open rooms</label><input id="mpRooms" type="number" min="1" max="5"></div>
+          <div class="field"><label for="mpPlayers">Players per room</label><input id="mpPlayers" type="number" min="2" max="50"></div>
+          <div class="field"><label for="mpReveal">Reveal next room at %</label><input id="mpReveal" type="number" min="10" max="100"></div>
+          <div class="field"><label for="mpRound">Round length (seconds)</label><input id="mpRound" type="number" min="60" max="1800"></div>
+          <div class="field"><label for="mpVote">Vote length (seconds)</label><input id="mpVote" type="number" min="5" max="120"></div>
+          <div class="field"><label for="mpWords">Words to win</label><input id="mpWords" type="number" min="3" max="30"></div>
+        </div>
+        <button id="saveMp">Save multiplayer settings</button>
+      </div>
+
+      <div class="card">
+        <h2>Announcement bar</h2>
+        <div class="toggle">
+          <div><div class="t">Show an announcement</div><div class="d">Appears above the game on every page.</div></div>
+          <label class="sw"><input type="checkbox" id="annOn"><span></span></label>
+        </div>
+        <div class="field" style="margin-top:14px"><label for="annText">Text</label><input id="annText" type="text" maxlength="200"></div>
+        <div class="field"><label for="annHref">Link (optional)</label><input id="annHref" type="text" maxlength="300" placeholder="https://…"></div>
+        <button id="saveAnn">Save announcement</button>
+      </div>
+    </section>
+
+    <!-- TOPICS -->
+    <section data-panel="topics" class="hidden">
+      <div class="card">
+        <h2>Topics</h2>
+        <div class="scroll"><table id="topicTable"><thead><tr>
+          <th>Name</th><th>Slug</th><th>Category</th><th>Region</th>
+          <th class="num">Items</th><th class="num">Plays</th><th>On</th><th>Featured</th><th></th>
+        </tr></thead><tbody></tbody></table></div>
+      </div>
+      <div class="card">
+        <h2>Bulk import</h2>
+        <p style="font-size:13px;color:var(--muted);margin-top:0">
+          Paste an array of topic packs. Answers must be 3–7 letters; anything else is dropped.
+          An existing slug is replaced.</p>
+        <div class="field">
+          <textarea id="importBox" spellcheck="false" placeholder='[{"slug":"marvel","name":"Marvel","category":"movies &amp; tv","icon":"🦸","items":[{"answer":"THOR"},{"answer":"HULK","clue":"Big and green"}]}]'></textarea>
+        </div>
+        <div class="row"><button id="importBtn">Import</button><span id="importOut" style="font-size:13px;color:var(--muted)"></span></div>
+      </div>
+    </section>
+
+    <!-- SECURITY -->
+    <section data-panel="security" class="hidden">
+      <div class="card">
+        <h2>Change password</h2>
+        <div id="pwMsg"></div>
+        <form id="pwForm">
+          <div class="field"><label for="pwCur">Current password</label><input id="pwCur" type="password" autocomplete="current-password" required></div>
+          <div class="field"><label for="pwNew">New password (12+ characters)</label><input id="pwNew" type="password" autocomplete="new-password" minlength="12" required></div>
+          <div class="field"><label for="pwNew2">Repeat new password</label><input id="pwNew2" type="password" autocomplete="new-password" minlength="12" required></div>
+          <button type="submit">Change password</button>
+        </form>
+        <p style="font-size:12.5px;color:var(--muted);margin-bottom:0">
+          Stored hashed in the database, and it overrides the <code>ADMIN_PASSWORD</code>
+          environment variable from then on. You will be signed out.</p>
+      </div>
+    </section>
+
+    <!-- AUDIT -->
+    <section data-panel="audit" class="hidden">
+      <div class="card">
+        <h2>Audit log</h2>
+        <div class="scroll"><table id="auditTable"><thead><tr>
+          <th>When</th><th>Who</th><th>Action</th><th>Detail</th><th>IP</th>
+        </tr></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="/admin/admin.js"></script>
+</body>
+</html>

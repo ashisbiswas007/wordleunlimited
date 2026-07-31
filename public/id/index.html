@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Wordle Indonesia — Main Katla Tanpa Batas, Gratis</title>
+<meta name="description" content="Wordle Indonesia (Katla) dengan kamus KBBI dan kata baku. Main tanpa batas 3 sampai 7 huruf, mode Harian, Waktu, Topik dan multiplayer langsung. Gratis, tanpa akun.">
+<link rel="canonical" href="https://wordleunlimited.dev/id/">
+
+<link rel="alternate" hreflang="en" href="https://wordleunlimited.dev/">
+<link rel="alternate" hreflang="en-GB" href="https://wordleunlimited.dev/wordle-uk/">
+<link rel="alternate" hreflang="id" href="https://wordleunlimited.dev/id/">
+<link rel="alternate" hreflang="x-default" href="https://wordleunlimited.dev/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wordle Unlimited">
+<meta property="og:title" content="Wordle Indonesia — Katla Tanpa Batas">
+<meta property="og:description" content="Kamus KBBI, kata baku, main tanpa batas dari 3 sampai 7 huruf. Gratis, tanpa akun.">
+<meta property="og:url" content="https://wordleunlimited.dev/id/">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#6aaa64" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121213" media="(prefers-color-scheme: dark)">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="fetch" href="/src/dict/id/5.txt?v=562b72d1ef" crossorigin>
+<link rel="stylesheet" href="/src/wordle.css?v=562b72d1ef">
+<link rel="stylesheet" href="/src/site.css?v=562b72d1ef">
+</head>
+<body>
+
+<header class="topnav">
+  <div class="wrap">
+    <a class="logo" href="/"><b>Wordle</b>Unlimited</a>
+    <nav>
+      <a href="/">English</a>
+      <a href="/wordle-uk/">UK</a>
+      <a href="/id/" aria-current="page">Indonesia</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="eyebrow">Bahasa Indonesia, KBBI, Tanpa Batas</p>
+    <h1>Wordle Indonesia</h1>
+    <p>Tebak kata bahasa Indonesia dalam 6 percobaan. Panjang kata bisa diatur dari 3 sampai 7 huruf, semuanya mengikuti ejaan baku KBBI.</p>
+    <div class="badges">
+      <span>Kamus KBBI</span><span>3–7 huruf</span><span>Tanpa akun</span>
+      <span>Mode anak</span><span>Tantang teman</span>
+    </div>
+  </div>
+
+  <div class="wrap gamehost">
+
+<div id="wu-root">
+  <div class="app">
+    <div class="topbar">
+      <div class="wu-brand"><span class="wu-brand-1">Wordle</span><span class="wu-brand-2">Indonesia</span></div>
+      <div class="icons">
+        <button class="icon" id="helpBtn" data-open="howtoModal" aria-label="Cara main"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></button>
+        <button class="icon" id="statsBtn" data-open="statsModal" aria-label="Statistik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></button>
+        <button class="icon" id="kbdBtn" data-act="kbd" aria-label="Pakai keyboard saya" title="Pakai keyboard saya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9 14h6"></path></svg></button>
+        <button class="icon" id="setBtn" data-open="settingsModal" aria-label="Pengaturan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button>
+        <button class="icon" id="fsBtn" data-act="fullscreen" aria-label="Layar penuh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab" data-mode="daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span>Harian</span></button>
+      <button class="tab" data-mode="unlimited"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8a4 4 0 0 0 0 8c2 0 3.2-1.5 5-4s3-4 5-4a4 4 0 0 1 0 8c-2 0-3.2-1.5-5-4S9 8 7 8z"></path></svg><span>Unlimited</span></button>
+      <button class="tab" data-mode="time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg><span>Waktu</span></button>
+      <button class="tab" data-mode="topic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Topik</span></button>
+      <button class="tab" data-mode="multiplayer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Lawan</span><span class="tab-live" id="mpLive" aria-live="polite"></span></button>
+    </div>
+
+    <div id="banner"></div>
+    <div class="controls" id="controls"></div>
+    <div class="tp-clue" id="tpClue"></div>
+    <div class="hintline" id="hintline"></div>
+    <div class="toast" id="toast"></div>
+    <div class="boardwrap">
+      <div class="grid" id="board"></div>
+      <div class="endwrap" id="endwrap"><div class="endcard" id="endcard"></div></div>
+    </div>
+
+    <div class="keyboard" id="keyboard"></div>
+
+    <div class="typebar" id="typebar">
+      <span class="tb-ico">⌨</span>
+      <span class="tb-txt">Keyboard kamu aktif — langsung ketik tebakanmu.</span>
+      <button class="tb-x" data-act="kbdoff">Tombol di layar</button>
+    </div>
+
+    <input id="wuTyper" class="wu-typer" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" aria-hidden="true" tabindex="-1">
+  </div>
+
+  <div class="overlay" id="howtoModal"><div class="modal">
+    <button class="x" data-close="howtoModal" aria-label="Tutup"></button>
+    <h2>Cara main</h2>
+    <p>Tebak katanya dalam 6 percobaan. Setiap tebakan harus kata yang valid dengan panjang yang sesuai. Warna kotak menunjukkan seberapa dekat tebakanmu.</p>
+    <div class="ex"><div class="tile correct">R</div><div class="tile correct">U</div><div class="tile correct">M</div><div class="tile correct">A</div><div class="tile correct">H</div></div>
+    <p>Semua hijau — katanya ketemu, kamu menang.</p>
+    <div class="ex"><div class="tile">K</div><div class="tile">O</div><div class="tile present">P</div><div class="tile">I</div><div class="tile present">R</div></div>
+    <p><b>P</b> dan <b>R</b> kuning — hurufnya benar, posisinya salah.</p>
+    <div class="ex"><div class="tile absent">S</div><div class="tile absent">E</div><div class="tile absent">N</div><div class="tile absent">D</div><div class="tile absent">A</div></div>
+    <p>Semua abu-abu — tidak ada satu pun huruf ini di dalam kata.</p>
+    <p><b>Harian</b> satu kata per hari. <b>Unlimited</b> tanpa batas. <b>Waktu</b> adu cepat dengan jam. <b>Topik</b> memberi rangkaian nama bertema. <b>Lawan</b> memasukkanmu ke ruang langsung bersama pemain lain.</p>
+    <p class="howsite">Main gratis selamanya di <b>wordleunlimited.dev</b></p>
+    <div id="brandSlot"></div>
+  </div></div>
+
+  <div class="overlay" id="statsModal"><div class="modal">
+    <button class="x" data-close="statsModal" aria-label="Tutup"></button>
+    <h2 id="statsTitle">Statistik</h2>
+    <div id="statsBody"></div>
+  </div></div>
+
+  <div class="overlay" id="topicModal"><div class="modal">
+    <button class="x" data-close="topicModal" aria-label="Tutup"></button>
+    <h2>Pilih topik</h2>
+    <p>Pilih tema lalu tebak nama-namanya satu per satu. Panjang katanya berubah seiring kamu maju.</p>
+    <div class="tp-pick" id="topicBody"></div>
+  </div></div>
+
+  <div class="overlay" id="mpModal"><div class="modal">
+    <button class="x" data-close="mpModal" aria-label="Tutup"></button>
+    <h2>Lawan — main langsung</h2>
+    <div id="mpBody"></div>
+  </div></div>
+
+  <div class="overlay" id="challengeModal"><div class="modal">
+    <button class="x" data-close="challengeModal" aria-label="Tutup"></button>
+    <h2>Tantang teman</h2>
+    <p>Pilih kata apa saja dari kamus kami. Kami ubah jadi tautan — saat temanmu membukanya, katamu muncul dan mereka mencoba menebaknya.</p>
+    <div class="field"><label for="chWord">Katamu (3–7 huruf)</label><input id="chWord" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="7" placeholder="mis. antre"></div>
+    <div class="field"><label for="chName">Namamu (opsional)</label><input id="chName" type="text" autocomplete="off" maxlength="20" placeholder="Ditampilkan ke temanmu"></div>
+    <div class="field opt"><label>Batas waktu (opsional)</label>
+      <div class="seg small" id="chTimeSeg">
+        <button data-chtime="0" class="active">Tanpa</button>
+        <button data-chtime="30">30 dtk</button>
+        <button data-chtime="60">1 mnt</button>
+        <button data-chtime="120">2 mnt</button>
+      </div>
+    </div>
+    <div class="setrow" style="border-bottom:none;padding:8px 0">
+      <div><div class="label">Izinkan petunjuk</div><div class="desc">Temanmu bisa membuka huruf</div></div>
+      <label class="switch"><input type="checkbox" id="chHints"><span class="slider"></span></label>
+    </div>
+    <div class="err" id="chErr"></div>
+    <button class="cbtn" data-act="makelink"><span class="ic" id="mlIcon"></span><span>Buat tautan tantangan</span></button>
+    <div id="chResult" style="display:none">
+      <div class="linkbox"><input id="chLink" readonly><button class="cbtn ghost" data-act="copylink">Salin</button></div>
+      <div id="chShare"></div>
+      <div class="note">Tautan ini membuka situs utama dan memuat katanya. Tidak ada yang disimpan di server.</div>
+    </div>
+  </div></div>
+
+  <div class="overlay" id="settingsModal"><div class="modal">
+    <button class="x" data-close="settingsModal" aria-label="Tutup"></button>
+    <h2>Pengaturan</h2>
+    <div class="setrow"><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"></line><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"></line><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"></line></svg>Tema</div>
+      <div class="seg"><button data-seg="theme" data-val="light">Terang</button><button data-seg="theme" data-val="dark">Gelap</button><button data-seg="theme" data-val="system">Auto</button></div></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>Panjang kata</div><div class="desc">Anak = 3 huruf</div></div>
+      <div class="seg">
+        <button data-seg="length" data-val="3" title="Anak — 3 huruf" aria-label="Mode anak, 3 huruf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9.5" x2="9.01" y2="9.5"></line><line x1="15" y1="9.5" x2="15.01" y2="9.5"></line></svg></button>
+        <button data-seg="length" data-val="4">4</button><button data-seg="length" data-val="5">5</button><button data-seg="length" data-val="6">6</button><button data-seg="length" data-val="7">7</button>
+      </div></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-4z"></path></svg>Level sulit</div><div class="desc">Huruf yang terungkap wajib dipakai lagi</div></div>
+      <label class="switch"><input type="checkbox" id="setHard"><span class="slider"></span></label></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"></path></svg>Petunjuk</div><div class="desc">Tampilkan tombol petunjuk saat bermain</div></div>
+      <label class="switch"><input type="checkbox" id="setHints"><span class="slider"></span></label></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"></path></svg>Kontras tinggi</div><div class="desc">Warna ramah buta warna</div></div>
+      <label class="switch"><input type="checkbox" id="setContrast"><span class="slider"></span></label></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"></path></svg>Suara</div><div class="desc">Suara tombol dan hasil</div></div>
+      <label class="switch"><input type="checkbox" id="setSound"><span class="slider"></span></label></div>
+    <div class="setrow col" id="cloudRow" style="display:none"></div>
+    <div class="setrow col"><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><circle cx="12" cy="12" r="9"></circle><line x1="3" y1="12" x2="21" y2="12"></line><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"></path></svg>Bahasa / Wilayah</div><div class="regions" id="regionRow"></div></div>
+    <div class="footer">
+      <a href="/privacy-policy/">Kebijakan Privasi</a>
+      <a href="/disclaimer/">Disclaimer</a>
+    </div>
+  </div></div>
+</div>
+
+  </div>
+
+  <div class="wrap prose">
+    <p>Kalau kamu orang Indonesia atau paham Bahasa Indonesia dan lagi mencari Wordle yang mendukung Bahasa Indonesia, berarti kamu sudah mendarat di halaman yang tepat, karena di halaman ini kamu akan menemukan game Wordle Indonesia, atau yang lebih akrab disebut Katla Indonesia.</p>
+    <p>Aturan mainnya simpel sekali, tugasmu cuma menemukan kata bahasa Indonesia yang tersembunyi dalam 6 kali percobaan, panjang katanya bisa kamu atur dari 3 sampai 7 huruf, lalu langsung mulai.</p>
+
+    <nav class="toc" aria-label="Di halaman ini">
+      <h2>Di halaman ini</h2>
+      <ol>
+        <li><a href="#why">Kenapa Indonesia Butuh Ini</a></li>
+        <li><a href="#howto">Cara Main</a></li>
+        <li><a href="#kbbi">KBBI &amp; Kata Baku</a></li>
+        <li><a href="#letters">Kata Pembuka Terbaik</a></li>
+        <li><a href="#length">Memilih Panjang Kata</a></li>
+        <li><a href="#challenge">Tantang Teman</a></li>
+        <li><a href="#kids">Mode Anak SD</a></li>
+        <li><a href="#modes">Mode Permainan</a></li>
+        <li><a href="#timezone">WIB, WITA dan WIT</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
+    </nav>
+
+    <section id="why">
+      <p class="eyebrow">01</p>
+      <h2><span class="num">1</span>Kenapa Indonesia Butuh Ini</h2>
+      <h3>Masalahnya</h3>
+      <p>Beda dengan bahasa lain seperti Hindi atau Mandarin, Bahasa Indonesia memakai alfabet Latin yang sama dengan bahasa Inggris, makanya sangat mungkin membuat game Wordle untuk bahasa Indonesia.</p>
+      <p>Selain itu ada banyak sekali pemain yang gemar main tebak kata sejak katla game viral beberapa tahun lalu lewat katla vercel, itulah alasan utama kami menghadirkan versi <a href="/id/">Wordle Indonesia unlimited</a> bersama <a href="/">Wordle Unlimited</a> dan <a href="/wordle-uk/">Wordle UK</a>.</p>
+    </section>
+
+    <section id="howto">
+      <p class="eyebrow">02</p>
+      <h2><span class="num">2</span>Cara Main</h2>
+      <h3>Cara bermain</h3>
+      <p>Cara mainnya gampang banget, begitu game dimulai, lihat jumlah kotak dari kiri ke kanan, itu panjang katanya yang secara bawaan 5, dan bisa kamu ubah dari kata 3 huruf sampai 7 huruf. Setiap kali game Wordle Indonesia dimuat, satu kata rahasia diberikan untuk kamu temukan dalam total 6 percobaan.</p>
+      <p>Dari atas ke bawah, baris-baris kotak kosong itu adalah jatah percobaanmu, ketik kata pertama lalu lihat huruf mana yang berubah warna, hijau artinya sudah di posisi yang benar, kuning artinya hurufnya ada tapi posisinya salah, abu-abu artinya tidak ada di dalam kata. Sekarang ketik kata keduamu dengan cermat, pakai petunjuk dari kata sebelumnya untuk menemukan kata rahasia bahasa Indonesia itu.</p>
+      <h3>Cara kerja warnanya</h3>
+      <div class="demo"><i class="g">R</i><i class="g">U</i><i class="g">M</i><i class="g">A</i><i class="g">H</i></div>
+      <p class="demo-note">Semua hijau — katanya ketemu, kamu menang</p>
+      <div class="demo"><i>K</i><i>O</i><i class="y">P</i><i>I</i><i class="y">R</i></div>
+      <p class="demo-note">P dan R kuning — hurufnya benar, posisinya salah</p>
+      <div class="demo"><i class="b">S</i><i class="b">E</i><i class="b">N</i><i class="b">D</i><i class="b">A</i></div>
+      <p class="demo-note">Semua abu-abu — tidak ada satu pun huruf ini di dalam kata</p>
+      <p>Petunjuk tidak wajib dipakai, tapi kalau mau, tekan tombol gerigi lalu tombol bohlam yang muncul di atas papan permainan untuk mendapat dua petunjuk per ronde. Di menu yang sama ada opsi level sulit, di situ semua huruf yang sudah terungkap wajib dipakai lagi.</p>
+    </section>
+
+    <section id="kbbi">
+      <p class="eyebrow">03</p>
+      <h2><span class="num">3</span>KBBI &amp; Kata Baku</h2>
+      <h3>Kamus</h3>
+      <p>Dan setiap kali ada perdebatan soal puzzle kata bahasa Indonesia, keberatan yang muncul selalu sama: "Kata saya ditolak, padahal itu kata beneran." Ya, bisa jadi memang kata sungguhan, tapi bukan kata baku – bentuk resmi yang tercatat di Kamus Besar Bahasa Indonesia. Kamus kami mengikuti standar KBBI, jadi ejaan yang melenceng tidak akan lolos. Penting diketahui karena justru di sinilah kamu bisa unggul.</p>
+      <ul class="tlist">
+        <li><b>4 huruf</b> — IZIN diterima, IJIN ditolak. ASAS diterima, AZAS ditolak</li>
+        <li><b>5 huruf</b> — ANTRE bukan ANTRI, NAPAS bukan NAFAS, ANDAL bukan HANDAL, IMBAU bukan HIMBAU, ZAMAN bukan JAMAN, PIKIR bukan FIKIR, HAFAL bukan HAPAL, ATLET bukan ATLIT, OBJEK bukan OBYEK, EMBUS bukan HEMBUS</li>
+        <li><b>6 huruf</b> — RISIKO bukan RESIKO, APOTEK bukan APOTIK, PEDULI bukan PERDULI, KARIER bukan KARIR, TEKNIK bukan TEHNIK, SUBJEK bukan SUBYEK, REZEKI bukan REJEKI, MILIAR bukan MILYAR, DETAIL bukan DETIL</li>
+        <li><b>7 huruf</b> — PRAKTIK bukan PRAKTEK, NASIHAT bukan NASEHAT, SILAKAN bukan SILAHKAN, RESPONS bukan RESPON</li>
+      </ul>
+      <p style="margin-top:16px">Dua pola yang menjelaskan hampir semuanya — huruf H di depan yang orang tambahkan karena kebiasaan akan dihilangkan, dan ejaan lama pengaruh Belanda dimodernisasi sehingga J berubah jadi Z dan Y berubah jadi J.</p>
+    </section>
+
+    <section id="letters">
+      <p class="eyebrow">04</p>
+      <h2><span class="num">4</span>Kata Pembuka Terbaik</h2>
+      <h3>Strategi</h3>
+      <p>Namun, sebaran huruf dalam bahasa Indonesia sangat berbeda dengan bahasa Inggris dan hampir tidak ada yang bisa dilakukan soal itu. Contohnya, huruf A mendominasi jauh meninggalkan semua huruf lain; setelahnya ada E lalu N. Selain itu, kata-kata bahasa Indonesia sangat kaya vokal, karena menurut struktur suku kata standarnya vokal selalu mengikuti konsonan.</p>
+      <ul class="tlist">
+        <li><b>Pakai lebih awal</b> — A, N, E, I, R, K, T, U, S, M, D, G, L, H, B dan P. Sertakan A di hampir setiap tebakan pembuka, sering kali dua kali</li>
+        <li><b>Pakai belakangan</b> — Q, V, X, Z, F dan C kebanyakan hanya muncul di kata serapan. Jangan buang tebakan awal untuk memburu huruf-huruf ini</li>
+        <li><b>Tebakan 1, MERAH</b> — menguji A dan E, dua vokal paling umum, plus M, R dan H</li>
+        <li><b>Tebakan 2, TULIS</b> — menguji U dan I, plus T, L dan S. Dua tebakan sudah mencakup empat dari lima vokal</li>
+        <li><b>Tebakan 3, KONDE</b> — hanya kalau dua tebakan pertama kebanyakan abu-abu. Menambah O plus K, N dan D</li>
+      </ul>
+      <p style="margin-top:16px">MERAH dan TULIS berdua sudah memuat bunyi vokal A, E, I dan U serta delapan konsonan yang paling sering dipakai dalam bahasa ini. Jelas jauh lebih baik dari yang bisa dicapai satu kata brilian mana pun, dan biasanya dalam tiga tebakan saja kamu sudah punya cukup informasi untuk memecahkan puzzle-nya. Satu hal yang perlu dicatat, dalam bahasa Indonesia NG dan NY memang satu bunyi tapi di game ini tetap dihitung terpisah, jadi BUNGA butuh lima kotak.</p>
+    </section>
+
+    <section id="length">
+      <p class="eyebrow">05</p>
+      <h2><span class="num">5</span>Memilih Panjang Kata</h2>
+      <h3>Kesulitan</h3>
+      <p>Wordle versi Inggris memilih kata lima huruf. Untuk bahasa Indonesia pilihan itu bisa dibilang agak sembarangan, karena kebanyakan kata dasar bahasa Indonesia terdiri dari dua suku kata; jadi panjangnya empat atau enam huruf. Mari kita rasakan tiap modenya.</p>
+      <ul class="tlist">
+        <li><b>3 huruf</b> — terbatas, kata tiga huruf bahasa Indonesia tidak banyak. IBU, API, AIR, TAS, KUE, UBI, DUA</li>
+        <li><b>4 huruf</b> — paling pas untuk anak-anak dan pemula. NASI, BUKU, MEJA, MATA, IKAN, KOPI, SUSU, BOLA</li>
+        <li><b>5 huruf</b> — standar, kumpulan kata paling kaya. RUMAH, KURSI, HUJAN, TIDUR, TEMAN, CINTA, PUTIH, PINTU</li>
+        <li><b>6 dan 7 huruf</b> — lebih sulit, kata serapan dan kata formal mulai muncul. RISIKO, APOTEK, KUNING, SEPATU, LANGIT, PRAKTIK, NASIHAT, SEKOLAH</li>
+      </ul>
+    </section>
+
+    <section id="challenge">
+      <p class="eyebrow">Multiplayer</p>
+      <h2><span class="num">6</span>Tantang Teman</h2>
+      <p>Pilih kata apa saja dari kamus bahasa Indonesia kami dan kami ubah menjadi tautan yang bisa diklik. Kirim ke temanmu dan katamu akan muncul di layar mereka, siap ditebak. Belum ada katla indonesia lain yang punya tempat senyaman ini di dunia chat WhatsApp.</p>
+      <p>Klik tab Tantang Teman dan empat kolom akan muncul. Ketik kata yang ingin ditebak temanmu. Kalau mau, tulis juga namamu supaya mereka tahu siapa pengirimnya. Kamu juga bisa mengatur waktu untuk rondenya, bisa tanpa batas, 30 detik, satu menit, atau dua menit. Terakhir, tentukan apakah petunjuk diizinkan, nanti temanmu akan melihat dua huruf dari katamu di posisi acak.</p>
+      <p>Kalau mau main cepat, cukup masukkan katanya, lewati sisanya dan klik Buat tautan tantangan. Setelah itu bisa langsung dikirim ke WhatsApp lewat tombol bagikan, atau salin tautannya dan kirim ke Telegram, Instagram, atau ke mana pun kamu mau. Katamu dikodekan di dalam tautan, tidak ada informasi yang disimpan di mana pun, dan tidak perlu akun apa-apa.</p>
+      <p>Paling seru kalau kamu pilih kata baku yang orang-orang terus salah eja berulang kali. Misalnya ANTRE, RISIKO, IMBAU, ANDAL, atau NAPAS. Kamu bisa menyaksikan temanmu dengan percaya diri mengetik ANTRI beberapa kali berturut-turut. Begitu selesai, mereka bisa mengirim hasilnya dan menunjukkan berapa tebakan yang mereka habiskan.</p>
+    </section>
+
+    <div class="cta">
+      <h2>Siap main?</h2>
+      <p>Main kata bahasa Indonesia tanpa batas atau kirim tantangan buatanmu sendiri ke teman.</p>
+      <div class="btns">
+        <a class="btn primary" href="#wu-root">Main Sekarang</a>
+        <a class="btn ghost" href="#wu-root">Tantang</a>
+      </div>
+    </div>
+
+    <section id="kids">
+      <p class="eyebrow">Untuk anak</p>
+      <h2><span class="num">7</span>Mode Anak SD</h2>
+      <p>Cukup klik ikon gerigi, pilih Panjang Kata lalu pilih tiga atau empat huruf. Semua katanya sudah disaring dan sesuai umur, diambil dari kosakata normal yang dipelajari anak di sekolah dasar.</p>
+      <p>Daftar kata tiga huruf untuk TK dan kelas 1 antara lain IBU, API, AIR, TAS, KUE, UBI, dan DUA, sedangkan kata empat hurufnya ada NASI, BUKU, MEJA, MATA, KAKI, IKAN, AYAM, TOPI, SUSU, dan BOLA untuk kelas 1 dan 2 SD.</p>
+      <p>Umpan balik instan dari kotak warna membuat anak bisa membuat dan memperbaiki salah eja dalam hitungan detik. Ini memang cara belajar kosakata yang efektif tanpa terasa seperti mengerjakan PR, lebih terasa seperti bermain. Daftar kata lima huruf untuk kelas 3 dan 4 antara lain RUMAH, KURSI, HUJAN, PINTU, BUNGA, dan PUTIH, sedangkan kata enam dan tujuh huruf untuk kelas 5 dan 6.</p>
+    </section>
+
+    <section id="modes">
+      <p class="eyebrow">Bandingkan</p>
+      <h2><span class="num">8</span>Mode Permainan</h2>
+      <p>Semua mode berjalan di kamus KBBI yang sama. Berpindah antar mode lewat tombol di atas papan. Pengaturan wilayahmu tetap di Indonesia mode apa pun yang kamu pilih, dan kamu bisa kembali ke bahasa Inggris kapan saja dari Pengaturan tanpa kehilangan statistikmu.</p>
+      <div class="cards">
+        <div class="card"><div class="k">01 · Sekali sehari</div><h3>Harian</h3><p>Satu kata bahasa Indonesia per hari, sama untuk semua orang, diperbarui tepat tengah malam waktu setempatmu. Tanpa petunjuk dan tanpa mengulang, jadi hasilnya langsung masuk ke statistikmu.</p></div>
+        <div class="card"><div class="k">02 · Paling populer</div><h3>Unlimited</h3><p>Main kata demi kata tanpa batas harian sama sekali. Kalau satu kata terus mengalahkanmu, ketuk muat ulang dan mulai lagi dengan kata baru, tidak perlu menunggu sampai besok.</p></div>
+        <div class="card"><div class="k">03 · Untuk ahli</div><h3>Waktu</h3><p>Atur jamnya, pilih panjang kata, dan lihat berapa banyak kata yang bisa kamu pecahkan sebelum waktunya habis. Pilihannya satu menit, satu setengah menit dan dua menit.</p></div>
+        <div class="card"><div class="k">04 · Bertema</div><h3>Topik</h3><p>Rangkaian nama bertema. Tebak satu per satu, dengan panjang kata yang berubah seiring kamu maju.</p></div>
+        <div class="card"><div class="k">05 · Langsung</div><h3>Lawan</h3><p>Pemain sungguhan, kata yang sama, papan peringkat langsung. Masuk ruang terbuka atau buat ruang privat untuk teman.</p></div>
+      </div>
+    </section>
+
+    <section id="timezone">
+      <p class="eyebrow">Waktu</p>
+      <h2><span class="num">9</span>WIB, WITA dan WIT</h2>
+      <p>Kata Harian berganti tepat tengah malam menurut waktu perangkatmu sendiri, jadi tidak masalah kamu di WIB, WITA atau WIT — tidak perlu menghitung selisih jam. Hitung mundur menuju kata berikutnya muncul langsung di papan begitu kamu menyelesaikan puzzle hari ini, dan rentetan kemenanganmu tetap terjaga selama kamu kembali keesokan harinya.</p>
+    </section>
+
+    <section id="faq">
+      <p class="eyebrow">FAQ</p>
+      <h2><span class="num">10</span>Pertanyaan yang Sering Diajukan</h2>
+      <p>Jawaban seputar Wordle Indonesia.</p>
+      <details class="faq"><summary>Kenapa kata bahasa Indonesia saya ditolak?</summary><p>Paling sering karena bukan kata baku. ANTRI, RESIKO, IJIN, PRAKTEK dan NAFAS memang sangat umum dalam tulisan sehari-hari tapi tidak baku, jadi bentuk KBBI-nya yaitu ANTRE, RISIKO, IZIN, PRAKTIK dan NAPAS yang diterima game.</p></details>
+      <details class="faq"><summary>Berapa banyak kata yang bisa saya mainkan per hari?</summary><p>Sebanyak yang kamu mau di mode Unlimited. Puzzle Harian memang satu kata per hari, tapi kamu tidak pernah dikunci dari permainannya seperti di situs katla Indonesia lainnya.</p></details>
+      <details class="faq"><summary>Apakah Wordle Indonesia gratis?</summary><p>Ya. Tanpa unduhan, tanpa akun, tanpa bayar. Langsung jalan di browser di ponsel, tablet, atau komputer mana pun.</p></details>
+      <details class="faq"><summary>Apakah anak-anak bisa main dengan aman?</summary><p>Bisa. Turunkan panjang kata ke tiga atau empat di Pengaturan untuk daftar kata tersaring yang sesuai umur. Tidak ada obrolan, tanpa pendaftaran dan tanpa iklan yang menyasar anak, dan mode layar penuh membersihkan sisa tampilan.</p></details>
+      <details class="faq"><summary>Bisakah saya mengirim kata ke teman?</summary><p>Bisa. Buat tautan tantangan di mode Unlimited dan bagikan ke WhatsApp atau ke mana pun. Katanya dikodekan di dalam tautan dan tidak ada yang disimpan di server.</p></details>
+      <details class="faq"><summary>Bisakah saya beralih ke kata bahasa Inggris?</summary><p>Kapan saja, lewat kontrol Bahasa dan Wilayah di Pengaturan. Statistikmu ikut terbawa dan tidak ada yang hilang.</p></details>
+    </section>
+  </div>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <nav>
+      <a href="/">Wordle Unlimited</a>
+      <a href="/wordle-uk/">Wordle UK</a>
+      <a href="/id/">Wordle Indonesia</a>
+      <a href="/privacy-policy/">Kebijakan Privasi</a>
+      <a href="/disclaimer/">Disclaimer</a>
+    </nav>
+    <p>© <span id="yr">2026</span> Wordle Unlimited · Game tebak kata gratis · Tidak berafiliasi dengan The New York Times.</p>
+  </div>
+</footer>
+
+<script>window.WU_CONFIG={region:"id",ns:"id",name:"Wordle Indonesia",url:"https://wordleunlimited.dev/",extOnly:true};document.getElementById("yr").textContent=new Date().getFullYear();</script>
+<script src="/src/i18n-id.js?v=562b72d1ef"></script>
+<script src="/src/wordle.js?v=562b72d1ef" defer></script>
+<script src="/src/multiplayer.js?v=562b72d1ef" defer></script>
+<script src="/src/cloudsave.js?v=562b72d1ef" defer></script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"VideoGame","@id":"https://wordleunlimited.dev/id/#game","name":"Wordle Indonesia","url":"https://wordleunlimited.dev/id/","inLanguage":"id","gamePlatform":"Web browser","applicationCategory":"GameApplication","operatingSystem":"Any","playMode":["SinglePlayer","MultiPlayer"],"genre":["Word game","Puzzle"],"description":"Wordle Indonesia (Katla) dengan kamus KBBI dan kata baku, main tanpa batas dari 3 sampai 7 huruf.","offers":{"@type":"Offer","price":"0","priceCurrency":"IDR","availability":"https://schema.org/InStock"}},
+{"@type":"BreadcrumbList","@id":"https://wordleunlimited.dev/id/#bc","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Wordle Unlimited","item":"https://wordleunlimited.dev/"},
+{"@type":"ListItem","position":2,"name":"Wordle Indonesia","item":"https://wordleunlimited.dev/id/"}]},
+{"@type":"FAQPage","@id":"https://wordleunlimited.dev/id/#faq","mainEntity":[
+{"@type":"Question","name":"Kenapa kata bahasa Indonesia saya ditolak?","acceptedAnswer":{"@type":"Answer","text":"Paling sering karena bukan kata baku. ANTRI, RESIKO, IJIN, PRAKTEK dan NAFAS tidak baku, jadi bentuk KBBI-nya yaitu ANTRE, RISIKO, IZIN, PRAKTIK dan NAPAS yang diterima game."}},
+{"@type":"Question","name":"Berapa banyak kata yang bisa saya mainkan per hari?","acceptedAnswer":{"@type":"Answer","text":"Sebanyak yang kamu mau di mode Unlimited. Puzzle Harian memang satu kata per hari."}},
+{"@type":"Question","name":"Apakah Wordle Indonesia gratis?","acceptedAnswer":{"@type":"Answer","text":"Ya. Tanpa unduhan, tanpa akun, tanpa bayar. Langsung jalan di browser."}},
+{"@type":"Question","name":"Apakah anak-anak bisa main dengan aman?","acceptedAnswer":{"@type":"Answer","text":"Bisa. Turunkan panjang kata ke tiga atau empat di Pengaturan untuk daftar kata tersaring yang sesuai umur."}},
+{"@type":"Question","name":"Bisakah saya mengirim kata ke teman?","acceptedAnswer":{"@type":"Answer","text":"Bisa. Buat tautan tantangan di mode Unlimited dan bagikan ke WhatsApp. Katanya dikodekan di dalam tautan."}},
+{"@type":"Question","name":"Bisakah saya beralih ke kata bahasa Inggris?","acceptedAnswer":{"@type":"Answer","text":"Kapan saja, lewat kontrol Bahasa dan Wilayah di Pengaturan. Statistikmu ikut terbawa."}}]}
+]}</script>
+</body>
+</html>

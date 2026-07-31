@@ -587,11 +587,50 @@
   }
 
   function refreshRooms() {
-    fetch("/api/rooms")
+    return fetch("/api/rooms")
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) { if (j) { lastRooms = j.rooms || []; renderLobby(); } })
+      .then(function (j) {
+        if (!j) return;
+        lastRooms = j.rooms || [];
+        updateLiveCount();
+        renderLobby();
+      })
       .catch(function () {});
   }
+
+  /* ---------- live player count on the Versus tab ---------- */
+  var liveEl = document.getElementById("mpLive");
+  var pollTimer = null;
+
+  function updateLiveCount() {
+    if (!liveEl) return;
+    var n = lastRooms.reduce(function (sum, r) { return sum + (r.players || 0); }, 0);
+    if (active && room) n = Math.max(n, room.players || 0);
+    if (n > 0) {
+      liveEl.innerHTML = "<i></i>" + n;
+      liveEl.classList.add("on");
+      liveEl.setAttribute("title", n + (n === 1 ? " player" : " players") + " online now");
+    } else {
+      liveEl.classList.remove("on");
+      liveEl.textContent = "";
+    }
+  }
+
+  function startPolling() {
+    stopPolling();
+    // Slow enough to be free, fast enough that the number feels live.
+    pollTimer = setInterval(function () {
+      if (document.hidden || active) return;
+      refreshRooms();
+    }, 20000);
+  }
+  function stopPolling() { if (pollTimer) clearInterval(pollTimer); pollTimer = null; }
+
+  // Don't poll a tab nobody is looking at; refresh immediately on return.
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) stopPolling();
+    else { refreshRooms(); startPolling(); }
+  });
 
   function createRoom() {
     var body = {
@@ -647,6 +686,10 @@
     refreshRooms();
   };
   WU.joinRoom = joinRoom;
+
+  // Seed the live count on load without opening a socket — one cheap GET.
+  refreshRooms();
+  startPolling();
 
   document.dispatchEvent(new CustomEvent("wu:multiplayer-ready"));
 })();

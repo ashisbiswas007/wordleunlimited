@@ -62,7 +62,16 @@ body.wu-lock{position:fixed;width:100%;left:0;right:0;}
 #wu-root .tab{flex:1;min-height:38px;border:1px solid var(--border);background:var(--modal);color:var(--text);padding:7px;border-radius:9px;font-weight:600;cursor:pointer;font-size:clamp(12px,3.4vw,13.5px);transition:background .15s,color .15s;display:inline-flex;align-items:center;justify-content:center;gap:6px;}
 #wu-root .tab svg{width:clamp(15px,4vw,17px)!important;height:clamp(15px,4vw,17px)!important;}
 #wu-root .tab.active{background:var(--accent);color:var(--on-accent);border-color:var(--accent);}
-#wu-root .tab span{white-space:nowrap;}
+#wu-root .tab span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* Live player count on the Versus tab. Sits in normal flow rather than
+   absolutely positioned, so it can never overlap the tab beside it. */
+#wu-root .tab .tab-live{display:none;align-items:center;gap:3px;font-size:10.5px;font-weight:800;
+  background:var(--green);color:#fff;border-radius:20px;padding:1px 6px;line-height:1.5;flex:none;}
+#wu-root .tab.active .tab-live{background:rgba(255,255,255,.28);}
+#wu-root .tab .tab-live.on{display:inline-flex;}
+#wu-root .tab .tab-live i{width:5px;height:5px;border-radius:50%;background:currentColor;
+  display:inline-block;animation:wuPulseDot 1.8s ease-in-out infinite;}
 
 #wu-root #banner{flex:none;}
 #wu-root #banner:empty{display:none;}
@@ -120,6 +129,8 @@ body.wu-lock{position:fixed;width:100%;left:0;right:0;}
 @keyframes shake{10%,90%{transform:translateX(-2px);}20%,80%{transform:translateX(4px);}30%,50%,70%{transform:translateX(-6px);}40%,60%{transform:translateX(6px);}}
 @keyframes bounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-14px);}60%{transform:translateY(-6px);}}
 
+/* Above the sticky site header (z-index 20) so a scrolled page can never let
+   the nav cover the result card. Modals and toasts sit higher again. */
 #wu-root .endwrap{position:absolute;inset:0;z-index:30;display:none;align-items:center;justify-content:center;padding:10px;
   background:rgba(255,255,255,.55);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);}
 [data-theme="dark"] #wu-root .endwrap{background:rgba(18,18,19,.55);}
@@ -357,6 +368,39 @@ body.wu-lock{position:fixed;width:100%;left:0;right:0;}
   #wu-root .app{margin:6px auto 0;}
   #wu-root .keyboard{padding-bottom:max(6px, env(safe-area-inset-bottom));}
   #wu-root .mp-vote{grid-template-columns:1fr;}
+  #wu-root .modal{margin-top:10px;padding:16px;}
+  #wu-root .overlay{padding:8px;}
+}
+
+/* Five tabs stop fitting with labels around here. Drop to icons only rather
+   than letting the text wrap and change the row height. */
+@media (max-width:520px){
+  #wu-root .tabs{gap:4px;}
+  #wu-root .tab{padding:7px 4px;gap:4px;}
+  #wu-root .tab span:not(.tab-live){display:none;}
+  #wu-root .tab .tab-live{font-size:10px;padding:1px 5px;}
+}
+
+/* Very narrow phones: the settings rows and share buttons need to stack. */
+@media (max-width:400px){
+  #wu-root .setrow{flex-direction:column;align-items:flex-start;gap:8px;}
+  #wu-root .setrow .seg{width:100%;}
+  #wu-root .setrow .seg button{flex:1;}
+  #wu-root .setrow .switch{align-self:flex-end;margin-top:-32px;}
+  #wu-root .share-row{gap:6px;}
+  #wu-root .sbtn.wa span{display:none;}
+  #wu-root .sbtn.wa{width:40px;padding:0;}
+  #wu-root .tmode{flex-wrap:wrap;}
+  #wu-root .tm-right{width:100%;justify-content:flex-end;}
+  #wu-root .tp-grid{grid-template-columns:1fr;}
+}
+
+/* Landscape phones: the board and keyboard together are taller than the
+   viewport, so let the whole app scroll instead of clipping the keys. */
+@media (max-height:520px) and (orientation:landscape){
+  #wu-root .app{height:auto;max-height:none;overflow:visible;}
+  #wu-root .boardwrap{height:auto;min-height:180px;}
+  #wu-root .key{height:38px;}
 }
 @media (prefers-reduced-motion:reduce){
   #wu-root *,#wu-root *::before,#wu-root *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}

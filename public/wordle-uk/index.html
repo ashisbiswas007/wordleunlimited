@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Wordle UK — Play Unlimited British English Wordle Free</title>
+<meta name="description" content="Wordle UK with a proper British word list — COLOUR, LITRE, DEFENCE, TYRE and everyday words like LORRY and BROLLY. Unlimited play, Daily, Time mode, topics and live multiplayer. Free, no login.">
+<link rel="canonical" href="https://wordleunlimited.dev/wordle-uk/">
+
+<link rel="alternate" hreflang="en" href="https://wordleunlimited.dev/">
+<link rel="alternate" hreflang="en-GB" href="https://wordleunlimited.dev/wordle-uk/">
+<link rel="alternate" hreflang="id" href="https://wordleunlimited.dev/id/">
+<link rel="alternate" hreflang="x-default" href="https://wordleunlimited.dev/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wordle Unlimited">
+<meta property="og:title" content="Wordle UK — Unlimited British English Wordle">
+<meta property="og:description" content="A proper British word list: COLOUR, LITRE, DEFENCE, TYRE, LORRY, BROLLY. Unlimited play, free, no login.">
+<meta property="og:url" content="https://wordleunlimited.dev/wordle-uk/">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#6aaa64" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121213" media="(prefers-color-scheme: dark)">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="fetch" href="/src/dict/gb/5.txt?v=562b72d1ef" crossorigin>
+<link rel="stylesheet" href="/src/wordle.css?v=562b72d1ef">
+<link rel="stylesheet" href="/src/site.css?v=562b72d1ef">
+</head>
+<body>
+
+<header class="topnav">
+  <div class="wrap">
+    <a class="logo" href="/"><b>Wordle</b>Unlimited</a>
+    <nav>
+      <a href="/">English</a>
+      <a href="/wordle-uk/" aria-current="page">UK</a>
+      <a href="/id/">Indonesia</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="eyebrow">British English, Unlimited, daily</p>
+    <h1>Wordle UK</h1>
+    <p>The same game, a proper British word list. COLOUR not COLOR, LITRE not LITER, and everyday words like LORRY, BROLLY and BAIRN that an American list simply does not have.</p>
+    <div class="badges">
+      <span>British spellings</span><span>3–7 letters</span><span>No login</span>
+      <span>Kid mode</span><span>Challenge a friend</span>
+    </div>
+  </div>
+
+  <div class="wrap gamehost">
+
+<div id="wu-root">
+  <div class="app">
+    <div class="topbar">
+      <div class="wu-brand"><span class="wu-brand-1">Wordle</span><span class="wu-brand-2">UK</span></div>
+      <div class="icons">
+        <button class="icon" id="helpBtn" data-open="howtoModal" aria-label="How to play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></button>
+        <button class="icon" id="statsBtn" data-open="statsModal" aria-label="Statistics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></button>
+        <button class="icon" id="kbdBtn" data-act="kbd" aria-label="Use my keyboard" title="Use my keyboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9 14h6"></path></svg></button>
+        <button class="icon" id="setBtn" data-open="settingsModal" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button>
+        <button class="icon" id="fsBtn" data-act="fullscreen" aria-label="Fullscreen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab" data-mode="daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span>Daily</span></button>
+      <button class="tab" data-mode="unlimited"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8a4 4 0 0 0 0 8c2 0 3.2-1.5 5-4s3-4 5-4a4 4 0 0 1 0 8c-2 0-3.2-1.5-5-4S9 8 7 8z"></path></svg><span>Unlimited</span></button>
+      <button class="tab" data-mode="time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg><span>Time</span></button>
+      <button class="tab" data-mode="topic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Topics</span></button>
+      <button class="tab" data-mode="multiplayer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Versus</span><span class="tab-live" id="mpLive" aria-live="polite"></span></button>
+    </div>
+
+    <div id="banner"></div>
+    <div class="controls" id="controls"></div>
+    <div class="tp-clue" id="tpClue"></div>
+    <div class="hintline" id="hintline"></div>
+    <div class="toast" id="toast"></div>
+    <div class="boardwrap">
+      <div class="grid" id="board"></div>
+      <div class="endwrap" id="endwrap"><div class="endcard" id="endcard"></div></div>
+    </div>
+
+    <div class="keyboard" id="keyboard"></div>
+
+    <div class="typebar" id="typebar">
+      <span class="tb-ico">⌨</span>
+      <span class="tb-txt">Your keyboard is on — just type your guess.</span>
+      <button class="tb-x" data-act="kbdoff">On-screen keys</button>
+    </div>
+
+    <input id="wuTyper" class="wu-typer" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" aria-hidden="true" tabindex="-1">
+  </div>
+
+  <div class="overlay" id="howtoModal"><div class="modal">
+    <button class="x" data-close="howtoModal" aria-label="Close"></button>
+    <h2>How to play</h2>
+    <p>Guess the British English word in 6 tries. Each guess must be a valid word of the right length. Tile colours show how close you were.</p>
+    <div class="ex"><div class="tile correct">L</div><div class="tile correct">I</div><div class="tile correct">T</div><div class="tile correct">R</div><div class="tile correct">E</div></div>
+    <p>All green — LITRE is British, LITER is not.</p>
+    <div class="ex"><div class="tile">T</div><div class="tile">Y</div><div class="tile">R</div><div class="tile present">E</div><div class="tile">S</div></div>
+    <p>Orange <b>E</b> — right letter, wrong spot.</p>
+    <div class="ex"><div class="tile absent">C</div><div class="tile absent">H</div><div class="tile absent">A</div><div class="tile absent">I</div><div class="tile absent">R</div></div>
+    <p>All grey — none of these letters are in the word.</p>
+    <p><b>Daily</b> is one shared puzzle a day. <b>Unlimited</b> never stops. <b>Time</b> is a race against the clock. <b>Topics</b> gives you a themed run. <b>Versus</b> puts you in a live room. Kids can switch to 3-letter words in Settings.</p>
+    <p class="howsite">Play free, forever at <b>wordleunlimited.dev</b></p>
+    <div id="brandSlot"></div>
+  </div></div>
+
+  <div class="overlay" id="statsModal"><div class="modal">
+    <button class="x" data-close="statsModal" aria-label="Close"></button>
+    <h2 id="statsTitle">Statistics</h2>
+    <div id="statsBody"></div>
+  </div></div>
+
+  <div class="overlay" id="topicModal"><div class="modal">
+    <button class="x" data-close="topicModal" aria-label="Close"></button>
+    <h2>Choose a topic</h2>
+    <p>Pick a theme and guess your way through its names, one after another. Word lengths change as you go.</p>
+    <div class="tp-pick" id="topicBody"></div>
+  </div></div>
+
+  <div class="overlay" id="mpModal"><div class="modal">
+    <button class="x" data-close="mpModal" aria-label="Close"></button>
+    <h2>Versus — play live</h2>
+    <div id="mpBody"></div>
+  </div></div>
+
+  <div class="overlay" id="challengeModal"><div class="modal">
+    <button class="x" data-close="challengeModal" aria-label="Close"></button>
+    <h2>Challenge a friend</h2>
+    <p>Pick any word in our dictionary. We'll make a link — when your friend opens it, your word loads and they try to guess it.</p>
+    <div class="field"><label for="chWord">Your word (3–7 letters)</label><input id="chWord" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="7" placeholder="e.g. brolly"></div>
+    <div class="field"><label for="chName">Your name (optional)</label><input id="chName" type="text" autocomplete="off" maxlength="20" placeholder="Shown to your friend"></div>
+    <div class="field opt"><label>Time limit (optional)</label>
+      <div class="seg small" id="chTimeSeg">
+        <button data-chtime="0" class="active">None</button>
+        <button data-chtime="30">30s</button>
+        <button data-chtime="60">1 min</button>
+        <button data-chtime="120">2 min</button>
+      </div>
+    </div>
+    <div class="setrow" style="border-bottom:none;padding:8px 0">
+      <div><div class="label">Allow hints</div><div class="desc">Let your friend reveal letters</div></div>
+      <label class="switch"><input type="checkbox" id="chHints"><span class="slider"></span></label>
+    </div>
+    <div class="err" id="chErr"></div>
+    <button class="cbtn" data-act="makelink"><span class="ic" id="mlIcon"></span><span>Create challenge link</span></button>
+    <div id="chResult" style="display:none">
+      <div class="linkbox"><input id="chLink" readonly><button class="cbtn ghost" data-act="copylink">Copy</button></div>
+      <div id="chShare"></div>
+      <div class="note">This link opens your main site and loads the word. Nothing is stored on a server.</div>
+    </div>
+  </div></div>
+
+  <div class="overlay" id="settingsModal"><div class="modal">
+    <button class="x" data-close="settingsModal" aria-label="Close"></button>
+    <h2>Settings</h2>
+    <div class="setrow"><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"></line><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"></line><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"></line></svg>Theme</div>
+      <div class="seg"><button data-seg="theme" data-val="light">Light</button><button data-seg="theme" data-val="dark">Dark</button><button data-seg="theme" data-val="system">Auto</button></div></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>Word length</div><div class="desc">Kids = 3 letters</div></div>
+      <div class="seg">
+        <button data-seg="length" data-val="3" title="Kids — 3 letters" aria-label="Kids mode, 3 letters"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9.5" x2="9.01" y2="9.5"></line><line x1="15" y1="9.5" x2="15.01" y2="9.5"></line></svg></button>
+        <button data-seg="length" data-val="4">4</button><button data-seg="length" data-val="5">5</button><button data-seg="length" data-val="6">6</button><button data-seg="length" data-val="7">7</button>
+      </div></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-4z"></path></svg>Hard mode</div><div class="desc">Revealed hints must be reused</div></div>
+      <label class="switch"><input type="checkbox" id="setHard"><span class="slider"></span></label></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"></path></svg>Hints</div><div class="desc">Show the hint button while playing</div></div>
+      <label class="switch"><input type="checkbox" id="setHints"><span class="slider"></span></label></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"></path></svg>High contrast</div><div class="desc">Colourblind-friendly colours</div></div>
+      <label class="switch"><input type="checkbox" id="setContrast"><span class="slider"></span></label></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"></path></svg>Sound</div><div class="desc">Key and result sounds</div></div>
+      <label class="switch"><input type="checkbox" id="setSound"><span class="slider"></span></label></div>
+    <div class="setrow col" id="cloudRow" style="display:none"></div>
+    <div class="setrow col"><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><circle cx="12" cy="12" r="9"></circle><line x1="3" y1="12" x2="21" y2="12"></line><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"></path></svg>Language / Region</div><div class="regions" id="regionRow"></div></div>
+    <div class="footer">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/disclaimer/">Disclaimer</a>
+    </div>
+  </div></div>
+</div>
+
+  </div>
+
+  <div class="wrap prose">
+    <p>If you are from United Kingdom or from a country where British English or UK English is used and you are familiar to that more than US English then you are at the right page to play Wordle UK Unlimited. There are some countries where UK English used officially including United Kingdom and some Asian countries like India, Singapore, Hong Kong and many more. People from there know the meaning of Color and Colour, both meaning same but UK English a bit different in writing and pronouncing that is why we have developed the UK Wordle Unlimited so you can use all British Words to play.</p>
+    <p>If you already have played the unlimited version then this already will be familiar to you, the same gameplay, same UI and only change is the Words list. We have kept everything same and updated the words list from 3 letter words to 7 words letters with UK English words like Colour.</p>
+
+    <nav class="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <ol>
+        <li><a href="#why">Why Wordle UK Needed</a></li>
+        <li><a href="#howto">Gameplay</a></li>
+        <li><a href="#spellings">British Spelling Families</a></li>
+        <li><a href="#vocab">British Words &amp; Dialect</a></li>
+        <li><a href="#starters">Best Starting Words</a></li>
+        <li><a href="#challenge">Challenge a Friend</a></li>
+        <li><a href="#kids">Kid Mode &amp; School Spellings</a></li>
+        <li><a href="#modes">Game Modes</a></li>
+        <li><a href="#reset">Reset Time in the UK</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
+    </nav>
+
+    <section id="why">
+      <p class="eyebrow">01</p>
+      <h2><span class="num">1</span>Why Wordle UK Needed</h2>
+      <h3>The problem</h3>
+      <p>The original Wordle game was built in USA and therefore the English words list used in the game also US English, therefore players familiar to UK English have difficulty to win the game. For the reason we have brought the UK version that is similar to the game of Wordle but different and built for people from UK and familiar to British English.</p>
+      <p>You may find other Wordle UK game on the Internet, we have played and checked them, you see only a few words are there like Colour or Realise. After checking them we realised some words and length are not matching and that is why we have checked the dictionary and added those words that you miss on those sites.</p>
+      <p>This time your words will not show 'wrong' or 'not in the dictionary' like phrases.</p>
+    </section>
+
+    <section id="howto">
+      <p class="eyebrow">02</p>
+      <h2><span class="num">2</span>Gameplay</h2>
+      <h3>How to play Wordle</h3>
+      <p>Find the hidden UK English word within 6 tries, type a word of 5 letters or choose the difficulty by changing the word length from the settings. From 3 letters to 7 letters words available to play, 3 letter words for kid unless you are beginner and higher means harder.</p>
+      <p>As soon you type a word for that supported length it show how many of the characters of the typed word matched with the hidden word. Green means that letter is matched with the hidden word in the same position, orange means that letter present in the word but not in the correct position, darker colour means that letter does not present in the hidden UK word.</p>
+      <p>So type your next word wisely, you have total 6 tries to find that hidden British word.</p>
+      <h3>How the colours work</h3>
+      <div class="demo"><i class="g">L</i><i class="g">I</i><i class="g">T</i><i class="g">R</i><i class="g">E</i></div>
+      <p class="demo-note">All green — LITRE is British, LITER is not</p>
+      <div class="demo"><i>T</i><i>Y</i><i>R</i><i class="y">E</i><i>S</i></div>
+      <p class="demo-note">Orange E — right letter, wrong spot</p>
+      <div class="demo"><i class="b">C</i><i class="b">H</i><i class="b">A</i><i class="b">I</i><i class="b">R</i></div>
+      <p class="demo-note">All grey — none of these letters are in the word</p>
+      <p>If the game is getting harder and want any tip to find the hidden UK En Word you can enable Tip. To enable it tap the gear icon for settings, and enable Hints, you will get a bulb icon clicking it shows a letter for the hidden word. If this does not help much and want another letter tap the bulb icon again which reveals another letter of the word. You get maximum 2 Hints.</p>
+    </section>
+
+    <section id="spellings">
+      <p class="eyebrow">03</p>
+      <h2><span class="num">3</span>UK English Spelling Families</h2>
+      <h3>Word list</h3>
+      <p>See the main six differences between the spellings of English in UK English and the US English, if you learn all the six differences, you will not face any confusion playing Wordle UK.</p>
+      <ul class="tlist">
+        <li><b>OUR not OR</b> — COLOUR, FAVOUR, HONOUR, LABOUR, RUMOUR, VAPOUR, VIGOUR, ARMOUR at 6 letters, ODOUR at 5, HARBOUR and PARLOUR at 7</li>
+        <li><b>RE not ER</b> — LITRE, METRE, MITRE, TITRE, SABRE, OCHRE, FIBRE, NITRE at 5 letters, CENTRE, SOMBRE, LUSTRE at 6, THEATRE and CALIBRE at 7</li>
+        <li><b>CE not SE</b> — DEFENCE, OFFENCE, LICENCE at 7 letters, PRETENCE at 8. These are nouns, the verb forms still take an S</li>
+        <li><b>ISE and YSE not IZE and YZE</b> — REALISE, ADVISE, ANALYSE, PARALYSE. Because of this, Z is a much rarer letter in UK mode than in the American version</li>
+        <li><b>Double L, except when single</b> — TRAVELLED and JEWELLERY gain an L, but ENROL, FULFIL, INSTIL, APPAL and SKILFUL lose one. It runs the opposite way to what most players expect</li>
+        <li><b>One-off British spellings</b> — TYRE, KERB, GAOL, GREY, MOULD, MATHS, STOREY, WHISKY, PLOUGH, CHEQUE, DRAUGHT, PYJAMAS, SULPHUR, PROGRAMME, ALUMINIUM</li>
+      </ul>
+      <p style="margin-top:16px">To win the game you have to understand the patterns that you get almost nowhere. UK English has a whole family of irregular past tenses ending in T where US English uses ED, when you type Words like BURNT, SPELT, SPILT, LEAPT, SMELT, KNELT and DWELT are all five letters, LEARNT, DREAMT and SPOILT are six. If you get a green T at the end of the word, type the words that have T in the end take it as a tip.</p>
+    </section>
+
+    <section id="vocab">
+      <p class="eyebrow">04</p>
+      <h2><span class="num">4</span>UK Words</h2>
+      <h3>Vocabulary</h3>
+      <p>UK English spelling is only part of it, actually there is a huge layer of everyday UK English vocabulary where an American word list does not have it, and also another layer of regional words that even national dictionaries treat as an afterthought. Both Words are in our Word list.</p>
+      <ul class="tlist">
+        <li><b>3 letters</b> — LOO, TIN, BIN, MUM, NAN, BAP, COB, HOB, PEG, MAC, TEA</li>
+        <li><b>4 letters</b> — MATE, QUID, POSH, DAFT, NAFF, PINT, BREW, PRAM, CHAP, NOWT</li>
+        <li><b>5 letters</b> — LORRY, QUEUE, CRISP, TELLY, BLOKE, DODGY, NAPPY, WELLY, SCONE, PASTY, BARMY, LURGY, PLONK, MARDY, BAIRN</li>
+        <li><b>6 and 7 letters</b> — BROLLY, BANTER, GUTTED, PETROL, JUMPER, GEEZER, CHUFFED, TROLLEY, BISCUIT, CRUMPET</li>
+        <li><b>Regional</b> — BAIRN, BRAW, CANNY, LOCH, DRAM and BONNY from Scotland, NOWT, OWT, MARDY, GINNEL and BARM from the North, CWTCH, TIDY and LUSH from Wales</li>
+      </ul>
+      <p style="margin-top:16px">A dictionary that where you will not find BAIRN is as a British Word. If a word you use every day is missing from the Word List, write it in the comments and we will look for adding it.</p>
+    </section>
+
+    <section id="starters">
+      <p class="eyebrow">05</p>
+      <h2><span class="num">5</span>Best UK Wordle Starting Words</h2>
+      <h3>Strategy</h3>
+      <p>The Wordle tip you search on the Internet is the Tips for Wordle US English, where it is said to open with AISLE. It is not wrong after all but it is just not actually the best tip for a British word list. See, these pairs cover the vowels first, then the consonants that actually appear most in British English, and are picked for the exact word length you are playing.</p>
+      <ul class="tlist">
+        <li><b>3 letters</b> — first word SAT, second PIN. Two vowels and six common consonants in six letters</li>
+        <li><b>4 letters</b> — open word RATE, then SILO. Covers A, E, I, O plus R, T, S, L</li>
+        <li><b>5 letters</b> — First word SLATE, then second CHOIR. All five vowels across two guesses, plus S, L, T, C, H, R</li>
+        <li><b>6 and 7 letters</b> — Start with MASTER then put second word CLOUDY at six, or PAINTER at seven</li>
+        <li><b>UK only trick</b> — Word with a green R and E in the last two slots means a family of American word lists do not have: LITRE, METRE, MITRE, TITRE, SABRE, OCHRE, FIBRE, NITRE</li>
+      </ul>
+      <p style="margin-top:16px">One final tip to remember or look at while playing In six letter mode, if you typed a word OUR at the end, the chance of being the hidden word can be from words: COLOUR, FAVOUR, HONOUR, LABOUR, RUMOUR, VAPOUR, VIGOUR, ARMOUR and SAVOUR.</p>
+    </section>
+
+    <section id="challenge">
+      <p class="eyebrow">wordle uk Multiplayer</p>
+      <h2><span class="num">6</span>Challenge a Friend</h2>
+      <p>We have played Wordle UK on many website and have not found a single website that let you do this, you can challenge you friend to find the UK word you choose and let you friend find your word. We have brought Wordle UK multiplayer mode, where you challenge you friend with the word from UK English word list.</p>
+      <p>To challenge your friend tap 'Challenge a friend' button, a panel opens with four options. Type the word your friend will play to find it. Add your name, which is optional. Set a time limit if you want set none or 30 seconds or one minute or two minutes, none for no time limit. Then decide whether hints are allowed, which reveals two letters of your hidden word in random positions.</p>
+      <p>For a quick challenge just type the word, skip everything else and press Create challenge link. A link will be generated Share it direct to WhatsApp or FB with the share button or copy it and send it however you like. Nothing is stored on a server the word hidden inside the link itself so we do not store any data you type for Challenging a friend.</p>
+    </section>
+
+    <div class="cta">
+      <h2>Ready to play?</h2>
+      <p>Play Wordle UK solo or send a custom challenge to a friend.</p>
+      <div class="btns">
+        <a class="btn primary" href="#wu-root">Play Now</a>
+        <a class="btn ghost" href="#wu-root">Challenge</a>
+      </div>
+    </div>
+
+    <section id="kids">
+      <p class="eyebrow">For kids</p>
+      <h2><span class="num">7</span>Kid Mode &amp; School Words</h2>
+      <p>To the parent who want your child to play Wordle UK version, tap the gear icon for opening Settings, find Word Length and tap the Kid option to switch the whole game to three letter words only and with a filtered list words for Kids to play. Yes, everything in kid mode word list is filtered and age appropriate, and every word uses British spelling as well. So the kid guesses the word MUM and not MOM. And always common Words like CAT, DOG, SUN, CUP, PEN, BIN, JAM, BUS and more.</p>
+    </section>
+
+    <section id="modes">
+      <p class="eyebrow">Compare</p>
+      <h2><span class="num">8</span>Game Modes</h2>
+      <p>Wordle UK features the game modes which all run on the same British or UK English words. Switch between modes using the buttons above the letter board.</p>
+      <div class="cards">
+        <div class="card"><div class="k">01 · One a day</div><h3>Daily</h3><p>Everyday you get a new UK Word which refreshes every 24 hours at your midnight time. In this mode you see no hints and no restarts and get a pure challenge, play wisely because when you win or lose it goes straight into your stats. Available for every word length from three to seven letters.</p></div>
+        <div class="card"><div class="k">02 · Most popular</div><h3>Unlimited</h3><p>The best mode players play is Wordle UK unlimited, endless and with no limit at all. You can restart the game anytime just clicking the restart button during the game or after finishing a challenge.</p></div>
+        <div class="card"><div class="k">03 · For experts</div><h3>Time</h3><p>Select the time, word length and get ready to find the hidden British word within that time. Each time you complete a word you get a + time, so create the best record for how many words you can find.</p></div>
+        <div class="card"><div class="k">04 · Themed</div><h3>Topics</h3><p>Themed packs of names — guess through a topic one answer at a time, with the word length changing as you go.</p></div>
+        <div class="card"><div class="k">05 · Live</div><h3>Versus</h3><p>Real players, same words, live leaderboard. Join an open room instantly or make a private one for friends.</p></div>
+      </div>
+    </section>
+
+    <section id="reset">
+      <p class="eyebrow">Timing</p>
+      <h2><span class="num">9</span>Reset Time in the UK</h2>
+      <p>The Daily word rolls over at midnight in your own local time, so if you are in the UK that is midnight GMT in winter and midnight BST in summer — you do not have to work out any time difference. The countdown to the next Daily is shown right on the board once you have finished today's puzzle, and your streak is kept as long as you come back the following day.</p>
+    </section>
+
+    <section id="faq">
+      <p class="eyebrow">FAQ</p>
+      <h2><span class="num">10</span>Frequently Asked Questions</h2>
+      <p>Answers about Wordle UK.</p>
+      <details class="faq"><summary>Does Wordle UK accept COLOUR and COLOR?</summary><p>Both words are recognised as valid guesses, but in Wordle UK the words list comes from only the British list we have created.</p></details>
+      <details class="faq"><summary>Is Wordle UK free to play?</summary><p>Yes. You do not need an account and also unlimited.</p></details>
+      <details class="faq"><summary>Why was my word not accepted?</summary><p>If your word is not accepted as a valid word then the main reason is the word is not in our Wordle UK word list. You can add the word by putting it in the words suggestion comment below.</p></details>
+      <details class="faq"><summary>Can I play three and four letter Wordle UK?</summary><p>Yes, you can play Wordle UK three letter, 4 letter and up to 7 letter words, choose the word length from the settings.</p></details>
+      <details class="faq"><summary>Is Wordle UK safe for children?</summary><p>Yes. We have Kid mode that is built only for the kids after filtering the foul words and it is available in 3 letter words.</p></details>
+      <details class="faq"><summary>Can I switch back to the standard word list?</summary><p>You can, in Settings choose the region, the game starts immediately with the region word lists.</p></details>
+    </section>
+  </div>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <nav>
+      <a href="/">Wordle Unlimited</a>
+      <a href="/wordle-uk/">Wordle UK</a>
+      <a href="/id/">Wordle Indonesia</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/disclaimer/">Disclaimer</a>
+    </nav>
+    <p>© <span id="yr">2026</span> Wordle Unlimited · Free unlimited word game · Not affiliated with The New York Times.</p>
+  </div>
+</footer>
+
+<script>window.WU_CONFIG={region:"gb",ns:"gb",name:"Wordle UK",url:"https://wordleunlimited.dev/",extOnly:true};document.getElementById("yr").textContent=new Date().getFullYear();</script>
+<script src="/src/wordle.js?v=562b72d1ef" defer></script>
+<script src="/src/multiplayer.js?v=562b72d1ef" defer></script>
+<script src="/src/cloudsave.js?v=562b72d1ef" defer></script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"VideoGame","@id":"https://wordleunlimited.dev/wordle-uk/#game","name":"Wordle UK","url":"https://wordleunlimited.dev/wordle-uk/","inLanguage":"en-GB","gamePlatform":"Web browser","applicationCategory":"GameApplication","operatingSystem":"Any","playMode":["SinglePlayer","MultiPlayer"],"genre":["Word game","Puzzle"],"description":"Unlimited Wordle with a British English word list — COLOUR, LITRE, DEFENCE, TYRE and everyday British vocabulary.","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP","availability":"https://schema.org/InStock"}},
+{"@type":"BreadcrumbList","@id":"https://wordleunlimited.dev/wordle-uk/#bc","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Wordle Unlimited","item":"https://wordleunlimited.dev/"},
+{"@type":"ListItem","position":2,"name":"Wordle UK","item":"https://wordleunlimited.dev/wordle-uk/"}]},
+{"@type":"FAQPage","@id":"https://wordleunlimited.dev/wordle-uk/#faq","mainEntity":[
+{"@type":"Question","name":"Does Wordle UK accept COLOUR and COLOR?","acceptedAnswer":{"@type":"Answer","text":"Both words are recognised as valid guesses, but in Wordle UK the words list comes from only the British list we have created."}},
+{"@type":"Question","name":"Is Wordle UK free to play?","acceptedAnswer":{"@type":"Answer","text":"Yes. You do not need an account and also unlimited."}},
+{"@type":"Question","name":"Why was my word not accepted?","acceptedAnswer":{"@type":"Answer","text":"If your word is not accepted as a valid word then the main reason is the word is not in our Wordle UK word list."}},
+{"@type":"Question","name":"Can I play three and four letter Wordle UK?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can play Wordle UK three letter, 4 letter and up to 7 letter words, choose the word length from the settings."}},
+{"@type":"Question","name":"Is Wordle UK safe for children?","acceptedAnswer":{"@type":"Answer","text":"Yes. We have Kid mode that is built only for the kids after filtering the foul words and it is available in 3 letter words."}},
+{"@type":"Question","name":"Can I switch back to the standard word list?","acceptedAnswer":{"@type":"Answer","text":"You can, in Settings choose the region, the game starts immediately with the region word lists."}}]}
+]}</script>
+</body>
+</html>

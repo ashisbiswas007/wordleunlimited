@@ -17,18 +17,22 @@ import { stats as wordStats } from "../lib/words.js";
 import { invalidateSitemap } from "./pages.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const ADMIN_HTML = join(HERE, "..", "..", "public", "admin", "index.html");
+// Deliberately outside public/: keeping the admin UI out of the static root
+// avoids a route collision with @fastify/static and guarantees the noindex /
+// no-store headers below always apply to it.
+const ADMIN_UI = join(HERE, "..", "admin-ui");
 
 const COOKIE = "wu_admin";
 const LOGIN_LIMIT = { max: 8, timeWindow: "5 minutes" };
 const API_LIMIT = { max: 120, timeWindow: "1 minute" };
 
-let htmlCache = null;
+const uiCache = new Map();
 
-async function adminHtml() {
-  if (htmlCache && config.isProd) return htmlCache;
-  htmlCache = await readFile(ADMIN_HTML, "utf8");
-  return htmlCache;
+async function adminAsset(name) {
+  if (config.isProd && uiCache.has(name)) return uiCache.get(name);
+  const body = await readFile(join(ADMIN_UI, name), "utf8");
+  uiCache.set(name, body);
+  return body;
 }
 
 function currentAdmin(req) {
@@ -67,7 +71,12 @@ export default async function registerAdminRoutes(app) {
 
   app.get("/", async (req, reply) => {
     reply.type("text/html; charset=utf-8");
-    return adminHtml();
+    return adminAsset("index.html");
+  });
+
+  app.get("/admin.js", async (req, reply) => {
+    reply.type("text/javascript; charset=utf-8");
+    return adminAsset("admin.js");
   });
 
   /* ---------- auth ---------- */
