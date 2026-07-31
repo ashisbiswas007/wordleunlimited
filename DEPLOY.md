@@ -10,15 +10,20 @@ two variables by hand.
 
 In Coolify:
 
-1. **+ New** → **Resource** → **Docker Compose**
-2. Choose your server and project
-3. Source: **Public Repository**
-4. Repository URL: `https://github.com/ashisbiswas007/wordleunlimited`
-5. Branch: `main`
-6. Docker Compose Location: `/docker-compose.yml`
-7. Click **Continue** / **Save**
+1. **+ New** → **Resource** → **Public Repository**
+2. Repository URL: `https://github.com/ashisbiswas007/wordleunlimited`
+3. Branch: `main`
+4. Build Pack: **Docker Compose**
+5. Docker Compose Location: `/docker-compose.yaml` **or** `/docker-compose.yml` —
+   both are committed, so whichever Coolify defaults to will work
+6. Click **Continue** / **Save**
 
 Coolify reads the compose file and finds two services: `app` and `db`.
+
+> **"Failed to read the Docker Compose file from the repository"** means Coolify
+> looked at a path that does not exist. Check the Branch is `main` (not
+> `master`) and that **Base Directory** is `/`. If it still fails, use the
+> Dockerfile route below — it has fewer moving parts and always works.
 
 ---
 
@@ -111,6 +116,54 @@ sitemap and share links use the right origin.
 **Do not point DNS until step 5 passes** — the WordPress site is currently
 ranking, and swapping it for a broken deploy is the one mistake that is
 expensive to undo.
+
+---
+
+## Alternative: deploy without Compose
+
+If the Compose build pack keeps failing, this route avoids it entirely and
+produces exactly the same site. It is the more reliable path in Coolify.
+
+**1. Create the database**
+
+**+ New** → **Database** → **PostgreSQL** → Deploy. Once running, open it and
+copy the **internal** connection URL (it looks like
+`postgres://postgres:xxxx@abc123:5432/postgres`).
+
+**2. Create the app**
+
+**+ New** → **Public Repository**
+
+| Field | Value |
+|---|---|
+| Repository | `https://github.com/ashisbiswas007/wordleunlimited` |
+| Branch | `main` |
+| Build Pack | **Dockerfile** |
+| Dockerfile Location | `/Dockerfile` |
+| Port | `3000` |
+
+**3. Environment variables**
+
+```
+SITE_URL=https://wordleunlimited.dev
+DATABASE_URL=<the internal URL from step 1>
+SESSION_SECRET=<64 hex chars, see below>
+ADMIN_PASSWORD=<your chosen password>
+TRUST_PROXY=1
+NODE_ENV=production
+```
+
+Generate the session secret locally:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+**4.** Set the domain on the app resource, then **Deploy**.
+
+The only difference from Compose is that you wire Postgres up yourself instead
+of the compose file doing it. Everything else — migrations, topic seeding, word
+list generation — still runs automatically at build and boot.
 
 ---
 
