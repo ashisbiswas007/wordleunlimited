@@ -21,6 +21,7 @@ import {
   stopSettingsReloader,
 } from "./lib/settings.js";
 
+import { initAdminAuth } from "./lib/admin-auth.js";
 import registerApiRoutes from "./routes/api.js";
 import registerAdminRoutes from "./routes/admin.js";
 import registerPageRoutes from "./routes/pages.js";
@@ -260,6 +261,8 @@ async function start() {
   }
   await loadSettings();
   startSettingsReloader();
+  // Must run after migrations so the credentials table exists.
+  await initAdminAuth();
 
   const app = await build();
 

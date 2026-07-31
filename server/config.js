@@ -40,7 +40,10 @@ export const config = {
   sessionSecret,
   admin: {
     user: process.env.ADMIN_USER || "admin",
+    // Pre-hashed (preferred) or plain text typed into the deploy environment.
+    // If neither is set, one is generated at boot — see lib/admin-auth.js.
     passwordHash: process.env.ADMIN_PASSWORD_HASH || "",
+    password: process.env.ADMIN_PASSWORD || "",
     sessionTtlMs: 12 * 60 * 60 * 1000,
   },
 

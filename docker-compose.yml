@@ -14,7 +14,11 @@ services:
       DATABASE_URL: postgres://wordle:${POSTGRES_PASSWORD}@db:5432/wordle
       SESSION_SECRET: ${SESSION_SECRET}
       ADMIN_USER: ${ADMIN_USER:-admin}
-      ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH}
+      # Set ADMIN_PASSWORD to whatever you want to log in with — it is hashed at
+      # boot and never stored in the clear. Leave both blank and one is generated
+      # on first boot and printed to this container's logs.
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH:-}
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
       TRUST_PROXY: "1"
     expose:

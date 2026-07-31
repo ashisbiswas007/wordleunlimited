@@ -3,7 +3,12 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 import config from "../config.js";
-import { verifyPassword, signToken, verifyToken } from "../lib/crypto.js";
+import { signToken, verifyToken } from "../lib/crypto.js";
+import {
+  verifyAdminPassword,
+  changeAdminPassword,
+  adminAuthStatus,
+} from "../lib/admin-auth.js";
 import { getSettings, setSetting, loadSettings, DEFAULTS } from "../lib/settings.js";
 import { query, queryStrict, isDbEnabled, isDbAvailable } from "../db/pool.js";
 import { invalidate as invalidateTopics, normalisePack, listTopics } from "../lib/topics.js";
@@ -85,19 +90,20 @@ export default async function registerAdminRoutes(app) {
     },
     async (req, reply) => {
       const { username, password } = req.body;
+      const status = adminAuthStatus();
 
-      if (!config.admin.passwordHash) {
+      if (!status.configured) {
         return reply.code(500).send({
           error: "not_configured",
           message:
-            "ADMIN_PASSWORD_HASH is not set. Generate one with: node scripts/hash-password.mjs \"your password\"",
+            "No admin password is set. Add ADMIN_PASSWORD to the environment and redeploy.",
         });
       }
 
       const userOk = username === config.admin.user;
       // Always run the hash so a wrong username and a wrong password take the
       // same amount of time.
-      const passOk = await verifyPassword(password, config.admin.passwordHash);
+      const passOk = await verifyAdminPassword(password);
 
       if (!userOk || !passOk) {
         await audit(req, "login_failed", { username });
@@ -114,7 +120,51 @@ export default async function registerAdminRoutes(app) {
       });
 
       await audit(req, "login_ok", { username });
-      return { ok: true, user: username };
+      return { ok: true, user: username, ...adminAuthStatus() };
+    }
+  );
+
+  /* Tells the login screen whether a password even exists yet. */
+  app.get("/api/auth-status", { config: { rateLimit: LOGIN_LIMIT } }, async () => {
+    const s = adminAuthStatus();
+    return {
+      configured: s.configured,
+      usingGeneratedPassword: s.usingGeneratedPassword,
+      username: config.admin.user,
+    };
+  });
+
+  app.post(
+    "/api/password",
+    {
+      preHandler: requireAdmin,
+      config: { rateLimit: LOGIN_LIMIT },
+      schema: {
+        body: {
+          type: "object",
+          required: ["currentPassword", "newPassword"],
+          additionalProperties: false,
+          properties: {
+            currentPassword: { type: "string", maxLength: 256 },
+            newPassword: { type: "string", minLength: 12, maxLength: 256 },
+          },
+        },
+      },
+    },
+    async (req, reply) => {
+      const res = await changeAdminPassword(
+        req.body.currentPassword,
+        req.body.newPassword
+      );
+      if (res.error) {
+        await audit(req, "password_change_failed", { reason: res.error });
+        const code = res.error === "wrong_password" ? 401 : 400;
+        return reply.code(code).send(res);
+      }
+      // Force a fresh login so any other session signed with the old state dies.
+      reply.clearCookie(COOKIE, { path: "/admin" });
+      await audit(req, "password_changed", {});
+      return { ok: true };
     }
   );
 

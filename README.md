@@ -106,15 +106,37 @@ Copy `.env.example` to `.env`. The values that matter:
 | `SITE_URL` | canonical origin — drives sitemap, OG tags, challenge links |
 | `DATABASE_URL` | PostgreSQL. Omit to run on defaults |
 | `SESSION_SECRET` | **required in production**; signs the admin cookie |
-| `ADMIN_USER` / `ADMIN_PASSWORD_HASH` | `/admin` login |
+| `ADMIN_USER` / `ADMIN_PASSWORD` | `/admin` login — see below |
 | `GOOGLE_CLIENT_ID` | Drive appData cloud save; safe to expose |
 | `TRUST_PROXY` | `1` behind Coolify's Traefik, so rate limits see real IPs |
 
-Generate the admin credentials:
+### Admin password
 
-```bash
-node scripts/hash-password.mjs "your admin password"
+Three ways to set it, in order of precedence:
+
+1. **Change it inside `/admin`.** Stored hashed in the database, and outranks
+   everything below — so a change made in the UI actually sticks across deploys.
+2. **`ADMIN_PASSWORD_HASH`** — pre-hashed, so no plain text ever sits in the
+   environment. Generate with `node scripts/hash-password.mjs "your password"`.
+3. **`ADMIN_PASSWORD`** — just type the password you want into the environment
+   variables. It is hashed at boot; the plain text is never written to the
+   database or to disk. This is the easy option for Coolify.
+
+**Set none of them and one is generated on first boot** and printed to the
+container logs in a banner:
+
 ```
++==================================================================+
+|  ADMIN PASSWORD GENERATED                                        |
+|    URL:       https://wordleunlimited.dev/admin                  |
+|    Username:  admin                                              |
+|    Password:  MnkpZ-LpnGG-bsktv-M5SDx                            |
+|  This is shown ONCE. Copy it now, then change it in /admin.      |
++==================================================================+
+```
+
+It is saved to the database, so it survives restarts — but change it once you
+are in. A deploy is never locked out.
 
 ---
 
