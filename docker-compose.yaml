@@ -1,0 +1,53 @@
+# Identical to docker-compose.yml.
+#
+# Both spellings are committed on purpose: Coolify's "Docker Compose Location"
+# field defaults to /docker-compose.yaml in some versions and /docker-compose.yml
+# in others, and pointing it at a file that does not exist fails with
+# "Failed to read the Docker Compose file from the repository".
+# Keeping both means either default works. Edit them together.
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - SERVICE_FQDN_APP_3000
+      - NODE_ENV=production
+      - PORT=3000
+      - TRUST_PROXY=1
+      - SITE_URL=${SITE_URL}
+      - DATABASE_URL=postgres://wordle:${SERVICE_PASSWORD_POSTGRES}@db:5432/wordle
+      - SESSION_SECRET=${SERVICE_BASE64_64_SESSION}
+      - ADMIN_USER=${ADMIN_USER}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=wordle
+      - POSTGRES_PASSWORD=${SERVICE_PASSWORD_POSTGRES}
+      - POSTGRES_DB=wordle
+    volumes:
+      - wordle-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wordle -d wordle"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  wordle-db:
