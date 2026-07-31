@@ -1,16 +1,3 @@
-# Coolify deployment.
-#
-# In Coolify: New Resource -> Docker Compose -> point at this repository.
-# The SERVICE_* names below are Coolify "magic" variables: it fills them in
-# automatically, so the only thing you have to type is your domain and an
-# admin password.
-#
-#   SERVICE_FQDN_APP_3000   Coolify assigns the domain and routes it to port 3000
-#   SERVICE_PASSWORD_POSTGRES  a strong database password, generated once
-#   SERVICE_BASE64_64_SESSION  a 64-byte random secret for signing admin sessions
-#
-# See DEPLOY.md for the full walkthrough.
-
 services:
   app:
     build:
@@ -18,24 +5,16 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
-      # Coolify generates the URL and points Traefik at container port 3000.
       - SERVICE_FQDN_APP_3000
-      # Canonical origin used for sitemap, OG tags and challenge links.
-      # Override this with your real domain once DNS is pointed at the app.
-      - SITE_URL=${SITE_URL:-$SERVICE_FQDN_APP}
       - NODE_ENV=production
       - PORT=3000
-      # Behind Coolify's Traefik proxy, so rate limiting sees the real client IP.
       - TRUST_PROXY=1
+      - SITE_URL=${SITE_URL}
       - DATABASE_URL=postgres://wordle:${SERVICE_PASSWORD_POSTGRES}@db:5432/wordle
       - SESSION_SECRET=${SERVICE_BASE64_64_SESSION}
-      - ADMIN_USER=${ADMIN_USER:-admin}
-      # Type the password you want here in Coolify's environment variables.
-      # Leave it blank and one is generated on first boot and printed to the
-      # logs of this container, once.
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
-      # Optional: only needed for Google Drive cloud save.
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID:-}
+      - ADMIN_USER=${ADMIN_USER}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
     depends_on:
       db:
         condition: service_healthy
