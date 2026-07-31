@@ -1629,6 +1629,8 @@
   var _rawCh = readChallengeRaw();
   var _bootLen = _rawCh ? _rawCh.len : settings.length;
   var _roomParam = new URLSearchParams(location.search).get("room");
+  // Topic landing pages (/topics/<slug>/) declare which pack to open with.
+  var _bootTopic = typeof window.WU_TOPIC === "string" ? window.WU_TOPIC : null;
 
   loadCore(_bootLen).then(function () {
     var ch = readChallenge();
@@ -1643,6 +1645,11 @@
         challengeInfo = ch;
         startGame("challenge", ch.word.length);
       }
+    } else if (_bootTopic) {
+      // Show a playable board immediately, then swap to the topic once its
+      // answers arrive — the page should never sit empty while we fetch.
+      startGame("unlimited", settings.length);
+      chooseTopic(_bootTopic);
     } else {
       if (_bootLen !== settings.length) loadCore(settings.length);
       var pend = loadPendingChallenge();
@@ -1650,7 +1657,7 @@
       else startGame("unlimited", settings.length);
     }
 
-    if (!lsGet(K("seen_howto"), false) && !_roomParam) {
+    if (!lsGet(K("seen_howto"), false) && !_roomParam && !_bootTopic) {
       openModal("howtoModal");
       lsSet(K("seen_howto"), true);
     }

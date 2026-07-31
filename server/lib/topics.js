@@ -27,8 +27,13 @@ async function readPacks() {
   for (const file of files) {
     if (file === "index.json") continue;
     try {
-      const pack = JSON.parse(await readFile(join(PACKS_DIR, file), "utf8"));
-      if (pack && pack.slug && Array.isArray(pack.items)) packs.push(normalisePack(pack));
+      const parsed = JSON.parse(await readFile(join(PACKS_DIR, file), "utf8"));
+      // A file may hold a single pack or an array of them, so related topics
+      // can be grouped together instead of one file each.
+      const list = Array.isArray(parsed) ? parsed : [parsed];
+      for (const pack of list) {
+        if (pack && pack.slug && Array.isArray(pack.items)) packs.push(normalisePack(pack));
+      }
     } catch (err) {
       console.warn(`[topics] skipping malformed pack ${file}: ${err.message}`);
     }

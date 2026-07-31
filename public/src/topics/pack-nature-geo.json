@@ -1,0 +1,135 @@
+[
+{
+  "slug": "capital-cities", "name": "Capital Cities", "category": "geography", "region": "en",
+  "icon": "🏙️", "featured": true, "sortOrder": 71,
+  "blurb": "Capitals from every continent.",
+  "items": [
+    {"answer":"PARIS"},{"answer":"ROME"},{"answer":"OSLO"},{"answer":"LIMA"},
+    {"answer":"KYIV"},{"answer":"DOHA"},{"answer":"RIGA"},{"answer":"BERN"},
+    {"answer":"CAIRO"},{"answer":"SEOUL"},{"answer":"TOKYO"},{"answer":"HANOI"},
+    {"answer":"DELHI"},{"answer":"DHAKA"},{"answer":"KABUL"},{"answer":"AMMAN"},
+    {"answer":"QUITO"},{"answer":"SOFIA"},{"answer":"MINSK"},{"answer":"ACCRA"},
+    {"answer":"DAKAR"},{"answer":"MANILA"},{"answer":"VIENNA"},{"answer":"ATHENS"},
+    {"answer":"LISBON"},{"answer":"MADRID"},{"answer":"LONDON"},{"answer":"DUBLIN"},
+    {"answer":"WARSAW"},{"answer":"MOSCOW"},{"answer":"ANKARA"},{"answer":"BEIJING"},
+    {"answer":"JAKARTA"},{"answer":"BANGKOK"},{"answer":"NAIROBI"},{"answer":"KAMPALA"},
+    {"answer":"TEHRAN"},{"answer":"RIYADH"},{"answer":"HAVANA"},{"answer":"OTTAWA"},
+    {"answer":"BOGOTA"},{"answer":"BRUSSELS"},{"answer":"HELSINKI"},{"answer":"BUDAPEST"}
+  ]
+},
+{
+  "slug": "us-states", "name": "US States", "category": "geography", "region": "en",
+  "icon": "🗺️", "featured": false, "sortOrder": 74,
+  "blurb": "All fifty, three to seven letters.",
+  "items": [
+    {"answer":"OHIO"},{"answer":"IOWA"},{"answer":"UTAH"},{"answer":"MAINE"},
+    {"answer":"IDAHO"},{"answer":"TEXAS"},{"answer":"ALASKA"},{"answer":"HAWAII"},
+    {"answer":"KANSAS"},{"answer":"NEVADA"},{"answer":"OREGON"},{"answer":"FLORIDA"},
+    {"answer":"GEORGIA"},{"answer":"INDIANA"},{"answer":"MONTANA"},{"answer":"NEWYORK"},
+    {"answer":"VERMONT"},{"answer":"WYOMING"},{"answer":"ARIZONA"},{"answer":"ALABAMA"},
+    {"answer":"VIRGINIA"},{"answer":"ILLINOIS"},{"answer":"MISSOURI"},{"answer":"COLORADO"}
+  ]
+},
+{
+  "slug": "trees-plants", "name": "Trees & Plants", "category": "nature", "region": "en",
+  "icon": "🌳", "featured": false, "sortOrder": 82,
+  "blurb": "From the garden to the forest.",
+  "items": [
+    {"answer":"OAK"},{"answer":"ELM"},{"answer":"FIR"},{"answer":"ASH"},
+    {"answer":"YEW"},{"answer":"PINE"},{"answer":"BIRCH"},{"answer":"CEDAR"},
+    {"answer":"MAPLE"},{"answer":"ALDER"},{"answer":"WILLOW"},{"answer":"POPLAR"},
+    {"answer":"SPRUCE"},{"answer":"WALNUT"},{"answer":"CHERRY"},{"answer":"BEECH"},
+    {"answer":"HOLLY"},{"answer":"IVY"},{"answer":"FERN"},{"answer":"MOSS"},
+    {"answer":"ROSE"},{"answer":"TULIP"},{"answer":"DAISY"},{"answer":"LILY"},
+    {"answer":"ORCHID"},{"answer":"CACTUS"},{"answer":"BAMBOO"},{"answer":"LOTUS"},
+    {"answer":"JASMINE"},{"answer":"LAVENDER"},{"answer":"SUNFLOWER"},{"answer":"PALM"}
+  ]
+},
+{
+  "slug": "birds", "name": "Birds", "category": "nature", "region": "en",
+  "icon": "🦅", "featured": false, "sortOrder": 83,
+  "blurb": "Feathered from garden to jungle.",
+  "items": [
+    {"answer":"OWL"},{"answer":"JAY"},{"answer":"HEN"},{"answer":"CROW"},
+    {"answer":"DOVE"},{"answer":"SWAN"},{"answer":"HAWK"},{"answer":"WREN"},
+    {"answer":"LARK"},{"answer":"IBIS"},{"answer":"KIWI"},{"answer":"ROBIN"},
+    {"answer":"EAGLE"},{"answer":"HERON"},{"answer":"STORK"},{"answer":"CRANE"},
+    {"answer":"RAVEN"},{"answer":"FINCH"},{"answer":"GOOSE"},{"answer":"QUAIL"},
+    {"answer":"MAGPIE"},{"answer":"PIGEON"},{"answer":"TOUCAN"},{"answer":"FALCON"},
+    {"answer":"PARROT"},{"answer":"CUCKOO"},{"answer":"PUFFIN"},{"answer":"OSPREY"},
+    {"answer":"PELICAN"},{"answer":"PEACOCK"},{"answer":"SPARROW"},{"answer":"PENGUIN"},
+    {"answer":"OSTRICH"},{"answer":"VULTURE"},{"answer":"SEAGULL"},{"answer":"BUZZARD"}
+  ]
+},
+{
+  "slug": "weather", "name": "Weather", "category": "nature", "region": "en",
+  "icon": "🌦️", "featured": false, "sortOrder": 84,
+  "blurb": "Everything the sky can do.",
+  "items": [
+    {"answer":"SUN"},{"answer":"FOG"},{"answer":"ICE"},{"answer":"RAIN"},
+    {"answer":"SNOW"},{"answer":"HAIL"},{"answer":"WIND"},{"answer":"MIST"},
+    {"answer":"GALE"},{"answer":"CALM"},{"answer":"STORM"},{"answer":"CLOUD"},
+    {"answer":"FROST"},{"answer":"SLEET"},{"answer":"THAW"},{"answer":"HUMID"},
+    {"answer":"BREEZE"},{"answer":"SHOWER"},{"answer":"DROUGHT"},{"answer":"MONSOON"},
+    {"answer":"TORNADO"},{"answer":"CYCLONE"},{"answer":"TYPHOON"},{"answer":"THUNDER"},
+    {"answer":"RAINBOW"},{"answer":"BLIZZARD"},{"answer":"DRIZZLE"},{"answer":"OVERCAST"}
+  ]
+},
+{
+  "slug": "oceans-seas", "name": "Oceans & Seas", "category": "nature", "region": "en",
+  "icon": "🌊", "featured": false, "sortOrder": 85,
+  "blurb": "The world's water.",
+  "items": [
+    {"answer":"RED","clue":"The ___ Sea"},{"answer":"CORAL"},{"answer":"BLACK"},
+    {"answer":"NORTH"},{"answer":"BALTIC"},{"answer":"AEGEAN"},{"answer":"CASPIAN"},
+    {"answer":"ARCTIC"},{"answer":"INDIAN"},{"answer":"PACIFIC"},{"answer":"ATLANTIC"},
+    {"answer":"ADRIATIC"},{"answer":"ARABIAN"},{"answer":"BERING"},{"answer":"JAVA"},
+    {"answer":"BANDA"},{"answer":"TIMOR"},{"answer":"IRISH"},{"answer":"CELTIC"},
+    {"answer":"AZOV"},{"answer":"WEDDELL"},{"answer":"TASMAN"},{"answer":"IONIAN"}
+  ]
+},
+{
+  "slug": "gemstones", "name": "Gemstones & Minerals", "category": "nature", "region": "en",
+  "icon": "💎", "featured": false, "sortOrder": 86,
+  "blurb": "Precious, semi-precious and just plain rock.",
+  "items": [
+    {"answer":"JADE"},{"answer":"OPAL"},{"answer":"RUBY"},{"answer":"ONYX"},
+    {"answer":"TOPAZ"},{"answer":"PEARL"},{"answer":"AMBER"},{"answer":"CORAL"},
+    {"answer":"QUARTZ"},{"answer":"GARNET"},{"answer":"ZIRCON"},{"answer":"COPPER"},
+    {"answer":"SILVER"},{"answer":"GOLD"},{"answer":"IRON"},{"answer":"TIN"},
+    {"answer":"NICKEL"},{"answer":"COBALT"},{"answer":"GYPSUM"},{"answer":"GRANITE"},
+    {"answer":"BASALT"},{"answer":"MARBLE"},{"answer":"OBSIDIAN"},{"answer":"DIAMOND"},
+    {"answer":"EMERALD"},{"answer":"SAPPHIRE"},{"answer":"AMETHYST"},{"answer":"PERIDOT"}
+  ]
+},
+{
+  "slug": "chemical-elements", "name": "Chemical Elements", "category": "science", "region": "en",
+  "icon": "🧪", "featured": false, "sortOrder": 91,
+  "blurb": "Straight off the periodic table.",
+  "items": [
+    {"answer":"TIN"},{"answer":"IRON"},{"answer":"ZINC"},{"answer":"NEON"},
+    {"answer":"GOLD"},{"answer":"LEAD"},{"answer":"ARGON"},{"answer":"BORON"},
+    {"answer":"XENON"},{"answer":"RADON"},{"answer":"SODIUM"},{"answer":"CARBON"},
+    {"answer":"COPPER"},{"answer":"SILVER"},{"answer":"NICKEL"},{"answer":"COBALT"},
+    {"answer":"OXYGEN"},{"answer":"HELIUM"},{"answer":"CALCIUM"},{"answer":"LITHIUM"},
+    {"answer":"MERCURY"},{"answer":"URANIUM"},{"answer":"ARSENIC"},{"answer":"BROMINE"},
+    {"answer":"CHLORINE"},{"answer":"KRYPTON"},{"answer":"SULFUR"},{"answer":"SILICON"},
+    {"answer":"BARIUM"},{"answer":"RADIUM"},{"answer":"IODINE"},{"answer":"PLATINUM"}
+  ]
+},
+{
+  "slug": "space", "name": "Space & Astronomy", "category": "science", "region": "en",
+  "icon": "🪐", "featured": true, "sortOrder": 92,
+  "blurb": "Planets, moons and the things between them.",
+  "items": [
+    {"answer":"SUN"},{"answer":"MOON"},{"answer":"MARS"},{"answer":"VENUS"},
+    {"answer":"EARTH"},{"answer":"PLUTO"},{"answer":"SATURN"},{"answer":"URANUS"},
+    {"answer":"NEPTUNE"},{"answer":"JUPITER"},{"answer":"MERCURY"},{"answer":"COMET"},
+    {"answer":"ORBIT"},{"answer":"NEBULA"},{"answer":"GALAXY"},{"answer":"QUASAR"},
+    {"answer":"PULSAR"},{"answer":"METEOR"},{"answer":"ECLIPSE"},{"answer":"ASTEROID"},
+    {"answer":"COSMOS"},{"answer":"ROCKET"},{"answer":"SHUTTLE"},{"answer":"APOLLO"},
+    {"answer":"GEMINI"},{"answer":"ORION"},{"answer":"TITAN"},{"answer":"EUROPA"},
+    {"answer":"PHOBOS"},{"answer":"DEIMOS"},{"answer":"IO"},{"answer":"CERES"}
+  ]
+}
+]

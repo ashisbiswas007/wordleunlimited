@@ -252,7 +252,21 @@ function escapeHtml(s) {
 }
 
 /* ---------- boot ---------- */
+/** The asset hash stamped into the static pages, so server-rendered pages
+    reference the same cache-busted URLs. */
+async function loadBuildId() {
+  try {
+    const raw = await readFile(join(HERE, "generated", "build.json"), "utf8");
+    const { buildId } = JSON.parse(raw);
+    if (buildId) process.env.BUILD_ID = buildId;
+  } catch {
+    /* not built yet — dev mode falls back to "1" */
+  }
+}
+
 async function start() {
+  await loadBuildId();
+
   // A DB that is not ready yet must not stop the game from serving.
   try {
     await migrate();

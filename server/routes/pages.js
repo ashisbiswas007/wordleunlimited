@@ -1,13 +1,20 @@
 import config from "../config.js";
 import { getSettings } from "../lib/settings.js";
 import { listTopics } from "../lib/topics.js";
+import {
+  renderTopicIndex,
+  renderTopicPage,
+  invalidateTopicPages,
+  inlineScriptHashes,
+  extendCsp,
+} from "../lib/topic-pages.js";
 
 const SITEMAP_TTL_MS = 60 * 60 * 1000;
 let sitemapCache = { at: 0, xml: "" };
 
 export default async function registerPageRoutes(app) {
   /* Canonical trailing slashes — /wordle-uk and /wordle-uk/ must not both rank. */
-  const slashRedirects = ["/wordle-uk", "/id", "/topics", "/multiplayer", "/privacy-policy", "/disclaimer"];
+  const slashRedirects = ["/wordle-uk", "/id", "/topics", "/privacy-policy", "/disclaimer"];
   for (const from of slashRedirects) {
     app.get(from, (req, reply) => reply.redirect(`${from}/`, 301));
   }
@@ -89,13 +96,6 @@ ${xDefault}
     <priority>0.8</priority>
   </url>`);
 
-    entries.push(`  <url>
-    <loc>${base}/multiplayer/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>`);
-
     // Each topic gets a crawlable URL — this is the whole point of Topic mode
     // for search: one landing page per "wordle <topic>" query.
     try {
@@ -133,9 +133,33 @@ ${entries.join("\n")}
   });
 
   /* ---------- topic landing pages ---------- */
-  /* Served by the SPA shell; the crawler gets real content injected client-side
-     is NOT enough, so these render server-side in public/topics/. The route
-     below only normalises the URL shape. */
+  /* Rendered on the server: a crawler has to see the topic name, the copy and
+     the answers as HTML. Injecting them client-side would not rank. */
+
+  app.get("/topics/", { logLevel: "silent" }, async (req, reply) => {
+    if (!getSettings().modes.topic) return reply.callNotFound();
+    const html = await renderTopicIndex();
+    reply.type("text/html; charset=utf-8");
+    reply.header("Cache-Control", "public, max-age=600, stale-while-revalidate=3600");
+    extendCsp(reply, inlineScriptHashes(html));
+    return html;
+  });
+
+  app.get("/topics/:slug/", { logLevel: "silent" }, async (req, reply) => {
+    if (!getSettings().modes.topic) return reply.callNotFound();
+    const slug = String(req.params.slug || "").toLowerCase();
+    if (!/^[a-z0-9-]{1,64}$/.test(slug)) return reply.callNotFound();
+
+    const html = await renderTopicPage(slug);
+    if (!html) return reply.callNotFound();
+
+    reply.type("text/html; charset=utf-8");
+    reply.header("Cache-Control", "public, max-age=600, stale-while-revalidate=3600");
+    extendCsp(reply, inlineScriptHashes(html));
+    return html;
+  });
+
+  // Without the trailing slash it is a different URL to Google.
   app.get("/topics/:slug", (req, reply) => {
     const slug = String(req.params.slug || "").toLowerCase();
     if (!/^[a-z0-9-]{1,64}$/.test(slug)) return reply.callNotFound();
@@ -145,4 +169,6 @@ ${entries.join("\n")}
 
 export function invalidateSitemap() {
   sitemapCache = { at: 0, xml: "" };
+  // Topic edits change both the sitemap and the rendered landing pages.
+  invalidateTopicPages();
 }

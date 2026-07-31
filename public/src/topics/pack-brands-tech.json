@@ -1,0 +1,78 @@
+[
+{
+  "slug": "tech-companies", "name": "Tech Companies", "category": "brands", "region": "en",
+  "icon": "💻", "featured": true, "sortOrder": 41,
+  "blurb": "The companies behind the software and hardware you use.",
+  "items": [
+    {"answer":"APPLE"},{"answer":"GOOGLE"},{"answer":"META"},{"answer":"AMAZON"},
+    {"answer":"ADOBE"},{"answer":"ORACLE"},{"answer":"INTEL"},{"answer":"CISCO"},
+    {"answer":"NVIDIA"},{"answer":"TESLA"},{"answer":"UBER"},{"answer":"NETFLIX"},
+    {"answer":"SPOTIFY"},{"answer":"TWITTER"},{"answer":"REDDIT"},{"answer":"GITHUB"},
+    {"answer":"SLACK"},{"answer":"ZOOM"},{"answer":"STRIPE"},{"answer":"SHOPIFY"},
+    {"answer":"DROPBOX"},{"answer":"TWITCH"},{"answer":"DISCORD"},{"answer":"SNAP"},
+    {"answer":"TIKTOK"},{"answer":"IBM"},{"answer":"DELL"},{"answer":"SONY"},
+    {"answer":"CANON"},{"answer":"EPSON"},{"answer":"NOKIA"},{"answer":"SIEMENS"}
+  ]
+},
+{
+  "slug": "fast-food", "name": "Fast Food Brands", "category": "brands", "region": "en",
+  "icon": "🍔", "featured": false, "sortOrder": 45,
+  "blurb": "Chains you have queued at.",
+  "items": [
+    {"answer":"KFC"},{"answer":"SUBWAY"},{"answer":"WENDYS"},{"answer":"POPEYES"},
+    {"answer":"ARBYS"},{"answer":"SONIC"},{"answer":"DOMINOS"},{"answer":"PAPA"},
+    {"answer":"NANDOS"},{"answer":"GREGGS"},{"answer":"COSTA"},{"answer":"PRET"},
+    {"answer":"CHIPOTLE"},{"answer":"PANERA"},{"answer":"DENNYS"},{"answer":"IHOP"},
+    {"answer":"HARDEES"},{"answer":"CULVERS"},{"answer":"WHATABURGER"},{"answer":"JOLLIBEE"}
+  ]
+},
+{
+  "slug": "sportswear", "name": "Sportswear Brands", "category": "brands", "region": "en",
+  "icon": "👟", "featured": false, "sortOrder": 46,
+  "blurb": "Kit, trainers and gear.",
+  "items": [
+    {"answer":"NIKE"},{"answer":"PUMA"},{"answer":"ASICS"},{"answer":"ADIDAS"},
+    {"answer":"REEBOK"},{"answer":"UMBRO"},{"answer":"KAPPA"},{"answer":"FILA"},
+    {"answer":"DIADORA"},{"answer":"MIZUNO"},{"answer":"SPEEDO"},{"answer":"HUMMEL"},
+    {"answer":"SAUCONY"},{"answer":"BROOKS"},{"answer":"MACRON"},{"answer":"JOMA"},
+    {"answer":"LOTTO"},{"answer":"ERREA"},{"answer":"CONVERSE"},{"answer":"VANS"}
+  ]
+},
+{
+  "slug": "airlines", "name": "Airlines", "category": "brands", "region": "en",
+  "icon": "✈️", "featured": false, "sortOrder": 47,
+  "blurb": "Carriers from around the world.",
+  "items": [
+    {"answer":"DELTA"},{"answer":"UNITED"},{"answer":"RYANAIR"},{"answer":"EMIRATES"},
+    {"answer":"QATAR"},{"answer":"QANTAS"},{"answer":"IBERIA"},{"answer":"ALITALIA"},
+    {"answer":"LUFTHANSA"},{"answer":"JETBLUE"},{"answer":"WIZZ"},{"answer":"VUELING"},
+    {"answer":"AEROMEXICO"},{"answer":"GARUDA"},{"answer":"LION"},{"answer":"BATIK"},
+    {"answer":"CATHAY"},{"answer":"KOREAN"},{"answer":"ANA"},{"answer":"JAL"},
+    {"answer":"TAP"},{"answer":"SAS"},{"answer":"KLM"},{"answer":"EASYJET"}
+  ]
+},
+{
+  "slug": "supermarkets", "name": "Supermarkets", "category": "brands", "region": "en",
+  "icon": "🛒", "featured": false, "sortOrder": 48,
+  "blurb": "Where the shopping gets done.",
+  "items": [
+    {"answer":"TESCO"},{"answer":"ASDA"},{"answer":"ALDI"},{"answer":"LIDL"},
+    {"answer":"COOP"},{"answer":"SPAR"},{"answer":"COSTCO"},{"answer":"KROGER"},
+    {"answer":"SAFEWAY"},{"answer":"PUBLIX"},{"answer":"MEIJER"},{"answer":"WEGMANS"},
+    {"answer":"CARREFOUR"},{"answer":"MORRISONS"},{"answer":"WAITROSE"},{"answer":"ICELAND"},
+    {"answer":"BUDGENS"},{"answer":"ALFAMART"},{"answer":"INDOMARET"},{"answer":"HYPERMART"}
+  ]
+},
+{
+  "slug": "motorbikes", "name": "Motorbike Brands", "category": "brands", "region": "en",
+  "icon": "🏍️", "featured": false, "sortOrder": 49,
+  "blurb": "Two wheels and an engine.",
+  "items": [
+    {"answer":"HONDA"},{"answer":"YAMAHA"},{"answer":"SUZUKI"},{"answer":"DUCATI"},
+    {"answer":"APRILIA"},{"answer":"TRIUMPH"},{"answer":"HARLEY"},{"answer":"INDIAN"},
+    {"answer":"KTM"},{"answer":"BENELLI"},{"answer":"NORTON"},{"answer":"BSA"},
+    {"answer":"ROYAL","clue":"___ Enfield"},{"answer":"HUSQVARNA"},{"answer":"BAJAJ"},
+    {"answer":"HERO"},{"answer":"TVS"},{"answer":"VESPA"},{"answer":"PIAGGIO"},{"answer":"KAWASAKI"}
+  ]
+}
+]

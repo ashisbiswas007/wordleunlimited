@@ -1,0 +1,182 @@
+[
+{
+  "slug": "marvel", "name": "Marvel", "category": "movies & tv", "region": "en",
+  "icon": "🦸", "featured": true, "sortOrder": 11,
+  "blurb": "Heroes, villains and the wider Marvel universe.",
+  "items": [
+    {"answer":"THOR","clue":"God of thunder"},{"answer":"HULK","clue":"Big and green"},
+    {"answer":"LOKI","clue":"God of mischief"},{"answer":"STARK","clue":"Iron Man's surname"},
+    {"answer":"TONY","clue":"Iron Man's first name"},{"answer":"STEVE","clue":"Captain America"},
+    {"answer":"ROGERS","clue":"Cap's surname"},{"answer":"NATASHA","clue":"Black Widow"},
+    {"answer":"CLINT","clue":"Hawkeye"},{"answer":"VISION","clue":"Born of the Mind Stone"},
+    {"answer":"WANDA","clue":"Scarlet Witch"},{"answer":"PIETRO","clue":"Quicksilver"},
+    {"answer":"THANOS","clue":"The Mad Titan"},{"answer":"GAMORA","clue":"Deadliest woman in the galaxy"},
+    {"answer":"NEBULA","clue":"Gamora's sister"},{"answer":"DRAX","clue":"The Destroyer"},
+    {"answer":"GROOT","clue":"I am ___"},{"answer":"ROCKET","clue":"The raccoon"},
+    {"answer":"BUCKY","clue":"Winter Soldier"},{"answer":"SAM","clue":"Falcon"},
+    {"answer":"SHURI","clue":"Wakandan princess"},{"answer":"OKOYE","clue":"Dora Milaje general"},
+    {"answer":"WAKANDA","clue":"T'Challa's nation"},{"answer":"ASGARD","clue":"Thor's realm"},
+    {"answer":"HYDRA","clue":"Cut off one head…"},{"answer":"SHIELD","clue":"Fury's agency"},
+    {"answer":"FURY","clue":"The man with the eyepatch"},{"answer":"ULTRON","clue":"Stark's mistake"},
+    {"answer":"MJOLNIR","clue":"Worthy only"},{"answer":"XAVIER","clue":"Professor X"},
+    {"answer":"LOGAN","clue":"Wolverine"},{"answer":"STORM","clue":"Weather-controlling X-Man"},
+    {"answer":"CYCLOPS","clue":"Visor and optic blasts"},{"answer":"MAGNETO","clue":"Master of magnetism"},
+    {"answer":"DEADPOOL","clue":"The merc with a mouth"},{"answer":"MYSTIQUE","clue":"Blue shapeshifter"}
+  ]
+},
+{
+  "slug": "harry-potter", "name": "Harry Potter", "category": "movies & tv", "region": "en",
+  "icon": "⚡", "featured": true, "sortOrder": 12,
+  "blurb": "Wizards, spells and places from the wizarding world.",
+  "items": [
+    {"answer":"HARRY"},{"answer":"POTTER"},{"answer":"RON"},{"answer":"WEASLEY"},
+    {"answer":"HERMIONE"},{"answer":"GRANGER"},{"answer":"HAGRID"},{"answer":"SNAPE"},
+    {"answer":"DRACO"},{"answer":"MALFOY"},{"answer":"SIRIUS"},{"answer":"REMUS"},
+    {"answer":"LUPIN"},{"answer":"NEVILLE"},{"answer":"LUNA"},{"answer":"GINNY"},
+    {"answer":"FRED"},{"answer":"GEORGE"},{"answer":"CEDRIC"},{"answer":"HEDWIG","clue":"Harry's owl"},
+    {"answer":"DOBBY","clue":"A free elf"},{"answer":"FAWKES","clue":"The phoenix"},
+    {"answer":"HOGWARTS"},{"answer":"GRYFFINDOR"},{"answer":"SLYTHERIN"},
+    {"answer":"QUIDDITCH","clue":"The broomstick sport"},{"answer":"SNITCH","clue":"Worth 150 points"},
+    {"answer":"WAND"},{"answer":"MUGGLE","clue":"Non-magical folk"},{"answer":"HORCRUX"},
+    {"answer":"PATRONUS"},{"answer":"AZKABAN","clue":"The wizard prison"},
+    {"answer":"DIAGON","clue":"___ Alley"},{"answer":"GRINGOTTS","clue":"The goblin bank"}
+  ]
+},
+{
+  "slug": "star-wars", "name": "Star Wars", "category": "movies & tv", "region": "en",
+  "icon": "🌌", "featured": true, "sortOrder": 13,
+  "blurb": "A galaxy far, far away.",
+  "items": [
+    {"answer":"LUKE"},{"answer":"LEIA"},{"answer":"HAN"},{"answer":"SOLO"},
+    {"answer":"VADER"},{"answer":"YODA"},{"answer":"ANAKIN"},{"answer":"PADME"},
+    {"answer":"OBIWAN"},{"answer":"KENOBI"},{"answer":"REY"},{"answer":"FINN"},
+    {"answer":"POE"},{"answer":"KYLO"},{"answer":"CHEWIE"},{"answer":"JABBA"},
+    {"answer":"BOBA"},{"answer":"FETT"},{"answer":"MAUL"},{"answer":"DOOKU"},
+    {"answer":"GRIEVOUS"},{"answer":"PALPATINE"},{"answer":"ACKBAR"},{"answer":"LANDO"},
+    {"answer":"JEDI"},{"answer":"SITH"},{"answer":"FORCE"},{"answer":"SABER"},
+    {"answer":"EWOK"},{"answer":"WOOKIEE"},{"answer":"DROID"},{"answer":"TATOOINE"},
+    {"answer":"HOTH"},{"answer":"ENDOR"},{"answer":"NABOO"},{"answer":"CORUSCANT"},
+    {"answer":"FALCON","clue":"Millennium ___"},{"answer":"XWING"}
+  ]
+},
+{
+  "slug": "the-simpsons", "name": "The Simpsons", "category": "movies & tv", "region": "en",
+  "icon": "🍩", "featured": false, "sortOrder": 21,
+  "blurb": "Everyone in Springfield.",
+  "items": [
+    {"answer":"HOMER"},{"answer":"MARGE"},{"answer":"BART"},{"answer":"LISA"},
+    {"answer":"MAGGIE"},{"answer":"SIMPSON"},{"answer":"NED"},{"answer":"FLANDERS"},
+    {"answer":"MOE"},{"answer":"APU"},{"answer":"BARNEY"},{"answer":"KRUSTY"},
+    {"answer":"MILHOUSE"},{"answer":"NELSON"},{"answer":"RALPH"},{"answer":"SKINNER"},
+    {"answer":"BURNS"},{"answer":"SMITHERS"},{"answer":"LENNY"},{"answer":"CARL"},
+    {"answer":"SELMA"},{"answer":"PATTY"},{"answer":"ABE"},{"answer":"OTTO"},
+    {"answer":"WILLIE"},{"answer":"QUIMBY"},{"answer":"WIGGUM"},{"answer":"DUFF","clue":"The beer"},
+    {"answer":"SPRINGFIELD"},{"answer":"DONUT"}
+  ]
+},
+{
+  "slug": "friends", "name": "Friends", "category": "movies & tv", "region": "en",
+  "icon": "☕", "featured": false, "sortOrder": 22,
+  "blurb": "The one with the word game.",
+  "items": [
+    {"answer":"ROSS"},{"answer":"RACHEL"},{"answer":"MONICA"},{"answer":"CHANDLER"},
+    {"answer":"JOEY"},{"answer":"PHOEBE"},{"answer":"GUNTHER"},{"answer":"JANICE"},
+    {"answer":"GELLER"},{"answer":"GREEN"},{"answer":"BING"},{"answer":"BUFFAY"},
+    {"answer":"CENTRAL","clue":"___ Perk"},{"answer":"PERK"},{"answer":"SMELLY","clue":"___ Cat"},
+    {"answer":"EMMA"},{"answer":"BEN"},{"answer":"MIKE"},{"answer":"RICHARD"},
+    {"answer":"CAROL"},{"answer":"SUSAN"},{"answer":"MARCEL","clue":"Ross's monkey"},
+    {"answer":"UGLY","clue":"___ Naked Guy"},{"answer":"PIVOT"}
+  ]
+},
+{
+  "slug": "disney", "name": "Disney", "category": "movies & tv", "region": "en",
+  "icon": "🏰", "featured": true, "sortOrder": 14,
+  "blurb": "Classic and modern Disney characters.",
+  "items": [
+    {"answer":"MICKEY"},{"answer":"MINNIE"},{"answer":"DONALD"},{"answer":"GOOFY"},
+    {"answer":"PLUTO"},{"answer":"DAISY"},{"answer":"ELSA"},{"answer":"ANNA"},
+    {"answer":"OLAF"},{"answer":"SVEN"},{"answer":"KRISTOFF"},{"answer":"MOANA"},
+    {"answer":"MAUI"},{"answer":"ARIEL"},{"answer":"BELLE"},{"answer":"AURORA"},
+    {"answer":"JASMINE"},{"answer":"ALADDIN"},{"answer":"GENIE"},{"answer":"JAFAR"},
+    {"answer":"SIMBA"},{"answer":"NALA"},{"answer":"MUFASA"},{"answer":"SCAR"},
+    {"answer":"TIMON"},{"answer":"PUMBAA"},{"answer":"RAFIKI"},{"answer":"ZAZU"},
+    {"answer":"WOODY"},{"answer":"BUZZ"},{"answer":"JESSIE"},{"answer":"NEMO"},
+    {"answer":"DORY"},{"answer":"MULAN"},{"answer":"TIANA"},{"answer":"RAPUNZEL"},
+    {"answer":"CINDERELLA"},{"answer":"BAMBI"},{"answer":"DUMBO"},{"answer":"STITCH"}
+  ]
+},
+{
+  "slug": "game-of-thrones", "name": "Game of Thrones", "category": "movies & tv", "region": "en",
+  "icon": "🐉", "featured": false, "sortOrder": 23,
+  "blurb": "Houses, characters and places of Westeros.",
+  "items": [
+    {"answer":"STARK"},{"answer":"ARYA"},{"answer":"SANSA"},{"answer":"BRAN"},
+    {"answer":"ROBB"},{"answer":"NED"},{"answer":"CATELYN"},{"answer":"JON"},
+    {"answer":"SNOW"},{"answer":"DAENERYS"},{"answer":"TARGARYEN"},{"answer":"VISERYS"},
+    {"answer":"TYRION"},{"answer":"CERSEI"},{"answer":"JAIME"},{"answer":"TYWIN"},
+    {"answer":"JOFFREY"},{"answer":"TOMMEN"},{"answer":"MYRCELLA"},{"answer":"SAMWELL"},
+    {"answer":"BRIENNE"},{"answer":"BRONN"},{"answer":"VARYS"},{"answer":"PETYR"},
+    {"answer":"MELISANDRE"},{"answer":"DAVOS"},{"answer":"STANNIS"},{"answer":"RENLY"},
+    {"answer":"HODOR"},{"answer":"GHOST"},{"answer":"DROGON"},{"answer":"DOTHRAKI"},
+    {"answer":"WINTERFELL"},{"answer":"DORNE"},{"answer":"BRAAVOS"},{"answer":"VALYRIA"},
+    {"answer":"LANNISTER"},{"answer":"BARATHEON"},{"answer":"GREYJOY"},{"answer":"TULLY"}
+  ]
+},
+{
+  "slug": "stranger-things", "name": "Stranger Things", "category": "movies & tv", "region": "en",
+  "icon": "🔦", "featured": false, "sortOrder": 24,
+  "blurb": "Hawkins and the Upside Down.",
+  "items": [
+    {"answer":"ELEVEN"},{"answer":"MIKE"},{"answer":"DUSTIN"},{"answer":"LUCAS"},
+    {"answer":"WILL"},{"answer":"MAX"},{"answer":"NANCY"},{"answer":"JONATHAN"},
+    {"answer":"STEVE"},{"answer":"ROBIN"},{"answer":"HOPPER"},{"answer":"JOYCE"},
+    {"answer":"EDDIE"},{"answer":"BILLY"},{"answer":"ERICA"},{"answer":"MURRAY"},
+    {"answer":"BRENNER"},{"answer":"VECNA"},{"answer":"DEMOGORGON"},{"answer":"HAWKINS"},
+    {"answer":"WHEELER"},{"answer":"BYERS"},{"answer":"SINCLAIR"},{"answer":"HENDERSON"},
+    {"answer":"WAFFLE"},{"answer":"MINDFLAYER"}
+  ]
+},
+{
+  "slug": "breaking-bad", "name": "Breaking Bad", "category": "movies & tv", "region": "en",
+  "icon": "⚗️", "featured": false, "sortOrder": 25,
+  "blurb": "Say my name.",
+  "items": [
+    {"answer":"WALTER"},{"answer":"WHITE"},{"answer":"JESSE"},{"answer":"PINKMAN"},
+    {"answer":"SKYLER"},{"answer":"HANK"},{"answer":"MARIE"},{"answer":"SAUL"},
+    {"answer":"GOODMAN"},{"answer":"MIKE"},{"answer":"GUS"},{"answer":"FRING"},
+    {"answer":"TUCO"},{"answer":"HECTOR"},{"answer":"LYDIA"},{"answer":"TODD"},
+    {"answer":"BADGER"},{"answer":"SKINNY","clue":"___ Pete"},{"answer":"GALE"},
+    {"answer":"HEISENBERG"},{"answer":"POLLOS","clue":"Los ___ Hermanos"},{"answer":"CRYSTAL"},
+    {"answer":"RICIN"},{"answer":"WINNEBAGO"}
+  ]
+},
+{
+  "slug": "pixar", "name": "Pixar", "category": "movies & tv", "region": "en",
+  "icon": "💡", "featured": false, "sortOrder": 26,
+  "blurb": "Characters from the Pixar films.",
+  "items": [
+    {"answer":"WOODY"},{"answer":"BUZZ"},{"answer":"NEMO"},{"answer":"DORY"},
+    {"answer":"MARLIN"},{"answer":"CRUSH"},{"answer":"SULLEY"},{"answer":"MIKE"},
+    {"answer":"BOO"},{"answer":"RANDALL"},{"answer":"REMY"},{"answer":"LINGUINI"},
+    {"answer":"WALLE"},{"answer":"EVE"},{"answer":"CARL"},{"answer":"RUSSELL"},
+    {"answer":"DUG"},{"answer":"KEVIN"},{"answer":"MERIDA"},{"answer":"RILEY"},
+    {"answer":"JOY"},{"answer":"SADNESS"},{"answer":"ANGER"},{"answer":"FEAR"},
+    {"answer":"DISGUST"},{"answer":"MIGUEL"},{"answer":"HECTOR"},{"answer":"LUCA"},
+    {"answer":"MCQUEEN"},{"answer":"MATER"},{"answer":"SALLY"},{"answer":"BONNIE"}
+  ]
+},
+{
+  "slug": "batman", "name": "Batman", "category": "movies & tv", "region": "en",
+  "icon": "🦇", "featured": false, "sortOrder": 27,
+  "blurb": "Gotham's heroes and rogues.",
+  "items": [
+    {"answer":"BRUCE"},{"answer":"WAYNE"},{"answer":"ALFRED"},{"answer":"ROBIN"},
+    {"answer":"GORDON"},{"answer":"BARBARA"},{"answer":"JOKER"},{"answer":"PENGUIN"},
+    {"answer":"RIDDLER"},{"answer":"BANE"},{"answer":"CATWOMAN"},{"answer":"SELINA"},
+    {"answer":"HARLEY"},{"answer":"QUINN"},{"answer":"SCARECROW"},{"answer":"FREEZE"},
+    {"answer":"CLAYFACE"},{"answer":"DEATHSTROKE"},{"answer":"GOTHAM"},{"answer":"ARKHAM"},
+    {"answer":"BATCAVE"},{"answer":"BATMOBILE"},{"answer":"DICK"},{"answer":"GRAYSON"},
+    {"answer":"TIMDRAKE"},{"answer":"RAS"}
+  ]
+}
+]

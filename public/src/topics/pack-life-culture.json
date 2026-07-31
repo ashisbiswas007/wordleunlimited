@@ -1,0 +1,184 @@
+[
+{
+  "slug": "football-clubs", "name": "Football Clubs", "category": "sport", "region": "en",
+  "icon": "⚽", "featured": true, "sortOrder": 101,
+  "blurb": "Clubs from the big European leagues and beyond.",
+  "items": [
+    {"answer":"ARSENAL"},{"answer":"CHELSEA"},{"answer":"EVERTON"},{"answer":"FULHAM"},
+    {"answer":"LEEDS"},{"answer":"ASTON","clue":"___ Villa"},{"answer":"SPURS"},
+    {"answer":"WOLVES"},{"answer":"BURNLEY"},{"answer":"CELTIC"},{"answer":"RANGERS"},
+    {"answer":"BARCA"},{"answer":"SEVILLA"},{"answer":"BETIS"},{"answer":"VALENCIA"},
+    {"answer":"MILAN"},{"answer":"INTER"},{"answer":"ROMA"},{"answer":"LAZIO"},
+    {"answer":"NAPOLI"},{"answer":"JUVENTUS"},{"answer":"TORINO"},{"answer":"GENOA"},
+    {"answer":"BAYERN"},{"answer":"SCHALKE"},{"answer":"HERTHA"},{"answer":"MAINZ"},
+    {"answer":"AJAX"},{"answer":"PSV"},{"answer":"FEYENOORD"},{"answer":"PORTO"},
+    {"answer":"BENFICA"},{"answer":"SPORTING"},{"answer":"MONACO"},{"answer":"LYON"},
+    {"answer":"LILLE"},{"answer":"NANTES"},{"answer":"RENNES"}
+  ]
+},
+{
+  "slug": "sports", "name": "Sports", "category": "sport", "region": "en",
+  "icon": "🏆", "featured": false, "sortOrder": 105,
+  "blurb": "Games, events and disciplines.",
+  "items": [
+    {"answer":"GOLF"},{"answer":"POLO"},{"answer":"JUDO"},{"answer":"SUMO"},
+    {"answer":"RUGBY"},{"answer":"BOXING"},{"answer":"TENNIS"},{"answer":"SQUASH"},
+    {"answer":"HOCKEY"},{"answer":"SOCCER"},{"answer":"CRICKET"},{"answer":"NETBALL"},
+    {"answer":"CURLING"},{"answer":"FENCING"},{"answer":"ROWING"},{"answer":"SAILING"},
+    {"answer":"SKIING"},{"answer":"SURFING"},{"answer":"DIVING"},{"answer":"CYCLING"},
+    {"answer":"KARATE"},{"answer":"ARCHERY"},{"answer":"BOWLING"},{"answer":"SKATING"},
+    {"answer":"CLIMBING"},{"answer":"MARATHON"},{"answer":"TRIATHLON"},{"answer":"BADMINTON"}
+  ]
+},
+{
+  "slug": "fruits-vegetables", "name": "Fruit & Vegetables", "category": "food", "region": "en",
+  "icon": "🍎", "featured": true, "sortOrder": 111,
+  "blurb": "Good one for kids — plenty of short answers.",
+  "items": [
+    {"answer":"FIG"},{"answer":"YAM"},{"answer":"PEA"},{"answer":"KIWI"},
+    {"answer":"PEAR"},{"answer":"PLUM"},{"answer":"LIME"},{"answer":"DATE"},
+    {"answer":"BEAN"},{"answer":"CORN"},{"answer":"LEEK"},{"answer":"KALE"},
+    {"answer":"APPLE"},{"answer":"MANGO"},{"answer":"PEACH"},{"answer":"GRAPE"},
+    {"answer":"LEMON"},{"answer":"MELON"},{"answer":"BERRY"},{"answer":"GUAVA"},
+    {"answer":"ONION"},{"answer":"OLIVE"},{"answer":"BANANA"},{"answer":"CHERRY"},
+    {"answer":"ORANGE"},{"answer":"PAPAYA"},{"answer":"TOMATO"},{"answer":"POTATO"},
+    {"answer":"CARROT"},{"answer":"CELERY"},{"answer":"GARLIC"},{"answer":"GINGER"},
+    {"answer":"PEPPER"},{"answer":"SPINACH"},{"answer":"CABBAGE"},{"answer":"BROCCOLI"},
+    {"answer":"AVOCADO"},{"answer":"APRICOT"},{"answer":"PUMPKIN"},{"answer":"LETTUCE"}
+  ]
+},
+{
+  "slug": "world-food", "name": "Food & Dishes", "category": "food", "region": "en",
+  "icon": "🍜", "featured": false, "sortOrder": 112,
+  "blurb": "Dishes from around the world.",
+  "items": [
+    {"answer":"RICE"},{"answer":"SOUP"},{"answer":"CAKE"},{"answer":"TACO"},
+    {"answer":"SUSHI"},{"answer":"PASTA"},{"answer":"PIZZA"},{"answer":"CURRY"},
+    {"answer":"BREAD"},{"answer":"SALAD"},{"answer":"STEAK"},{"answer":"KEBAB"},
+    {"answer":"RAMEN"},{"answer":"NOODLE"},{"answer":"BURGER"},{"answer":"WAFFLE"},
+    {"answer":"MUFFIN"},{"answer":"SCONE"},{"answer":"BAGEL"},{"answer":"PASTRY"},
+    {"answer":"RISOTTO"},{"answer":"LASAGNE"},{"answer":"OMELETTE"},{"answer":"PANCAKE"},
+    {"answer":"CUSTARD"},{"answer":"PUDDING"},{"answer":"BROWNIE"},{"answer":"SANDWICH"},
+    {"answer":"RENDANG"},{"answer":"SATAY"},{"answer":"NASI"},{"answer":"BAKSO"}
+  ]
+},
+{
+  "slug": "musical-instruments", "name": "Musical Instruments", "category": "music", "region": "en",
+  "icon": "🎸", "featured": false, "sortOrder": 121,
+  "blurb": "Strings, brass, wind and percussion.",
+  "items": [
+    {"answer":"DRUM"},{"answer":"HARP"},{"answer":"LUTE"},{"answer":"OBOE"},
+    {"answer":"TUBA"},{"answer":"HORN"},{"answer":"BELL"},{"answer":"GONG"},
+    {"answer":"PIANO"},{"answer":"CELLO"},{"answer":"VIOLA"},{"answer":"FLUTE"},
+    {"answer":"BANJO"},{"answer":"ORGAN"},{"answer":"BUGLE"},{"answer":"SITAR"},
+    {"answer":"GUITAR"},{"answer":"VIOLIN"},{"answer":"CYMBAL"},{"answer":"UKULELE"},
+    {"answer":"TRUMPET"},{"answer":"CLARINET"},{"answer":"TROMBONE"},{"answer":"ACCORDION"},
+    {"answer":"HARMONICA"},{"answer":"MANDOLIN"},{"answer":"BASSOON"},{"answer":"MARIMBA"}
+  ]
+},
+{
+  "slug": "music-genres", "name": "Music Genres", "category": "music", "region": "en",
+  "icon": "🎧", "featured": false, "sortOrder": 122,
+  "blurb": "What is on the playlist.",
+  "items": [
+    {"answer":"POP"},{"answer":"RAP"},{"answer":"SKA"},{"answer":"EMO"},
+    {"answer":"ROCK"},{"answer":"FOLK"},{"answer":"JAZZ"},{"answer":"SOUL"},
+    {"answer":"FUNK"},{"answer":"PUNK"},{"answer":"BLUES"},{"answer":"HOUSE"},
+    {"answer":"METAL"},{"answer":"DISCO"},{"answer":"INDIE"},{"answer":"OPERA"},
+    {"answer":"SALSA"},{"answer":"TANGO"},{"answer":"TECHNO"},{"answer":"GOSPEL"},
+    {"answer":"GRUNGE"},{"answer":"REGGAE"},{"answer":"GARAGE"},{"answer":"AMBIENT"},
+    {"answer":"COUNTRY"},{"answer":"CLASSICAL"},{"answer":"DUBSTEP"},{"answer":"DANGDUT"}
+  ]
+},
+{
+  "slug": "video-games", "name": "Video Games", "category": "gaming", "region": "en",
+  "icon": "🎮", "featured": true, "sortOrder": 131,
+  "blurb": "Games, franchises and consoles.",
+  "items": [
+    {"answer":"MARIO"},{"answer":"LUIGI"},{"answer":"ZELDA"},{"answer":"LINK"},
+    {"answer":"SONIC"},{"answer":"TAILS"},{"answer":"KIRBY"},{"answer":"SAMUS"},
+    {"answer":"PIKACHU"},{"answer":"POKEMON"},{"answer":"TETRIS"},{"answer":"DOOM"},
+    {"answer":"HALO"},{"answer":"FORTNITE"},{"answer":"MINECRAFT"},{"answer":"ROBLOX"},
+    {"answer":"AMONGUS"},{"answer":"PORTAL"},{"answer":"SKYRIM"},{"answer":"FALLOUT"},
+    {"answer":"WITCHER"},{"answer":"GERALT"},{"answer":"KRATOS"},{"answer":"LARA"},
+    {"answer":"CROFT"},{"answer":"RATCHET"},{"answer":"CRASH"},{"answer":"SPYRO"},
+    {"answer":"PACMAN"},{"answer":"GALAGA"},{"answer":"XBOX"},{"answer":"SWITCH"},
+    {"answer":"STEAM"},{"answer":"ATARI"},{"answer":"SEGA"},{"answer":"NINTENDO"}
+  ]
+},
+{
+  "slug": "jobs", "name": "Jobs & Professions", "category": "everyday", "region": "en",
+  "icon": "🧰", "featured": false, "sortOrder": 141,
+  "blurb": "What people do all day.",
+  "items": [
+    {"answer":"CHEF"},{"answer":"NURSE"},{"answer":"PILOT"},{"answer":"ACTOR"},
+    {"answer":"BAKER"},{"answer":"JUDGE"},{"answer":"MEDIC"},{"answer":"TUTOR"},
+    {"answer":"DOCTOR"},{"answer":"DENTIST"},{"answer":"LAWYER"},{"answer":"FARMER"},
+    {"answer":"WRITER"},{"answer":"SINGER"},{"answer":"DANCER"},{"answer":"ARTIST"},
+    {"answer":"BARBER"},{"answer":"BUTCHER"},{"answer":"PLUMBER"},{"answer":"BUILDER"},
+    {"answer":"TEACHER"},{"answer":"CLEANER"},{"answer":"DRIVER"},{"answer":"SAILOR"},
+    {"answer":"SOLDIER"},{"answer":"MECHANIC"},{"answer":"ENGINEER"},{"answer":"SCIENTIST"},
+    {"answer":"LIBRARIAN"},{"answer":"FIREMAN"},{"answer":"POLICE"},{"answer":"PILOTS"}
+  ]
+},
+{
+  "slug": "body-parts", "name": "Body Parts", "category": "everyday", "region": "en",
+  "icon": "🦴", "featured": false, "sortOrder": 142,
+  "blurb": "Easy enough for the kid mode.",
+  "items": [
+    {"answer":"EAR"},{"answer":"EYE"},{"answer":"ARM"},{"answer":"LEG"},
+    {"answer":"HIP"},{"answer":"JAW"},{"answer":"RIB"},{"answer":"TOE"},
+    {"answer":"LIP"},{"answer":"GUM"},{"answer":"HAND"},{"answer":"FOOT"},
+    {"answer":"HEAD"},{"answer":"NECK"},{"answer":"BACK"},{"answer":"KNEE"},
+    {"answer":"NOSE"},{"answer":"CHIN"},{"answer":"HEEL"},{"answer":"BONE"},
+    {"answer":"CHEST"},{"answer":"ANKLE"},{"answer":"WRIST"},{"answer":"ELBOW"},
+    {"answer":"THUMB"},{"answer":"SPINE"},{"answer":"SKULL"},{"answer":"HEART"},
+    {"answer":"LIVER"},{"answer":"KIDNEY"},{"answer":"SHOULDER"},{"answer":"STOMACH"}
+  ]
+},
+{
+  "slug": "colours", "name": "Colours", "category": "everyday", "region": "en",
+  "icon": "🎨", "featured": false, "sortOrder": 143,
+  "blurb": "Shades and hues.",
+  "items": [
+    {"answer":"RED"},{"answer":"TAN"},{"answer":"BLUE"},{"answer":"PINK"},
+    {"answer":"GREY"},{"answer":"GOLD"},{"answer":"LIME"},{"answer":"NAVY"},
+    {"answer":"TEAL"},{"answer":"PLUM"},{"answer":"CYAN"},{"answer":"RUBY"},
+    {"answer":"GREEN"},{"answer":"BLACK"},{"answer":"WHITE"},{"answer":"BROWN"},
+    {"answer":"BEIGE"},{"answer":"CORAL"},{"answer":"OLIVE"},{"answer":"AMBER"},
+    {"answer":"IVORY"},{"answer":"KHAKI"},{"answer":"MAUVE"},{"answer":"PEACH"},
+    {"answer":"ORANGE"},{"answer":"PURPLE"},{"answer":"SILVER"},{"answer":"VIOLET"},
+    {"answer":"INDIGO"},{"answer":"MAROON"},{"answer":"SCARLET"},{"answer":"CRIMSON"},
+    {"answer":"MAGENTA"},{"answer":"LAVENDER"},{"answer":"TURQUOISE"},{"answer":"BURGUNDY"}
+  ]
+},
+{
+  "slug": "transport", "name": "Transport", "category": "everyday", "region": "en",
+  "icon": "🚂", "featured": false, "sortOrder": 144,
+  "blurb": "Ways to get around.",
+  "items": [
+    {"answer":"BUS"},{"answer":"CAB"},{"answer":"VAN"},{"answer":"JET"},
+    {"answer":"BIKE"},{"answer":"BOAT"},{"answer":"SHIP"},{"answer":"TRAM"},
+    {"answer":"CART"},{"answer":"SLED"},{"answer":"RAFT"},{"answer":"TAXI"},
+    {"answer":"TRAIN"},{"answer":"TRUCK"},{"answer":"COACH"},{"answer":"FERRY"},
+    {"answer":"CANOE"},{"answer":"YACHT"},{"answer":"MOPED"},{"answer":"LORRY"},
+    {"answer":"SCOOTER"},{"answer":"TRACTOR"},{"answer":"TRAILER"},{"answer":"CARAVAN"},
+    {"answer":"CHOPPER"},{"answer":"AIRPLANE"},{"answer":"SUBMARINE"},{"answer":"BICYCLE"}
+  ]
+},
+{
+  "slug": "mythology", "name": "Gods & Mythology", "category": "history", "region": "en",
+  "icon": "🏛️", "featured": false, "sortOrder": 151,
+  "blurb": "Greek, Norse, Egyptian and more.",
+  "items": [
+    {"answer":"ZEUS"},{"answer":"HERA"},{"answer":"ARES"},{"answer":"EROS"},
+    {"answer":"HADES"},{"answer":"THOR"},{"answer":"ODIN"},{"answer":"LOKI"},
+    {"answer":"FREYA"},{"answer":"BALDR"},{"answer":"APOLLO"},{"answer":"ATHENA"},
+    {"answer":"ARTEMIS"},{"answer":"HERMES"},{"answer":"HESTIA"},{"answer":"DEMETER"},
+    {"answer":"POSEIDON"},{"answer":"CRONUS"},{"answer":"TITAN"},{"answer":"MEDUSA"},
+    {"answer":"HYDRA"},{"answer":"SPHINX"},{"answer":"CENTAUR"},{"answer":"PEGASUS"},
+    {"answer":"MINOTAUR"},{"answer":"OSIRIS"},{"answer":"ANUBIS"},{"answer":"HORUS"},
+    {"answer":"RAGNAROK"},{"answer":"VALHALLA"},{"answer":"OLYMPUS"},{"answer":"ICARUS"}
+  ]
+}
+]
