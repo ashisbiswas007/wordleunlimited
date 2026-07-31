@@ -1,0 +1,13 @@
+# Normalise line endings. Without this, files committed from Windows carry CRLF
+# into the Linux container, which breaks shell scripts and shows up as spurious
+# whole-file diffs.
+* text=auto eol=lf
+
+# Generated word lists — collapse them in diffs and PR views.
+public/src/dict/** linguist-generated=true -diff
+data/reference/**  linguist-generated=true -diff
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
