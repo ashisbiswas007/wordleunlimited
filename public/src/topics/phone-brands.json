@@ -1,0 +1,19 @@
+{
+  "slug": "phone-brands",
+  "name": "Phone Brands",
+  "category": "brands",
+  "region": "en",
+  "icon": "📱",
+  "featured": true,
+  "sortOrder": 40,
+  "blurb": "Makers of the thing in your hand.",
+  "items": [
+    { "answer": "HTC" }, { "answer": "ZTE" }, { "answer": "OPPO" }, { "answer": "VIVO" },
+    { "answer": "SONY" }, { "answer": "ASUS" }, { "answer": "POCO" }, { "answer": "IQOO" },
+    { "answer": "APPLE" }, { "answer": "NOKIA" }, { "answer": "HONOR" }, { "answer": "REDMI" },
+    { "answer": "TECNO" }, { "answer": "MEIZU" }, { "answer": "SHARP" }, { "answer": "PIXEL" },
+    { "answer": "XIAOMI" }, { "answer": "HUAWEI" }, { "answer": "REALME" }, { "answer": "GOOGLE" },
+    { "answer": "LENOVO" }, { "answer": "SAMSUNG" }, { "answer": "ONEPLUS" }, { "answer": "INFINIX" },
+    { "answer": "ALCATEL" }, { "answer": "NOTHING" }
+  ]
+}

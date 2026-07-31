@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Wordle Unlimited — Play Free Unlimited Wordle, Daily, Time & Multiplayer</title>
+<meta name="description" content="Play Wordle Unlimited free — unlimited words, 3 to 7 letters, Daily puzzle, Time mode, topic packs and live multiplayer rooms. Challenge a friend with your own secret word. No app, no login.">
+<link rel="canonical" href="https://wordleunlimited.dev/">
+
+<link rel="alternate" hreflang="en" href="https://wordleunlimited.dev/">
+<link rel="alternate" hreflang="en-GB" href="https://wordleunlimited.dev/wordle-uk/">
+<link rel="alternate" hreflang="id" href="https://wordleunlimited.dev/id/">
+<link rel="alternate" hreflang="x-default" href="https://wordleunlimited.dev/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wordle Unlimited">
+<meta property="og:title" content="Wordle Unlimited — Play Free Unlimited Wordle">
+<meta property="og:description" content="Unlimited words, 3 to 7 letters, Daily puzzle, Time mode, topic packs and live multiplayer rooms. Challenge a friend with your own secret word.">
+<meta property="og:url" content="https://wordleunlimited.dev/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="id_ID">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#6aaa64" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121213" media="(prefers-color-scheme: dark)">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="fetch" href="/src/dict/en/5.txt?v=36cc6679d6" crossorigin>
+<link rel="stylesheet" href="/src/wordle.css?v=36cc6679d6">
+<style>
+/* Page shell. The game's own styles live in wordle.css. */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.65 "Helvetica Neue",Arial,sans-serif;overflow-x:hidden}
+a{color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+.eyebrow{text-transform:uppercase;letter-spacing:1.6px;font-size:11px;font-weight:800;color:var(--accent);margin:0 0 6px}
+h1{font-size:clamp(26px,6vw,38px);line-height:1.15;margin:0 0 14px;letter-spacing:-.5px}
+h2{font-size:clamp(21px,4.6vw,27px);line-height:1.25;margin:0 0 12px;letter-spacing:-.3px}
+h3{font-size:17px;margin:0 0 8px}
+p{margin:0 0 14px}
+
+.topnav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(1.6) blur(10px);-webkit-backdrop-filter:saturate(1.6) blur(10px);
+  border-bottom:1px solid var(--border)}
+.topnav .wrap{display:flex;align-items:center;gap:14px;height:56px}
+.logo{display:inline-flex;align-items:baseline;gap:4px;font-weight:800;font-size:17px;text-decoration:none;color:inherit}
+.logo b{color:var(--green)}
+.topnav nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+.topnav nav a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 9px;border-radius:8px;white-space:nowrap}
+.topnav nav a:hover{background:var(--bg2);color:var(--text)}
+.topnav nav a[aria-current]{color:var(--accent)}
+
+.hero{padding:26px 0 4px;text-align:center}
+.hero p{color:var(--muted);max-width:56ch;margin:0 auto 6px}
+.badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0 0}
+.badges span{font-size:11.5px;font-weight:700;background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:5px 11px;color:var(--muted)}
+
+.gamehost{padding:6px 0 10px}
+
+section{padding:34px 0;border-top:1px solid var(--border)}
+section:first-of-type{border-top:none}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--accent);
+  color:#fff;font-size:12px;font-weight:800;margin-right:9px;vertical-align:2px}
+
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin:22px 0}
+.toc h2{font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin:0 0 10px}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:22px}
+.toc li{margin:0 0 5px;font-size:14px;break-inside:avoid}
+.toc a{color:var(--text);text-decoration:none}
+.toc a:hover{color:var(--accent);text-decoration:underline}
+
+.demo{display:flex;gap:5px;margin:12px 0 6px;flex-wrap:wrap}
+.demo i{width:38px;height:38px;display:grid;place-items:center;border:2px solid var(--tile-border);
+  border-radius:3px;font-style:normal;font-weight:700;font-size:19px}
+.demo i.g{background:var(--green);border-color:var(--green);color:#fff}
+.demo i.y{background:var(--yellow);border-color:var(--yellow);color:#fff}
+.demo i.b{background:var(--absent);border-color:var(--absent);color:#fff}
+.demo-note{font-size:13.5px;color:var(--muted);margin:0 0 18px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px}
+.card{border:1px solid var(--border);border-radius:14px;padding:16px;background:var(--bg2)}
+.card .k{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.card h3{margin:0 0 4px}
+.card p{font-size:13.5px;color:var(--muted);margin:0}
+
+.cta{text-align:center;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px 18px;margin:26px 0}
+.cta h2{margin-bottom:6px}
+.cta p{color:var(--muted);margin-bottom:16px}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.ghost{background:var(--key);color:var(--key-text)}
+
+.tlist{list-style:none;padding:0;margin:14px 0 0}
+.tlist li{border-top:1px solid var(--border);padding:13px 0;font-size:14.5px}
+.tlist li:first-child{border-top:none}
+.tlist b{color:var(--accent)}
+
+details.faq{border-top:1px solid var(--border);padding:2px 0}
+details.faq summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:15px;list-style:none;
+  display:flex;justify-content:space-between;gap:12px;align-items:center}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";font-size:20px;color:var(--accent);font-weight:800;flex:none}
+details.faq[open] summary::after{content:"\2212"}
+details.faq p{margin:0 0 14px;color:var(--muted);font-size:14.5px}
+
+.topicstrip{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px;margin-top:14px}
+.topicstrip a{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:10px;
+  padding:10px;text-decoration:none;color:var(--text);background:var(--bg2);font-size:13px;font-weight:600}
+.topicstrip a:hover{border-color:var(--accent)}
+.topicstrip .e{font-size:17px}
+
+.sitefoot{border-top:1px solid var(--border);padding:26px 0 40px;text-align:center;color:var(--muted);font-size:13px}
+.sitefoot nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.sitefoot a{color:var(--muted);text-decoration:none}
+.sitefoot a:hover{color:var(--text);text-decoration:underline}
+
+@media (max-width:560px){.toc ol{columns:1}}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="wrap">
+    <a class="logo" href="/"><b>Wordle</b>Unlimited</a>
+    <nav>
+      <a href="/" aria-current="page">English</a>
+      <a href="/wordle-uk/">UK</a>
+      <a href="/id/">Indonesia</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="eyebrow">Play, Challenge, Wordle infinite</p>
+    <h1>Wordle Unlimited</h1>
+    <p>Unlimited words from 3 to 7 letters, a Daily puzzle, a race against the clock, hundreds of topic packs and live multiplayer rooms. No app, no account, free forever.</p>
+    <div class="badges">
+      <span>No login</span><span>3–7 letters</span><span>Kid mode</span>
+      <span>Challenge a friend</span><span>Live multiplayer</span>
+    </div>
+  </div>
+
+  <div class="wrap gamehost">
+
+<div id="wu-root">
+  <div class="app">
+    <div class="topbar">
+      <div class="wu-brand"><span class="wu-brand-1">Wordle</span><span class="wu-brand-2">Unlimited</span></div>
+      <div class="icons">
+        <button class="icon" id="helpBtn" data-open="howtoModal" aria-label="How to play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></button>
+        <button class="icon" id="statsBtn" data-open="statsModal" aria-label="Statistics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></button>
+        <button class="icon" id="kbdBtn" data-act="kbd" aria-label="Use my keyboard" title="Use my keyboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9 14h6"></path></svg></button>
+        <button class="icon" id="setBtn" data-open="settingsModal" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button>
+        <button class="icon" id="fsBtn" data-act="fullscreen" aria-label="Fullscreen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab" data-mode="daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span>Daily</span></button>
+      <button class="tab" data-mode="unlimited"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8a4 4 0 0 0 0 8c2 0 3.2-1.5 5-4s3-4 5-4a4 4 0 0 1 0 8c-2 0-3.2-1.5-5-4S9 8 7 8z"></path></svg><span>Unlimited</span></button>
+      <button class="tab" data-mode="time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg><span>Time</span></button>
+      <button class="tab" data-mode="topic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Topics</span></button>
+      <button class="tab" data-mode="multiplayer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Versus</span></button>
+    </div>
+
+    <div id="banner"></div>
+    <div class="controls" id="controls"></div>
+    <div class="tp-clue" id="tpClue"></div>
+    <div class="hintline" id="hintline"></div>
+    <div class="toast" id="toast"></div>
+    <div class="boardwrap">
+      <div class="grid" id="board"></div>
+      <div class="endwrap" id="endwrap"><div class="endcard" id="endcard"></div></div>
+    </div>
+
+    <div class="keyboard" id="keyboard"></div>
+
+    <div class="typebar" id="typebar">
+      <span class="tb-ico">⌨</span>
+      <span class="tb-txt">Your keyboard is on — just type your guess.</span>
+      <button class="tb-x" data-act="kbdoff">On-screen keys</button>
+    </div>
+
+    <input id="wuTyper" class="wu-typer" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" aria-hidden="true" tabindex="-1">
+  </div>
+
+  <div class="overlay" id="howtoModal"><div class="modal">
+    <button class="x" data-close="howtoModal" aria-label="Close"></button>
+    <h2>How to play</h2>
+    <p>Guess the word in 6 tries. Each guess must be a valid word of the right length. Tile colors show how close you were.</p>
+    <div class="ex"><div class="tile correct">W</div><div class="tile">O</div><div class="tile">R</div><div class="tile">D</div><div class="tile">S</div></div>
+    <p><b>W</b> is in the word and in the correct spot.</p>
+    <div class="ex"><div class="tile">P</div><div class="tile present">L</div><div class="tile">A</div><div class="tile">N</div><div class="tile">T</div></div>
+    <p><b>L</b> is in the word but in the wrong spot.</p>
+    <div class="ex"><div class="tile">C</div><div class="tile">H</div><div class="tile absent">A</div><div class="tile">I</div><div class="tile">R</div></div>
+    <p><b>A</b> is not in the word.</p>
+    <p><b>Daily</b> is one shared puzzle a day. <b>Unlimited</b> never stops. <b>Time</b> is a race against the clock. <b>Topics</b> gives you a themed run of names. <b>Versus</b> puts you in a live room against other players. Kids can switch to 3-letter words in Settings.</p>
+    <p>On phones, tap the keyboard icon at the top to switch between the on-screen keys and your own device keyboard.</p>
+    <p class="howsite">Play free, forever at <b>wordleunlimited.dev</b></p>
+    <div id="brandSlot"></div>
+  </div></div>
+
+  <div class="overlay" id="statsModal"><div class="modal">
+    <button class="x" data-close="statsModal" aria-label="Close"></button>
+    <h2 id="statsTitle">Statistics</h2>
+    <div id="statsBody"></div>
+  </div></div>
+
+  <div class="overlay" id="topicModal"><div class="modal">
+    <button class="x" data-close="topicModal" aria-label="Close"></button>
+    <h2>Choose a topic</h2>
+    <p>Pick a theme and guess your way through its names, one after another. Word lengths change as you go.</p>
+    <div class="tp-pick" id="topicBody"></div>
+  </div></div>
+
+  <div class="overlay" id="mpModal"><div class="modal">
+    <button class="x" data-close="mpModal" aria-label="Close"></button>
+    <h2>Versus — play live</h2>
+    <div id="mpBody"></div>
+  </div></div>
+
+  <div class="overlay" id="challengeModal"><div class="modal">
+    <button class="x" data-close="challengeModal" aria-label="Close"></button>
+    <h2>Challenge a friend</h2>
+    <p>Pick any word in our dictionary. We'll make a link — when your friend opens it, your word loads and they try to guess it.</p>
+    <div class="field"><label for="chWord">Your word (3–7 letters)</label><input id="chWord" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="7" placeholder="e.g. ghost"></div>
+    <div class="field"><label for="chName">Your name (optional)</label><input id="chName" type="text" autocomplete="off" maxlength="20" placeholder="Shown to your friend"></div>
+    <div class="field opt"><label>Time limit (optional)</label>
+      <div class="seg small" id="chTimeSeg">
+        <button data-chtime="0" class="active">None</button>
+        <button data-chtime="30">30s</button>
+        <button data-chtime="60">1 min</button>
+        <button data-chtime="120">2 min</button>
+      </div>
+    </div>
+    <div class="setrow" style="border-bottom:none;padding:8px 0">
+      <div><div class="label">Allow hints</div><div class="desc">Let your friend reveal letters</div></div>
+      <label class="switch"><input type="checkbox" id="chHints"><span class="slider"></span></label>
+    </div>
+    <div class="err" id="chErr"></div>
+    <button class="cbtn" data-act="makelink"><span class="ic" id="mlIcon"></span><span>Create challenge link</span></button>
+    <div id="chResult" style="display:none">
+      <div class="linkbox"><input id="chLink" readonly><button class="cbtn ghost" data-act="copylink">Copy</button></div>
+      <div id="chShare"></div>
+      <div class="note">This link opens your main site and loads the word. Nothing is stored on a server.</div>
+    </div>
+  </div></div>
+
+  <div class="overlay" id="settingsModal"><div class="modal">
+    <button class="x" data-close="settingsModal" aria-label="Close"></button>
+    <h2>Settings</h2>
+    <div class="setrow"><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"></line><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"></line><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"></line></svg>Theme</div>
+      <div class="seg"><button data-seg="theme" data-val="light">Light</button><button data-seg="theme" data-val="dark">Dark</button><button data-seg="theme" data-val="system">Auto</button></div></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>Word length</div><div class="desc">Kids = 3 letters</div></div>
+      <div class="seg">
+        <button data-seg="length" data-val="3" title="Kids — 3 letters" aria-label="Kids mode, 3 letters"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9.5" x2="9.01" y2="9.5"></line><line x1="15" y1="9.5" x2="15.01" y2="9.5"></line></svg></button>
+        <button data-seg="length" data-val="4">4</button><button data-seg="length" data-val="5">5</button><button data-seg="length" data-val="6">6</button><button data-seg="length" data-val="7">7</button>
+      </div></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-4z"></path></svg>Hard mode</div><div class="desc">Revealed hints must be reused</div></div>
+      <label class="switch"><input type="checkbox" id="setHard"><span class="slider"></span></label></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"></path></svg>Hints</div><div class="desc">Show the hint button while playing</div></div>
+      <label class="switch"><input type="checkbox" id="setHints"><span class="slider"></span></label></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"></path></svg>High contrast</div><div class="desc">Colorblind-friendly colors</div></div>
+      <label class="switch"><input type="checkbox" id="setContrast"><span class="slider"></span></label></div>
+    <div class="setrow"><div><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"></path></svg>Sound</div><div class="desc">Key and result sounds</div></div>
+      <label class="switch"><input type="checkbox" id="setSound"><span class="slider"></span></label></div>
+    <div class="setrow col" id="cloudRow" style="display:none"></div>
+    <div class="setrow col"><div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lblico"><circle cx="12" cy="12" r="9"></circle><line x1="3" y1="12" x2="21" y2="12"></line><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"></path></svg>Language / Region</div><div class="regions" id="regionRow"></div></div>
+    <div class="footer">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/disclaimer/">Disclaimer</a>
+    </div>
+  </div></div>
+</div>
+
+  </div>
+
+  <div class="wrap">
+    <nav class="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <ol>
+        <li><a href="#gameplay">Gameplay</a></li>
+        <li><a href="#overview">Wordle Unlimited Overview</a></li>
+        <li><a href="#ui">UI &amp; Controls</a></li>
+        <li><a href="#topics">Topic Mode</a></li>
+        <li><a href="#versus">Live Multiplayer</a></li>
+        <li><a href="#challenge">Challenge a Friend</a></li>
+        <li><a href="#kids">Children Friendly Mode</a></li>
+        <li><a href="#modes">Game Modes</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
+    </nav>
+
+    <p>If you are looking for a word game that you can play without installing any app from the app store or play store that offers the same modern experience and user interface then you are welcome to <a href="https://wordleunlimited.dev">Wordle Unlimited</a>. We have developed and enhanced it after checking all the other wordle unlimited game website, we checked what players missing and how we can improve it. After many research and test we have brought most feature full Wordle Unlimited available on the internet.</p>
+    <p>Have you ever seen any Wordle Unlimited game that you can challenge your friends and loved ones without login or your children can play the Kid mode where they guess the word of 3 letters? You are going to see and play it here because we have made it next level.</p>
+
+    <section id="gameplay">
+      <p class="eyebrow">01</p>
+      <h2><span class="num">1</span>Gameplay</h2>
+      <h3>How to play</h3>
+      <p>Wordle Unlimited is easy to play word game even a kid can play, to play first understand the rule. Our game has 3 main modes and in every mode you have to guess the hidden word in 6 try, see the word length that can be from 3-7 letters for easy to hard. Write the first word and see if any letter changed the color or not, green means the hidden word also have the same letter in the same letter position, orange means the letter present in the word but it is in the wrong place right now and black or dark color means the letter does not contains in the hidden word. Now you have proper hints now write your next word smartly and try to find the hidden word in total 6 tries.</p>
+      <h3>How the colors work</h3>
+      <div class="demo"><i class="g">W</i><i class="g">O</i><i class="g">R</i><i class="g">D</i><i class="g">S</i></div>
+      <p class="demo-note">Every letter green — correct spot, you win</p>
+      <div class="demo"><i>P</i><i class="y">L</i><i>A</i><i>N</i><i>T</i></div>
+      <p class="demo-note">Orange L — right letter, wrong spot</p>
+      <div class="demo"><i class="b">C</i><i class="b">H</i><i class="b">A</i><i class="b">I</i><i class="b">R</i></div>
+      <p class="demo-note">All gray — none of these letters are in the word</p>
+      <p>You can also enable hints from the settings, click the top right corner gear icon and enable hints. Once enabled, you can find it on the top as bulb icon, tap it to see the hint or tip. Total two hints or tips are available to make the game more interesting.</p>
+    </section>
+
+    <section id="overview">
+      <p class="eyebrow">02</p>
+      <h2><span class="num">2</span>Wordle Unlimited Overview</h2>
+      <p>There are many word games available on the internet including some related names like Wordle, Quordle, Nerdle, Dordle and many more. We have build the similar game Wordle Unlimited with a lot of playful modes and Challenge friends like features that other games failed to provide. Wordle Unlimited makes your brain sharper, makes you better in word sense and also makes your child English good.</p>
+      <p>It also helps in timepass and in fun time like you can play while you are on a bus, train to kill free time. I myself love to challenge my wife when we are using our mobile in bed, I gave create a challenge and send it to her WhatsApp and she enjoys it too.</p>
+    </section>
+
+    <section id="ui">
+      <p class="eyebrow">03</p>
+      <h2><span class="num">3</span>UI &amp; Controls</h2>
+      <h3>Interface</h3>
+      <p>The user interface is so simple, we kept it super simple so even a child can play. When first time loads a toast shows you how to play, close that and the default mode is Wordle Unlimited. The mode buttons across the top are “Daily”, “Unlimited”, “Time”, “Topics” and “Versus”, choose whatever you like to play. Other visible icons you can find are on top, Question Mark that tells how to play, Stats icon that shows your stats, full screen icon, tap to see the game in full screen and a gear icon for settings where you find</p>
+      <ul class="tlist">
+        <li><b>Theme</b> — Light / Dark / Auto</li>
+        <li><b>Word Length</b> — 3 / 4 / 5 / 6 / 7</li>
+        <li><b>Hard mode</b></li>
+        <li><b>Hints</b></li>
+        <li><b>High Contrast</b></li>
+        <li><b>Sound</b></li>
+        <li><b>Region or Language</b></li>
+      </ul>
+      <p style="margin-top:16px">The main game UI is seen with grid that is word length x Six size. Below of it shows the keyboard that its letter is colored when a letter is in the correct position or contains or does not exist. Additionally we have added an extra keyboard icon next to setting icon for mobile users so they disable the visual game key and enable the mobile default keyboard, its optional for those who feel more comfortable on their own keyboard though device keyboard works always.</p>
+    </section>
+
+    <section id="topics">
+      <p class="eyebrow">New</p>
+      <h2><span class="num">4</span>Topic Mode</h2>
+      <p>Topic mode turns Wordle into a themed run. Pick a topic and the game gives you its names one after another — the length changes as you go, so a five letter name might be followed by a four or a seven. Guess it, and the next one loads straight away. Hints work exactly as they do in Unlimited, and your run is counted in your level and rank.</p>
+      <p>Tap <b>Topics</b> above the board to browse everything, or start from one of these:</p>
+      <div class="topicstrip" id="topicStrip"></div>
+    </section>
+
+    <section id="versus">
+      <p class="eyebrow">New</p>
+      <h2><span class="num">5</span>Live Multiplayer</h2>
+      <p>Versus puts you in a room with other players solving the same words at the same time, with a leaderboard updating live as people finish. Pick a nickname, or take the one we suggest, and you are straight in.</p>
+      <div class="cards">
+        <div class="card"><div class="k">Open rooms</div><h3>Jump in instantly</h3><p>Public rooms that run continuously. When a round ends everyone votes on the next topic, the winner is picked, and the next round starts.</p></div>
+        <div class="card"><div class="k">Private rooms</div><h3>Just your friends</h3><p>Create a room, send the link, and start when everyone is in. Choose the format, the word length and how many players.</p></div>
+        <div class="card"><div class="k">Formats</div><h3>Race or clock</h3><p>Race to be first to solve ten words, or see who can solve the most before the timer runs out.</p></div>
+      </div>
+    </section>
+
+    <section id="challenge">
+      <p class="eyebrow">Multiplayer</p>
+      <h2><span class="num">6</span>Challenge a Friend</h2>
+      <p>We noticed nowhere on the Internet people can challenge Wordle Unlimited to a friend and that is why you are the first to bringing this brand new feature that other failed to provide. You can type your hidden word and let your friend guess it.</p>
+      <p>To do so click the “Challenge a friend” button where you see some basic options, first type the word your friend will play on, second your name which is optional then Time limit (Optional) you can choose if within 1-2 minute your friend has to guess or choose it none and the last option is Hints if enabled then a hints of 2 letters of your chosen word your friend can see in random position of the word.</p>
+      <p>For quick challenge just type the word and skip all other options and click the “Create challenge link” button, a link will be generated that you can directly share clicking the share button to the phone app you like or copy the link and share whichever you like.</p>
+      <p>As your friend's prospective if you get the link open it, click accept the challenge and start playing and try to guess the hidden word your friend chose. If you can find that out of 6 try and if any tips allowed by your friend. After a win a share of state button appear click share to share the state to your friend back who challenged you, in the state it is clearly written you won in how many try and what was the hidden word and also you can challenge your friend back.</p>
+    </section>
+
+    <div class="cta">
+      <h2>Ready to play?</h2>
+      <p>Play single or multiplayer custom challenge to your friend.</p>
+      <div class="btns">
+        <a class="btn primary" href="#wu-root">Play Now</a>
+        <a class="btn ghost" href="#wu-root">Challenge</a>
+      </div>
+    </div>
+
+    <section id="kids">
+      <p class="eyebrow">For kids</p>
+      <h2><span class="num">7</span>Children Friendly Mode</h2>
+      <p>There are many words games for kid or children but hardly there is any Wordle Unlimited game for your kid and that is why we have made it easy for child. The game now has 3 letter word mode that you can enable from settings. Tap the gear icon, in Word Length section tap Kid icon to enable 3 letter word mode, give it to your child to play and guess the hidden 3 letter word unlimited times.</p>
+      <p>We have kept all the words easy for kids and filtered all the fault words to make it full kid friendly, for more user friendly tap the full screen mode and let your children play Wordle Unlimited.</p>
+    </section>
+
+    <section id="modes">
+      <p class="eyebrow">Compare</p>
+      <h2><span class="num">8</span>Game Modes</h2>
+      <p>The default is Wordle Unlimited, and alongside it you get Daily, Time, Topics and Versus. Lets take a closer look at them to understand better which is going to easy for you to decide what mode to play.</p>
+      <div class="cards">
+        <div class="card"><div class="k">01 · One a day</div><h3>Daily</h3><p>Wordle Daily mode where in every 24 hours players get a secret word to solve. Available in all word lengths from 3 to 7 characters, choose in settings. Win or lose records are saved in Stats, and a countdown is shown for the next Daily word.</p></div>
+        <div class="card"><div class="k">02 · Most popular</div><h3>Unlimited</h3><p>This mode can be played unlimited times as many times you want. If you have any difficulty solving it just tap the reload button to restart with a new word. You also get unlimited hints, and this is the mode with “Challenge a friend”.</p></div>
+        <div class="card"><div class="k">03 · For experts</div><h3>Time</h3><p>This mode lets you solve within a fixed time. You choose the time, you choose the word length, and make the best record for how many words you can find. Options are 1 minute, 1 and a half, and 2 minutes.</p></div>
+        <div class="card"><div class="k">04 · Themed</div><h3>Topics</h3><p>Hundreds of themed packs. Guess your way through the names in a topic, one after another, with the length changing as you go.</p></div>
+        <div class="card"><div class="k">05 · Live</div><h3>Versus</h3><p>Real players, same words, live leaderboard. Join an open room instantly or make a private one for friends.</p></div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <p class="eyebrow">FAQ</p>
+      <h2><span class="num">9</span>Frequently Asked Questions</h2>
+      <p>Answers about Wordle Unlimited.</p>
+      <details class="faq"><summary>Is Wordle Unlimited free to play?</summary><p>Yes. It is completely free, there is nothing to download and no account to create.</p></details>
+      <details class="faq"><summary>How many times can I play in a day?</summary><p>Unlimited. Only the Daily puzzle is once per day — every other mode you can play as much as you like.</p></details>
+      <details class="faq"><summary>Can my child play Wordle Unlimited safely?</summary><p>Yes. Switch Word Length to the kid icon in Settings for 3-letter words from a filtered, age-appropriate list. There is no chat, no sign up and no ads aimed at children.</p></details>
+      <details class="faq"><summary>Do I need an account to play multiplayer?</summary><p>No. Pick a nickname and you are in. Sign in with Google only if you want your stats and level to follow you between devices.</p></details>
+      <details class="faq"><summary>Can I play in British English or Indonesian?</summary><p>Yes. Use the Language / Region control in Settings, or go straight to <a href="/wordle-uk/">Wordle UK</a> or <a href="/id/">Wordle Indonesia</a>.</p></details>
+    </section>
+  </div>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <nav>
+      <a href="/">Wordle Unlimited</a>
+      <a href="/wordle-uk/">Wordle UK</a>
+      <a href="/id/">Wordle Indonesia</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/disclaimer/">Disclaimer</a>
+    </nav>
+    <p>© <span id="yr">2026</span> Wordle Unlimited · Free unlimited word game · Not affiliated with The New York Times.</p>
+  </div>
+</footer>
+
+<script>window.WU_CONFIG={region:"en",ns:"",name:"Wordle Unlimited",url:"https://wordleunlimited.dev/"};document.getElementById("yr").textContent=new Date().getFullYear();</script>
+<script src="/src/wordle.js?v=36cc6679d6" defer></script>
+<script src="/src/topics-strip.js?v=36cc6679d6" defer></script>
+<script src="/src/multiplayer.js?v=36cc6679d6" defer></script>
+<script src="/src/cloudsave.js?v=36cc6679d6" defer></script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"WebSite","@id":"https://wordleunlimited.dev/#website","url":"https://wordleunlimited.dev/","name":"Wordle Unlimited","inLanguage":"en","publisher":{"@id":"https://wordleunlimited.dev/#org"}},
+{"@type":"Organization","@id":"https://wordleunlimited.dev/#org","name":"Wordle Unlimited","url":"https://wordleunlimited.dev/"},
+{"@type":"VideoGame","@id":"https://wordleunlimited.dev/#game","name":"Wordle Unlimited","url":"https://wordleunlimited.dev/","inLanguage":"en","gamePlatform":"Web browser","applicationCategory":"GameApplication","operatingSystem":"Any","playMode":["SinglePlayer","MultiPlayer"],"genre":["Word game","Puzzle"],"description":"Free unlimited Wordle with 3 to 7 letter words, a Daily puzzle, Time mode, topic packs and live multiplayer rooms.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock"}},
+{"@type":"FAQPage","@id":"https://wordleunlimited.dev/#faq","mainEntity":[
+{"@type":"Question","name":"Is Wordle Unlimited free to play?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is completely free, there is nothing to download and no account to create."}},
+{"@type":"Question","name":"How many times can I play in a day?","acceptedAnswer":{"@type":"Answer","text":"Unlimited. Only the Daily puzzle is once per day — every other mode you can play as much as you like."}},
+{"@type":"Question","name":"Can my child play Wordle Unlimited safely?","acceptedAnswer":{"@type":"Answer","text":"Yes. Switch Word Length to the kid icon in Settings for 3-letter words from a filtered, age-appropriate list. There is no chat, no sign up and no ads aimed at children."}},
+{"@type":"Question","name":"Do I need an account to play multiplayer?","acceptedAnswer":{"@type":"Answer","text":"No. Pick a nickname and you are in. Sign in with Google only if you want your stats and level to follow you between devices."}},
+{"@type":"Question","name":"Can I play in British English or Indonesian?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Language / Region control in Settings, or go straight to Wordle UK or Wordle Indonesia."}}]}
+]}</script>
+</body>
+</html>

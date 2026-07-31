@@ -1,0 +1,26 @@
+{
+  "slug": "countries",
+  "name": "Countries",
+  "category": "geography",
+  "region": "en",
+  "icon": "🌍",
+  "featured": true,
+  "sortOrder": 70,
+  "blurb": "Nations from every continent.",
+  "items": [
+    { "answer": "CHAD" }, { "answer": "CUBA" }, { "answer": "IRAN" }, { "answer": "IRAQ" },
+    { "answer": "PERU" }, { "answer": "MALI" }, { "answer": "TOGO" }, { "answer": "LAOS" },
+    { "answer": "OMAN" }, { "answer": "FIJI" },
+    { "answer": "KENYA" }, { "answer": "NEPAL" }, { "answer": "CHILE" }, { "answer": "GHANA" },
+    { "answer": "HAITI" }, { "answer": "MALTA" }, { "answer": "QATAR" }, { "answer": "SUDAN" },
+    { "answer": "SYRIA" }, { "answer": "YEMEN" }, { "answer": "EGYPT" }, { "answer": "LIBYA" },
+    { "answer": "BRAZIL" }, { "answer": "CANADA" }, { "answer": "FRANCE" }, { "answer": "GREECE" },
+    { "answer": "MEXICO" }, { "answer": "NORWAY" }, { "answer": "POLAND" }, { "answer": "SWEDEN" },
+    { "answer": "TURKEY" }, { "answer": "ANGOLA" }, { "answer": "PANAMA" }, { "answer": "CYPRUS" },
+    { "answer": "AUSTRIA" }, { "answer": "BELGIUM" }, { "answer": "BOLIVIA" }, { "answer": "DENMARK" },
+    { "answer": "ECUADOR" }, { "answer": "FINLAND" }, { "answer": "HUNGARY" }, { "answer": "IRELAND" },
+    { "answer": "JAMAICA" }, { "answer": "LEBANON" }, { "answer": "MOROCCO" }, { "answer": "MYANMAR" },
+    { "answer": "NIGERIA" }, { "answer": "ROMANIA" }, { "answer": "SENEGAL" }, { "answer": "SOMALIA" },
+    { "answer": "TUNISIA" }, { "answer": "UKRAINE" }, { "answer": "URUGUAY" }, { "answer": "VIETNAM" }
+  ]
+}

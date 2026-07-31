@@ -1,0 +1,22 @@
+{
+  "slug": "car-brands",
+  "name": "Car Brands",
+  "category": "brands",
+  "region": "en",
+  "icon": "🚗",
+  "featured": true,
+  "sortOrder": 30,
+  "blurb": "Marques from every corner of the road.",
+  "items": [
+    { "answer": "AUDI" }, { "answer": "FORD" }, { "answer": "OPEL" }, { "answer": "SEAT" },
+    { "answer": "FIAT" }, { "answer": "JEEP" }, { "answer": "MINI" }, { "answer": "KIA" },
+    { "answer": "LEXUS" }, { "answer": "MAZDA" }, { "answer": "HONDA" }, { "answer": "TESLA" },
+    { "answer": "VOLVO" }, { "answer": "SKODA" }, { "answer": "DACIA" }, { "answer": "LOTUS" },
+    { "answer": "ACURA" }, { "answer": "BUICK" }, { "answer": "DODGE" }, { "answer": "ISUZU" },
+    { "answer": "SMART" }, { "answer": "LUCID" }, { "answer": "SUBARU" }, { "answer": "TOYOTA" },
+    { "answer": "NISSAN" }, { "answer": "JAGUAR" }, { "answer": "RIVIAN" }, { "answer": "LANCIA" },
+    { "answer": "BUGATTI" }, { "answer": "FERRARI" }, { "answer": "HYUNDAI" }, { "answer": "PORSCHE" },
+    { "answer": "BENTLEY" }, { "answer": "CITROEN" }, { "answer": "PEUGEOT" }, { "answer": "RENAULT" },
+    { "answer": "GENESIS" }, { "answer": "PONTIAC" }
+  ]
+}

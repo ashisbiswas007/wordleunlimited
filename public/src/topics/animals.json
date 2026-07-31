@@ -1,0 +1,24 @@
+{
+  "slug": "animals",
+  "name": "Animals",
+  "category": "nature",
+  "region": "en",
+  "icon": "🦁",
+  "featured": true,
+  "sortOrder": 80,
+  "blurb": "Creatures great and small — a good one for kids.",
+  "items": [
+    { "answer": "CAT" }, { "answer": "DOG" }, { "answer": "COW" }, { "answer": "PIG" },
+    { "answer": "FOX" }, { "answer": "OWL" }, { "answer": "BAT" }, { "answer": "APE" },
+    { "answer": "BEAR" }, { "answer": "LION" }, { "answer": "WOLF" }, { "answer": "DEER" },
+    { "answer": "GOAT" }, { "answer": "FROG" }, { "answer": "CRAB" }, { "answer": "SEAL" },
+    { "answer": "MOLE" }, { "answer": "SWAN" }, { "answer": "TOAD" }, { "answer": "MULE" },
+    { "answer": "TIGER" }, { "answer": "HORSE" }, { "answer": "SHEEP" }, { "answer": "MOUSE" },
+    { "answer": "SNAKE" }, { "answer": "WHALE" }, { "answer": "ZEBRA" }, { "answer": "KOALA" },
+    { "answer": "PANDA" }, { "answer": "OTTER" }, { "answer": "SHARK" }, { "answer": "EAGLE" },
+    { "answer": "MONKEY" }, { "answer": "RABBIT" }, { "answer": "DONKEY" }, { "answer": "BADGER" },
+    { "answer": "FALCON" }, { "answer": "PARROT" }, { "answer": "TURTLE" }, { "answer": "WALRUS" },
+    { "answer": "ELEPHANT" }, { "answer": "GIRAFFE" }, { "answer": "PENGUIN" }, { "answer": "DOLPHIN" },
+    { "answer": "LEOPARD" }, { "answer": "GORILLA" }, { "answer": "HAMSTER" }, { "answer": "OSTRICH" }
+  ]
+}
