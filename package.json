@@ -1,0 +1,28 @@
+{
+  "name": "wordleunlimited",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Wordle Unlimited — free unlimited word game with Daily, Unlimited, Time, Topic and live Multiplayer modes.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node --watch server/index.js",
+    "start": "node server/index.js",
+    "build": "node scripts/gen-words.mjs && node scripts/build-assets.mjs",
+    "words": "node scripts/gen-words.mjs",
+    "assets": "node scripts/build-assets.mjs",
+    "migrate": "node server/db/migrate.js"
+  },
+  "dependencies": {
+    "@fastify/compress": "^8.0.1",
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/helmet": "^13.0.1",
+    "@fastify/rate-limit": "^10.2.2",
+    "@fastify/static": "^8.0.4",
+    "@fastify/websocket": "^11.0.2",
+    "fastify": "^5.2.1",
+    "pg": "^8.13.1"
+  }
+}

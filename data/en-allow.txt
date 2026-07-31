@@ -1,0 +1,15 @@
+# Words that are genuinely valid but are missing from the reference dictionary
+# (dwyl/english-words is derived from an older corpus and has gaps around
+# modern and everyday vocabulary).
+#
+# Anything listed here bypasses the spell-check in gen-words.mjs, so only add
+# words you are confident about — this is the one place a typo can get through.
+
+# modern / everyday nouns the reference predates
+email emails inbox online offline website blog blogs podcast
+latte pesto ramen sushi panini burrito taco tacos wrap smoothie
+laptop tablet router selfie emoji app apps wifi
+sunbed airbase carpark
+texted texting
+curated curating
+recycle recycled recycling

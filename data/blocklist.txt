@@ -1,0 +1,36 @@
+# Words that must never be chosen as an answer or accepted as a guess.
+#
+# Four groups:
+#   1. Profanity and crude anatomy — this game is played by children.
+#   2. Slurs and pejoratives.
+#   3. Proper nouns that crept into the lexicon (not valid Wordle answers).
+#   4. Distressing subject matter that does not belong in a casual word game.
+#
+# Matching is exact and case-insensitive. Applied to every region.
+
+# --- profanity / crude ---
+arse arsed arses ass asses bastard bitch bitches boob boobs bugger buggered bollock bollocks
+cock cocks crap crappy cunt damn dick dicks dildo dong douche dyke fart farted feck
+fuck fucked fucker fucking git horny hump humped jerk jizz knob knobs nude nudes
+penis piss pissed poo poop prick pricks pube pubes pubic pussy queef
+scrotum semen shag shagged shit shits shitty slut sluts smut sperm spunk
+teat teats testes testis tit tits titty turd twat vagina wank wanker whore whores
+
+# --- slurs and pejoratives ---
+chink coon cracker darkie dago fag fags faggot gook gyp gypsy gipsy gyppo
+kike mick negro negroes nigger paki pikey queer raghead redskin retard retarded
+spastic spaz spic squaw tranny wetback wog wop yid
+
+# --- distressing subject matter ---
+abuse abused abuser bomber corpse corpses genocide grope groped hang hanged
+incest kill killed killer killing lynch molest molested murder murdered murderer
+nazi noose overdose rape raped rapist slave slavery suicide terror torture tortured
+
+# --- proper nouns / demonyms that are not valid common-noun answers ---
+april august british britain china chinese christian dutch easter english europe
+french german germany india indian irish islam italy japan jesus july june
+london march monday muslim november october roman russia russian scotland
+scottish spain spanish sunday texas tuesday wales welsh
+
+# --- fragments and non-words to exclude if they slip into a lexicon file ---
+arent cant dont didnt hasnt isnt shouldnt wasnt werent wont wouldnt youre

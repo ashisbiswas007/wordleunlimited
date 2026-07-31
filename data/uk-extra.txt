@@ -1,0 +1,47 @@
+# British English additions for the Wordle UK word list.
+#
+# The generator also derives UK spellings automatically from the shared English
+# lexicon (color→colour, -ize→-ise, -er→-re, defense→defence, traveled→travelled).
+# This file holds the words that no transformation rule can produce: genuinely
+# British vocabulary, dialect, and the irregular past tenses in -T.
+
+## == British spellings that must exist regardless of the transform rules ==
+colour colours favour favours honour honours labour labours rumour rumours vapour vapours
+vigour armour armours odour odours harbour harbours parlour parlours saviour savour savours
+splendour endeavour behaviour neighbour neighbours clamour glamour humour tumour succour
+litre litres metre metres mitre mitres titre sabre sabres ochre fibre fibres nitre
+centre centres sombre lustre theatre theatres calibre calibres spectre spectres macabre
+sceptre goitre meagre manoeuvre
+defence defences offence offences licence licences pretence pretences
+realise realises realised realising advise analyse analysed analysing paralyse paralysed
+apologise apologised organise organised recognise recognised criticise criticised
+emphasise emphasised specialise specialised civilise civilised memorise memorised
+travelled travelling traveller jewellery jewelled marvelled marvellous cancelled cancelling
+labelled labelling modelling modelled signalling signalled tunnelled counsellor
+enrol enrols fulfil fulfils instil instils appal appals skilful wilful distil distils
+tyre tyres kerb kerbs gaol grey greyer greyest mould moulds moulding moult maths storey
+storeys whisky plough ploughs cheque cheques draught draughts pyjamas sulphur programme
+aluminium aeroplane axe axes doughnut kerbside
+
+## == irregular past tenses in -T (a real UK Wordle edge that trips people up) ==
+burnt spelt spilt leapt smelt knelt dwelt learnt dreamt spoilt
+
+## == everyday British vocabulary an American list will not have ==
+loo tin bin mum nan bap cob hob peg mac tea nowt owt
+mate quid posh daft naff pint brew pram chap wonk swot prat berk
+lorry queue crisp telly bloke dodgy nappy welly scone pasty barmy lurgy plonk mardy bairn
+biffo grotty poorly chippy brolly banter gutted petrol jumper geezer chuffed trolley
+biscuit crumpet flannel snogged knackered gobsmacked chunder fortnight rubbish
+anticlockwise autumn candyfloss caravan chemist courgette aubergine
+dustbin dummy fringe holiday jumper lift nappy pavement plaster postbox
+pushchair queue rubber sellotape shattered skirting sultana torch trainers
+trolley trousers waistcoat wardrobe wellies zebra
+
+## == regional (Scotland, the North, Wales) ==
+braw canny loch dram bonny bonnie wee ken aye laddie lassie
+ginnel barm mardy owt nowt gander mither muppet mingin
+cwtch tidy lush bach butty tamping
+
+## == UK measurements, institutions and everyday nouns ==
+stone quid fiver tenner pence penny quidsworth
+pillar postie brolly wellie anorak jumble bunting

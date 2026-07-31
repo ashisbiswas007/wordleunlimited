@@ -1,0 +1,112 @@
+# Wordle Indonesia — daftar kata inti (Bahasa Indonesia, ejaan baku KBBI).
+#
+# Semua kata di sini mengikuti bentuk BAKU. Bentuk tidak baku yang umum dipakai
+# (ANTRI, RESIKO, IJIN, PRAKTEK, NAFAS) sengaja TIDAK dimasukkan — justru itu
+# yang membuat versi Indonesia menarik untuk dimainkan.
+#
+# Baris diawali # adalah komentar. Kata dipisah spasi, difilter otomatis
+# berdasarkan panjang aslinya oleh scripts/gen-words.mjs.
+
+## == 3 huruf ==
+ada air aku apa api asa aur
+bab bak bal ban bar bas bau bel bis bom bon bos bui bus
+cat cek cor
+dan dam dua dus
+gas gua gol
+hak hal
+ibu ide
+jam jas
+kau kue
+lap lem
+mau mas
+oma opa
+pak pas pil pos pot
+rak rem roh rok
+sah sel
+tas tim tua
+ubi
+
+## == 4 huruf ==
+anak arah atap awan ayah ayam
+baju baru batu bawa beda beli besi biru buah buku bumi
+cara cuci
+dada dari daun desa diri duri
+gigi gula guru
+hari hati haus
+ikan
+jala jari jauh
+kaca kaki kain kaku kali kamu kaya kayu kera kita kota kuda kuku
+lagu laut lima luar luas
+maju mama mata muka
+nama nasi
+obat otak
+padi pagi paha paku papa pipi pita puas
+raja rasa ribu roti
+sapi satu saya suka susu
+tali tamu tiga topi tuan
+uang ular
+wana
+
+## == 5 huruf ==
+angin
+badan bagus bahan bahasa balik bantu batas belum benar berat besar biasa bibir bintik bisnis
+buang bukan bulan bunga burung
+cepat cinta cukup
+darah datang debat dekat delapan dengan depan dokter dunia
+enak empat
+gajah garam garis gelap gigit
+hadir hanya harga hidup hitam hujan hutan
+ingin
+jalan jamur jarak jelas jumat
+kalau kamar kanan kapal kaset kecil kelas kerja kertas ketat kilat kotak kotor kucing kuning kurang
+lagi lampu lantai lapar lebar lebih lemah lidah lucu lupa
+makan malam manis masuk merah mimpi minum mobil mulai mulut murah musim
+naik nanti nomor
+orang
+padat paham panas pasar pedas pergi pesan pikir pintu pohon pulau putih
+rajin ramai rapat rumah
+sabar sakit salah sayur sedih segar sehat siang sikat sopan suara sudah surat susah
+tahun takut taman tanah tarik tebal telur teman tepat tidur tulis
+udara ujung untuk
+waktu warna
+yakin
+
+## == 6 huruf ==
+akhir angkat apotek
+bangun bantal belajar berani berita bersih bintang bilang bocor botol budaya bulan
+cabang cantik celana cermin cerita coklat
+daerah dahulu dapur datang dengar dompet
+gambar gunung
+halaman hangat harapan hemat hitung
+istana
+jarang jendela
+kamera kantor keluar kemari kepala kertas ketika kucing kuning
+lambat lantai lapang lembut liburan lingkar
+malang masuk melihat menang mereka minggu monyet
+negara nyaman
+pantai perang perlu piring pisang
+rambut rumput
+sampai sedang sekali selalu sepatu sepeda sering setiap sungai
+tangan tempat tenang tentu terang tinggi tolong tujuan
+warung
+zaman
+
+## == 7 huruf ==
+anggota
+bahagia bekerja berbeda berdiri bermain bersama bertemu bintang burung
+cerdas
+gembira
+harapan
+jendela
+kalimat kegiatan kembali kemarin keluarga kesehatan
+makanan masalah melihat membaca membeli memberi menarik mencari mengapa menulis minuman
+nasihat
+panjang pelajar penting perahu pikiran pinggir praktik
+respons
+sahabat sebelum sekolah selamat seorang sesuatu setelah silakan
+tanggal telinga tentang terbaik terbang tertawa
+### Catatan: bentuk baku yang sering salah eja sengaja disorot di sini —
+### ANTRE, RISIKO, IZIN, PRAKTIK, NAPAS, APOTEK, KARIER, ANDAL, IMBAU, ZAMAN.
+antre risiko izin praktik napas apotek karier andal imbau zaman
+asas atlet objek subjek rezeki miliar detail teknik peduli nasihat silakan respons
+embus hafal pikir
