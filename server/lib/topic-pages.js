@@ -43,7 +43,10 @@ function head({ title, description, canonical, extra = "" }) {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#6aaa64" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121213" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/src/wordle.css?v=${b}">
 <link rel="stylesheet" href="/src/site.css?v=${b}">
 ${extra}
