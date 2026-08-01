@@ -75,17 +75,36 @@ async function storeHash(hash, needsChange) {
 
 export async function initAdminAuth() {
   const stored = await readStoredHash();
-  if (stored) {
+  const envSupplied = Boolean(config.admin.passwordHash || config.admin.password);
+
+  // A password deliberately set in the admin UI outranks the environment.
+  // A password we GENERATED on a previous boot must not, or setting
+  // ADMIN_PASSWORD afterwards would silently keep rejecting you.
+  if (stored && !(stored.mustChange && envSupplied)) {
     cachedHash = stored.hash;
     mustChange = stored.mustChange;
     source = "database";
-    console.log(`[admin] login ready for "${config.admin.user}" (password set in /admin)`);
+    console.log(
+      `[admin] login ready for "${config.admin.user}" ` +
+        (stored.mustChange
+          ? "(generated password — change it in the admin panel)"
+          : "(password set in the admin panel)")
+    );
     return { source, mustChange };
+  }
+
+  if (stored && stored.mustChange && envSupplied) {
+    console.log(
+      "[admin] replacing the generated password with the one from the environment"
+    );
   }
 
   if (config.admin.passwordHash) {
     cachedHash = config.admin.passwordHash;
     source = "env:ADMIN_PASSWORD_HASH";
+    mustChange = false;
+    // Overwrite any generated row so the two cannot disagree.
+    await storeHash(cachedHash, false);
     console.log(`[admin] login ready for "${config.admin.user}" (ADMIN_PASSWORD_HASH)`);
     return { source, mustChange: false };
   }
@@ -93,6 +112,7 @@ export async function initAdminAuth() {
   if (config.admin.password) {
     cachedHash = await hashPassword(config.admin.password);
     source = "env:ADMIN_PASSWORD";
+    mustChange = false;
     // Persisted so the login keeps working even if the variable is later removed.
     await storeHash(cachedHash, false);
     console.log(`[admin] login ready for "${config.admin.user}" (ADMIN_PASSWORD)`);

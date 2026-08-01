@@ -57,8 +57,10 @@ export const config = {
     maxPlayersPerRoom: int(process.env.MAX_PLAYERS_PER_ROOM, 50),
     revealNextAtPercent: int(process.env.REVEAL_NEXT_AT_PERCENT, 80),
     maxCustomRooms: int(process.env.MAX_CUSTOM_ROOMS, 500),
-    roundSeconds: int(process.env.ROUND_SECONDS, 600),
-    voteSeconds: int(process.env.VOTE_SECONDS, 20),
+    // 28 minutes of play, then a 2 minute scoreboard that doubles as the vote
+    // for the next topic — a 30 minute cycle on the server's clock.
+    roundSeconds: int(process.env.ROUND_SECONDS, 1680),
+    resultsSeconds: int(process.env.RESULTS_SECONDS, 120),
     lobbySeconds: int(process.env.LOBBY_SECONDS, 15),
   },
 

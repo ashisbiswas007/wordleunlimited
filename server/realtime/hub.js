@@ -10,7 +10,8 @@ const HEARTBEAT_MS = 30_000;
 const CUSTOM_ROOM_IDLE_MS = 10 * 60_000;
 const OPEN_ROOM_IDLE_MS = 5 * 60_000;
 const MAX_SOCKETS_PER_IP = 8;
-const VOTE_OPTION_COUNT = 4;
+// Six choices fills the vote grid without making it a wall of cards.
+const VOTE_OPTION_COUNT = 6;
 
 /** code -> Room */
 const rooms = new Map();
@@ -40,7 +41,7 @@ function createOpenRoom(index) {
     maxPlayers: Math.min(s.maxPlayersPerRoom, 50),
     wordsToWin: s.wordsToWin,
     durationSeconds: s.roundSeconds,
-    voteSeconds: s.voteSeconds,
+    resultsSeconds: s.resultsSeconds,
     lobbySeconds: s.lobbySeconds,
     region: "en",
     length: 5,
@@ -121,7 +122,7 @@ export function createCustomRoom(opts = {}) {
     kind: "custom",
     maxPlayers: Math.min(opts.maxPlayers ?? 8, s.maxPlayersPerRoom),
     lobbySeconds: s.lobbySeconds,
-    voteSeconds: s.voteSeconds,
+    resultsSeconds: s.resultsSeconds,
   });
   wireRoom(room);
   rooms.set(code, room);
@@ -205,49 +206,55 @@ function tick() {
   const s = settings();
 
   for (const room of [...rooms.values()]) {
-    // Phase transitions
+    /* Open rooms run a continuous clock:  play -> results+vote -> play.
+       Custom rooms wait in a lobby until the host starts. */
     if (room.phase === PHASE.LOBBY) {
-      if (room.players.size >= (room.kind === "open" ? 1 : 2)) {
-        if (!room.phaseEndsAt) {
+      const minPlayers = room.kind === "open" ? 1 : 2;
+      if (room.players.size >= minPlayers) {
+        if (room.kind === "open") {
+          // Public rooms never wait on a lobby countdown.
+          room.startRound(null).catch(logRoomError);
+        } else if (!room.phaseEndsAt) {
           room.phaseEndsAt = now + room.lobbySeconds * 1000;
           room.broadcast({
             t: "lobby",
             startsAt: room.phaseEndsAt,
             seconds: room.lobbySeconds,
             players: room.players.size,
+            room: room.describe(),
+            playerList: room.lobbyList(),
           });
-        } else if (now >= room.phaseEndsAt) {
-          if (room.kind === "open") room.startVoting().catch(logRoomError);
-          else room.startRound(room.topicSlug ? { slug: room.topicSlug } : null).catch(logRoomError);
+        } else if (now >= room.phaseEndsAt && room.allReady()) {
+          room.startRound(room.topicSlug ? { slug: room.topicSlug } : null).catch(logRoomError);
         }
       } else if (room.phaseEndsAt) {
-        // Dropped below the minimum while counting down — hold.
         room.phaseEndsAt = 0;
         room.broadcast({ t: "lobby_hold", players: room.players.size });
       }
-    } else if (room.phase === PHASE.VOTING) {
-      if (now >= room.phaseEndsAt) {
-        const choice = room.resolveVote();
-        room.broadcast({ t: "vote_result", choice, tally: room.voteTally() });
-        room.startRound(choice).catch(logRoomError);
-      }
     } else if (room.phase === PHASE.PLAYING) {
-      if (now >= room.phaseEndsAt) room.endRound("time");
-      else if (room.players.size === 0) {
+      // Only the clock ends a round. A player who clears every word waits.
+      if (now >= room.phaseEndsAt) room.endRound("time").catch(logRoomError);
+      else if (room.players.size === 0 && room.kind === "custom") {
         room.phase = PHASE.LOBBY;
         room.phaseEndsAt = 0;
       }
-    } else if (room.phase === PHASE.RESULTS) {
+    } else if (room.phase === PHASE.RESULTS || room.phase === PHASE.VOTING) {
       if (now >= room.phaseEndsAt) {
-        if (room.players.size === 0) {
-          room.phase = PHASE.LOBBY;
-          room.phaseEndsAt = 0;
-        } else if (room.kind === "open") {
-          room.startVoting().catch(logRoomError);
+        if (room.kind === "open") {
+          const choice = room.resolveVote();
+          room.broadcast({ t: "vote_result", choice, tally: room.voteTally() });
+          room.startRound(choice).catch(logRoomError);
         } else {
           room.phase = PHASE.LOBBY;
           room.phaseEndsAt = 0;
-          room.broadcast({ t: "lobby", startsAt: 0, players: room.players.size });
+          for (const p of room.players.values()) p.ready = false;
+          room.broadcast({
+            t: "lobby",
+            startsAt: 0,
+            players: room.players.size,
+            room: room.describe(),
+            playerList: room.lobbyList(),
+          });
         }
       }
     }
@@ -392,7 +399,14 @@ export async function registerRealtime(app) {
             return;
           }
 
+          // A refresh sends the match id it was in. If the room has since moved
+          // on to a new round, the old id is stale and must not be honoured.
+          if (msg.matchId && room.matchId && msg.matchId !== room.matchId) {
+            safeSend(socket, { t: "match_gone", current: room.matchId });
+          }
+
           joined = { room, player: res.player };
+          const voting = room.phase === PHASE.RESULTS || room.phase === PHASE.VOTING;
 
           safeSend(socket, {
             t: "joined",
@@ -400,8 +414,10 @@ export async function registerRealtime(app) {
             room: room.describe(),
             board: room.boardPayload(),
             feed: room.feed.slice(-15),
-            voteOptions: room.phase === PHASE.VOTING ? room.voteOptions : null,
-            tally: room.phase === PHASE.VOTING ? room.voteTally() : null,
+            playerList: room.lobbyList(),
+            voteOptions: voting ? room.voteOptions : null,
+            tally: voting ? room.voteTally() : null,
+            isHost: res.player.id === room.hostId,
           });
 
           if (room.phase === PHASE.PLAYING) room.sendWord(res.player);
@@ -422,16 +438,38 @@ export async function registerRealtime(app) {
           break;
         }
 
+        case "ready": {
+          if (!joined) return;
+          joined.room.setReady(joined.player.id, msg.ready !== false);
+          break;
+        }
+
+        case "kick": {
+          if (!joined) return;
+          const res = joined.room.kick(joined.player.id, String(msg.playerId || ""));
+          if (res.error) safeSend(socket, { t: "error", code: res.error });
+          break;
+        }
+
         case "start": {
-          // Any player may start a custom room once it has two people in it.
+          // The host can start early once everyone present has readied up,
+          // rather than waiting for the room to fill.
           if (!joined) return;
           const room = joined.room;
           if (room.kind !== "custom" || room.phase !== PHASE.LOBBY) return;
+          if (joined.player.id !== room.hostId) {
+            safeSend(socket, { t: "error", code: "not_host" });
+            return;
+          }
           if (room.players.size < 2) {
             safeSend(socket, { t: "error", code: "need_two_players" });
             return;
           }
-          room.phaseEndsAt = Date.now();
+          if (!room.allReady()) {
+            safeSend(socket, { t: "error", code: "not_all_ready" });
+            return;
+          }
+          room.startRound(room.topicSlug ? { slug: room.topicSlug } : null).catch(logRoomError);
           break;
         }
 

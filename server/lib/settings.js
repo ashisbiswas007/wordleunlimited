@@ -28,7 +28,7 @@ export const DEFAULTS = {
     maxPlayersPerRoom: config.rooms.maxPlayersPerRoom,
     revealNextAtPercent: config.rooms.revealNextAtPercent,
     roundSeconds: config.rooms.roundSeconds,
-    voteSeconds: config.rooms.voteSeconds,
+    resultsSeconds: config.rooms.resultsSeconds,
     lobbySeconds: config.rooms.lobbySeconds,
     allowCustomRooms: true,
     wordsToWin: 10,
