@@ -585,19 +585,14 @@
     sizeBoardSoon();
   }
   function relock() { _lockedH = 0; applyVV(); }
+  /* The board is sized purely in CSS from --len. Measuring the DOM and writing
+     pixel sizes back was what made the grid jump on every render. All this does
+     now is publish the word length. */
   function sizeBoard() {
     if (!board || !game) return;
-    var len = game.length, gap = 6;
-    var bw = board.clientWidth, bh = board.clientHeight;
-    if (bw <= 0) bw = Math.min(500, window.innerWidth) - 24;
-    var sw = Math.floor((bw - (len - 1) * gap) / len);
-    var sh = bh > 0 ? Math.floor((bh - 5 * gap) / 6) : sw;
-    var s = Math.min(sw, sh);
-    s = Math.max(34, Math.min(66, s));
-    board.style.setProperty("--tile", s + "px");
-    board.style.setProperty("--gap", gap + "px");
+    board.style.setProperty("--len", game.length);
   }
-  function sizeBoardSoon() { cancelAnimationFrame(_raf); _raf = requestAnimationFrame(sizeBoard); }
+  function sizeBoardSoon() { sizeBoard(); }
 
   /* ===================== device keyboard ===================== */
   function resetTyper() {
@@ -1063,8 +1058,7 @@
       if (r < game.guesses.length) { letters = game.guesses[r].split(""); evals = evaluate(game.guesses[r], game.answer); }
       else if (r === game.guesses.length) letters = game.current.split("");
       var reveal = r === game._reveal, win = game.status === "won" && r === game.guesses.length - 1;
-      html += '<div class="row' + (game._shake && r === game.guesses.length ? " shake" : "") +
-        '" style="grid-template-columns:repeat(' + len + ',var(--tile,52px))">';
+      html += '<div class="row' + (game._shake && r === game.guesses.length ? " shake" : "") + '">';
       for (c = 0; c < len; c++) {
         var L = letters[c] || "", ev = evals[c], cls = "tile";
         if (ev) cls += " " + ev;
@@ -1100,15 +1094,18 @@
       });
     kbEl.innerHTML = html;
   }
+  /* The hint row always occupies its height, so revealing a letter fades text
+     in rather than pushing the board down. */
   function renderHint() {
-    if (!game.revealed.length) { hintEl.style.display = "none"; hintEl.innerHTML = ""; return; }
+    if (!hintEl) return;
+    if (!game.revealed.length) { hintEl.classList.remove("on"); hintEl.innerHTML = ""; return; }
     var s = "", i;
     for (i = 0; i < game.length; i++) {
       s += game.revealed.indexOf(i) > -1 ? game.answer[i] : "·";
       s += i < game.length - 1 ? " " : "";
     }
-    hintEl.style.display = "block";
     hintEl.innerHTML = '<span class="hintlabel">' + t("hintTag") + "</span>" + s;
+    hintEl.classList.add("on");
   }
   function cbtn(act, icon, label, ghost) {
     return '<button class="cbtn' + (ghost ? " ghost" : "") + '" data-act="' + act + '"><span class="ic">' + ICON[icon] + "</span><span>" + label + "</span></button>";

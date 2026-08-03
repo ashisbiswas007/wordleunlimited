@@ -247,7 +247,7 @@
   /* ---------- board takeover ---------- */
   function takeOverBoard() {
     WU.suspend();
-    if (els.hint) { els.hint.style.display = "none"; els.hint.innerHTML = ""; }
+    if (els.hint) { els.hint.classList.remove("on"); els.hint.innerHTML = ""; }
     var clue = document.getElementById("tpClue");
     if (clue) clue.classList.remove("show");
     document.querySelectorAll(".tab").forEach(function (tb) {
@@ -325,8 +325,7 @@
       var reveal = r === board.justRevealed;
       var win = board.won && r === board.rows.length - 1;
 
-      html += '<div class="row' + (board.shake && r === board.rows.length ? " shake" : "") +
-        '" style="grid-template-columns:repeat(' + len + ',var(--tile,52px))">';
+      html += '<div class="row' + (board.shake && r === board.rows.length ? " shake" : "") + '">';
       for (c = 0; c < len; c++) {
         var L = letters[c] || "", k = "tile";
         if (pat) k += " " + cls[pat[c]];
@@ -342,16 +341,8 @@
     board.shake = false;
     board.justRevealed = -1;
 
-    // Reuse the engine's tile sizing so a changing word length still fits.
-    els.grid.style.setProperty("--tile", tileSize(len) + "px");
-    els.grid.style.setProperty("--gap", "6px");
-  }
-
-  function tileSize(len) {
-    var bw = els.grid.clientWidth || 380, bh = els.grid.clientHeight || 0, gap = 6;
-    var sw = Math.floor((bw - (len - 1) * gap) / len);
-    var sh = bh > 0 ? Math.floor((bh - 5 * gap) / 6) : sw;
-    return Math.max(34, Math.min(66, Math.min(sw, sh)));
+    // CSS sizes the grid from --len; nothing here measures the DOM.
+    els.grid.style.setProperty("--len", len);
   }
 
   function renderKeyboard() {

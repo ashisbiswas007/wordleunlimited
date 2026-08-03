@@ -16,7 +16,7 @@
 import { readdir, readFile, writeFile, stat, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join, extname, relative } from "node:path";
-import { brotliCompress, gzip, constants } from "node:zlib";
+import { brotliCompress, gzip, constants, brotliDecompressSync } from "node:zlib";
 import { promisify } from "node:util";
 import { createHash } from "node:crypto";
 
@@ -110,8 +110,12 @@ async function compress(files) {
       gz(buf, { level: 9 }),
     ]);
 
-    // Only keep a variant if it actually helps.
+    // Verify before writing. A truncated .br is served in place of the real
+    // file and silently breaks the site, which is very hard to spot.
     if (b.length < buf.length) {
+      if (!brotliDecompressSync(b).equals(buf)) {
+        throw new Error(`brotli round-trip failed for ${file} — refusing to write a corrupt asset`);
+      }
       await writeFile(`${file}.br`, b);
       saved += buf.length - b.length;
       count++;
