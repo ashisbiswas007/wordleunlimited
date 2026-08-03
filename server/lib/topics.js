@@ -41,6 +41,22 @@ async function readPacks() {
   return packs;
 }
 
+/**
+ * The clue every answer falls back to.
+ *
+ * A name you have never heard of with no hint at all is not a puzzle, it is a
+ * wall — so no answer is ever served without one, whatever its source.
+ */
+export function defaultClue(answer) {
+  return `Starts with ${answer[0]} · ${answer.length} letters`;
+}
+
+/** Hand-written clue if there is one, generated clue otherwise. Never empty. */
+export function ensureClue(answer, clue) {
+  const written = clue == null ? "" : String(clue).trim();
+  return written ? written.slice(0, 120) : defaultClue(answer);
+}
+
 function normalisePack(pack) {
   const seen = new Set();
   const items = [];
@@ -58,14 +74,10 @@ function normalisePack(pack) {
     if (seen.has(answer)) continue;
     seen.add(answer);
 
-    // Every answer carries a clue. Hand-written ones win; the rest get a
-    // generated one, because a name you have never heard of with no hint at
-    // all is not a puzzle, it is a wall.
-    const written = entry.clue ? String(entry.clue).slice(0, 120) : null;
     items.push({
       answer,
       length: answer.length,
-      clue: written || `Starts with ${answer[0]} · ${answer.length} letters`,
+      clue: ensureClue(answer, entry.clue),
     });
   }
 
@@ -227,7 +239,15 @@ export async function getTopic(slug) {
           blurb: rows[0].blurb,
           icon: rows[0].icon,
         },
-        items: rows.map((r) => ({ answer: r.answer, length: r.length, clue: r.clue })),
+        // Rows seeded before clues were generated — or imported without one —
+        // still have a NULL clue, and seedTopics deliberately never rewrites an
+        // existing topic. Filling the gap on read is what guarantees that every
+        // answer has a clue on a live database, not just from the JSON packs.
+        items: rows.map((r) => ({
+          answer: r.answer,
+          length: r.length,
+          clue: ensureClue(r.answer, r.clue),
+        })),
       };
       itemsCache.set(key, entry);
       return entry;

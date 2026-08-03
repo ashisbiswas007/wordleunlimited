@@ -48,7 +48,7 @@ window.WU_I18N = {
   lvlUp: "NAIK LEVEL", memberSince: "Bermain sejak {0}", rankTitle: "Peringkatmu",
   tpPick: "Pilih topik", tpSearch: "Cari topik…", tpAll: "Semua",
   tpNone: "Tidak ada topik yang cocok.",
-  tpProgress: "{0} dari {1}", tpDone: "Topik selesai!",
+  tpProgress: "{0} dari {1}", tpDone: "Topik selesai!", tpWords: "kata",
   tpDoneMsg: "Kamu memecahkan semua {0} jawaban di {1}.",
   tpChange: "Ganti topik", tpLoading: "Memuat topik…",
   tpFailed: "Tidak bisa memuat topik. Coba lagi sebentar.",

@@ -5,6 +5,7 @@ import {
   evaluate,
   encodePattern,
 } from "../lib/words.js";
+import { defaultClue, ensureClue } from "../lib/topics.js";
 
 export const PHASE = {
   LOBBY: "lobby",
@@ -440,12 +441,19 @@ export class Room {
         const shuffled = shuffle(entry.items.slice());
         return shuffled
           .slice(0, target)
-          .map((it) => ({ answer: it.answer, length: it.length, clue: it.clue || null }));
+          .map((it) => ({
+            answer: it.answer,
+            length: it.length,
+            clue: ensureClue(it.answer, it.clue),
+          }));
       }
     }
 
+    // Random-word rounds get a clue too. The open rooms have no hint button —
+    // the clue is the help — so leaving these blank meant the default public
+    // room was the one place you played with nothing at all.
     return wordSequence(this.region, this.length, target, (Math.random() * 2 ** 31) | 0).map(
-      (w) => ({ answer: w, length: w.length, clue: null })
+      (w) => ({ answer: w, length: w.length, clue: defaultClue(w) })
     );
   }
 

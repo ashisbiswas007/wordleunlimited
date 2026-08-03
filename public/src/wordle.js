@@ -85,7 +85,7 @@
     /* topic mode */
     tpPick: "Choose a topic", tpSearch: "Search topics…", tpAll: "All",
     tpNone: "No topics match that search.",
-    tpProgress: "{0} of {1}", tpDone: "Topic complete!",
+    tpProgress: "{0} of {1}", tpDone: "Topic complete!", tpWords: "words",
     tpDoneMsg: "You solved all {0} answers in {1}.",
     tpChange: "Change topic", tpLoading: "Loading topics…",
     tpFailed: "Could not load topics. Try again in a moment.",
@@ -1005,12 +1005,15 @@
       return (x.name + " " + x.category).toLowerCase().indexOf(tpFilter.q.toLowerCase()) > -1;
     });
 
-    var h = '<input class="tp-search" id="tpSearch" type="search" autocomplete="off" placeholder="' + esc(t("tpSearch")) + '" value="' + esc(tpFilter.q) + '">';
+    // Search and categories stay pinned while the list scrolls under them —
+    // on a phone they are otherwise tall enough to push every topic off screen.
+    var h = '<div class="tp-head">' +
+      '<input class="tp-search" id="tpSearch" type="search" autocomplete="off" placeholder="' + esc(t("tpSearch")) + '" value="' + esc(tpFilter.q) + '">';
     h += '<div class="tp-cats"><button class="tp-cat' + (tpFilter.cat ? "" : " active") + '" data-tpcat="">' + t("tpAll") + "</button>";
     cats.forEach(function (c) {
       h += '<button class="tp-cat' + (tpFilter.cat === c ? " active" : "") + '" data-tpcat="' + esc(c) + '">' + esc(c) + "</button>";
     });
-    h += "</div>";
+    h += "</div></div>";
 
     if (!list.length) h += '<div class="tp-empty">' + t("tpNone") + "</div>";
     else {
@@ -1018,7 +1021,9 @@
       list.forEach(function (x) {
         h += '<button class="tp-item" data-tpslug="' + esc(x.slug) + '">' +
           '<span class="e">' + esc(x.icon || "🎯") + "</span>" +
-          '<span class="t"><span class="n">' + esc(x.name) + '</span><span class="c">' + x.count + " · " + esc(x.category) + "</span></span></button>";
+          '<span class="t"><span class="n">' + esc(x.name) + "</span>" +
+          '<span class="c"><b>' + x.count + "</b> " + esc(t("tpWords")) +
+          '<span class="dot">·</span>' + esc(x.category) + "</span></span></button>";
       });
       h += "</div>";
     }
@@ -1198,10 +1203,15 @@
       var rightT = "";
       if (hintAllowed()) rightT += hintBtnIcon();
       rightT += iBtn("picktopic", "grid", t("tpChange"));
+      // The counts carry the meaning, so they are the bold part; the name sits
+      // on its own line above rather than running into "1 of 47".
+      var tpAt = Math.min(game.topicIndex + 1, tp.items.length);
       h = '<div class="tp-bar"><div class="tp-now"><span class="tp-ico">' + esc(tp.icon || "🎯") + "</span>" +
         '<span class="tp-meta"><span class="tp-name">' + esc(tp.name) + "</span>" +
-        '<span class="tp-prog">' + t("tpProgress", Math.min(game.topicIndex + 1, tp.items.length), tp.items.length) +
-        " · " + game.topicSolved + " " + t("solvedLbl").toLowerCase() + "</span></span></div>" +
+        '<span class="tp-prog">' +
+        t("tpProgress", '<b>' + tpAt + '</b>', '<b>' + tp.items.length + '</b>') +
+        '<span class="dot">·</span><b>' + game.topicSolved + "</b> " + t("solvedLbl").toLowerCase() +
+        "</span></span></div>" +
         '<div class="tm-right">' + rightT + "</div></div>";
     }
     controls.innerHTML = h;

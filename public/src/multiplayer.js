@@ -420,7 +420,8 @@
     if (!el) return;
     if (board && board.clue) {
       el.innerHTML = '<span class="hint-inner"></span>';
-      el.firstChild.textContent = board.clue;
+      // Same "Clue: …" wording as Topic mode; Versus was showing it bare.
+      el.firstChild.textContent = t("tpClue", board.clue);
       el.classList.add("show");
     } else {
       el.classList.remove("show");
