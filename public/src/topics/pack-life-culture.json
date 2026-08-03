@@ -1,184 +1,1706 @@
 [
-{
-  "slug": "football-clubs", "name": "Football Clubs", "category": "sport", "region": "en",
-  "icon": "⚽", "featured": true, "sortOrder": 101,
-  "blurb": "Clubs from the big European leagues and beyond.",
-  "items": [
-    {"answer":"ARSENAL"},{"answer":"CHELSEA"},{"answer":"EVERTON"},{"answer":"FULHAM"},
-    {"answer":"LEEDS"},{"answer":"ASTON","clue":"___ Villa"},{"answer":"SPURS"},
-    {"answer":"WOLVES"},{"answer":"BURNLEY"},{"answer":"CELTIC"},{"answer":"RANGERS"},
-    {"answer":"BARCA"},{"answer":"SEVILLA"},{"answer":"BETIS"},{"answer":"VALENCIA"},
-    {"answer":"MILAN"},{"answer":"INTER"},{"answer":"ROMA"},{"answer":"LAZIO"},
-    {"answer":"NAPOLI"},{"answer":"JUVENTUS"},{"answer":"TORINO"},{"answer":"GENOA"},
-    {"answer":"BAYERN"},{"answer":"SCHALKE"},{"answer":"HERTHA"},{"answer":"MAINZ"},
-    {"answer":"AJAX"},{"answer":"PSV"},{"answer":"FEYENOORD"},{"answer":"PORTO"},
-    {"answer":"BENFICA"},{"answer":"SPORTING"},{"answer":"MONACO"},{"answer":"LYON"},
-    {"answer":"LILLE"},{"answer":"NANTES"},{"answer":"RENNES"}
-  ]
-},
-{
-  "slug": "sports", "name": "Sports", "category": "sport", "region": "en",
-  "icon": "🏆", "featured": false, "sortOrder": 105,
-  "blurb": "Games, events and disciplines.",
-  "items": [
-    {"answer":"GOLF"},{"answer":"POLO"},{"answer":"JUDO"},{"answer":"SUMO"},
-    {"answer":"RUGBY"},{"answer":"BOXING"},{"answer":"TENNIS"},{"answer":"SQUASH"},
-    {"answer":"HOCKEY"},{"answer":"SOCCER"},{"answer":"CRICKET"},{"answer":"NETBALL"},
-    {"answer":"CURLING"},{"answer":"FENCING"},{"answer":"ROWING"},{"answer":"SAILING"},
-    {"answer":"SKIING"},{"answer":"SURFING"},{"answer":"DIVING"},{"answer":"CYCLING"},
-    {"answer":"KARATE"},{"answer":"ARCHERY"},{"answer":"BOWLING"},{"answer":"SKATING"},
-    {"answer":"CLIMBING"},{"answer":"MARATHON"},{"answer":"TRIATHLON"},{"answer":"BADMINTON"}
-  ]
-},
-{
-  "slug": "fruits-vegetables", "name": "Fruit & Vegetables", "category": "food", "region": "en",
-  "icon": "🍎", "featured": true, "sortOrder": 111,
-  "blurb": "Good one for kids — plenty of short answers.",
-  "items": [
-    {"answer":"FIG"},{"answer":"YAM"},{"answer":"PEA"},{"answer":"KIWI"},
-    {"answer":"PEAR"},{"answer":"PLUM"},{"answer":"LIME"},{"answer":"DATE"},
-    {"answer":"BEAN"},{"answer":"CORN"},{"answer":"LEEK"},{"answer":"KALE"},
-    {"answer":"APPLE"},{"answer":"MANGO"},{"answer":"PEACH"},{"answer":"GRAPE"},
-    {"answer":"LEMON"},{"answer":"MELON"},{"answer":"BERRY"},{"answer":"GUAVA"},
-    {"answer":"ONION"},{"answer":"OLIVE"},{"answer":"BANANA"},{"answer":"CHERRY"},
-    {"answer":"ORANGE"},{"answer":"PAPAYA"},{"answer":"TOMATO"},{"answer":"POTATO"},
-    {"answer":"CARROT"},{"answer":"CELERY"},{"answer":"GARLIC"},{"answer":"GINGER"},
-    {"answer":"PEPPER"},{"answer":"SPINACH"},{"answer":"CABBAGE"},{"answer":"BROCCOLI"},
-    {"answer":"AVOCADO"},{"answer":"APRICOT"},{"answer":"PUMPKIN"},{"answer":"LETTUCE"}
-  ]
-},
-{
-  "slug": "world-food", "name": "Food & Dishes", "category": "food", "region": "en",
-  "icon": "🍜", "featured": false, "sortOrder": 112,
-  "blurb": "Dishes from around the world.",
-  "items": [
-    {"answer":"RICE"},{"answer":"SOUP"},{"answer":"CAKE"},{"answer":"TACO"},
-    {"answer":"SUSHI"},{"answer":"PASTA"},{"answer":"PIZZA"},{"answer":"CURRY"},
-    {"answer":"BREAD"},{"answer":"SALAD"},{"answer":"STEAK"},{"answer":"KEBAB"},
-    {"answer":"RAMEN"},{"answer":"NOODLE"},{"answer":"BURGER"},{"answer":"WAFFLE"},
-    {"answer":"MUFFIN"},{"answer":"SCONE"},{"answer":"BAGEL"},{"answer":"PASTRY"},
-    {"answer":"RISOTTO"},{"answer":"LASAGNE"},{"answer":"OMELETTE"},{"answer":"PANCAKE"},
-    {"answer":"CUSTARD"},{"answer":"PUDDING"},{"answer":"BROWNIE"},{"answer":"SANDWICH"},
-    {"answer":"RENDANG"},{"answer":"SATAY"},{"answer":"NASI"},{"answer":"BAKSO"}
-  ]
-},
-{
-  "slug": "musical-instruments", "name": "Musical Instruments", "category": "music", "region": "en",
-  "icon": "🎸", "featured": false, "sortOrder": 121,
-  "blurb": "Strings, brass, wind and percussion.",
-  "items": [
-    {"answer":"DRUM"},{"answer":"HARP"},{"answer":"LUTE"},{"answer":"OBOE"},
-    {"answer":"TUBA"},{"answer":"HORN"},{"answer":"BELL"},{"answer":"GONG"},
-    {"answer":"PIANO"},{"answer":"CELLO"},{"answer":"VIOLA"},{"answer":"FLUTE"},
-    {"answer":"BANJO"},{"answer":"ORGAN"},{"answer":"BUGLE"},{"answer":"SITAR"},
-    {"answer":"GUITAR"},{"answer":"VIOLIN"},{"answer":"CYMBAL"},{"answer":"UKULELE"},
-    {"answer":"TRUMPET"},{"answer":"CLARINET"},{"answer":"TROMBONE"},{"answer":"ACCORDION"},
-    {"answer":"HARMONICA"},{"answer":"MANDOLIN"},{"answer":"BASSOON"},{"answer":"MARIMBA"}
-  ]
-},
-{
-  "slug": "music-genres", "name": "Music Genres", "category": "music", "region": "en",
-  "icon": "🎧", "featured": false, "sortOrder": 122,
-  "blurb": "What is on the playlist.",
-  "items": [
-    {"answer":"POP"},{"answer":"RAP"},{"answer":"SKA"},{"answer":"EMO"},
-    {"answer":"ROCK"},{"answer":"FOLK"},{"answer":"JAZZ"},{"answer":"SOUL"},
-    {"answer":"FUNK"},{"answer":"PUNK"},{"answer":"BLUES"},{"answer":"HOUSE"},
-    {"answer":"METAL"},{"answer":"DISCO"},{"answer":"INDIE"},{"answer":"OPERA"},
-    {"answer":"SALSA"},{"answer":"TANGO"},{"answer":"TECHNO"},{"answer":"GOSPEL"},
-    {"answer":"GRUNGE"},{"answer":"REGGAE"},{"answer":"GARAGE"},{"answer":"AMBIENT"},
-    {"answer":"COUNTRY"},{"answer":"CLASSICAL"},{"answer":"DUBSTEP"},{"answer":"DANGDUT"}
-  ]
-},
-{
-  "slug": "video-games", "name": "Video Games", "category": "gaming", "region": "en",
-  "icon": "🎮", "featured": true, "sortOrder": 131,
-  "blurb": "Games, franchises and consoles.",
-  "items": [
-    {"answer":"MARIO"},{"answer":"LUIGI"},{"answer":"ZELDA"},{"answer":"LINK"},
-    {"answer":"SONIC"},{"answer":"TAILS"},{"answer":"KIRBY"},{"answer":"SAMUS"},
-    {"answer":"PIKACHU"},{"answer":"POKEMON"},{"answer":"TETRIS"},{"answer":"DOOM"},
-    {"answer":"HALO"},{"answer":"FORTNITE"},{"answer":"MINECRAFT"},{"answer":"ROBLOX"},
-    {"answer":"AMONGUS"},{"answer":"PORTAL"},{"answer":"SKYRIM"},{"answer":"FALLOUT"},
-    {"answer":"WITCHER"},{"answer":"GERALT"},{"answer":"KRATOS"},{"answer":"LARA"},
-    {"answer":"CROFT"},{"answer":"RATCHET"},{"answer":"CRASH"},{"answer":"SPYRO"},
-    {"answer":"PACMAN"},{"answer":"GALAGA"},{"answer":"XBOX"},{"answer":"SWITCH"},
-    {"answer":"STEAM"},{"answer":"ATARI"},{"answer":"SEGA"},{"answer":"NINTENDO"}
-  ]
-},
-{
-  "slug": "jobs", "name": "Jobs & Professions", "category": "everyday", "region": "en",
-  "icon": "🧰", "featured": false, "sortOrder": 141,
-  "blurb": "What people do all day.",
-  "items": [
-    {"answer":"CHEF"},{"answer":"NURSE"},{"answer":"PILOT"},{"answer":"ACTOR"},
-    {"answer":"BAKER"},{"answer":"JUDGE"},{"answer":"MEDIC"},{"answer":"TUTOR"},
-    {"answer":"DOCTOR"},{"answer":"DENTIST"},{"answer":"LAWYER"},{"answer":"FARMER"},
-    {"answer":"WRITER"},{"answer":"SINGER"},{"answer":"DANCER"},{"answer":"ARTIST"},
-    {"answer":"BARBER"},{"answer":"BUTCHER"},{"answer":"PLUMBER"},{"answer":"BUILDER"},
-    {"answer":"TEACHER"},{"answer":"CLEANER"},{"answer":"DRIVER"},{"answer":"SAILOR"},
-    {"answer":"SOLDIER"},{"answer":"MECHANIC"},{"answer":"ENGINEER"},{"answer":"SCIENTIST"},
-    {"answer":"LIBRARIAN"},{"answer":"FIREMAN"},{"answer":"POLICE"},{"answer":"PILOTS"}
-  ]
-},
-{
-  "slug": "body-parts", "name": "Body Parts", "category": "everyday", "region": "en",
-  "icon": "🦴", "featured": false, "sortOrder": 142,
-  "blurb": "Easy enough for the kid mode.",
-  "items": [
-    {"answer":"EAR"},{"answer":"EYE"},{"answer":"ARM"},{"answer":"LEG"},
-    {"answer":"HIP"},{"answer":"JAW"},{"answer":"RIB"},{"answer":"TOE"},
-    {"answer":"LIP"},{"answer":"GUM"},{"answer":"HAND"},{"answer":"FOOT"},
-    {"answer":"HEAD"},{"answer":"NECK"},{"answer":"BACK"},{"answer":"KNEE"},
-    {"answer":"NOSE"},{"answer":"CHIN"},{"answer":"HEEL"},{"answer":"BONE"},
-    {"answer":"CHEST"},{"answer":"ANKLE"},{"answer":"WRIST"},{"answer":"ELBOW"},
-    {"answer":"THUMB"},{"answer":"SPINE"},{"answer":"SKULL"},{"answer":"HEART"},
-    {"answer":"LIVER"},{"answer":"KIDNEY"},{"answer":"SHOULDER"},{"answer":"STOMACH"}
-  ]
-},
-{
-  "slug": "colours", "name": "Colours", "category": "everyday", "region": "en",
-  "icon": "🎨", "featured": false, "sortOrder": 143,
-  "blurb": "Shades and hues.",
-  "items": [
-    {"answer":"RED"},{"answer":"TAN"},{"answer":"BLUE"},{"answer":"PINK"},
-    {"answer":"GREY"},{"answer":"GOLD"},{"answer":"LIME"},{"answer":"NAVY"},
-    {"answer":"TEAL"},{"answer":"PLUM"},{"answer":"CYAN"},{"answer":"RUBY"},
-    {"answer":"GREEN"},{"answer":"BLACK"},{"answer":"WHITE"},{"answer":"BROWN"},
-    {"answer":"BEIGE"},{"answer":"CORAL"},{"answer":"OLIVE"},{"answer":"AMBER"},
-    {"answer":"IVORY"},{"answer":"KHAKI"},{"answer":"MAUVE"},{"answer":"PEACH"},
-    {"answer":"ORANGE"},{"answer":"PURPLE"},{"answer":"SILVER"},{"answer":"VIOLET"},
-    {"answer":"INDIGO"},{"answer":"MAROON"},{"answer":"SCARLET"},{"answer":"CRIMSON"},
-    {"answer":"MAGENTA"},{"answer":"LAVENDER"},{"answer":"TURQUOISE"},{"answer":"BURGUNDY"}
-  ]
-},
-{
-  "slug": "transport", "name": "Transport", "category": "everyday", "region": "en",
-  "icon": "🚂", "featured": false, "sortOrder": 144,
-  "blurb": "Ways to get around.",
-  "items": [
-    {"answer":"BUS"},{"answer":"CAB"},{"answer":"VAN"},{"answer":"JET"},
-    {"answer":"BIKE"},{"answer":"BOAT"},{"answer":"SHIP"},{"answer":"TRAM"},
-    {"answer":"CART"},{"answer":"SLED"},{"answer":"RAFT"},{"answer":"TAXI"},
-    {"answer":"TRAIN"},{"answer":"TRUCK"},{"answer":"COACH"},{"answer":"FERRY"},
-    {"answer":"CANOE"},{"answer":"YACHT"},{"answer":"MOPED"},{"answer":"LORRY"},
-    {"answer":"SCOOTER"},{"answer":"TRACTOR"},{"answer":"TRAILER"},{"answer":"CARAVAN"},
-    {"answer":"CHOPPER"},{"answer":"AIRPLANE"},{"answer":"SUBMARINE"},{"answer":"BICYCLE"}
-  ]
-},
-{
-  "slug": "mythology", "name": "Gods & Mythology", "category": "history", "region": "en",
-  "icon": "🏛️", "featured": false, "sortOrder": 151,
-  "blurb": "Greek, Norse, Egyptian and more.",
-  "items": [
-    {"answer":"ZEUS"},{"answer":"HERA"},{"answer":"ARES"},{"answer":"EROS"},
-    {"answer":"HADES"},{"answer":"THOR"},{"answer":"ODIN"},{"answer":"LOKI"},
-    {"answer":"FREYA"},{"answer":"BALDR"},{"answer":"APOLLO"},{"answer":"ATHENA"},
-    {"answer":"ARTEMIS"},{"answer":"HERMES"},{"answer":"HESTIA"},{"answer":"DEMETER"},
-    {"answer":"POSEIDON"},{"answer":"CRONUS"},{"answer":"TITAN"},{"answer":"MEDUSA"},
-    {"answer":"HYDRA"},{"answer":"SPHINX"},{"answer":"CENTAUR"},{"answer":"PEGASUS"},
-    {"answer":"MINOTAUR"},{"answer":"OSIRIS"},{"answer":"ANUBIS"},{"answer":"HORUS"},
-    {"answer":"RAGNAROK"},{"answer":"VALHALLA"},{"answer":"OLYMPUS"},{"answer":"ICARUS"}
-  ]
-}
+  {
+    "slug": "football-clubs",
+    "name": "Football Clubs",
+    "category": "sport",
+    "region": "en",
+    "icon": "⚽",
+    "featured": true,
+    "sortOrder": 101,
+    "blurb": "Clubs from the big European leagues and beyond.",
+    "items": [
+      {
+        "answer": "ARSENAL",
+        "clue": "North London gunners, unbeaten in 2003-04"
+      },
+      {
+        "answer": "CHELSEA",
+        "clue": "West London blues at Stamford Bridge"
+      },
+      {
+        "answer": "EVERTON",
+        "clue": "The Toffees, blue half of Merseyside"
+      },
+      {
+        "answer": "FULHAM",
+        "clue": "West London club by the Thames at Craven Cottage"
+      },
+      {
+        "answer": "LEEDS",
+        "clue": "Yorkshire whites at Elland Road"
+      },
+      {
+        "answer": "ASTON",
+        "clue": "Villa, from Birmingham, European champions in 1982"
+      },
+      {
+        "answer": "SPURS",
+        "clue": "To dare is to do, at the Tottenham end of London"
+      },
+      {
+        "answer": "WOLVES",
+        "clue": "Old gold and black, from Wolverhampton"
+      },
+      {
+        "answer": "BURNLEY",
+        "clue": "Lancashire claret and blue at Turf Moor"
+      },
+      {
+        "answer": "CELTIC",
+        "clue": "Green and white hoops of Glasgow"
+      },
+      {
+        "answer": "RANGERS",
+        "clue": "The blue half of Glasgow, at Ibrox"
+      },
+      {
+        "answer": "BARCA",
+        "clue": "More than a club, and Messi's first"
+      },
+      {
+        "answer": "SEVILLA",
+        "clue": "Andalusian kings of the Europa League"
+      },
+      {
+        "answer": "BETIS",
+        "clue": "Seville's other club, in green and white"
+      },
+      {
+        "answer": "VALENCIA",
+        "clue": "Spanish club with a bat on the badge"
+      },
+      {
+        "answer": "MILAN",
+        "clue": "Red and black of the San Siro"
+      },
+      {
+        "answer": "INTER",
+        "clue": "Blue and black of the San Siro"
+      },
+      {
+        "answer": "ROMA",
+        "clue": "The she-wolf of the Italian capital"
+      },
+      {
+        "answer": "LAZIO",
+        "clue": "Rome's other club, in sky blue"
+      },
+      {
+        "answer": "NAPOLI",
+        "clue": "Maradona's Italian home, under Vesuvius"
+      },
+      {
+        "answer": "JUVENTUS",
+        "clue": "The old lady of Turin, in black and white stripes"
+      },
+      {
+        "answer": "TORINO",
+        "clue": "Turin's other club, lost at Superga in 1949"
+      },
+      {
+        "answer": "GENOA",
+        "clue": "Italy's oldest club, founded by the English"
+      },
+      {
+        "answer": "BAYERN",
+        "clue": "Munich's giants, and Germany's serial champions"
+      },
+      {
+        "answer": "SCHALKE",
+        "clue": "Gelsenkirchen club born of the coal mines"
+      },
+      {
+        "answer": "HERTHA",
+        "clue": "Berlin's old blue and white club"
+      },
+      {
+        "answer": "MAINZ",
+        "clue": "German club where Klopp and Tuchel both started"
+      },
+      {
+        "answer": "AJAX",
+        "clue": "Amsterdam's academy that taught total football"
+      },
+      {
+        "answer": "PSV",
+        "clue": "Eindhoven club founded by Philips employees"
+      },
+      {
+        "answer": "FEYENOORD",
+        "clue": "Rotterdam's club at De Kuip"
+      },
+      {
+        "answer": "PORTO",
+        "clue": "Dragons of northern Portugal"
+      },
+      {
+        "answer": "BENFICA",
+        "clue": "Lisbon's eagles, and Eusebio's club"
+      },
+      {
+        "answer": "SPORTING",
+        "clue": "Lisbon club that produced Ronaldo"
+      },
+      {
+        "answer": "MONACO",
+        "clue": "Principality club in red and white diagonals"
+      },
+      {
+        "answer": "LYON",
+        "clue": "French club that won seven titles in a row"
+      },
+      {
+        "answer": "LILLE",
+        "clue": "Northern French club that stunned PSG in 2021"
+      },
+      {
+        "answer": "NANTES",
+        "clue": "French club in yellow and green"
+      },
+      {
+        "answer": "RENNES",
+        "clue": "Breton club in red and black"
+      }
+    ]
+  },
+  {
+    "slug": "sports",
+    "name": "Sports",
+    "category": "sport",
+    "region": "en",
+    "icon": "🏆",
+    "featured": false,
+    "sortOrder": 105,
+    "blurb": "Games, events and disciplines.",
+    "items": [
+      {
+        "answer": "GOLF",
+        "clue": "Eighteen holes and the lowest score wins"
+      },
+      {
+        "answer": "POLO",
+        "clue": "Played on horseback with mallets, and a shirt"
+      },
+      {
+        "answer": "JUDO",
+        "clue": "The gentle way, and it is all about the throw"
+      },
+      {
+        "answer": "SUMO",
+        "clue": "Japanese wrestling in a ring of clay"
+      },
+      {
+        "answer": "RUGBY",
+        "clue": "Oval ball, named after an English school"
+      },
+      {
+        "answer": "BOXING",
+        "clue": "Twelve rounds, and a Day after Christmas"
+      },
+      {
+        "answer": "TENNIS",
+        "clue": "Love means nothing here"
+      },
+      {
+        "answer": "SQUASH",
+        "clue": "Racket game in a walled white room"
+      },
+      {
+        "answer": "HOCKEY",
+        "clue": "Sticks and a puck, or a ball on grass"
+      },
+      {
+        "answer": "SOCCER",
+        "clue": "What most of the world calls football"
+      },
+      {
+        "answer": "CRICKET",
+        "clue": "Bats, wickets, tea, and five whole days"
+      },
+      {
+        "answer": "NETBALL",
+        "clue": "Seven a side, no backboard, no dribbling"
+      },
+      {
+        "answer": "CURLING",
+        "clue": "Stones on ice, and furious sweeping"
+      },
+      {
+        "answer": "FENCING",
+        "clue": "Foil, epee or sabre, and en garde"
+      },
+      {
+        "answer": "ROWING",
+        "clue": "Eight and a cox, backwards down the river"
+      },
+      {
+        "answer": "SAILING",
+        "clue": "Wind, water and a lot of tacking"
+      },
+      {
+        "answer": "SKIING",
+        "clue": "Two planks down a mountain"
+      },
+      {
+        "answer": "SURFING",
+        "clue": "Waiting for the set, then riding it in"
+      },
+      {
+        "answer": "DIVING",
+        "clue": "Ten metres up, and barely a splash"
+      },
+      {
+        "answer": "CYCLING",
+        "clue": "Three weeks in July for the yellow jersey"
+      },
+      {
+        "answer": "KARATE",
+        "clue": "Empty hand, and a famous kid"
+      },
+      {
+        "answer": "ARCHERY",
+        "clue": "Bow, arrow and a gold centre"
+      },
+      {
+        "answer": "BOWLING",
+        "clue": "Ten pins and a perfect three hundred"
+      },
+      {
+        "answer": "SKATING",
+        "clue": "Blades on ice, figures or speed"
+      },
+      {
+        "answer": "CLIMBING",
+        "clue": "Up the rock or the wall, with chalk on the hands"
+      },
+      {
+        "answer": "MARATHON",
+        "clue": "Twenty-six miles and three hundred and eighty-five yards"
+      },
+      {
+        "answer": "TRIATHLON",
+        "clue": "Swim, ride, run, in that order"
+      },
+      {
+        "answer": "BADMINTON",
+        "clue": "The fastest racket sport, played with a shuttlecock"
+      }
+    ]
+  },
+  {
+    "slug": "fruits-vegetables",
+    "name": "Fruit & Vegetables",
+    "category": "food",
+    "region": "en",
+    "icon": "🍎",
+    "featured": true,
+    "sortOrder": 111,
+    "blurb": "Good one for kids — plenty of short answers.",
+    "items": [
+      {
+        "answer": "FIG",
+        "clue": "Ancient fruit full of tiny seeds, and a rolled biscuit"
+      },
+      {
+        "answer": "YAM",
+        "clue": "Starchy tuber often confused with the sweet potato"
+      },
+      {
+        "answer": "PEA",
+        "clue": "Green sphere in a pod, and a princess felt one"
+      },
+      {
+        "answer": "KIWI",
+        "clue": "Fuzzy brown outside, brilliant green in"
+      },
+      {
+        "answer": "PEAR",
+        "clue": "Fruit shaped like a light bulb"
+      },
+      {
+        "answer": "PLUM",
+        "clue": "Purple stone fruit that dries into a prune"
+      },
+      {
+        "answer": "LIME",
+        "clue": "Small green citrus for your gin and tonic"
+      },
+      {
+        "answer": "DATE",
+        "clue": "Sweet desert fruit of the palm, and a night out"
+      },
+      {
+        "answer": "BEAN",
+        "clue": "Jack traded a cow for magic ones"
+      },
+      {
+        "answer": "CORN",
+        "clue": "Grows on a cob, pops in a pan"
+      },
+      {
+        "answer": "LEEK",
+        "clue": "Mild onion relative, and the emblem of Wales"
+      },
+      {
+        "answer": "KALE",
+        "clue": "Curly green leaf that became a smoothie"
+      },
+      {
+        "answer": "APPLE",
+        "clue": "Kept the doctor away, and fell on Newton"
+      },
+      {
+        "answer": "MANGO",
+        "clue": "King of tropical fruit, with a big flat stone"
+      },
+      {
+        "answer": "PEACH",
+        "clue": "Fuzzy skin, sweet flesh, and a Georgia symbol"
+      },
+      {
+        "answer": "GRAPE",
+        "clue": "Comes in bunches, and becomes wine"
+      },
+      {
+        "answer": "LEMON",
+        "clue": "Sour yellow citrus, and a car that keeps breaking"
+      },
+      {
+        "answer": "MELON",
+        "clue": "Big, watery and full of seeds"
+      },
+      {
+        "answer": "BERRY",
+        "clue": "Small soft fruit, and what a straw one really is"
+      },
+      {
+        "answer": "GUAVA",
+        "clue": "Tropical fruit, pink inside, huge in vitamin C"
+      },
+      {
+        "answer": "ONION",
+        "clue": "Layer upon layer, and it makes you cry"
+      },
+      {
+        "answer": "OLIVE",
+        "clue": "Green or black, pressed for oil, and a branch of peace"
+      },
+      {
+        "answer": "BANANA",
+        "clue": "Yellow, curved, and the monkey's favourite"
+      },
+      {
+        "answer": "CHERRY",
+        "clue": "Small red fruit that goes on top"
+      },
+      {
+        "answer": "ORANGE",
+        "clue": "Fruit and colour sharing one name"
+      },
+      {
+        "answer": "PAPAYA",
+        "clue": "Tropical orange flesh with black seeds inside"
+      },
+      {
+        "answer": "TOMATO",
+        "clue": "A fruit that insists on being a vegetable"
+      },
+      {
+        "answer": "POTATO",
+        "clue": "Chips, mash, roast, and the Irish famine"
+      },
+      {
+        "answer": "CARROT",
+        "clue": "Orange root said to help you see in the dark"
+      },
+      {
+        "answer": "CELERY",
+        "clue": "Crunchy green stalks that burn calories to chew"
+      },
+      {
+        "answer": "GARLIC",
+        "clue": "Cloves that flavour everything and repel vampires"
+      },
+      {
+        "answer": "GINGER",
+        "clue": "Knobbly hot root, and a shade of hair"
+      },
+      {
+        "answer": "PEPPER",
+        "clue": "Bell or chilli, sweet or fiery"
+      },
+      {
+        "answer": "SPINACH",
+        "clue": "Leafy green that made Popeye strong"
+      },
+      {
+        "answer": "CABBAGE",
+        "clue": "Tight ball of leaves that becomes sauerkraut"
+      },
+      {
+        "answer": "BROCCOLI",
+        "clue": "Little green trees on the dinner plate"
+      },
+      {
+        "answer": "AVOCADO",
+        "clue": "Creamy green fruit with a huge stone, and toast's best friend"
+      },
+      {
+        "answer": "APRICOT",
+        "clue": "Small orange stone fruit, cousin of the peach"
+      },
+      {
+        "answer": "PUMPKIN",
+        "clue": "Carved at Halloween, and Cinderella's coach"
+      },
+      {
+        "answer": "LETTUCE",
+        "clue": "The base of nearly every salad"
+      }
+    ]
+  },
+  {
+    "slug": "world-food",
+    "name": "Food & Dishes",
+    "category": "food",
+    "region": "en",
+    "icon": "🍜",
+    "featured": false,
+    "sortOrder": 112,
+    "blurb": "Dishes from around the world.",
+    "items": [
+      {
+        "answer": "RICE",
+        "clue": "Feeds half the planet, grown in paddies"
+      },
+      {
+        "answer": "SOUP",
+        "clue": "Eaten with a spoon, and good for the soul"
+      },
+      {
+        "answer": "CAKE",
+        "clue": "Candles go on it, and Marie Antoinette never said it"
+      },
+      {
+        "answer": "TACO",
+        "clue": "Folded tortilla, and a Tuesday"
+      },
+      {
+        "answer": "SUSHI",
+        "clue": "Raw fish on vinegared rice"
+      },
+      {
+        "answer": "PASTA",
+        "clue": "Italian staple in a hundred shapes"
+      },
+      {
+        "answer": "PIZZA",
+        "clue": "Round, sliced, and argued about over pineapple"
+      },
+      {
+        "answer": "CURRY",
+        "clue": "Spiced sauce dish, and Britain's adopted favourite"
+      },
+      {
+        "answer": "BREAD",
+        "clue": "The staff of life, best when fresh"
+      },
+      {
+        "answer": "SALAD",
+        "clue": "Cold leaves, and the healthy option"
+      },
+      {
+        "answer": "STEAK",
+        "clue": "Cut of beef, ordered rare to well done"
+      },
+      {
+        "answer": "KEBAB",
+        "clue": "Grilled meat on a skewer or in a wrap"
+      },
+      {
+        "answer": "RAMEN",
+        "clue": "Japanese noodle soup with a rich broth"
+      },
+      {
+        "answer": "NOODLE",
+        "clue": "Long strand of dough, slurped across Asia"
+      },
+      {
+        "answer": "BURGER",
+        "clue": "Patty in a bun, and a fast-food kingdom"
+      },
+      {
+        "answer": "WAFFLE",
+        "clue": "Griddled squares, and to talk far too much"
+      },
+      {
+        "answer": "MUFFIN",
+        "clue": "Sweet baked cup, and a man on Drury Lane"
+      },
+      {
+        "answer": "SCONE",
+        "clue": "Split with jam and cream, and pronounced two ways"
+      },
+      {
+        "answer": "BAGEL",
+        "clue": "Boiled then baked ring, a New York breakfast"
+      },
+      {
+        "answer": "PASTRY",
+        "clue": "Butter and flour, layered or shortened"
+      },
+      {
+        "answer": "RISOTTO",
+        "clue": "Italian rice stirred slowly until creamy"
+      },
+      {
+        "answer": "LASAGNE",
+        "clue": "Layers of pasta, sauce and cheese"
+      },
+      {
+        "answer": "OMELETTE",
+        "clue": "Beaten eggs folded in a pan"
+      },
+      {
+        "answer": "PANCAKE",
+        "clue": "Flipped on its day, stacked with syrup"
+      },
+      {
+        "answer": "CUSTARD",
+        "clue": "Yellow pouring sauce of eggs and milk"
+      },
+      {
+        "answer": "PUDDING",
+        "clue": "Dessert in general, or a very British course"
+      },
+      {
+        "answer": "BROWNIE",
+        "clue": "Dense chocolate square, and a junior Guide"
+      },
+      {
+        "answer": "SANDWICH",
+        "clue": "Named after an earl who would not leave the card table"
+      },
+      {
+        "answer": "RENDANG",
+        "clue": "Slow-cooked Indonesian beef in coconut and spice"
+      },
+      {
+        "answer": "SATAY",
+        "clue": "Skewered meat with peanut sauce"
+      },
+      {
+        "answer": "NASI",
+        "clue": "The Indonesian word for rice, as in goreng"
+      },
+      {
+        "answer": "BAKSO",
+        "clue": "Indonesian meatball soup sold from street carts"
+      }
+    ]
+  },
+  {
+    "slug": "musical-instruments",
+    "name": "Musical Instruments",
+    "category": "music",
+    "region": "en",
+    "icon": "🎸",
+    "featured": false,
+    "sortOrder": 121,
+    "blurb": "Strings, brass, wind and percussion.",
+    "items": [
+      {
+        "answer": "DRUM",
+        "clue": "Hit it, and it keeps everyone in time"
+      },
+      {
+        "answer": "HARP",
+        "clue": "Forty-seven strings, and angels play it"
+      },
+      {
+        "answer": "LUTE",
+        "clue": "Pear-shaped ancestor of the guitar"
+      },
+      {
+        "answer": "OBOE",
+        "clue": "Double reed that gives the orchestra its tuning note"
+      },
+      {
+        "answer": "TUBA",
+        "clue": "The lowest brass, and the heaviest to carry"
+      },
+      {
+        "answer": "HORN",
+        "clue": "Coiled brass, or what you sound in traffic"
+      },
+      {
+        "answer": "BELL",
+        "clue": "Rings out, and hangs in the tower"
+      },
+      {
+        "answer": "GONG",
+        "clue": "One enormous struck disc, and a huge sound"
+      },
+      {
+        "answer": "PIANO",
+        "clue": "Eighty-eight keys, black and white"
+      },
+      {
+        "answer": "CELLO",
+        "clue": "Played sitting down, between the knees"
+      },
+      {
+        "answer": "VIOLA",
+        "clue": "Bigger than a violin, and the butt of orchestra jokes"
+      },
+      {
+        "answer": "FLUTE",
+        "clue": "Held sideways and blown across"
+      },
+      {
+        "answer": "BANJO",
+        "clue": "Five strings, a drum body, and bluegrass"
+      },
+      {
+        "answer": "ORGAN",
+        "clue": "Pipes, pedals and the sound of a cathedral"
+      },
+      {
+        "answer": "BUGLE",
+        "clue": "No valves at all, and it wakes the camp"
+      },
+      {
+        "answer": "SITAR",
+        "clue": "Indian strings that Harrison brought to the Beatles"
+      },
+      {
+        "answer": "GUITAR",
+        "clue": "Six strings, and every teenager wants one"
+      },
+      {
+        "answer": "VIOLIN",
+        "clue": "First chair of the orchestra, played with a bow"
+      },
+      {
+        "answer": "CYMBAL",
+        "clue": "Two brass plates that crash"
+      },
+      {
+        "answer": "UKULELE",
+        "clue": "Four strings and a Hawaiian sunshine sound"
+      },
+      {
+        "answer": "TRUMPET",
+        "clue": "Three valves, and the loudest voice in the brass"
+      },
+      {
+        "answer": "CLARINET",
+        "clue": "Single reed, black body, silver keys"
+      },
+      {
+        "answer": "TROMBONE",
+        "clue": "The one with the slide"
+      },
+      {
+        "answer": "ACCORDION",
+        "clue": "Squeezed in and out, with buttons and keys"
+      },
+      {
+        "answer": "HARMONICA",
+        "clue": "Fits in a pocket, played on the blues train"
+      },
+      {
+        "answer": "MANDOLIN",
+        "clue": "Eight strings in four pairs, plucked fast"
+      },
+      {
+        "answer": "BASSOON",
+        "clue": "The deep double reed at the back of the woodwind"
+      },
+      {
+        "answer": "MARIMBA",
+        "clue": "Wooden bars struck with mallets, with pipes below"
+      }
+    ]
+  },
+  {
+    "slug": "music-genres",
+    "name": "Music Genres",
+    "category": "music",
+    "region": "en",
+    "icon": "🎧",
+    "featured": false,
+    "sortOrder": 122,
+    "blurb": "What is on the playlist.",
+    "items": [
+      {
+        "answer": "POP",
+        "clue": "Built for the charts and the radio"
+      },
+      {
+        "answer": "RAP",
+        "clue": "Rhymes delivered over a beat"
+      },
+      {
+        "answer": "SKA",
+        "clue": "Jamaican offbeat that came before reggae"
+      },
+      {
+        "answer": "EMO",
+        "clue": "Guitars, eyeliner and a lot of feelings"
+      },
+      {
+        "answer": "ROCK",
+        "clue": "Guitars, drums and a hall of fame"
+      },
+      {
+        "answer": "FOLK",
+        "clue": "Acoustic songs handed down through generations"
+      },
+      {
+        "answer": "JAZZ",
+        "clue": "Improvised, swung, and born in New Orleans"
+      },
+      {
+        "answer": "SOUL",
+        "clue": "Gospel feeling with a secular lyric, and Motown"
+      },
+      {
+        "answer": "FUNK",
+        "clue": "All about the bass and the one"
+      },
+      {
+        "answer": "PUNK",
+        "clue": "Three chords, two minutes and no apologies"
+      },
+      {
+        "answer": "BLUES",
+        "clue": "Twelve bars and a broken heart"
+      },
+      {
+        "answer": "HOUSE",
+        "clue": "Four-on-the-floor born in Chicago"
+      },
+      {
+        "answer": "METAL",
+        "clue": "Distortion, double kick and very long hair"
+      },
+      {
+        "answer": "DISCO",
+        "clue": "Glitter balls and the seventies dance floor"
+      },
+      {
+        "answer": "INDIE",
+        "clue": "Made away from the major labels, then a whole sound"
+      },
+      {
+        "answer": "OPERA",
+        "clue": "Sung drama, and it is not over until she sings"
+      },
+      {
+        "answer": "SALSA",
+        "clue": "Cuban-rooted dance music, hot as its name"
+      },
+      {
+        "answer": "TANGO",
+        "clue": "It takes two, from Buenos Aires"
+      },
+      {
+        "answer": "TECHNO",
+        "clue": "Machine music out of Detroit"
+      },
+      {
+        "answer": "GOSPEL",
+        "clue": "Church choir raising the roof"
+      },
+      {
+        "answer": "GRUNGE",
+        "clue": "Flannel shirts out of Seattle"
+      },
+      {
+        "answer": "REGGAE",
+        "clue": "Jamaican offbeat, and Marley's music"
+      },
+      {
+        "answer": "GARAGE",
+        "clue": "UK style of skippy beats and chopped vocals"
+      },
+      {
+        "answer": "AMBIENT",
+        "clue": "Music to be ignored as much as listened to"
+      },
+      {
+        "answer": "COUNTRY",
+        "clue": "Nashville, steel guitar and a story in every song"
+      },
+      {
+        "answer": "CLASSICAL",
+        "clue": "Orchestras, concert halls and centuries of it"
+      },
+      {
+        "answer": "DUBSTEP",
+        "clue": "Half-time beats and a wobbling bass drop"
+      },
+      {
+        "answer": "DANGDUT",
+        "clue": "Indonesia's own pop, with drum and flute"
+      }
+    ]
+  },
+  {
+    "slug": "video-games",
+    "name": "Video Games",
+    "category": "gaming",
+    "region": "en",
+    "icon": "🎮",
+    "featured": true,
+    "sortOrder": 131,
+    "blurb": "Games, franchises and consoles.",
+    "items": [
+      {
+        "answer": "MARIO",
+        "clue": "The plumber who jumps on everything"
+      },
+      {
+        "answer": "LUIGI",
+        "clue": "The taller brother in green"
+      },
+      {
+        "answer": "ZELDA",
+        "clue": "The princess the series is named after, though you play Link"
+      },
+      {
+        "answer": "LINK",
+        "clue": "Green tunic, Master Sword, and he rarely speaks"
+      },
+      {
+        "answer": "SONIC",
+        "clue": "Blue hedgehog who collects rings at speed"
+      },
+      {
+        "answer": "TAILS",
+        "clue": "Two-tailed fox who flies alongside the hedgehog"
+      },
+      {
+        "answer": "KIRBY",
+        "clue": "Pink puffball who eats enemies to steal their powers"
+      },
+      {
+        "answer": "SAMUS",
+        "clue": "Bounty hunter in the Metroid suit"
+      },
+      {
+        "answer": "PIKACHU",
+        "clue": "Yellow electric mouse, and the face of a franchise"
+      },
+      {
+        "answer": "POKEMON",
+        "clue": "Gotta catch them all"
+      },
+      {
+        "answer": "TETRIS",
+        "clue": "Falling blocks, and clear the line"
+      },
+      {
+        "answer": "DOOM",
+        "clue": "The 1993 shooter that put demons on Mars"
+      },
+      {
+        "answer": "HALO",
+        "clue": "Master Chief's ringworld shooter"
+      },
+      {
+        "answer": "FORTNITE",
+        "clue": "Battle royale with building and a lot of dancing"
+      },
+      {
+        "answer": "MINECRAFT",
+        "clue": "Blocks, creepers and infinite worlds"
+      },
+      {
+        "answer": "ROBLOX",
+        "clue": "A platform of games made by its own players"
+      },
+      {
+        "answer": "AMONGUS",
+        "clue": "Find the impostor on the spaceship"
+      },
+      {
+        "answer": "PORTAL",
+        "clue": "Two portals, a companion cube, and the cake is a lie"
+      },
+      {
+        "answer": "SKYRIM",
+        "clue": "You took an arrow to the knee in this one"
+      },
+      {
+        "answer": "FALLOUT",
+        "clue": "Vault dweller in a retro-future wasteland"
+      },
+      {
+        "answer": "WITCHER",
+        "clue": "Monster hunter from a Polish book series"
+      },
+      {
+        "answer": "GERALT",
+        "clue": "The white-haired witcher of Rivia"
+      },
+      {
+        "answer": "KRATOS",
+        "clue": "The furious Spartan of God of War"
+      },
+      {
+        "answer": "LARA",
+        "clue": "The raider of tombs, first name"
+      },
+      {
+        "answer": "CROFT",
+        "clue": "The raider of tombs, surname"
+      },
+      {
+        "answer": "RATCHET",
+        "clue": "Lombax mechanic with a robot sidekick called Clank"
+      },
+      {
+        "answer": "CRASH",
+        "clue": "Orange bandicoot who spins"
+      },
+      {
+        "answer": "SPYRO",
+        "clue": "Small purple dragon who breathes fire"
+      },
+      {
+        "answer": "PACMAN",
+        "clue": "Yellow circle chased by four ghosts"
+      },
+      {
+        "answer": "GALAGA",
+        "clue": "Arcade classic where the aliens dive at you"
+      },
+      {
+        "answer": "XBOX",
+        "clue": "Microsoft's green console"
+      },
+      {
+        "answer": "SWITCH",
+        "clue": "Nintendo console that docks and undocks"
+      },
+      {
+        "answer": "STEAM",
+        "clue": "Valve's shop where your backlog lives"
+      },
+      {
+        "answer": "ATARI",
+        "clue": "The 2600 brought gaming home"
+      },
+      {
+        "answer": "SEGA",
+        "clue": "Made the Mega Drive and Sonic"
+      },
+      {
+        "answer": "NINTENDO",
+        "clue": "Started with playing cards, ended up with Mario"
+      }
+    ]
+  },
+  {
+    "slug": "jobs",
+    "name": "Jobs & Professions",
+    "category": "everyday",
+    "region": "en",
+    "icon": "🧰",
+    "featured": false,
+    "sortOrder": 141,
+    "blurb": "What people do all day.",
+    "items": [
+      {
+        "answer": "CHEF",
+        "clue": "Wears the tall white hat and runs the kitchen"
+      },
+      {
+        "answer": "NURSE",
+        "clue": "Holds the ward together, and Nightingale's calling"
+      },
+      {
+        "answer": "PILOT",
+        "clue": "Sits at the front and points out the wing"
+      },
+      {
+        "answer": "ACTOR",
+        "clue": "Learns the lines and hopes for a break a leg"
+      },
+      {
+        "answer": "BAKER",
+        "clue": "Up before dawn for the morning loaves"
+      },
+      {
+        "answer": "JUDGE",
+        "clue": "Wears the wig and has the last word"
+      },
+      {
+        "answer": "MEDIC",
+        "clue": "First on the scene when someone goes down"
+      },
+      {
+        "answer": "TUTOR",
+        "clue": "Teaches one to one, often after school"
+      },
+      {
+        "answer": "DOCTOR",
+        "clue": "Takes your pulse, and travels by TARDIS"
+      },
+      {
+        "answer": "DENTIST",
+        "clue": "Says open wide and asks about flossing"
+      },
+      {
+        "answer": "LAWYER",
+        "clue": "Objects, and bills by the hour"
+      },
+      {
+        "answer": "FARMER",
+        "clue": "Up with the animals, in at the harvest"
+      },
+      {
+        "answer": "WRITER",
+        "clue": "Stares at the blank page for a living"
+      },
+      {
+        "answer": "SINGER",
+        "clue": "Carries the tune and the tour"
+      },
+      {
+        "answer": "DANCER",
+        "clue": "Tells the story with the whole body"
+      },
+      {
+        "answer": "ARTIST",
+        "clue": "Works in paint, clay or anything else"
+      },
+      {
+        "answer": "BARBER",
+        "clue": "Cuts hair, and sings in a shop quartet"
+      },
+      {
+        "answer": "BUTCHER",
+        "clue": "Knows every cut of the animal"
+      },
+      {
+        "answer": "PLUMBER",
+        "clue": "Fixes the leak, and rescues a princess in Mario"
+      },
+      {
+        "answer": "BUILDER",
+        "clue": "Puts up the walls and the scaffolding"
+      },
+      {
+        "answer": "TEACHER",
+        "clue": "Sets the homework and marks it too"
+      },
+      {
+        "answer": "CLEANER",
+        "clue": "Leaves the place better than they found it"
+      },
+      {
+        "answer": "DRIVER",
+        "clue": "Behind the wheel, and a golf club"
+      },
+      {
+        "answer": "SAILOR",
+        "clue": "Works the deck and knows the knots"
+      },
+      {
+        "answer": "SOLDIER",
+        "clue": "Serves in uniform, and marches on"
+      },
+      {
+        "answer": "MECHANIC",
+        "clue": "Diagnoses the rattle under the bonnet"
+      },
+      {
+        "answer": "ENGINEER",
+        "clue": "Works out whether it will actually hold"
+      },
+      {
+        "answer": "SCIENTIST",
+        "clue": "Forms the hypothesis and tests it"
+      },
+      {
+        "answer": "LIBRARIAN",
+        "clue": "Keeps the catalogue and asks for quiet"
+      },
+      {
+        "answer": "FIREMAN",
+        "clue": "Slides the pole and holds the hose"
+      },
+      {
+        "answer": "POLICE",
+        "clue": "Blue lights, and the force you call at 999"
+      },
+      {
+        "answer": "PILOTS",
+        "clue": "More than one of the people at the controls"
+      }
+    ]
+  },
+  {
+    "slug": "body-parts",
+    "name": "Body Parts",
+    "category": "everyday",
+    "region": "en",
+    "icon": "🦴",
+    "featured": false,
+    "sortOrder": 142,
+    "blurb": "Easy enough for the kid mode.",
+    "items": [
+      {
+        "answer": "EAR",
+        "clue": "Catches sound, and holds up your glasses"
+      },
+      {
+        "answer": "EYE",
+        "clue": "The window to the soul, and to the storm"
+      },
+      {
+        "answer": "ARM",
+        "clue": "Shoulder to hand"
+      },
+      {
+        "answer": "LEG",
+        "clue": "You haven't a leg to stand on without two"
+      },
+      {
+        "answer": "HIP",
+        "clue": "Where the leg meets the body, and a word for cool"
+      },
+      {
+        "answer": "JAW",
+        "clue": "Hinges your bite, and drops in shock"
+      },
+      {
+        "answer": "RIB",
+        "clue": "One of twenty-four bones caging the heart"
+      },
+      {
+        "answer": "TOE",
+        "clue": "Ten of them, and the little one finds the furniture"
+      },
+      {
+        "answer": "LIP",
+        "clue": "Seals the kiss, and gets bitten in worry"
+      },
+      {
+        "answer": "GUM",
+        "clue": "Pink bed that holds the teeth"
+      },
+      {
+        "answer": "HAND",
+        "clue": "Five fingers and a thumb"
+      },
+      {
+        "answer": "FOOT",
+        "clue": "Twenty-six bones and a shoe size"
+      },
+      {
+        "answer": "HEAD",
+        "clue": "Houses the brain, and tops the body"
+      },
+      {
+        "answer": "NECK",
+        "clue": "Bridge between head and shoulders"
+      },
+      {
+        "answer": "BACK",
+        "clue": "Where the spine runs and the ache lives"
+      },
+      {
+        "answer": "KNEE",
+        "clue": "The hinge you fall onto to propose"
+      },
+      {
+        "answer": "NOSE",
+        "clue": "Smells everything, and grows when Pinocchio lies"
+      },
+      {
+        "answer": "CHIN",
+        "clue": "Below the mouth, and kept up when times are hard"
+      },
+      {
+        "answer": "HEEL",
+        "clue": "Back of the foot, and Achilles' weak spot"
+      },
+      {
+        "answer": "BONE",
+        "clue": "Two hundred and six of them hold you up"
+      },
+      {
+        "answer": "CHEST",
+        "clue": "Ribcage and heart, and where you keep your treasure"
+      },
+      {
+        "answer": "ANKLE",
+        "clue": "The joint you twist on a bad step"
+      },
+      {
+        "answer": "WRIST",
+        "clue": "Where the watch goes"
+      },
+      {
+        "answer": "ELBOW",
+        "clue": "The funny bone that is not funny"
+      },
+      {
+        "answer": "THUMB",
+        "clue": "The opposable one, and it goes up for yes"
+      },
+      {
+        "answer": "SPINE",
+        "clue": "Thirty-three stacked bones, and a book has one too"
+      },
+      {
+        "answer": "SKULL",
+        "clue": "Bone helmet for the brain, and the pirate flag"
+      },
+      {
+        "answer": "HEART",
+        "clue": "Beats a hundred thousand times a day"
+      },
+      {
+        "answer": "LIVER",
+        "clue": "Filters everything you drink"
+      },
+      {
+        "answer": "KIDNEY",
+        "clue": "Bean-shaped filter, and you have a spare"
+      },
+      {
+        "answer": "SHOULDER",
+        "clue": "Where the arm joins, and burdens are carried"
+      },
+      {
+        "answer": "STOMACH",
+        "clue": "Where dinner goes, and butterflies live"
+      }
+    ]
+  },
+  {
+    "slug": "colours",
+    "name": "Colours",
+    "category": "everyday",
+    "region": "en",
+    "icon": "🎨",
+    "featured": false,
+    "sortOrder": 143,
+    "blurb": "Shades and hues.",
+    "items": [
+      {
+        "answer": "RED",
+        "clue": "Stop, danger, and a matador's cape"
+      },
+      {
+        "answer": "TAN",
+        "clue": "What a fortnight in the sun leaves behind"
+      },
+      {
+        "answer": "BLUE",
+        "clue": "The sky, the sea, and a sad mood"
+      },
+      {
+        "answer": "PINK",
+        "clue": "Flamingos, candyfloss and a famous panther"
+      },
+      {
+        "answer": "GREY",
+        "clue": "Rainclouds, elephants and the space between right and wrong"
+      },
+      {
+        "answer": "GOLD",
+        "clue": "First place, and the colour of the medal"
+      },
+      {
+        "answer": "LIME",
+        "clue": "Sharp green, and a wedge in your drink"
+      },
+      {
+        "answer": "NAVY",
+        "clue": "The dark blue of a sailor's uniform"
+      },
+      {
+        "answer": "TEAL",
+        "clue": "Blue-green named after a duck"
+      },
+      {
+        "answer": "PLUM",
+        "clue": "Deep purple fruit, and a very good job"
+      },
+      {
+        "answer": "CYAN",
+        "clue": "The C in a printer's ink cartridge"
+      },
+      {
+        "answer": "RUBY",
+        "clue": "Deep red gem of a fortieth anniversary"
+      },
+      {
+        "answer": "GREEN",
+        "clue": "Go, grass, and envy"
+      },
+      {
+        "answer": "BLACK",
+        "clue": "The absence of all light"
+      },
+      {
+        "answer": "WHITE",
+        "clue": "All the colours at once, and a wedding dress"
+      },
+      {
+        "answer": "BROWN",
+        "clue": "Chocolate, soil and a well-brewed tea"
+      },
+      {
+        "answer": "BEIGE",
+        "clue": "The colour of a cardigan nobody remembers"
+      },
+      {
+        "answer": "CORAL",
+        "clue": "Pinkish orange, named for what reefs are made of"
+      },
+      {
+        "answer": "OLIVE",
+        "clue": "Muted green of an army uniform"
+      },
+      {
+        "answer": "AMBER",
+        "clue": "The middle traffic light, and fossilised tree resin"
+      },
+      {
+        "answer": "IVORY",
+        "clue": "Off-white, and the reason elephants were hunted"
+      },
+      {
+        "answer": "KHAKI",
+        "clue": "Dusty tan of desert fatigues"
+      },
+      {
+        "answer": "MAUVE",
+        "clue": "Pale purple, the first synthetic dye"
+      },
+      {
+        "answer": "PEACH",
+        "clue": "Soft pinkish orange, and a summer fruit"
+      },
+      {
+        "answer": "ORANGE",
+        "clue": "The colour famously rhyming with nothing"
+      },
+      {
+        "answer": "PURPLE",
+        "clue": "Royal shade of red and blue together"
+      },
+      {
+        "answer": "SILVER",
+        "clue": "Second place, and the moon's shine"
+      },
+      {
+        "answer": "VIOLET",
+        "clue": "Last band of the rainbow"
+      },
+      {
+        "answer": "INDIGO",
+        "clue": "Between blue and violet, and the dye in your jeans"
+      },
+      {
+        "answer": "MAROON",
+        "clue": "Dark brownish red, and to strand someone"
+      },
+      {
+        "answer": "SCARLET",
+        "clue": "Vivid red of a letter and a pimpernel"
+      },
+      {
+        "answer": "CRIMSON",
+        "clue": "Deep rich red, the colour of spilt wine"
+      },
+      {
+        "answer": "MAGENTA",
+        "clue": "Hot pinkish purple, the M in printer ink"
+      },
+      {
+        "answer": "LAVENDER",
+        "clue": "Pale purple of a calming flower"
+      },
+      {
+        "answer": "TURQUOISE",
+        "clue": "Blue-green of a tropical shallow sea"
+      },
+      {
+        "answer": "BURGUNDY",
+        "clue": "Dark red named after a French wine region"
+      }
+    ]
+  },
+  {
+    "slug": "transport",
+    "name": "Transport",
+    "category": "everyday",
+    "region": "en",
+    "icon": "🚂",
+    "featured": false,
+    "sortOrder": 144,
+    "blurb": "Ways to get around.",
+    "items": [
+      {
+        "answer": "BUS",
+        "clue": "Stops everywhere, and three come at once"
+      },
+      {
+        "answer": "CAB",
+        "clue": "Hail it, and watch the meter run"
+      },
+      {
+        "answer": "VAN",
+        "clue": "The workhorse with no back windows"
+      },
+      {
+        "answer": "JET",
+        "clue": "Engine that pushes by throwing air backwards"
+      },
+      {
+        "answer": "BIKE",
+        "clue": "Two wheels and a pair of legs"
+      },
+      {
+        "answer": "BOAT",
+        "clue": "Small craft that floats"
+      },
+      {
+        "answer": "SHIP",
+        "clue": "Big enough that a boat fits on it"
+      },
+      {
+        "answer": "TRAM",
+        "clue": "Runs on rails down the middle of the street"
+      },
+      {
+        "answer": "CART",
+        "clue": "Pulled, not driven"
+      },
+      {
+        "answer": "SLED",
+        "clue": "Runners on snow, and Santa's ride"
+      },
+      {
+        "answer": "RAFT",
+        "clue": "Flat, floating, and usually improvised"
+      },
+      {
+        "answer": "TAXI",
+        "clue": "Yellow in New York, black in London"
+      },
+      {
+        "answer": "TRAIN",
+        "clue": "Carriages in a line on steel rails"
+      },
+      {
+        "answer": "TRUCK",
+        "clue": "Hauls the freight down the motorway"
+      },
+      {
+        "answer": "COACH",
+        "clue": "Long-distance bus, and the one shouting at the team"
+      },
+      {
+        "answer": "FERRY",
+        "clue": "Carries cars across the water"
+      },
+      {
+        "answer": "CANOE",
+        "clue": "Paddled, pointed at both ends"
+      },
+      {
+        "answer": "YACHT",
+        "clue": "Sail and money on the water"
+      },
+      {
+        "answer": "MOPED",
+        "clue": "Pedals and a small engine"
+      },
+      {
+        "answer": "LORRY",
+        "clue": "What the British call a big truck"
+      },
+      {
+        "answer": "SCOOTER",
+        "clue": "Step-through bike, and the pride of Rome"
+      },
+      {
+        "answer": "TRACTOR",
+        "clue": "Huge rear wheels, pulls the plough"
+      },
+      {
+        "answer": "TRAILER",
+        "clue": "Towed behind, and a preview of a film"
+      },
+      {
+        "answer": "CARAVAN",
+        "clue": "A holiday home you tow, or a desert convoy"
+      },
+      {
+        "answer": "CHOPPER",
+        "clue": "Helicopter, or a long-forked motorbike"
+      },
+      {
+        "answer": "AIRPLANE",
+        "clue": "Wings, engines, and a seatbelt sign"
+      },
+      {
+        "answer": "SUBMARINE",
+        "clue": "Travels below, and yellow in a Beatles song"
+      },
+      {
+        "answer": "BICYCLE",
+        "clue": "Pedal power, and you never forget how"
+      }
+    ]
+  },
+  {
+    "slug": "mythology",
+    "name": "Gods & Mythology",
+    "category": "history",
+    "region": "en",
+    "icon": "🏛️",
+    "featured": false,
+    "sortOrder": 151,
+    "blurb": "Greek, Norse, Egyptian and more.",
+    "items": [
+      {
+        "answer": "ZEUS",
+        "clue": "King of Olympus, and he throws the lightning"
+      },
+      {
+        "answer": "HERA",
+        "clue": "Queen of the Greek gods, and a very jealous wife"
+      },
+      {
+        "answer": "ARES",
+        "clue": "Greek god of war, and the Roman Mars"
+      },
+      {
+        "answer": "EROS",
+        "clue": "Greek god of desire, with a bow and arrow"
+      },
+      {
+        "answer": "HADES",
+        "clue": "Greek lord of the underworld"
+      },
+      {
+        "answer": "THOR",
+        "clue": "The god of thunder, and his hammer"
+      },
+      {
+        "answer": "ODIN",
+        "clue": "One-eyed all-father of the Norse gods"
+      },
+      {
+        "answer": "LOKI",
+        "clue": "Norse trickster who fathered a wolf and a serpent"
+      },
+      {
+        "answer": "FREYA",
+        "clue": "Norse goddess of love, in a cat-drawn chariot"
+      },
+      {
+        "answer": "BALDR",
+        "clue": "Norse god of light, killed by a sprig of mistletoe"
+      },
+      {
+        "answer": "APOLLO",
+        "clue": "Greek god of the sun, music and prophecy"
+      },
+      {
+        "answer": "ATHENA",
+        "clue": "Greek goddess of wisdom, born from Zeus's head"
+      },
+      {
+        "answer": "ARTEMIS",
+        "clue": "Greek goddess of the hunt and the moon"
+      },
+      {
+        "answer": "HERMES",
+        "clue": "Winged messenger of the Greek gods"
+      },
+      {
+        "answer": "HESTIA",
+        "clue": "Greek goddess of the hearth and home"
+      },
+      {
+        "answer": "DEMETER",
+        "clue": "Greek goddess of the harvest, mother of Persephone"
+      },
+      {
+        "answer": "POSEIDON",
+        "clue": "Greek god of the sea, with a trident"
+      },
+      {
+        "answer": "CRONUS",
+        "clue": "Titan who ate his children, father of Zeus"
+      },
+      {
+        "answer": "TITAN",
+        "clue": "The elder race the Olympians overthrew"
+      },
+      {
+        "answer": "MEDUSA",
+        "clue": "Snakes for hair, and one look turns you to stone"
+      },
+      {
+        "answer": "HYDRA",
+        "clue": "Cut off one head and two grow back"
+      },
+      {
+        "answer": "SPHINX",
+        "clue": "Asks a riddle, and eats you if you fail"
+      },
+      {
+        "answer": "CENTAUR",
+        "clue": "Half man, half horse"
+      },
+      {
+        "answer": "PEGASUS",
+        "clue": "The winged horse"
+      },
+      {
+        "answer": "MINOTAUR",
+        "clue": "Bull-headed man at the centre of the labyrinth"
+      },
+      {
+        "answer": "OSIRIS",
+        "clue": "Egyptian god of the afterlife, killed by his brother"
+      },
+      {
+        "answer": "ANUBIS",
+        "clue": "Jackal-headed Egyptian god who weighs the heart"
+      },
+      {
+        "answer": "HORUS",
+        "clue": "Falcon-headed Egyptian god, and that famous eye"
+      },
+      {
+        "answer": "RAGNAROK",
+        "clue": "The Norse end of the world"
+      },
+      {
+        "answer": "VALHALLA",
+        "clue": "Odin's hall where slain warriors feast"
+      },
+      {
+        "answer": "OLYMPUS",
+        "clue": "The mountain where the Greek gods lived"
+      },
+      {
+        "answer": "ICARUS",
+        "clue": "Flew too close to the sun on wax wings"
+      }
+    ]
+  }
 ]

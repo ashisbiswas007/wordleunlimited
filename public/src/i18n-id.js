@@ -46,6 +46,7 @@ window.WU_I18N = {
   chInviteTime: " Kamu punya waktu {0}!",
   lvlWord: "Level", statWins: "menang", statPlayed: "dimainkan", toNext: "menuju berikutnya", maxRank: "MAKS",
   lvlUp: "NAIK LEVEL", memberSince: "Bermain sejak {0}", rankTitle: "Peringkatmu",
+  nextTier: "{0} di level {1}",
   tpPick: "Pilih topik", tpSearch: "Cari topik…", tpAll: "Semua",
   tpNone: "Tidak ada topik yang cocok.",
   tpProgress: "{0} dari {1}", tpDone: "Topik selesai!", tpWords: "kata",

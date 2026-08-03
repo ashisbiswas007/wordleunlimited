@@ -97,6 +97,31 @@ Being generous about what we accept and strict about what we choose is what stop
 
 ---
 
+## Topic clues
+
+Every topic answer carries a riddle-style clue — `THOR` is "The god of thunder,
+and his hammer", not "starts with T". Clues are what make Versus readable when
+twenty people are racing, so the clue is always on there and there is no hint
+button; single-player Topic mode has the hint button instead and shows no clue.
+
+Clues are authored in `data/clues/<slug>.json` as a plain answer → clue map, then
+folded into the packs:
+
+```bash
+node scripts/apply-clues.mjs           # merge into public/src/topics/*.json
+node scripts/apply-clues.mjs --check   # report coverage, non-zero if any are missing
+```
+
+Nothing is ever served without a clue: an answer with no written clue falls back
+to a generated one at read time, wherever it came from.
+
+**On an existing deployment, editing a pack is not enough on its own.**
+`seedTopics` only ever inserts topics that are not already in the database, so a
+rewritten clue would never reach a live site. `syncClues` runs at boot and pushes
+clue changes into topics that are already there, touching only the clue column.
+
+---
+
 ## Configuration
 
 Copy `.env.example` to `.env`. The values that matter:

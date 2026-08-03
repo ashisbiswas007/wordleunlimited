@@ -8,17 +8,197 @@
   "sortOrder": 80,
   "blurb": "Creatures great and small — a good one for kids.",
   "items": [
-    { "answer": "CAT" }, { "answer": "DOG" }, { "answer": "COW" }, { "answer": "PIG" },
-    { "answer": "FOX" }, { "answer": "OWL" }, { "answer": "BAT" }, { "answer": "APE" },
-    { "answer": "BEAR" }, { "answer": "LION" }, { "answer": "WOLF" }, { "answer": "DEER" },
-    { "answer": "GOAT" }, { "answer": "FROG" }, { "answer": "CRAB" }, { "answer": "SEAL" },
-    { "answer": "MOLE" }, { "answer": "SWAN" }, { "answer": "TOAD" }, { "answer": "MULE" },
-    { "answer": "TIGER" }, { "answer": "HORSE" }, { "answer": "SHEEP" }, { "answer": "MOUSE" },
-    { "answer": "SNAKE" }, { "answer": "WHALE" }, { "answer": "ZEBRA" }, { "answer": "KOALA" },
-    { "answer": "PANDA" }, { "answer": "OTTER" }, { "answer": "SHARK" }, { "answer": "EAGLE" },
-    { "answer": "MONKEY" }, { "answer": "RABBIT" }, { "answer": "DONKEY" }, { "answer": "BADGER" },
-    { "answer": "FALCON" }, { "answer": "PARROT" }, { "answer": "TURTLE" }, { "answer": "WALRUS" },
-    { "answer": "ELEPHANT" }, { "answer": "GIRAFFE" }, { "answer": "PENGUIN" }, { "answer": "DOLPHIN" },
-    { "answer": "LEOPARD" }, { "answer": "GORILLA" }, { "answer": "HAMSTER" }, { "answer": "OSTRICH" }
+    {
+      "answer": "CAT",
+      "clue": "Purrs, ignores you, and owns the internet"
+    },
+    {
+      "answer": "DOG",
+      "clue": "Loyal, waggy, and always ready for a walk"
+    },
+    {
+      "answer": "COW",
+      "clue": "Chews the cud and fills the milk jug"
+    },
+    {
+      "answer": "PIG",
+      "clue": "Pink, muddy, and mad for truffles"
+    },
+    {
+      "answer": "FOX",
+      "clue": "Red, quick, and famously sly"
+    },
+    {
+      "answer": "OWL",
+      "clue": "Night hunter with a swivelling head"
+    },
+    {
+      "answer": "BAT",
+      "clue": "Sleeps upside down and sees with sound"
+    },
+    {
+      "answer": "APE",
+      "clue": "The tailless cousin on our family tree"
+    },
+    {
+      "answer": "BEAR",
+      "clue": "Sleeps all winter, then raids the picnic"
+    },
+    {
+      "answer": "LION",
+      "clue": "Wears a mane and answers to king"
+    },
+    {
+      "answer": "WOLF",
+      "clue": "Howls at the moon and hunts in a pack"
+    },
+    {
+      "answer": "DEER",
+      "clue": "Bambi, grown up and antlered"
+    },
+    {
+      "answer": "GOAT",
+      "clue": "Eats anything, climbs everything"
+    },
+    {
+      "answer": "FROG",
+      "clue": "Green, hops, and was once a prince"
+    },
+    {
+      "answer": "CRAB",
+      "clue": "Walks sideways and argues with claws"
+    },
+    {
+      "answer": "SEAL",
+      "clue": "Barks, claps, and balances a ball"
+    },
+    {
+      "answer": "MOLE",
+      "clue": "Near-blind digger who wrecks the lawn"
+    },
+    {
+      "answer": "SWAN",
+      "clue": "The ugly duckling, all grown up"
+    },
+    {
+      "answer": "TOAD",
+      "clue": "The warty cousin of the pond hopper"
+    },
+    {
+      "answer": "MULE",
+      "clue": "Half horse, half donkey, all stubborn"
+    },
+    {
+      "answer": "TIGER",
+      "clue": "Burning bright, orange with black bars"
+    },
+    {
+      "answer": "HORSE",
+      "clue": "Four legs, a mane, and a Derby to win"
+    },
+    {
+      "answer": "SHEEP",
+      "clue": "Counted at bedtime, shorn in spring"
+    },
+    {
+      "answer": "MOUSE",
+      "clue": "Tiny, squeaky, and terrified of the cat"
+    },
+    {
+      "answer": "SNAKE",
+      "clue": "No legs, forked tongue, blamed since Eden"
+    },
+    {
+      "answer": "WHALE",
+      "clue": "The biggest animal alive, and it sings"
+    },
+    {
+      "answer": "ZEBRA",
+      "clue": "Wears its barcode on the savannah"
+    },
+    {
+      "answer": "KOALA",
+      "clue": "Sleeps twenty hours and eats only eucalyptus"
+    },
+    {
+      "answer": "PANDA",
+      "clue": "Black-and-white bear with a bamboo habit"
+    },
+    {
+      "answer": "OTTER",
+      "clue": "Floats on its back and holds hands asleep"
+    },
+    {
+      "answer": "SHARK",
+      "clue": "Rows of teeth and a very famous fin"
+    },
+    {
+      "answer": "EAGLE",
+      "clue": "Sharp-eyed bird on the American seal"
+    },
+    {
+      "answer": "MONKEY",
+      "clue": "Swings by its tail and steals your banana"
+    },
+    {
+      "answer": "RABBIT",
+      "clue": "Long ears, and late for a very important date"
+    },
+    {
+      "answer": "DONKEY",
+      "clue": "Long-eared worker that says hee-haw"
+    },
+    {
+      "answer": "BADGER",
+      "clue": "Striped face, digs a sett, out after dark"
+    },
+    {
+      "answer": "FALCON",
+      "clue": "The fastest diver in the sky"
+    },
+    {
+      "answer": "PARROT",
+      "clue": "Repeats everything and sits on a pirate"
+    },
+    {
+      "answer": "TURTLE",
+      "clue": "Carries its house and is in no hurry"
+    },
+    {
+      "answer": "WALRUS",
+      "clue": "Whiskers, blubber and two great tusks"
+    },
+    {
+      "answer": "ELEPHANT",
+      "clue": "Never forgets, and packs its own trunk"
+    },
+    {
+      "answer": "GIRAFFE",
+      "clue": "The tallest neck on the savannah"
+    },
+    {
+      "answer": "PENGUIN",
+      "clue": "Wears a dinner suit and cannot fly"
+    },
+    {
+      "answer": "DOLPHIN",
+      "clue": "Clicks, leaps, and may be smarter than you"
+    },
+    {
+      "answer": "LEOPARD",
+      "clue": "The spotted cat that cannot change them"
+    },
+    {
+      "answer": "GORILLA",
+      "clue": "Silverback ruler of the forest"
+    },
+    {
+      "answer": "HAMSTER",
+      "clue": "Stuffs its cheeks and runs a wheel all night"
+    },
+    {
+      "answer": "OSTRICH",
+      "clue": "The biggest bird, so it runs instead"
+    }
   ]
 }

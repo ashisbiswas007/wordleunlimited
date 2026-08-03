@@ -281,8 +281,18 @@
     if (token && saveTimer) { clearTimeout(saveTimer); sync(false); }
   });
 
+  /* Rows can be mounted long after the config check has run — the Versus panel
+     builds its own on first open — so a late arrival has to be told whether
+     cloud save is off, or it would sit there as an empty box. */
+  var unavailable = false;
+
   WU.renderCloudRow = function (id) {
     if (rows.indexOf(id) < 0) rows.push(id);
+    if (unavailable) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = "none";
+      return;
+    }
     if (lastStatus) status(lastStatus.text, lastStatus.sub);
   };
 
@@ -290,6 +300,7 @@
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (j) {
       if (!j || !j.cloudSave || !j.googleClientId) {
+        unavailable = true;
         eachRow(function (r) { r.style.display = "none"; });
         return;
       }
@@ -297,5 +308,8 @@
       signedOutUI();
       loadGis();
     })
-    .catch(function () { eachRow(function (r) { r.style.display = "none"; }); });
+    .catch(function () {
+      unavailable = true;
+      eachRow(function (r) { r.style.display = "none"; });
+    });
 })();

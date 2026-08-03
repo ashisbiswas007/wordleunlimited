@@ -8,15 +8,157 @@
   "sortOrder": 30,
   "blurb": "Marques from every corner of the road.",
   "items": [
-    { "answer": "AUDI" }, { "answer": "FORD" }, { "answer": "OPEL" }, { "answer": "SEAT" },
-    { "answer": "FIAT" }, { "answer": "JEEP" }, { "answer": "MINI" }, { "answer": "KIA" },
-    { "answer": "LEXUS" }, { "answer": "MAZDA" }, { "answer": "HONDA" }, { "answer": "TESLA" },
-    { "answer": "VOLVO" }, { "answer": "SKODA" }, { "answer": "DACIA" }, { "answer": "LOTUS" },
-    { "answer": "ACURA" }, { "answer": "BUICK" }, { "answer": "DODGE" }, { "answer": "ISUZU" },
-    { "answer": "SMART" }, { "answer": "LUCID" }, { "answer": "SUBARU" }, { "answer": "TOYOTA" },
-    { "answer": "NISSAN" }, { "answer": "JAGUAR" }, { "answer": "RIVIAN" }, { "answer": "LANCIA" },
-    { "answer": "BUGATTI" }, { "answer": "FERRARI" }, { "answer": "HYUNDAI" }, { "answer": "PORSCHE" },
-    { "answer": "BENTLEY" }, { "answer": "CITROEN" }, { "answer": "PEUGEOT" }, { "answer": "RENAULT" },
-    { "answer": "GENESIS" }, { "answer": "PONTIAC" }
+    {
+      "answer": "AUDI",
+      "clue": "Four interlocking rings from Ingolstadt"
+    },
+    {
+      "answer": "FORD",
+      "clue": "Built the Model T and the moving assembly line"
+    },
+    {
+      "answer": "OPEL",
+      "clue": "German marque with a lightning bolt badge"
+    },
+    {
+      "answer": "SEAT",
+      "clue": "Spanish brand owned by Volkswagen"
+    },
+    {
+      "answer": "FIAT",
+      "clue": "Turin's finest, and the tiny 500"
+    },
+    {
+      "answer": "JEEP",
+      "clue": "Seven-slot grille, born in the war"
+    },
+    {
+      "answer": "MINI",
+      "clue": "Tiny British icon that won Monte Carlo"
+    },
+    {
+      "answer": "KIA",
+      "clue": "Korean marque, sibling to Hyundai"
+    },
+    {
+      "answer": "LEXUS",
+      "clue": "Toyota's luxury badge"
+    },
+    {
+      "answer": "MAZDA",
+      "clue": "Hiroshima maker of the MX-5 and the rotary engine"
+    },
+    {
+      "answer": "HONDA",
+      "clue": "Cars, bikes and lawnmowers from Japan"
+    },
+    {
+      "answer": "TESLA",
+      "clue": "Electric cars named after an inventor"
+    },
+    {
+      "answer": "VOLVO",
+      "clue": "Swedish safety, and it gave away the seatbelt patent"
+    },
+    {
+      "answer": "SKODA",
+      "clue": "Czech marque now under Volkswagen"
+    },
+    {
+      "answer": "DACIA",
+      "clue": "Romanian budget brand owned by Renault"
+    },
+    {
+      "answer": "LOTUS",
+      "clue": "Light is right, from Norfolk"
+    },
+    {
+      "answer": "ACURA",
+      "clue": "Honda's luxury badge in America"
+    },
+    {
+      "answer": "BUICK",
+      "clue": "Old American marque, big in China"
+    },
+    {
+      "answer": "DODGE",
+      "clue": "American muscle, and the Charger"
+    },
+    {
+      "answer": "ISUZU",
+      "clue": "Japanese maker of trucks and pickups"
+    },
+    {
+      "answer": "SMART",
+      "clue": "Two seats, and it parks nose to the kerb"
+    },
+    {
+      "answer": "LUCID",
+      "clue": "American electric maker of the Air saloon"
+    },
+    {
+      "answer": "SUBARU",
+      "clue": "Boxer engines, all-wheel drive, and the Pleiades badge"
+    },
+    {
+      "answer": "TOYOTA",
+      "clue": "The world's biggest carmaker, and the Corolla"
+    },
+    {
+      "answer": "NISSAN",
+      "clue": "Japanese maker of the GT-R and the Leaf"
+    },
+    {
+      "answer": "JAGUAR",
+      "clue": "British cat that leaps from the bonnet"
+    },
+    {
+      "answer": "RIVIAN",
+      "clue": "American electric pickups and vans"
+    },
+    {
+      "answer": "LANCIA",
+      "clue": "Italian marque with a rally cabinet full of trophies"
+    },
+    {
+      "answer": "BUGATTI",
+      "clue": "Astonishing speed at an astonishing price"
+    },
+    {
+      "answer": "FERRARI",
+      "clue": "Prancing horse from Maranello"
+    },
+    {
+      "answer": "HYUNDAI",
+      "clue": "Korea's largest carmaker"
+    },
+    {
+      "answer": "PORSCHE",
+      "clue": "Stuttgart maker of the rear-engined 911"
+    },
+    {
+      "answer": "BENTLEY",
+      "clue": "Winged B, and very British luxury"
+    },
+    {
+      "answer": "CITROEN",
+      "clue": "French double chevron, and hydraulic suspension"
+    },
+    {
+      "answer": "PEUGEOT",
+      "clue": "French lion, and it once made pepper mills"
+    },
+    {
+      "answer": "RENAULT",
+      "clue": "French diamond badge, and Formula One engines"
+    },
+    {
+      "answer": "GENESIS",
+      "clue": "Hyundai's luxury division"
+    },
+    {
+      "answer": "PONTIAC",
+      "clue": "Dead GM brand of the Firebird and Trans Am"
+    }
   ]
 }

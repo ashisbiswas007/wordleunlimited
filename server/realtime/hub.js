@@ -1,6 +1,6 @@
 import { Room, PHASE, makeRoomCode, suggestNickname, sanitiseNick } from "./room.js";
 import { loadDictionaries } from "../lib/words.js";
-import { listTopics, getTopic, seedTopics } from "../lib/topics.js";
+import { listTopics, getTopic, seedTopics, syncClues } from "../lib/topics.js";
 import { getSettings } from "../lib/settings.js";
 import { query } from "../db/pool.js";
 import config from "../config.js";
@@ -140,7 +140,24 @@ export function describeRoom(code) {
 function wireRoom(room) {
   room.pickVoteOptions = pickVoteOptions;
   room.loadTopic = (slug) => getTopic(slug);
+  room.pickDefaultTopic = pickDefaultTopic;
   room.onMatchFinished = persistMatch;
+}
+
+/**
+ * The topic a public room opens on when there is nothing to go on yet. Biased
+ * towards featured and popular packs so a fresh room lands on something people
+ * recognise rather than the most obscure pack in the library.
+ */
+async function pickDefaultTopic(room) {
+  if (!getSettings().modes.topic) return null;
+  const all = await listTopics({ region: room.region }).catch(() => []);
+  if (!all.length) return null;
+
+  const featured = all.filter((t) => t.featured);
+  const pool = (featured.length >= 3 ? featured : all).slice(0, 24);
+  const t = pool[(Math.random() * pool.length) | 0];
+  return t ? { slug: t.slug, name: t.name, icon: t.icon, category: t.category, count: t.count } : null;
 }
 
 /** CSGO-style map vote: a few real topics plus an always-present random option. */
@@ -320,6 +337,8 @@ function heartbeat() {
 export async function registerRealtime(app) {
   await loadDictionaries();
   await seedTopics().catch((err) => console.warn("[topics] seed skipped:", err.message));
+  // Existing topics keep their answers but pick up rewritten clues.
+  await syncClues().catch((err) => console.warn("[topics] clue sync skipped:", err.message));
 
   app.get("/ws", { websocket: true }, (socket, req) => {
     const ip = req.ip || "unknown";

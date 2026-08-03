@@ -12,22 +12,38 @@
     return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + "</svg>";
   };
 
+  /* Player avatars. Must stay the same length as AVATAR_COUNT on the server,
+     which is what picks the index — a shorter list here would silently collapse
+     several avatars onto the same glyph. */
   var AV = [
     '<circle cx="12" cy="12" r="9"/><path d="M8 10h.01M16 10h.01M9 15c1.5 1.2 4.5 1.2 6 0"/>',
-    '<path d="M4 20V8l8-5 8 5v12"/><path d="M9 20v-6h6v6"/>',
     '<path d="m12 3 2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L12 17.3 6.2 20.8l1.6-6.6L2.6 9.8l6.8-.5z"/>',
-    '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
+    '<path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6z"/>',
+    '<path d="M13 2 4.1 13.4a1 1 0 0 0 .8 1.6H11l-1 7 8.9-11.4a1 1 0 0 0-.8-1.6H12z"/>',
     '<path d="M12 21s-7-4.6-7-9.6A4.4 4.4 0 0 1 12 8a4.4 4.4 0 0 1 7 3.4c0 5-7 9.6-7 9.6z"/>',
     '<path d="M3 12h4l3-8 4 16 3-8h4"/>',
-    '<rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/>',
-    '<path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6z"/>',
-    '<circle cx="12" cy="12" r="9"/><path d="m12 6 1.8 4.2 4.2.4-3.2 2.8 1 4.6L12 15.6 8.2 18l1-4.6L6 10.6l4.2-.4z"/>',
+    '<rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M16.5 12h.01M18.5 14h.01"/>',
+    '<path d="M14.5 2 6 12h5l-1.5 10L18 12h-5z"/>',
+    '<circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z"/><path d="M12 2v7M12 15v7M2 12h7M15 12h7"/>',
     '<path d="M5 20V9l7-6 7 6v11z"/><circle cx="12" cy="13" r="2.4"/>',
     '<path d="M6 4h12v6a6 6 0 0 1-12 0z"/><path d="M9 20h6M12 16v4"/><path d="M18 5h2a2 2 0 0 1 0 4h-2M6 5H4a2 2 0 0 0 0 4h2"/>',
     '<circle cx="12" cy="7" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+    '<path d="M4.9 4.9a10 10 0 0 1 14.2 0M7.8 7.8a6 6 0 0 1 8.4 0M10.6 10.6a2 2 0 0 1 2.8 0"/><circle cx="12" cy="17" r="1.4"/>',
+    '<path d="M12 2 2 22h20z"/><path d="M12 9v6M12 18h.01"/>',
+    '<circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18zM3 12h18"/>',
+    '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+    '<path d="M20 12a8 8 0 1 1-8-8"/><path d="M12 2a10 10 0 0 1 10 10"/><circle cx="12" cy="12" r="2"/>',
+    '<path d="M2 12h3l2-7 4 14 3-9 2 4h6"/><circle cx="12" cy="12" r="10"/>',
+    '<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 9h.01M15 9h.01M9 15h6"/>',
+    '<path d="M12 2 9 9l-7 1 5 5-1 7 6-3.5 6 3.5-1-7 5-5-7-1z"/>',
+    '<path d="M17 3a4 4 0 0 1 0 8H7a4 4 0 0 1 0-8z"/><path d="M7 21a4 4 0 0 1 0-8h10a4 4 0 0 1 0 8z"/>',
+    '<circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/>',
+    '<path d="M3 7h18l-2 13H5z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/>',
+    '<path d="M12 22a9 9 0 0 0 9-9c0-4-3-7-4-9 0 3-2 4-3 4 0-3-2-5-4-6 .5 4-2 5-3 8a9 9 0 0 0 5 12z"/>',
   ];
+  var AVATAR_COUNT = AV.length;
   function avatar(i, size) {
-    var d = AV[(i | 0) % AV.length];
+    var d = AV[((i | 0) % AVATAR_COUNT + AVATAR_COUNT) % AVATAR_COUNT];
     return '<svg viewBox="0 0 24 24" width="' + (size || 18) + '" height="' + (size || 18) +
       '" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + "</svg>";
   }
@@ -313,11 +329,14 @@
     }
   }
 
-  function preselectRandom() {
-    if (!voteState) return;
-    var r = voteState.options.filter(function (o) { return o.slug === "__random__"; })[0];
-    if (r && !voteState.picked) { voteState.picked = r.slug; send({ t: "vote", topic: r.slug }); }
-  }
+  /**
+   * Deliberately does not vote on the player's behalf.
+   *
+   * This used to auto-cast a vote for "Random Words" the moment the scoreboard
+   * opened, which meant random quietly won almost every vote and the room drifted
+   * off topics for good. An abstention now leaves the server to pick a topic.
+   */
+  function preselectRandom() {}
 
   function pushRecord(m) {
     if (!me) return;
@@ -584,8 +603,12 @@
 
     h += '<div class="mp-actions"><button class="cbtn" data-act="mpquick">Quick play</button>' +
       '<button class="cbtn ghost" data-act="mpcreate">Create room</button>' +
-      '<button class="cbtn ghost" data-act="mpjoincode">Join by code</button></div></div>';
+      '<button class="cbtn ghost" data-act="mpjoincode">Join by code</button></div>';
+    // Sign-in lives here too: this is where players care about keeping a level
+    // and a name across devices. Hides itself when cloud save is not configured.
+    h += '<div class="setrow col mp-cloud" id="mpCloud"></div></div>';
     els.body.innerHTML = h;
+    if (WU.renderCloudRow) WU.renderCloudRow("mpCloud");
   }
 
   function createView() {
@@ -868,6 +891,9 @@
     openPanel();
   };
   WU.joinRoom = joinRoom;
+  /* The clue line is shared with the single-player engine, which must not clear
+     it out from under a running round. */
+  WU.isMultiplayerActive = function () { return active; };
 
   refreshRooms();
   startPoll();

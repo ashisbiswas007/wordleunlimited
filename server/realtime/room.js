@@ -16,22 +16,45 @@ export const PHASE = {
 
 const MAX_GUESSES = 6;
 const BOARD_FLUSH_MS = 500;
+// Must match the AV list in public/src/multiplayer.js.
+const AVATAR_COUNT = 24;
 
+/* Nicknames are the first thing anyone sees in a room, so the pool is wide
+   enough that a 50-player lobby rarely collides: 96 x 96 pairs, and a number is
+   only appended when it has to be. */
 const ADJECTIVES = [
   "Swift", "Brave", "Clever", "Silent", "Golden", "Rapid", "Lucky", "Sharp",
   "Cosmic", "Neon", "Turbo", "Mighty", "Wild", "Sly", "Bold", "Frosty",
   "Crimson", "Shadow", "Atomic", "Rogue", "Quantum", "Stealth", "Blazing", "Iron",
+  "Velvet", "Obsidian", "Electric", "Feral", "Lunar", "Solar", "Arctic", "Ember",
+  "Midnight", "Savage", "Gilded", "Prime", "Vivid", "Storm", "Titan", "Onyx",
+  "Radiant", "Nimble", "Ghost", "Chrome", "Scarlet", "Astral", "Wicked", "Nova",
+  "Thunder", "Frantic", "Grim", "Jade", "Crystal", "Phantom", "Feisty", "Zen",
+  "Hyper", "Cobalt", "Ruthless", "Dizzy", "Sonic", "Amber", "Fearless", "Sublime",
+  "Rebel", "Cyber", "Marble", "Reckless", "Noble", "Plasma", "Steel", "Vortex",
+  "Crafty", "Epic", "Furious", "Glacial", "Hollow", "Infinite", "Jolly", "Keen",
+  "Lethal", "Mystic", "Nordic", "Opal", "Primal", "Quiet", "Royal", "Sterling",
+  "Twilight", "Umbral", "Valiant", "Warp", "Zealous", "Blitz", "Dusk", "Echo",
 ];
 const NOUNS = [
   "Falcon", "Tiger", "Comet", "Otter", "Panther", "Raven", "Fox", "Wolf",
   "Dragon", "Viper", "Hawk", "Bison", "Lynx", "Cobra", "Badger", "Jaguar",
   "Phoenix", "Puma", "Orca", "Rhino", "Gecko", "Mantis", "Heron", "Ibex",
+  "Kraken", "Griffin", "Wyvern", "Basilisk", "Chimera", "Sphinx", "Hydra", "Titan",
+  "Nebula", "Quasar", "Pulsar", "Meteor", "Eclipse", "Zenith", "Nomad", "Corsair",
+  "Ronin", "Samurai", "Valkyrie", "Paladin", "Sentinel", "Ranger", "Bandit", "Maverick",
+  "Osprey", "Kestrel", "Falconer", "Marten", "Stoat", "Serval", "Caracal", "Ocelot",
+  "Narwhal", "Manta", "Barracuda", "Piranha", "Stingray", "Marlin", "Tarpon", "Sable",
+  "Mamba", "Adder", "Python", "Iguana", "Chameleon", "Axolotl", "Pangolin", "Tapir",
+  "Wombat", "Quokka", "Meerkat", "Mongoose", "Wolverine", "Grizzly", "Cougar", "Bobcat",
+  "Condor", "Albatross", "Peregrine", "Shrike", "Magpie", "Puffin", "Toucan", "Macaw",
+  "Cyclone", "Avalanche", "Monsoon", "Tempest", "Blizzard", "Inferno", "Torrent", "Mirage",
 ];
 
 export function suggestNickname() {
   const a = ADJECTIVES[(Math.random() * ADJECTIVES.length) | 0];
   const n = NOUNS[(Math.random() * NOUNS.length) | 0];
-  return `${a}${n}${((Math.random() * 90) | 0) + 10}`;
+  return `${a}${n}`;
 }
 
 export function sanitiseNick(raw) {
@@ -104,6 +127,7 @@ export class Room {
     this.onMatchFinished = () => {};
     this.pickVoteOptions = async () => [];
     this.loadTopic = async () => null;
+    this.pickDefaultTopic = async () => null;
   }
 
   /* ---------- derived ---------- */
@@ -258,7 +282,9 @@ export class Room {
       id,
       socket,
       nick: name,
-      avatar: Number.isInteger(avatar) ? Math.abs(avatar) % 20 : (Math.random() * 20) | 0,
+      avatar: Number.isInteger(avatar)
+        ? Math.abs(avatar) % AVATAR_COUNT
+        : (Math.random() * AVATAR_COUNT) | 0,
       wordIndex: 0,
       guesses: [],
       solved: 0,
@@ -374,7 +400,15 @@ export class Room {
   }
 
   async startRound(option) {
-    const choice = option || this.resolveVote();
+    let choice = option || this.resolveVote();
+
+    // A public room always opens on a topic. Random words are only ever the
+    // result of players actually voting for them, never the default a room
+    // falls into because nobody has voted yet.
+    if (this.kind === "open" && (!choice || choice.slug === "__random__") && !this.votes.size) {
+      const picked = await this.pickDefaultTopic(this);
+      if (picked) choice = picked;
+    }
     this.topicSlug = choice && choice.slug !== "__random__" ? choice.slug : null;
     this.topicName = choice && choice.slug !== "__random__" ? choice.name : null;
 

@@ -8,19 +8,221 @@
   "sortOrder": 70,
   "blurb": "Nations from every continent.",
   "items": [
-    { "answer": "CHAD" }, { "answer": "CUBA" }, { "answer": "IRAN" }, { "answer": "IRAQ" },
-    { "answer": "PERU" }, { "answer": "MALI" }, { "answer": "TOGO" }, { "answer": "LAOS" },
-    { "answer": "OMAN" }, { "answer": "FIJI" },
-    { "answer": "KENYA" }, { "answer": "NEPAL" }, { "answer": "CHILE" }, { "answer": "GHANA" },
-    { "answer": "HAITI" }, { "answer": "MALTA" }, { "answer": "QATAR" }, { "answer": "SUDAN" },
-    { "answer": "SYRIA" }, { "answer": "YEMEN" }, { "answer": "EGYPT" }, { "answer": "LIBYA" },
-    { "answer": "BRAZIL" }, { "answer": "CANADA" }, { "answer": "FRANCE" }, { "answer": "GREECE" },
-    { "answer": "MEXICO" }, { "answer": "NORWAY" }, { "answer": "POLAND" }, { "answer": "SWEDEN" },
-    { "answer": "TURKEY" }, { "answer": "ANGOLA" }, { "answer": "PANAMA" }, { "answer": "CYPRUS" },
-    { "answer": "AUSTRIA" }, { "answer": "BELGIUM" }, { "answer": "BOLIVIA" }, { "answer": "DENMARK" },
-    { "answer": "ECUADOR" }, { "answer": "FINLAND" }, { "answer": "HUNGARY" }, { "answer": "IRELAND" },
-    { "answer": "JAMAICA" }, { "answer": "LEBANON" }, { "answer": "MOROCCO" }, { "answer": "MYANMAR" },
-    { "answer": "NIGERIA" }, { "answer": "ROMANIA" }, { "answer": "SENEGAL" }, { "answer": "SOMALIA" },
-    { "answer": "TUNISIA" }, { "answer": "UKRAINE" }, { "answer": "URUGUAY" }, { "answer": "VIETNAM" }
+    {
+      "answer": "CHAD",
+      "clue": "Landlocked African nation named after its shrinking lake"
+    },
+    {
+      "answer": "CUBA",
+      "clue": "Caribbean island of cigars, classic cars and Castro"
+    },
+    {
+      "answer": "IRAN",
+      "clue": "Formerly Persia, capital Tehran"
+    },
+    {
+      "answer": "IRAQ",
+      "clue": "Land between the Tigris and Euphrates"
+    },
+    {
+      "answer": "PERU",
+      "clue": "Home of Machu Picchu and the Inca"
+    },
+    {
+      "answer": "MALI",
+      "clue": "West African nation whose Timbuktu once traded gold"
+    },
+    {
+      "answer": "TOGO",
+      "clue": "Slim West African strip between Ghana and Benin"
+    },
+    {
+      "answer": "LAOS",
+      "clue": "Landlocked neighbour of Thailand and Vietnam"
+    },
+    {
+      "answer": "OMAN",
+      "clue": "Sultanate on the eastern corner of Arabia"
+    },
+    {
+      "answer": "FIJI",
+      "clue": "Pacific archipelago of over three hundred islands"
+    },
+    {
+      "answer": "KENYA",
+      "clue": "Safari country where the Great Migration crosses the Mara"
+    },
+    {
+      "answer": "NEPAL",
+      "clue": "Himalayan home of Everest, and the only non-rectangular flag"
+    },
+    {
+      "answer": "CHILE",
+      "clue": "Long thin ribbon down South America's Pacific coast"
+    },
+    {
+      "answer": "GHANA",
+      "clue": "First sub-Saharan nation to win independence, once the Gold Coast"
+    },
+    {
+      "answer": "HAITI",
+      "clue": "Shares Hispaniola with the Dominican Republic"
+    },
+    {
+      "answer": "MALTA",
+      "clue": "Tiny Mediterranean island nation south of Sicily"
+    },
+    {
+      "answer": "QATAR",
+      "clue": "Gas-rich peninsula that hosted the 2022 World Cup"
+    },
+    {
+      "answer": "SUDAN",
+      "clue": "Split in two in 2011, capital Khartoum"
+    },
+    {
+      "answer": "SYRIA",
+      "clue": "Ancient Damascus is its capital"
+    },
+    {
+      "answer": "YEMEN",
+      "clue": "Southern tip of the Arabian peninsula"
+    },
+    {
+      "answer": "EGYPT",
+      "clue": "Pyramids, pharaohs and the Nile"
+    },
+    {
+      "answer": "LIBYA",
+      "clue": "North African nation of desert and oil, capital Tripoli"
+    },
+    {
+      "answer": "BRAZIL",
+      "clue": "Carnival, the Amazon, and five World Cups"
+    },
+    {
+      "answer": "CANADA",
+      "clue": "Maple leaf on the flag, second largest by area"
+    },
+    {
+      "answer": "FRANCE",
+      "clue": "The Eiffel Tower stands in its capital"
+    },
+    {
+      "answer": "GREECE",
+      "clue": "Birthplace of democracy and the Olympics"
+    },
+    {
+      "answer": "MEXICO",
+      "clue": "Tacos, the Aztec eagle, and a very long US border"
+    },
+    {
+      "answer": "NORWAY",
+      "clue": "Fjords, northern lights and a lot of oil"
+    },
+    {
+      "answer": "POLAND",
+      "clue": "Central European home of Chopin and Copernicus"
+    },
+    {
+      "answer": "SWEDEN",
+      "clue": "Gave the world ABBA, IKEA and the Nobel Prize"
+    },
+    {
+      "answer": "TURKEY",
+      "clue": "Straddles two continents at Istanbul"
+    },
+    {
+      "answer": "ANGOLA",
+      "clue": "Oil-rich southwest African nation, capital Luanda"
+    },
+    {
+      "answer": "PANAMA",
+      "clue": "Its canal joins two oceans"
+    },
+    {
+      "answer": "CYPRUS",
+      "clue": "Divided Mediterranean island, birthplace of Aphrodite"
+    },
+    {
+      "answer": "AUSTRIA",
+      "clue": "Alpine home of Mozart and the waltz"
+    },
+    {
+      "answer": "BELGIUM",
+      "clue": "Waffles, chocolate and the EU's headquarters"
+    },
+    {
+      "answer": "BOLIVIA",
+      "clue": "Andean nation with the world's largest salt flat"
+    },
+    {
+      "answer": "DENMARK",
+      "clue": "Lego, Hamlet, and the happiest people going"
+    },
+    {
+      "answer": "ECUADOR",
+      "clue": "Named after the line it sits on"
+    },
+    {
+      "answer": "FINLAND",
+      "clue": "Land of a thousand lakes, saunas and Santa"
+    },
+    {
+      "answer": "HUNGARY",
+      "clue": "The Danube splits its capital in two"
+    },
+    {
+      "answer": "IRELAND",
+      "clue": "The Emerald Isle, shamrocks and Guinness"
+    },
+    {
+      "answer": "JAMAICA",
+      "clue": "Reggae, Bolt and Blue Mountain coffee"
+    },
+    {
+      "answer": "LEBANON",
+      "clue": "Cedar on the flag, capital Beirut"
+    },
+    {
+      "answer": "MOROCCO",
+      "clue": "Marrakesh, the Atlas mountains and mint tea"
+    },
+    {
+      "answer": "MYANMAR",
+      "clue": "Formerly Burma, golden pagodas everywhere"
+    },
+    {
+      "answer": "NIGERIA",
+      "clue": "Africa's most populous nation, home of Nollywood"
+    },
+    {
+      "answer": "ROMANIA",
+      "clue": "Transylvania and the Dracula legend"
+    },
+    {
+      "answer": "SENEGAL",
+      "clue": "Westernmost point of mainland Africa, capital Dakar"
+    },
+    {
+      "answer": "SOMALIA",
+      "clue": "Horn of Africa nation with the longest mainland coastline"
+    },
+    {
+      "answer": "TUNISIA",
+      "clue": "Where the Arab Spring began, and Star Wars filmed the desert"
+    },
+    {
+      "answer": "UKRAINE",
+      "clue": "Europe's breadbasket, capital Kyiv"
+    },
+    {
+      "answer": "URUGUAY",
+      "clue": "Hosted and won the very first World Cup"
+    },
+    {
+      "answer": "VIETNAM",
+      "clue": "Pho, rice terraces and Ha Long Bay"
+    }
   ]
 }

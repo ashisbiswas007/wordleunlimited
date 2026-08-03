@@ -8,12 +8,109 @@
   "sortOrder": 40,
   "blurb": "Makers of the thing in your hand.",
   "items": [
-    { "answer": "HTC" }, { "answer": "ZTE" }, { "answer": "OPPO" }, { "answer": "VIVO" },
-    { "answer": "SONY" }, { "answer": "ASUS" }, { "answer": "POCO" }, { "answer": "IQOO" },
-    { "answer": "APPLE" }, { "answer": "NOKIA" }, { "answer": "HONOR" }, { "answer": "REDMI" },
-    { "answer": "TECNO" }, { "answer": "MEIZU" }, { "answer": "SHARP" }, { "answer": "PIXEL" },
-    { "answer": "XIAOMI" }, { "answer": "HUAWEI" }, { "answer": "REALME" }, { "answer": "GOOGLE" },
-    { "answer": "LENOVO" }, { "answer": "SAMSUNG" }, { "answer": "ONEPLUS" }, { "answer": "INFINIX" },
-    { "answer": "ALCATEL" }, { "answer": "NOTHING" }
+    {
+      "answer": "HTC",
+      "clue": "Taiwanese maker of the first Android phone"
+    },
+    {
+      "answer": "ZTE",
+      "clue": "Chinese telecoms giant, budget handsets"
+    },
+    {
+      "answer": "OPPO",
+      "clue": "Chinese brand known for fast charging and selfie cameras"
+    },
+    {
+      "answer": "VIVO",
+      "clue": "Chinese brand, sibling to Oppo, big on camera gimbals"
+    },
+    {
+      "answer": "SONY",
+      "clue": "Japanese giant behind the Xperia and the PlayStation"
+    },
+    {
+      "answer": "ASUS",
+      "clue": "Taiwanese maker of the ROG gaming phone"
+    },
+    {
+      "answer": "POCO",
+      "clue": "Xiaomi's performance-per-price sub-brand"
+    },
+    {
+      "answer": "IQOO",
+      "clue": "Vivo's gaming-focused offshoot"
+    },
+    {
+      "answer": "APPLE",
+      "clue": "Cupertino, and a bitten fruit on the back"
+    },
+    {
+      "answer": "NOKIA",
+      "clue": "Finnish giant that ruled before the smartphone, and the 3310"
+    },
+    {
+      "answer": "HONOR",
+      "clue": "Spun out of Huawei to escape the sanctions"
+    },
+    {
+      "answer": "REDMI",
+      "clue": "Xiaomi's budget line"
+    },
+    {
+      "answer": "TECNO",
+      "clue": "Chinese brand built for the African market"
+    },
+    {
+      "answer": "MEIZU",
+      "clue": "Chinese maker once famous for its home button"
+    },
+    {
+      "answer": "SHARP",
+      "clue": "Japanese firm that shipped the first camera phone"
+    },
+    {
+      "answer": "PIXEL",
+      "clue": "Google's own handset, all about the camera software"
+    },
+    {
+      "answer": "XIAOMI",
+      "clue": "Beijing giant that undercut everyone"
+    },
+    {
+      "answer": "HUAWEI",
+      "clue": "Chinese leader cut off from Google services"
+    },
+    {
+      "answer": "REALME",
+      "clue": "Oppo spin-off aimed at young buyers"
+    },
+    {
+      "answer": "GOOGLE",
+      "clue": "Makes Android, and the Pixel that runs it"
+    },
+    {
+      "answer": "LENOVO",
+      "clue": "Chinese firm that bought Motorola and ThinkPad"
+    },
+    {
+      "answer": "SAMSUNG",
+      "clue": "Korean giant of the Galaxy"
+    },
+    {
+      "answer": "ONEPLUS",
+      "clue": "Never settle, and it started as a flagship killer"
+    },
+    {
+      "answer": "INFINIX",
+      "clue": "Budget brand big across Africa and South Asia"
+    },
+    {
+      "answer": "ALCATEL",
+      "clue": "Old French telecoms name, now budget handsets"
+    },
+    {
+      "answer": "NOTHING",
+      "clue": "London start-up with a transparent, glowing back"
+    }
   ]
 }

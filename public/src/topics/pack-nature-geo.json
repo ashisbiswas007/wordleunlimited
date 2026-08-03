@@ -1,135 +1,1226 @@
 [
-{
-  "slug": "capital-cities", "name": "Capital Cities", "category": "geography", "region": "en",
-  "icon": "🏙️", "featured": true, "sortOrder": 71,
-  "blurb": "Capitals from every continent.",
-  "items": [
-    {"answer":"PARIS"},{"answer":"ROME"},{"answer":"OSLO"},{"answer":"LIMA"},
-    {"answer":"KYIV"},{"answer":"DOHA"},{"answer":"RIGA"},{"answer":"BERN"},
-    {"answer":"CAIRO"},{"answer":"SEOUL"},{"answer":"TOKYO"},{"answer":"HANOI"},
-    {"answer":"DELHI"},{"answer":"DHAKA"},{"answer":"KABUL"},{"answer":"AMMAN"},
-    {"answer":"QUITO"},{"answer":"SOFIA"},{"answer":"MINSK"},{"answer":"ACCRA"},
-    {"answer":"DAKAR"},{"answer":"MANILA"},{"answer":"VIENNA"},{"answer":"ATHENS"},
-    {"answer":"LISBON"},{"answer":"MADRID"},{"answer":"LONDON"},{"answer":"DUBLIN"},
-    {"answer":"WARSAW"},{"answer":"MOSCOW"},{"answer":"ANKARA"},{"answer":"BEIJING"},
-    {"answer":"JAKARTA"},{"answer":"BANGKOK"},{"answer":"NAIROBI"},{"answer":"KAMPALA"},
-    {"answer":"TEHRAN"},{"answer":"RIYADH"},{"answer":"HAVANA"},{"answer":"OTTAWA"},
-    {"answer":"BOGOTA"},{"answer":"BRUSSELS"},{"answer":"HELSINKI"},{"answer":"BUDAPEST"}
-  ]
-},
-{
-  "slug": "us-states", "name": "US States", "category": "geography", "region": "en",
-  "icon": "🗺️", "featured": false, "sortOrder": 74,
-  "blurb": "All fifty, three to seven letters.",
-  "items": [
-    {"answer":"OHIO"},{"answer":"IOWA"},{"answer":"UTAH"},{"answer":"MAINE"},
-    {"answer":"IDAHO"},{"answer":"TEXAS"},{"answer":"ALASKA"},{"answer":"HAWAII"},
-    {"answer":"KANSAS"},{"answer":"NEVADA"},{"answer":"OREGON"},{"answer":"FLORIDA"},
-    {"answer":"GEORGIA"},{"answer":"INDIANA"},{"answer":"MONTANA"},{"answer":"NEWYORK"},
-    {"answer":"VERMONT"},{"answer":"WYOMING"},{"answer":"ARIZONA"},{"answer":"ALABAMA"},
-    {"answer":"VIRGINIA"},{"answer":"ILLINOIS"},{"answer":"MISSOURI"},{"answer":"COLORADO"}
-  ]
-},
-{
-  "slug": "trees-plants", "name": "Trees & Plants", "category": "nature", "region": "en",
-  "icon": "🌳", "featured": false, "sortOrder": 82,
-  "blurb": "From the garden to the forest.",
-  "items": [
-    {"answer":"OAK"},{"answer":"ELM"},{"answer":"FIR"},{"answer":"ASH"},
-    {"answer":"YEW"},{"answer":"PINE"},{"answer":"BIRCH"},{"answer":"CEDAR"},
-    {"answer":"MAPLE"},{"answer":"ALDER"},{"answer":"WILLOW"},{"answer":"POPLAR"},
-    {"answer":"SPRUCE"},{"answer":"WALNUT"},{"answer":"CHERRY"},{"answer":"BEECH"},
-    {"answer":"HOLLY"},{"answer":"IVY"},{"answer":"FERN"},{"answer":"MOSS"},
-    {"answer":"ROSE"},{"answer":"TULIP"},{"answer":"DAISY"},{"answer":"LILY"},
-    {"answer":"ORCHID"},{"answer":"CACTUS"},{"answer":"BAMBOO"},{"answer":"LOTUS"},
-    {"answer":"JASMINE"},{"answer":"LAVENDER"},{"answer":"SUNFLOWER"},{"answer":"PALM"}
-  ]
-},
-{
-  "slug": "birds", "name": "Birds", "category": "nature", "region": "en",
-  "icon": "🦅", "featured": false, "sortOrder": 83,
-  "blurb": "Feathered from garden to jungle.",
-  "items": [
-    {"answer":"OWL"},{"answer":"JAY"},{"answer":"HEN"},{"answer":"CROW"},
-    {"answer":"DOVE"},{"answer":"SWAN"},{"answer":"HAWK"},{"answer":"WREN"},
-    {"answer":"LARK"},{"answer":"IBIS"},{"answer":"KIWI"},{"answer":"ROBIN"},
-    {"answer":"EAGLE"},{"answer":"HERON"},{"answer":"STORK"},{"answer":"CRANE"},
-    {"answer":"RAVEN"},{"answer":"FINCH"},{"answer":"GOOSE"},{"answer":"QUAIL"},
-    {"answer":"MAGPIE"},{"answer":"PIGEON"},{"answer":"TOUCAN"},{"answer":"FALCON"},
-    {"answer":"PARROT"},{"answer":"CUCKOO"},{"answer":"PUFFIN"},{"answer":"OSPREY"},
-    {"answer":"PELICAN"},{"answer":"PEACOCK"},{"answer":"SPARROW"},{"answer":"PENGUIN"},
-    {"answer":"OSTRICH"},{"answer":"VULTURE"},{"answer":"SEAGULL"},{"answer":"BUZZARD"}
-  ]
-},
-{
-  "slug": "weather", "name": "Weather", "category": "nature", "region": "en",
-  "icon": "🌦️", "featured": false, "sortOrder": 84,
-  "blurb": "Everything the sky can do.",
-  "items": [
-    {"answer":"SUN"},{"answer":"FOG"},{"answer":"ICE"},{"answer":"RAIN"},
-    {"answer":"SNOW"},{"answer":"HAIL"},{"answer":"WIND"},{"answer":"MIST"},
-    {"answer":"GALE"},{"answer":"CALM"},{"answer":"STORM"},{"answer":"CLOUD"},
-    {"answer":"FROST"},{"answer":"SLEET"},{"answer":"THAW"},{"answer":"HUMID"},
-    {"answer":"BREEZE"},{"answer":"SHOWER"},{"answer":"DROUGHT"},{"answer":"MONSOON"},
-    {"answer":"TORNADO"},{"answer":"CYCLONE"},{"answer":"TYPHOON"},{"answer":"THUNDER"},
-    {"answer":"RAINBOW"},{"answer":"BLIZZARD"},{"answer":"DRIZZLE"},{"answer":"OVERCAST"}
-  ]
-},
-{
-  "slug": "oceans-seas", "name": "Oceans & Seas", "category": "nature", "region": "en",
-  "icon": "🌊", "featured": false, "sortOrder": 85,
-  "blurb": "The world's water.",
-  "items": [
-    {"answer":"RED","clue":"The ___ Sea"},{"answer":"CORAL"},{"answer":"BLACK"},
-    {"answer":"NORTH"},{"answer":"BALTIC"},{"answer":"AEGEAN"},{"answer":"CASPIAN"},
-    {"answer":"ARCTIC"},{"answer":"INDIAN"},{"answer":"PACIFIC"},{"answer":"ATLANTIC"},
-    {"answer":"ADRIATIC"},{"answer":"ARABIAN"},{"answer":"BERING"},{"answer":"JAVA"},
-    {"answer":"BANDA"},{"answer":"TIMOR"},{"answer":"IRISH"},{"answer":"CELTIC"},
-    {"answer":"AZOV"},{"answer":"WEDDELL"},{"answer":"TASMAN"},{"answer":"IONIAN"}
-  ]
-},
-{
-  "slug": "gemstones", "name": "Gemstones & Minerals", "category": "nature", "region": "en",
-  "icon": "💎", "featured": false, "sortOrder": 86,
-  "blurb": "Precious, semi-precious and just plain rock.",
-  "items": [
-    {"answer":"JADE"},{"answer":"OPAL"},{"answer":"RUBY"},{"answer":"ONYX"},
-    {"answer":"TOPAZ"},{"answer":"PEARL"},{"answer":"AMBER"},{"answer":"CORAL"},
-    {"answer":"QUARTZ"},{"answer":"GARNET"},{"answer":"ZIRCON"},{"answer":"COPPER"},
-    {"answer":"SILVER"},{"answer":"GOLD"},{"answer":"IRON"},{"answer":"TIN"},
-    {"answer":"NICKEL"},{"answer":"COBALT"},{"answer":"GYPSUM"},{"answer":"GRANITE"},
-    {"answer":"BASALT"},{"answer":"MARBLE"},{"answer":"OBSIDIAN"},{"answer":"DIAMOND"},
-    {"answer":"EMERALD"},{"answer":"SAPPHIRE"},{"answer":"AMETHYST"},{"answer":"PERIDOT"}
-  ]
-},
-{
-  "slug": "chemical-elements", "name": "Chemical Elements", "category": "science", "region": "en",
-  "icon": "🧪", "featured": false, "sortOrder": 91,
-  "blurb": "Straight off the periodic table.",
-  "items": [
-    {"answer":"TIN"},{"answer":"IRON"},{"answer":"ZINC"},{"answer":"NEON"},
-    {"answer":"GOLD"},{"answer":"LEAD"},{"answer":"ARGON"},{"answer":"BORON"},
-    {"answer":"XENON"},{"answer":"RADON"},{"answer":"SODIUM"},{"answer":"CARBON"},
-    {"answer":"COPPER"},{"answer":"SILVER"},{"answer":"NICKEL"},{"answer":"COBALT"},
-    {"answer":"OXYGEN"},{"answer":"HELIUM"},{"answer":"CALCIUM"},{"answer":"LITHIUM"},
-    {"answer":"MERCURY"},{"answer":"URANIUM"},{"answer":"ARSENIC"},{"answer":"BROMINE"},
-    {"answer":"CHLORINE"},{"answer":"KRYPTON"},{"answer":"SULFUR"},{"answer":"SILICON"},
-    {"answer":"BARIUM"},{"answer":"RADIUM"},{"answer":"IODINE"},{"answer":"PLATINUM"}
-  ]
-},
-{
-  "slug": "space", "name": "Space & Astronomy", "category": "science", "region": "en",
-  "icon": "🪐", "featured": true, "sortOrder": 92,
-  "blurb": "Planets, moons and the things between them.",
-  "items": [
-    {"answer":"SUN"},{"answer":"MOON"},{"answer":"MARS"},{"answer":"VENUS"},
-    {"answer":"EARTH"},{"answer":"PLUTO"},{"answer":"SATURN"},{"answer":"URANUS"},
-    {"answer":"NEPTUNE"},{"answer":"JUPITER"},{"answer":"MERCURY"},{"answer":"COMET"},
-    {"answer":"ORBIT"},{"answer":"NEBULA"},{"answer":"GALAXY"},{"answer":"QUASAR"},
-    {"answer":"PULSAR"},{"answer":"METEOR"},{"answer":"ECLIPSE"},{"answer":"ASTEROID"},
-    {"answer":"COSMOS"},{"answer":"ROCKET"},{"answer":"SHUTTLE"},{"answer":"APOLLO"},
-    {"answer":"GEMINI"},{"answer":"ORION"},{"answer":"TITAN"},{"answer":"EUROPA"},
-    {"answer":"PHOBOS"},{"answer":"DEIMOS"},{"answer":"IO"},{"answer":"CERES"}
-  ]
-}
+  {
+    "slug": "capital-cities",
+    "name": "Capital Cities",
+    "category": "geography",
+    "region": "en",
+    "icon": "🏙️",
+    "featured": true,
+    "sortOrder": 71,
+    "blurb": "Capitals from every continent.",
+    "items": [
+      {
+        "answer": "PARIS",
+        "clue": "The Eiffel Tower stands here"
+      },
+      {
+        "answer": "ROME",
+        "clue": "Built on seven hills, and not in a day"
+      },
+      {
+        "answer": "OSLO",
+        "clue": "Norwegian capital that hands out the Peace Prize"
+      },
+      {
+        "answer": "LIMA",
+        "clue": "Peruvian capital on the Pacific coast"
+      },
+      {
+        "answer": "KYIV",
+        "clue": "Ukrainian capital on the Dnipro"
+      },
+      {
+        "answer": "DOHA",
+        "clue": "Qatari capital that hosted the 2022 World Cup"
+      },
+      {
+        "answer": "RIGA",
+        "clue": "Latvian capital famous for its art nouveau streets"
+      },
+      {
+        "answer": "BERN",
+        "clue": "Swiss capital, though Zurich is bigger"
+      },
+      {
+        "answer": "CAIRO",
+        "clue": "Egyptian capital in sight of the pyramids"
+      },
+      {
+        "answer": "SEOUL",
+        "clue": "South Korean capital on the Han river"
+      },
+      {
+        "answer": "TOKYO",
+        "clue": "The world's largest metropolitan area"
+      },
+      {
+        "answer": "HANOI",
+        "clue": "Vietnamese capital of lakes and old quarters"
+      },
+      {
+        "answer": "DELHI",
+        "clue": "India's capital, with a New one inside it"
+      },
+      {
+        "answer": "DHAKA",
+        "clue": "Bangladeshi capital, city of rickshaws"
+      },
+      {
+        "answer": "KABUL",
+        "clue": "Afghan capital ringed by mountains"
+      },
+      {
+        "answer": "AMMAN",
+        "clue": "Jordanian capital near the ruins of Petra"
+      },
+      {
+        "answer": "QUITO",
+        "clue": "Ecuadorian capital high in the Andes, on the equator"
+      },
+      {
+        "answer": "SOFIA",
+        "clue": "Bulgarian capital named for holy wisdom"
+      },
+      {
+        "answer": "MINSK",
+        "clue": "Belarusian capital rebuilt after the war"
+      },
+      {
+        "answer": "ACCRA",
+        "clue": "Ghanaian capital on the Gulf of Guinea"
+      },
+      {
+        "answer": "DAKAR",
+        "clue": "Senegalese capital and the old rally finish line"
+      },
+      {
+        "answer": "MANILA",
+        "clue": "Philippine capital on Luzon"
+      },
+      {
+        "answer": "VIENNA",
+        "clue": "Austrian capital of waltzes and coffee houses"
+      },
+      {
+        "answer": "ATHENS",
+        "clue": "The Parthenon looks down on it"
+      },
+      {
+        "answer": "LISBON",
+        "clue": "Portuguese capital of trams and tiles"
+      },
+      {
+        "answer": "MADRID",
+        "clue": "Spanish capital, home of the Prado"
+      },
+      {
+        "answer": "LONDON",
+        "clue": "Big Ben, black cabs and the Thames"
+      },
+      {
+        "answer": "DUBLIN",
+        "clue": "Irish capital on the Liffey"
+      },
+      {
+        "answer": "WARSAW",
+        "clue": "Polish capital rebuilt brick by brick"
+      },
+      {
+        "answer": "MOSCOW",
+        "clue": "Red Square and the Kremlin"
+      },
+      {
+        "answer": "ANKARA",
+        "clue": "Turkish capital, though Istanbul is far bigger"
+      },
+      {
+        "answer": "BEIJING",
+        "clue": "Forbidden City at the heart of China"
+      },
+      {
+        "answer": "JAKARTA",
+        "clue": "Indonesian capital sinking on Java's coast"
+      },
+      {
+        "answer": "BANGKOK",
+        "clue": "Thai capital of temples and tuk-tuks"
+      },
+      {
+        "answer": "NAIROBI",
+        "clue": "Kenyan capital with a national park on its doorstep"
+      },
+      {
+        "answer": "KAMPALA",
+        "clue": "Ugandan capital near Lake Victoria"
+      },
+      {
+        "answer": "TEHRAN",
+        "clue": "Iranian capital below the Alborz mountains"
+      },
+      {
+        "answer": "RIYADH",
+        "clue": "Saudi capital in the middle of the desert"
+      },
+      {
+        "answer": "HAVANA",
+        "clue": "Cuban capital of cigars and classic cars"
+      },
+      {
+        "answer": "OTTAWA",
+        "clue": "Canadian capital, though not its biggest city"
+      },
+      {
+        "answer": "BOGOTA",
+        "clue": "Colombian capital high in the Andes"
+      },
+      {
+        "answer": "BRUSSELS",
+        "clue": "Belgian capital and the EU's home"
+      },
+      {
+        "answer": "HELSINKI",
+        "clue": "Finnish capital on the Baltic"
+      },
+      {
+        "answer": "BUDAPEST",
+        "clue": "Two cities joined by the Danube"
+      }
+    ]
+  },
+  {
+    "slug": "us-states",
+    "name": "US States",
+    "category": "geography",
+    "region": "en",
+    "icon": "🗺️",
+    "featured": false,
+    "sortOrder": 74,
+    "blurb": "All fifty, three to seven letters.",
+    "items": [
+      {
+        "answer": "OHIO",
+        "clue": "Buckeye State, birthplace of eight presidents"
+      },
+      {
+        "answer": "IOWA",
+        "clue": "Corn, and the first caucus in the nation"
+      },
+      {
+        "answer": "UTAH",
+        "clue": "Salt Lake, red rock arches and the Mormon trail"
+      },
+      {
+        "answer": "MAINE",
+        "clue": "Furthest northeast, and famous for lobster"
+      },
+      {
+        "answer": "IDAHO",
+        "clue": "The potato state"
+      },
+      {
+        "answer": "TEXAS",
+        "clue": "Lone Star State, second biggest of all"
+      },
+      {
+        "answer": "ALASKA",
+        "clue": "Biggest state, bought from Russia"
+      },
+      {
+        "answer": "HAWAII",
+        "clue": "Volcanic islands, and the fiftieth star"
+      },
+      {
+        "answer": "KANSAS",
+        "clue": "Where Dorothy was before the tornado"
+      },
+      {
+        "answer": "NEVADA",
+        "clue": "Desert state where Las Vegas glitters"
+      },
+      {
+        "answer": "OREGON",
+        "clue": "End of a famous pioneer trail, coast and forest"
+      },
+      {
+        "answer": "FLORIDA",
+        "clue": "Sunshine State of alligators and theme parks"
+      },
+      {
+        "answer": "GEORGIA",
+        "clue": "Peaches, Atlanta, and shares a name with a country"
+      },
+      {
+        "answer": "INDIANA",
+        "clue": "Its 500-mile race runs every May"
+      },
+      {
+        "answer": "MONTANA",
+        "clue": "Big Sky Country up against Canada"
+      },
+      {
+        "answer": "NEWYORK",
+        "clue": "The Empire State, and the city that never sleeps"
+      },
+      {
+        "answer": "VERMONT",
+        "clue": "Maple syrup and autumn leaves"
+      },
+      {
+        "answer": "WYOMING",
+        "clue": "Least populated, and home to Yellowstone"
+      },
+      {
+        "answer": "ARIZONA",
+        "clue": "The Grand Canyon cuts through it"
+      },
+      {
+        "answer": "ALABAMA",
+        "clue": "Deep South state where the bus boycott began"
+      },
+      {
+        "answer": "VIRGINIA",
+        "clue": "Birthplace of eight presidents, and Jamestown"
+      },
+      {
+        "answer": "ILLINOIS",
+        "clue": "Chicago sits on its lake shore"
+      },
+      {
+        "answer": "MISSOURI",
+        "clue": "Show Me State, and the Gateway Arch"
+      },
+      {
+        "answer": "COLORADO",
+        "clue": "A mile high, with the Rockies down its spine"
+      }
+    ]
+  },
+  {
+    "slug": "trees-plants",
+    "name": "Trees & Plants",
+    "category": "nature",
+    "region": "en",
+    "icon": "🌳",
+    "featured": false,
+    "sortOrder": 82,
+    "blurb": "From the garden to the forest.",
+    "items": [
+      {
+        "answer": "OAK",
+        "clue": "Mighty tree that starts as an acorn"
+      },
+      {
+        "answer": "ELM",
+        "clue": "Tree nearly wiped out by Dutch disease"
+      },
+      {
+        "answer": "FIR",
+        "clue": "Evergreen that ends up in the living room at Christmas"
+      },
+      {
+        "answer": "ASH",
+        "clue": "Tree of the Norse world-tree, and what fire leaves"
+      },
+      {
+        "answer": "YEW",
+        "clue": "Ancient churchyard tree, poisonous and long-lived"
+      },
+      {
+        "answer": "PINE",
+        "clue": "Needles, cones, and a longing"
+      },
+      {
+        "answer": "BIRCH",
+        "clue": "Slender tree with peeling white bark"
+      },
+      {
+        "answer": "CEDAR",
+        "clue": "Fragrant tree on the Lebanese flag"
+      },
+      {
+        "answer": "MAPLE",
+        "clue": "Its leaf is on the Canadian flag, its sap on your pancakes"
+      },
+      {
+        "answer": "ALDER",
+        "clue": "Waterside tree whose wood hardens under water"
+      },
+      {
+        "answer": "WILLOW",
+        "clue": "Weeps beside the river, and makes cricket bats"
+      },
+      {
+        "answer": "POPLAR",
+        "clue": "Fast-growing tree planted in tall thin rows"
+      },
+      {
+        "answer": "SPRUCE",
+        "clue": "Christmas tree, and to smarten up"
+      },
+      {
+        "answer": "WALNUT",
+        "clue": "Tree of a brain-shaped nut and prized dark wood"
+      },
+      {
+        "answer": "CHERRY",
+        "clue": "Blossoms pink in Japan, fruits red in summer"
+      },
+      {
+        "answer": "BEECH",
+        "clue": "Smooth grey bark and a carpet of copper leaves"
+      },
+      {
+        "answer": "HOLLY",
+        "clue": "Prickly leaves and red berries at Christmas"
+      },
+      {
+        "answer": "IVY",
+        "clue": "Climbs the wall and never lets go"
+      },
+      {
+        "answer": "FERN",
+        "clue": "Unfurls a fiddlehead, older than flowers"
+      },
+      {
+        "answer": "MOSS",
+        "clue": "Green velvet on the damp north side"
+      },
+      {
+        "answer": "ROSE",
+        "clue": "Thorny flower of love, and England's emblem"
+      },
+      {
+        "answer": "TULIP",
+        "clue": "Dutch bulb that once cost more than a house"
+      },
+      {
+        "answer": "DAISY",
+        "clue": "Chains are made of it on the lawn"
+      },
+      {
+        "answer": "LILY",
+        "clue": "Trumpet flower of funerals and the fleur-de-lis"
+      },
+      {
+        "answer": "ORCHID",
+        "clue": "Exotic bloom, and the largest plant family of all"
+      },
+      {
+        "answer": "CACTUS",
+        "clue": "Stores water, and hugs back"
+      },
+      {
+        "answer": "BAMBOO",
+        "clue": "Grass that grows like a tree, and a panda's dinner"
+      },
+      {
+        "answer": "LOTUS",
+        "clue": "Sacred flower that rises clean from the mud"
+      },
+      {
+        "answer": "JASMINE",
+        "clue": "Night-scented white flower, and Indonesia's national bloom"
+      },
+      {
+        "answer": "LAVENDER",
+        "clue": "Purple spikes that scent Provence and calm the nerves"
+      },
+      {
+        "answer": "SUNFLOWER",
+        "clue": "Turns its huge face to follow the light"
+      },
+      {
+        "answer": "PALM",
+        "clue": "Tree of the tropical beach and the coconut"
+      }
+    ]
+  },
+  {
+    "slug": "birds",
+    "name": "Birds",
+    "category": "nature",
+    "region": "en",
+    "icon": "🦅",
+    "featured": false,
+    "sortOrder": 83,
+    "blurb": "Feathered from garden to jungle.",
+    "items": [
+      {
+        "answer": "OWL",
+        "clue": "Asks who, and hunts in the dark"
+      },
+      {
+        "answer": "JAY",
+        "clue": "Noisy, blue-flashed cousin of the crow"
+      },
+      {
+        "answer": "HEN",
+        "clue": "Lays the breakfast"
+      },
+      {
+        "answer": "CROW",
+        "clue": "Black, clever, and gathers in a murder"
+      },
+      {
+        "answer": "DOVE",
+        "clue": "White bird that stands for peace"
+      },
+      {
+        "answer": "SWAN",
+        "clue": "Glides on the lake, mates for life"
+      },
+      {
+        "answer": "HAWK",
+        "clue": "Sharp-eyed hunter that hovers, then drops"
+      },
+      {
+        "answer": "WREN",
+        "clue": "Britain's tiniest bird, with a huge voice"
+      },
+      {
+        "answer": "LARK",
+        "clue": "Sings at dawn, and lends its name to early risers"
+      },
+      {
+        "answer": "IBIS",
+        "clue": "Curved beak, waded through ancient Egypt"
+      },
+      {
+        "answer": "KIWI",
+        "clue": "Flightless New Zealander with a long beak"
+      },
+      {
+        "answer": "ROBIN",
+        "clue": "Red breast on every Christmas card"
+      },
+      {
+        "answer": "EAGLE",
+        "clue": "King of the sky, and a golf score of two under"
+      },
+      {
+        "answer": "HERON",
+        "clue": "Stands motionless in the shallows, then strikes"
+      },
+      {
+        "answer": "STORK",
+        "clue": "Said to deliver babies"
+      },
+      {
+        "answer": "CRANE",
+        "clue": "Long-legged dancer that shares its name with a lifting machine"
+      },
+      {
+        "answer": "RAVEN",
+        "clue": "Guards the Tower, and quoth nevermore"
+      },
+      {
+        "answer": "FINCH",
+        "clue": "Small seed-eater that gave Darwin his idea"
+      },
+      {
+        "answer": "GOOSE",
+        "clue": "Honks in a V, and lays a golden egg"
+      },
+      {
+        "answer": "QUAIL",
+        "clue": "Small game bird with tiny speckled eggs"
+      },
+      {
+        "answer": "MAGPIE",
+        "clue": "Black-and-white thief with an eye for shiny things"
+      },
+      {
+        "answer": "PIGEON",
+        "clue": "City bird that once carried the post"
+      },
+      {
+        "answer": "TOUCAN",
+        "clue": "Enormous colourful beak, at home in the rainforest"
+      },
+      {
+        "answer": "FALCON",
+        "clue": "Fastest animal on earth in a dive"
+      },
+      {
+        "answer": "PARROT",
+        "clue": "Talks back, and rides a pirate's shoulder"
+      },
+      {
+        "answer": "CUCKOO",
+        "clue": "Lays in another bird's nest, and calls the hour from a clock"
+      },
+      {
+        "answer": "PUFFIN",
+        "clue": "Clown-faced cliff nester with a striped beak"
+      },
+      {
+        "answer": "OSPREY",
+        "clue": "Fish hawk that plunges feet first"
+      },
+      {
+        "answer": "PELICAN",
+        "clue": "Carries its catch in a great throat pouch"
+      },
+      {
+        "answer": "PEACOCK",
+        "clue": "Fans out an eye-covered tail to show off"
+      },
+      {
+        "answer": "SPARROW",
+        "clue": "Small brown bird of every hedge and city street"
+      },
+      {
+        "answer": "PENGUIN",
+        "clue": "Swims brilliantly, flies not at all"
+      },
+      {
+        "answer": "OSTRICH",
+        "clue": "Too big to fly, fast enough not to need to"
+      },
+      {
+        "answer": "VULTURE",
+        "clue": "Circles overhead, waiting for the end"
+      },
+      {
+        "answer": "SEAGULL",
+        "clue": "Steals chips at the seaside"
+      },
+      {
+        "answer": "BUZZARD",
+        "clue": "Broad-winged soarer, mewing over the fields"
+      }
+    ]
+  },
+  {
+    "slug": "weather",
+    "name": "Weather",
+    "category": "nature",
+    "region": "en",
+    "icon": "🌦️",
+    "featured": false,
+    "sortOrder": 84,
+    "blurb": "Everything the sky can do.",
+    "items": [
+      {
+        "answer": "SUN",
+        "clue": "The star that runs our day"
+      },
+      {
+        "answer": "FOG",
+        "clue": "Cloud that came down to your eye level"
+      },
+      {
+        "answer": "ICE",
+        "clue": "Water that stopped moving"
+      },
+      {
+        "answer": "RAIN",
+        "clue": "What falls on the just and the unjust alike"
+      },
+      {
+        "answer": "SNOW",
+        "clue": "Falls in flakes, no two the same"
+      },
+      {
+        "answer": "HAIL",
+        "clue": "Rain that turned to bullets"
+      },
+      {
+        "answer": "WIND",
+        "clue": "You cannot see it, only what it moves"
+      },
+      {
+        "answer": "MIST",
+        "clue": "Fog's lighter cousin"
+      },
+      {
+        "answer": "GALE",
+        "clue": "A wind strong enough to earn a warning"
+      },
+      {
+        "answer": "CALM",
+        "clue": "Comes before the storm"
+      },
+      {
+        "answer": "STORM",
+        "clue": "Thunder, lightning and a lot of noise"
+      },
+      {
+        "answer": "CLOUD",
+        "clue": "Floats above, and now stores your photos"
+      },
+      {
+        "answer": "FROST",
+        "clue": "White lace on the morning grass"
+      },
+      {
+        "answer": "SLEET",
+        "clue": "Rain and snow that could not decide"
+      },
+      {
+        "answer": "THAW",
+        "clue": "When the freeze finally lets go"
+      },
+      {
+        "answer": "HUMID",
+        "clue": "Sticky air you can almost drink"
+      },
+      {
+        "answer": "BREEZE",
+        "clue": "A gentle wind, and something very easy"
+      },
+      {
+        "answer": "SHOWER",
+        "clue": "A brief burst of rain, or your morning wash"
+      },
+      {
+        "answer": "DROUGHT",
+        "clue": "When the rain simply stops coming"
+      },
+      {
+        "answer": "MONSOON",
+        "clue": "The season that arrives with the rains"
+      },
+      {
+        "answer": "TORNADO",
+        "clue": "A spinning funnel that took Dorothy"
+      },
+      {
+        "answer": "CYCLONE",
+        "clue": "Spinning storm of the southern seas"
+      },
+      {
+        "answer": "TYPHOON",
+        "clue": "The Pacific's name for a hurricane"
+      },
+      {
+        "answer": "THUNDER",
+        "clue": "The sound that follows the flash"
+      },
+      {
+        "answer": "RAINBOW",
+        "clue": "Seven colours after the rain"
+      },
+      {
+        "answer": "BLIZZARD",
+        "clue": "Snow plus a howling wind"
+      },
+      {
+        "answer": "DRIZZLE",
+        "clue": "Rain too fine to bother with an umbrella"
+      },
+      {
+        "answer": "OVERCAST",
+        "clue": "When the sky is one grey lid"
+      }
+    ]
+  },
+  {
+    "slug": "oceans-seas",
+    "name": "Oceans & Seas",
+    "category": "nature",
+    "region": "en",
+    "icon": "🌊",
+    "featured": false,
+    "sortOrder": 85,
+    "blurb": "The world's water.",
+    "items": [
+      {
+        "answer": "RED",
+        "clue": "Moses is said to have parted this sea"
+      },
+      {
+        "answer": "CORAL",
+        "clue": "Sea off northeast Australia, site of a 1942 battle"
+      },
+      {
+        "answer": "BLACK",
+        "clue": "Sea between Turkey and Ukraine"
+      },
+      {
+        "answer": "NORTH",
+        "clue": "Sea of oil rigs between Britain and Norway"
+      },
+      {
+        "answer": "BALTIC",
+        "clue": "Cold northern sea ringed by nine countries"
+      },
+      {
+        "answer": "AEGEAN",
+        "clue": "Sea scattered with Greek islands"
+      },
+      {
+        "answer": "CASPIAN",
+        "clue": "The largest lake on earth, called a sea"
+      },
+      {
+        "answer": "ARCTIC",
+        "clue": "Smallest ocean, and the one under the ice"
+      },
+      {
+        "answer": "INDIAN",
+        "clue": "Ocean between Africa, Asia and Australia"
+      },
+      {
+        "answer": "PACIFIC",
+        "clue": "Largest ocean, and its name means peaceful"
+      },
+      {
+        "answer": "ATLANTIC",
+        "clue": "Ocean the Titanic never crossed"
+      },
+      {
+        "answer": "ADRIATIC",
+        "clue": "Sea that laps Venice and the Croatian coast"
+      },
+      {
+        "answer": "ARABIAN",
+        "clue": "Sea between India and the Arabian peninsula"
+      },
+      {
+        "answer": "BERING",
+        "clue": "Sea and strait separating Asia from America"
+      },
+      {
+        "answer": "JAVA",
+        "clue": "Sea north of Indonesia's most populous island"
+      },
+      {
+        "answer": "BANDA",
+        "clue": "Deep Indonesian sea of the old spice islands"
+      },
+      {
+        "answer": "TIMOR",
+        "clue": "Sea between Indonesia and northern Australia"
+      },
+      {
+        "answer": "IRISH",
+        "clue": "Sea between Britain and its western neighbour"
+      },
+      {
+        "answer": "CELTIC",
+        "clue": "Sea south of Ireland, off the Cornish coast"
+      },
+      {
+        "answer": "AZOV",
+        "clue": "The world's shallowest sea, north of the Black"
+      },
+      {
+        "answer": "WEDDELL",
+        "clue": "Antarctic sea where Shackleton lost his ship"
+      },
+      {
+        "answer": "TASMAN",
+        "clue": "Sea between Australia and New Zealand"
+      },
+      {
+        "answer": "IONIAN",
+        "clue": "Sea between Greece's west coast and Sicily"
+      }
+    ]
+  },
+  {
+    "slug": "gemstones",
+    "name": "Gemstones & Minerals",
+    "category": "nature",
+    "region": "en",
+    "icon": "💎",
+    "featured": false,
+    "sortOrder": 86,
+    "blurb": "Precious, semi-precious and just plain rock.",
+    "items": [
+      {
+        "answer": "JADE",
+        "clue": "Green stone carved in China for millennia"
+      },
+      {
+        "answer": "OPAL",
+        "clue": "Flashes every colour at once, October's stone"
+      },
+      {
+        "answer": "RUBY",
+        "clue": "Red corundum, July's birthstone"
+      },
+      {
+        "answer": "ONYX",
+        "clue": "Banded black stone cut for signet rings"
+      },
+      {
+        "answer": "TOPAZ",
+        "clue": "Golden November stone"
+      },
+      {
+        "answer": "PEARL",
+        "clue": "The only gem made by a living animal"
+      },
+      {
+        "answer": "AMBER",
+        "clue": "Fossilised tree resin, sometimes with an insect inside"
+      },
+      {
+        "answer": "CORAL",
+        "clue": "Gem grown by tiny reef animals"
+      },
+      {
+        "answer": "QUARTZ",
+        "clue": "Most common crystal, and it keeps your watch on time"
+      },
+      {
+        "answer": "GARNET",
+        "clue": "Deep red January stone"
+      },
+      {
+        "answer": "ZIRCON",
+        "clue": "Brilliant stone often mistaken for diamond"
+      },
+      {
+        "answer": "COPPER",
+        "clue": "Reddish metal that greens with age"
+      },
+      {
+        "answer": "SILVER",
+        "clue": "Bright metal of the second-place medal"
+      },
+      {
+        "answer": "GOLD",
+        "clue": "The metal that never tarnishes"
+      },
+      {
+        "answer": "IRON",
+        "clue": "The metal an Age was named after"
+      },
+      {
+        "answer": "TIN",
+        "clue": "Soft metal that made bronze possible"
+      },
+      {
+        "answer": "NICKEL",
+        "clue": "Metal that keeps steel from staining"
+      },
+      {
+        "answer": "COBALT",
+        "clue": "Metal that turns glass deep blue"
+      },
+      {
+        "answer": "GYPSUM",
+        "clue": "Soft mineral ground up to make plaster"
+      },
+      {
+        "answer": "GRANITE",
+        "clue": "Speckled hard rock of kitchen worktops"
+      },
+      {
+        "answer": "BASALT",
+        "clue": "Dark volcanic rock, and the Giant's Causeway"
+      },
+      {
+        "answer": "MARBLE",
+        "clue": "Stone Michelangelo carved"
+      },
+      {
+        "answer": "OBSIDIAN",
+        "clue": "Volcanic glass, sharp enough for a blade"
+      },
+      {
+        "answer": "DIAMOND",
+        "clue": "Hardest natural substance, and April's stone"
+      },
+      {
+        "answer": "EMERALD",
+        "clue": "Green beryl, May's stone, and an Isle"
+      },
+      {
+        "answer": "SAPPHIRE",
+        "clue": "Blue corundum, September's stone"
+      },
+      {
+        "answer": "AMETHYST",
+        "clue": "Purple quartz, February's stone"
+      },
+      {
+        "answer": "PERIDOT",
+        "clue": "Olive-green August stone, born in lava"
+      }
+    ]
+  },
+  {
+    "slug": "chemical-elements",
+    "name": "Chemical Elements",
+    "category": "science",
+    "region": "en",
+    "icon": "🧪",
+    "featured": false,
+    "sortOrder": 91,
+    "blurb": "Straight off the periodic table.",
+    "items": [
+      {
+        "answer": "TIN",
+        "clue": "Symbol Sn, and what the can used to be"
+      },
+      {
+        "answer": "IRON",
+        "clue": "Symbol Fe, and what the Age was named after"
+      },
+      {
+        "answer": "ZINC",
+        "clue": "Symbol Zn, galvanises steel against rust"
+      },
+      {
+        "answer": "NEON",
+        "clue": "Glows orange-red in a bar sign"
+      },
+      {
+        "answer": "GOLD",
+        "clue": "Symbol Au, and it never tarnishes"
+      },
+      {
+        "answer": "LEAD",
+        "clue": "Symbol Pb, heavy, soft and poisonous"
+      },
+      {
+        "answer": "ARGON",
+        "clue": "Lazy gas that fills a light bulb"
+      },
+      {
+        "answer": "BORON",
+        "clue": "Element five, and what borax is made of"
+      },
+      {
+        "answer": "XENON",
+        "clue": "Noble gas behind bright car headlights"
+      },
+      {
+        "answer": "RADON",
+        "clue": "Radioactive gas that seeps out of the ground"
+      },
+      {
+        "answer": "SODIUM",
+        "clue": "Half of table salt, and it explodes in water"
+      },
+      {
+        "answer": "CARBON",
+        "clue": "Diamonds, graphite, and all life"
+      },
+      {
+        "answer": "COPPER",
+        "clue": "Symbol Cu, turns green, wires your house"
+      },
+      {
+        "answer": "SILVER",
+        "clue": "Symbol Ag, best conductor of them all"
+      },
+      {
+        "answer": "NICKEL",
+        "clue": "Metal in stainless steel, and an American coin"
+      },
+      {
+        "answer": "COBALT",
+        "clue": "Gives glass its deep blue, and powers batteries"
+      },
+      {
+        "answer": "OXYGEN",
+        "clue": "A fifth of the air, and you cannot skip it"
+      },
+      {
+        "answer": "HELIUM",
+        "clue": "Second lightest, and it makes your voice squeak"
+      },
+      {
+        "answer": "CALCIUM",
+        "clue": "Builds bones and teeth, and chalk"
+      },
+      {
+        "answer": "LITHIUM",
+        "clue": "Lightest metal, and it charges your phone"
+      },
+      {
+        "answer": "MERCURY",
+        "clue": "The only metal that is liquid at room temperature"
+      },
+      {
+        "answer": "URANIUM",
+        "clue": "Splits to make power, and bombs"
+      },
+      {
+        "answer": "ARSENIC",
+        "clue": "The classic poison of Victorian crime"
+      },
+      {
+        "answer": "BROMINE",
+        "clue": "The only non-metal liquid at room temperature"
+      },
+      {
+        "answer": "CHLORINE",
+        "clue": "Bleaches the laundry and cleans the pool"
+      },
+      {
+        "answer": "KRYPTON",
+        "clue": "Noble gas that shares its name with Superman's world"
+      },
+      {
+        "answer": "SULFUR",
+        "clue": "Yellow, and the smell of rotten eggs"
+      },
+      {
+        "answer": "SILICON",
+        "clue": "Sand becomes chips, and a whole valley"
+      },
+      {
+        "answer": "BARIUM",
+        "clue": "Swallowed as a meal before an X-ray"
+      },
+      {
+        "answer": "RADIUM",
+        "clue": "Glowed on old watch dials, discovered by the Curies"
+      },
+      {
+        "answer": "IODINE",
+        "clue": "Purple vapour, painted on cuts, needed by the thyroid"
+      },
+      {
+        "answer": "PLATINUM",
+        "clue": "Rarer than gold, and the record above gold"
+      }
+    ]
+  },
+  {
+    "slug": "space",
+    "name": "Space & Astronomy",
+    "category": "science",
+    "region": "en",
+    "icon": "🪐",
+    "featured": true,
+    "sortOrder": 92,
+    "blurb": "Planets, moons and the things between them.",
+    "items": [
+      {
+        "answer": "SUN",
+        "clue": "Our own star, and it is quite average"
+      },
+      {
+        "answer": "MOON",
+        "clue": "We landed on it in 1969"
+      },
+      {
+        "answer": "MARS",
+        "clue": "The red planet, and the god of war"
+      },
+      {
+        "answer": "VENUS",
+        "clue": "Hottest planet, and the goddess of love"
+      },
+      {
+        "answer": "EARTH",
+        "clue": "The only one known to have us on it"
+      },
+      {
+        "answer": "PLUTO",
+        "clue": "Demoted from planet in 2006"
+      },
+      {
+        "answer": "SATURN",
+        "clue": "The one wearing rings"
+      },
+      {
+        "answer": "URANUS",
+        "clue": "Ice giant that rolls on its side"
+      },
+      {
+        "answer": "NEPTUNE",
+        "clue": "Furthest planet, and the god of the sea"
+      },
+      {
+        "answer": "JUPITER",
+        "clue": "Biggest planet, with a storm bigger than Earth"
+      },
+      {
+        "answer": "MERCURY",
+        "clue": "Closest to the sun, and a liquid metal"
+      },
+      {
+        "answer": "COMET",
+        "clue": "Dirty snowball that grows a tail near the sun"
+      },
+      {
+        "answer": "ORBIT",
+        "clue": "The path one body takes around another"
+      },
+      {
+        "answer": "NEBULA",
+        "clue": "Cloud of gas and dust where stars are born"
+      },
+      {
+        "answer": "GALAXY",
+        "clue": "Billions of stars bound together, like our Milky Way"
+      },
+      {
+        "answer": "QUASAR",
+        "clue": "Blazing core of a distant young galaxy"
+      },
+      {
+        "answer": "PULSAR",
+        "clue": "Spinning neutron star that ticks like a lighthouse"
+      },
+      {
+        "answer": "METEOR",
+        "clue": "A shooting star, burning up as it falls"
+      },
+      {
+        "answer": "ECLIPSE",
+        "clue": "When one body slides in front of another"
+      },
+      {
+        "answer": "ASTEROID",
+        "clue": "Rocky lump, mostly found in a belt past Mars"
+      },
+      {
+        "answer": "COSMOS",
+        "clue": "Everything there is, taken as a whole"
+      },
+      {
+        "answer": "ROCKET",
+        "clue": "Burns fuel downward to go up"
+      },
+      {
+        "answer": "SHUTTLE",
+        "clue": "Reusable NASA spaceplane, retired in 2011"
+      },
+      {
+        "answer": "APOLLO",
+        "clue": "The programme that put boots on the moon"
+      },
+      {
+        "answer": "GEMINI",
+        "clue": "Two-seat NASA programme, and the twins"
+      },
+      {
+        "answer": "ORION",
+        "clue": "The hunter with a famous belt of three stars"
+      },
+      {
+        "answer": "TITAN",
+        "clue": "Saturn's biggest moon, with lakes of methane"
+      },
+      {
+        "answer": "EUROPA",
+        "clue": "Jupiter's icy moon with an ocean beneath"
+      },
+      {
+        "answer": "PHOBOS",
+        "clue": "The larger of Mars's two small moons"
+      },
+      {
+        "answer": "DEIMOS",
+        "clue": "The smaller Martian moon, named for dread"
+      },
+      {
+        "answer": "IO",
+        "clue": "Jupiter's moon, the most volcanic place we know"
+      },
+      {
+        "answer": "CERES",
+        "clue": "Dwarf planet living in the asteroid belt"
+      }
+    ]
+  }
 ]

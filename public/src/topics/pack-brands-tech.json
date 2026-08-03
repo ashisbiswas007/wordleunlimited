@@ -1,78 +1,618 @@
 [
-{
-  "slug": "tech-companies", "name": "Tech Companies", "category": "brands", "region": "en",
-  "icon": "💻", "featured": true, "sortOrder": 41,
-  "blurb": "The companies behind the software and hardware you use.",
-  "items": [
-    {"answer":"APPLE"},{"answer":"GOOGLE"},{"answer":"META"},{"answer":"AMAZON"},
-    {"answer":"ADOBE"},{"answer":"ORACLE"},{"answer":"INTEL"},{"answer":"CISCO"},
-    {"answer":"NVIDIA"},{"answer":"TESLA"},{"answer":"UBER"},{"answer":"NETFLIX"},
-    {"answer":"SPOTIFY"},{"answer":"TWITTER"},{"answer":"REDDIT"},{"answer":"GITHUB"},
-    {"answer":"SLACK"},{"answer":"ZOOM"},{"answer":"STRIPE"},{"answer":"SHOPIFY"},
-    {"answer":"DROPBOX"},{"answer":"TWITCH"},{"answer":"DISCORD"},{"answer":"SNAP"},
-    {"answer":"TIKTOK"},{"answer":"IBM"},{"answer":"DELL"},{"answer":"SONY"},
-    {"answer":"CANON"},{"answer":"EPSON"},{"answer":"NOKIA"},{"answer":"SIEMENS"}
-  ]
-},
-{
-  "slug": "fast-food", "name": "Fast Food Brands", "category": "brands", "region": "en",
-  "icon": "🍔", "featured": false, "sortOrder": 45,
-  "blurb": "Chains you have queued at.",
-  "items": [
-    {"answer":"KFC"},{"answer":"SUBWAY"},{"answer":"WENDYS"},{"answer":"POPEYES"},
-    {"answer":"ARBYS"},{"answer":"SONIC"},{"answer":"DOMINOS"},{"answer":"PAPA"},
-    {"answer":"NANDOS"},{"answer":"GREGGS"},{"answer":"COSTA"},{"answer":"PRET"},
-    {"answer":"CHIPOTLE"},{"answer":"PANERA"},{"answer":"DENNYS"},{"answer":"IHOP"},
-    {"answer":"HARDEES"},{"answer":"CULVERS"},{"answer":"WHATABURGER"},{"answer":"JOLLIBEE"}
-  ]
-},
-{
-  "slug": "sportswear", "name": "Sportswear Brands", "category": "brands", "region": "en",
-  "icon": "👟", "featured": false, "sortOrder": 46,
-  "blurb": "Kit, trainers and gear.",
-  "items": [
-    {"answer":"NIKE"},{"answer":"PUMA"},{"answer":"ASICS"},{"answer":"ADIDAS"},
-    {"answer":"REEBOK"},{"answer":"UMBRO"},{"answer":"KAPPA"},{"answer":"FILA"},
-    {"answer":"DIADORA"},{"answer":"MIZUNO"},{"answer":"SPEEDO"},{"answer":"HUMMEL"},
-    {"answer":"SAUCONY"},{"answer":"BROOKS"},{"answer":"MACRON"},{"answer":"JOMA"},
-    {"answer":"LOTTO"},{"answer":"ERREA"},{"answer":"CONVERSE"},{"answer":"VANS"}
-  ]
-},
-{
-  "slug": "airlines", "name": "Airlines", "category": "brands", "region": "en",
-  "icon": "✈️", "featured": false, "sortOrder": 47,
-  "blurb": "Carriers from around the world.",
-  "items": [
-    {"answer":"DELTA"},{"answer":"UNITED"},{"answer":"RYANAIR"},{"answer":"EMIRATES"},
-    {"answer":"QATAR"},{"answer":"QANTAS"},{"answer":"IBERIA"},{"answer":"ALITALIA"},
-    {"answer":"LUFTHANSA"},{"answer":"JETBLUE"},{"answer":"WIZZ"},{"answer":"VUELING"},
-    {"answer":"AEROMEXICO"},{"answer":"GARUDA"},{"answer":"LION"},{"answer":"BATIK"},
-    {"answer":"CATHAY"},{"answer":"KOREAN"},{"answer":"ANA"},{"answer":"JAL"},
-    {"answer":"TAP"},{"answer":"SAS"},{"answer":"KLM"},{"answer":"EASYJET"}
-  ]
-},
-{
-  "slug": "supermarkets", "name": "Supermarkets", "category": "brands", "region": "en",
-  "icon": "🛒", "featured": false, "sortOrder": 48,
-  "blurb": "Where the shopping gets done.",
-  "items": [
-    {"answer":"TESCO"},{"answer":"ASDA"},{"answer":"ALDI"},{"answer":"LIDL"},
-    {"answer":"COOP"},{"answer":"SPAR"},{"answer":"COSTCO"},{"answer":"KROGER"},
-    {"answer":"SAFEWAY"},{"answer":"PUBLIX"},{"answer":"MEIJER"},{"answer":"WEGMANS"},
-    {"answer":"CARREFOUR"},{"answer":"MORRISONS"},{"answer":"WAITROSE"},{"answer":"ICELAND"},
-    {"answer":"BUDGENS"},{"answer":"ALFAMART"},{"answer":"INDOMARET"},{"answer":"HYPERMART"}
-  ]
-},
-{
-  "slug": "motorbikes", "name": "Motorbike Brands", "category": "brands", "region": "en",
-  "icon": "🏍️", "featured": false, "sortOrder": 49,
-  "blurb": "Two wheels and an engine.",
-  "items": [
-    {"answer":"HONDA"},{"answer":"YAMAHA"},{"answer":"SUZUKI"},{"answer":"DUCATI"},
-    {"answer":"APRILIA"},{"answer":"TRIUMPH"},{"answer":"HARLEY"},{"answer":"INDIAN"},
-    {"answer":"KTM"},{"answer":"BENELLI"},{"answer":"NORTON"},{"answer":"BSA"},
-    {"answer":"ROYAL","clue":"___ Enfield"},{"answer":"HUSQVARNA"},{"answer":"BAJAJ"},
-    {"answer":"HERO"},{"answer":"TVS"},{"answer":"VESPA"},{"answer":"PIAGGIO"},{"answer":"KAWASAKI"}
-  ]
-}
+  {
+    "slug": "tech-companies",
+    "name": "Tech Companies",
+    "category": "brands",
+    "region": "en",
+    "icon": "💻",
+    "featured": true,
+    "sortOrder": 41,
+    "blurb": "The companies behind the software and hardware you use.",
+    "items": [
+      {
+        "answer": "APPLE",
+        "clue": "Garage start-up now worth trillions, bitten fruit logo"
+      },
+      {
+        "answer": "GOOGLE",
+        "clue": "Started as a search engine, now a verb"
+      },
+      {
+        "answer": "META",
+        "clue": "Renamed itself after a virtual world nobody visited"
+      },
+      {
+        "answer": "AMAZON",
+        "clue": "Bookshop that became everything, named after a river"
+      },
+      {
+        "answer": "ADOBE",
+        "clue": "Photoshop, PDF, and a subscription you cannot escape"
+      },
+      {
+        "answer": "ORACLE",
+        "clue": "Databases, and a very competitive sailing team"
+      },
+      {
+        "answer": "INTEL",
+        "clue": "Inside, and it made the chip that ran the PC"
+      },
+      {
+        "answer": "CISCO",
+        "clue": "Routes most of the internet's traffic"
+      },
+      {
+        "answer": "NVIDIA",
+        "clue": "Graphics cards that ended up powering all of AI"
+      },
+      {
+        "answer": "TESLA",
+        "clue": "Electric cars and a very online founder"
+      },
+      {
+        "answer": "UBER",
+        "clue": "Tap the app, watch the car approach"
+      },
+      {
+        "answer": "NETFLIX",
+        "clue": "Posted DVDs, then killed the video shop"
+      },
+      {
+        "answer": "SPOTIFY",
+        "clue": "Swedish firm that rents you all the music"
+      },
+      {
+        "answer": "TWITTER",
+        "clue": "The blue bird that got renamed X"
+      },
+      {
+        "answer": "REDDIT",
+        "clue": "The self-declared front page of the internet"
+      },
+      {
+        "answer": "GITHUB",
+        "clue": "Where the world's code lives, with an octocat"
+      },
+      {
+        "answer": "SLACK",
+        "clue": "Where work chat goes to pile up"
+      },
+      {
+        "answer": "ZOOM",
+        "clue": "You are on mute"
+      },
+      {
+        "answer": "STRIPE",
+        "clue": "Handles the payment so the shop does not have to"
+      },
+      {
+        "answer": "SHOPIFY",
+        "clue": "Canadian firm that lets anyone open a shop online"
+      },
+      {
+        "answer": "DROPBOX",
+        "clue": "Put a file in a folder, find it everywhere"
+      },
+      {
+        "answer": "TWITCH",
+        "clue": "Watch other people play games, live"
+      },
+      {
+        "answer": "DISCORD",
+        "clue": "Voice and text servers, born out of gaming"
+      },
+      {
+        "answer": "SNAP",
+        "clue": "The app where the photo disappears"
+      },
+      {
+        "answer": "TIKTOK",
+        "clue": "Short vertical video and an alarming algorithm"
+      },
+      {
+        "answer": "IBM",
+        "clue": "Big Blue, and it built Watson and the PC"
+      },
+      {
+        "answer": "DELL",
+        "clue": "Founded in a Texas dorm room, sold direct"
+      },
+      {
+        "answer": "SONY",
+        "clue": "Walkman, PlayStation and a lot of cameras"
+      },
+      {
+        "answer": "CANON",
+        "clue": "Japanese camera and printer giant"
+      },
+      {
+        "answer": "EPSON",
+        "clue": "Printers, projectors and a lot of ink"
+      },
+      {
+        "answer": "NOKIA",
+        "clue": "Finnish giant of the indestructible handset"
+      },
+      {
+        "answer": "SIEMENS",
+        "clue": "German industrial giant, from trains to scanners"
+      }
+    ]
+  },
+  {
+    "slug": "fast-food",
+    "name": "Fast Food Brands",
+    "category": "brands",
+    "region": "en",
+    "icon": "🍔",
+    "featured": false,
+    "sortOrder": 45,
+    "blurb": "Chains you have queued at.",
+    "items": [
+      {
+        "answer": "KFC",
+        "clue": "Eleven herbs and spices, and a Colonel"
+      },
+      {
+        "answer": "SUBWAY",
+        "clue": "Pick your bread, then watch it get built"
+      },
+      {
+        "answer": "WENDYS",
+        "clue": "Square patties, red pigtails and a sharp social account"
+      },
+      {
+        "answer": "POPEYES",
+        "clue": "Louisiana fried chicken, and a sandwich that broke the internet"
+      },
+      {
+        "answer": "ARBYS",
+        "clue": "We have the meats, and a cowboy hat logo"
+      },
+      {
+        "answer": "SONIC",
+        "clue": "American drive-in where they bring it on skates"
+      },
+      {
+        "answer": "DOMINOS",
+        "clue": "Pizza in thirty minutes, or it used to be"
+      },
+      {
+        "answer": "PAPA",
+        "clue": "Johns, and better ingredients"
+      },
+      {
+        "answer": "NANDOS",
+        "clue": "Peri-peri chicken and a cheeky one"
+      },
+      {
+        "answer": "GREGGS",
+        "clue": "British bakery chain, and the vegan sausage roll"
+      },
+      {
+        "answer": "COSTA",
+        "clue": "British coffee chain, rival to the mermaid"
+      },
+      {
+        "answer": "PRET",
+        "clue": "A Manger, and sandwiches made that day"
+      },
+      {
+        "answer": "CHIPOTLE",
+        "clue": "Burrito bowls built down a line"
+      },
+      {
+        "answer": "PANERA",
+        "clue": "American bakery-cafe of soup and bread bowls"
+      },
+      {
+        "answer": "DENNYS",
+        "clue": "American diner open all night, and the Grand Slam"
+      },
+      {
+        "answer": "IHOP",
+        "clue": "Pancakes, internationally, and it briefly flipped to burgers"
+      },
+      {
+        "answer": "HARDEES",
+        "clue": "American burger chain, Carl's Jr in the west"
+      },
+      {
+        "answer": "CULVERS",
+        "clue": "Wisconsin butterburgers and frozen custard"
+      },
+      {
+        "answer": "WHATABURGER",
+        "clue": "Texan orange-and-white striped burger institution"
+      },
+      {
+        "answer": "JOLLIBEE",
+        "clue": "Filipino chain with a smiling bee and sweet spaghetti"
+      }
+    ]
+  },
+  {
+    "slug": "sportswear",
+    "name": "Sportswear Brands",
+    "category": "brands",
+    "region": "en",
+    "icon": "👟",
+    "featured": false,
+    "sortOrder": 46,
+    "blurb": "Kit, trainers and gear.",
+    "items": [
+      {
+        "answer": "NIKE",
+        "clue": "Named after a Greek goddess, and just do it"
+      },
+      {
+        "answer": "PUMA",
+        "clue": "German cat brand founded by the other Dassler brother"
+      },
+      {
+        "answer": "ASICS",
+        "clue": "Japanese running shoes, and a Latin motto in its name"
+      },
+      {
+        "answer": "ADIDAS",
+        "clue": "Three stripes from Herzogenaurach"
+      },
+      {
+        "answer": "REEBOK",
+        "clue": "British-born brand named after an African antelope"
+      },
+      {
+        "answer": "UMBRO",
+        "clue": "English kit maker of the double diamond"
+      },
+      {
+        "answer": "KAPPA",
+        "clue": "Italian brand with two people sitting back to back"
+      },
+      {
+        "answer": "FILA",
+        "clue": "Italian brand that came back through streetwear"
+      },
+      {
+        "answer": "DIADORA",
+        "clue": "Italian maker of boots and tennis shoes"
+      },
+      {
+        "answer": "MIZUNO",
+        "clue": "Japanese brand big in running and baseball"
+      },
+      {
+        "answer": "SPEEDO",
+        "clue": "You wear it to swim, and it needs no other name"
+      },
+      {
+        "answer": "HUMMEL",
+        "clue": "Danish brand with chevrons down the sleeve"
+      },
+      {
+        "answer": "SAUCONY",
+        "clue": "American running brand named after a creek"
+      },
+      {
+        "answer": "BROOKS",
+        "clue": "American brand that gave up everything but running"
+      },
+      {
+        "answer": "MACRON",
+        "clue": "Italian kit maker sharing a name with a president"
+      },
+      {
+        "answer": "JOMA",
+        "clue": "Spanish football kit and boot maker"
+      },
+      {
+        "answer": "LOTTO",
+        "clue": "Italian sportswear, and also a draw for millions"
+      },
+      {
+        "answer": "ERREA",
+        "clue": "Italian kit maker of many smaller clubs"
+      },
+      {
+        "answer": "CONVERSE",
+        "clue": "Chuck Taylor's All Star"
+      },
+      {
+        "answer": "VANS",
+        "clue": "Off the wall, and the skateboarder's checkerboard"
+      }
+    ]
+  },
+  {
+    "slug": "airlines",
+    "name": "Airlines",
+    "category": "brands",
+    "region": "en",
+    "icon": "✈️",
+    "featured": false,
+    "sortOrder": 47,
+    "blurb": "Carriers from around the world.",
+    "items": [
+      {
+        "answer": "DELTA",
+        "clue": "Atlanta-based US giant named after a river mouth"
+      },
+      {
+        "answer": "UNITED",
+        "clue": "Chicago-based US carrier with a globe on the tail"
+      },
+      {
+        "answer": "RYANAIR",
+        "clue": "Irish budget airline that charges for everything"
+      },
+      {
+        "answer": "EMIRATES",
+        "clue": "Dubai's flag carrier, and Arsenal's stadium"
+      },
+      {
+        "answer": "QATAR",
+        "clue": "Doha's airline, often voted the world's best"
+      },
+      {
+        "answer": "QANTAS",
+        "clue": "The flying kangaroo from Australia"
+      },
+      {
+        "answer": "IBERIA",
+        "clue": "Spain's flag carrier"
+      },
+      {
+        "answer": "ALITALIA",
+        "clue": "Italy's old flag carrier, replaced by ITA"
+      },
+      {
+        "answer": "LUFTHANSA",
+        "clue": "German flag carrier with a crane on the tail"
+      },
+      {
+        "answer": "JETBLUE",
+        "clue": "US low-cost airline out of New York"
+      },
+      {
+        "answer": "WIZZ",
+        "clue": "Hungarian purple-and-pink budget airline"
+      },
+      {
+        "answer": "VUELING",
+        "clue": "Spanish low-cost carrier based in Barcelona"
+      },
+      {
+        "answer": "AEROMEXICO",
+        "clue": "Mexico's flag carrier with an eagle knight on the tail"
+      },
+      {
+        "answer": "GARUDA",
+        "clue": "Indonesia's flag carrier, named after a mythical bird"
+      },
+      {
+        "answer": "LION",
+        "clue": "Indonesian budget airline, and the king of beasts"
+      },
+      {
+        "answer": "BATIK",
+        "clue": "Indonesian full-service airline named after a cloth"
+      },
+      {
+        "answer": "CATHAY",
+        "clue": "Hong Kong's Pacific flag carrier"
+      },
+      {
+        "answer": "KOREAN",
+        "clue": "Seoul's flag carrier with a blue swirl"
+      },
+      {
+        "answer": "ANA",
+        "clue": "All Nippon Airways, Japan's largest"
+      },
+      {
+        "answer": "JAL",
+        "clue": "Japan Airlines, with a red crane"
+      },
+      {
+        "answer": "TAP",
+        "clue": "Portugal's flag carrier"
+      },
+      {
+        "answer": "SAS",
+        "clue": "Scandinavian Airlines, shared by three countries"
+      },
+      {
+        "answer": "KLM",
+        "clue": "Dutch royal airline, the oldest still flying under its name"
+      },
+      {
+        "answer": "EASYJET",
+        "clue": "Orange British budget airline"
+      }
+    ]
+  },
+  {
+    "slug": "supermarkets",
+    "name": "Supermarkets",
+    "category": "brands",
+    "region": "en",
+    "icon": "🛒",
+    "featured": false,
+    "sortOrder": 48,
+    "blurb": "Where the shopping gets done.",
+    "items": [
+      {
+        "answer": "TESCO",
+        "clue": "Britain's biggest grocer, every little helps"
+      },
+      {
+        "answer": "ASDA",
+        "clue": "British chain long owned by Walmart"
+      },
+      {
+        "answer": "ALDI",
+        "clue": "German discounter that scans faster than you can pack"
+      },
+      {
+        "answer": "LIDL",
+        "clue": "The other German discounter, with a middle aisle of surprises"
+      },
+      {
+        "answer": "COOP",
+        "clue": "Owned by its members, not shareholders"
+      },
+      {
+        "answer": "SPAR",
+        "clue": "Small international convenience chain with a fir tree logo"
+      },
+      {
+        "answer": "COSTCO",
+        "clue": "Membership warehouse selling everything in bulk"
+      },
+      {
+        "answer": "KROGER",
+        "clue": "America's largest supermarket chain by itself"
+      },
+      {
+        "answer": "SAFEWAY",
+        "clue": "Old American grocery name, now part of Albertsons"
+      },
+      {
+        "answer": "PUBLIX",
+        "clue": "Employee-owned chain of the American southeast"
+      },
+      {
+        "answer": "MEIJER",
+        "clue": "Midwestern American superstore, open all hours"
+      },
+      {
+        "answer": "WEGMANS",
+        "clue": "New York family chain with a cult following"
+      },
+      {
+        "answer": "CARREFOUR",
+        "clue": "French hypermarket giant, a crossroads by name"
+      },
+      {
+        "answer": "MORRISONS",
+        "clue": "Bradford-born British supermarket"
+      },
+      {
+        "answer": "WAITROSE",
+        "clue": "The upmarket British grocer, part of John Lewis"
+      },
+      {
+        "answer": "ICELAND",
+        "clue": "British frozen food chain, and a country"
+      },
+      {
+        "answer": "BUDGENS",
+        "clue": "Small British convenience supermarket"
+      },
+      {
+        "answer": "ALFAMART",
+        "clue": "Indonesian convenience chain on every corner"
+      },
+      {
+        "answer": "INDOMARET",
+        "clue": "Indonesia's other ubiquitous mini-market"
+      },
+      {
+        "answer": "HYPERMART",
+        "clue": "Indonesian hypermarket chain"
+      }
+    ]
+  },
+  {
+    "slug": "motorbikes",
+    "name": "Motorbike Brands",
+    "category": "brands",
+    "region": "en",
+    "icon": "🏍️",
+    "featured": false,
+    "sortOrder": 49,
+    "blurb": "Two wheels and an engine.",
+    "items": [
+      {
+        "answer": "HONDA",
+        "clue": "The world's largest motorcycle maker, and the Super Cub"
+      },
+      {
+        "answer": "YAMAHA",
+        "clue": "Three tuning forks in the badge, and it makes pianos too"
+      },
+      {
+        "answer": "SUZUKI",
+        "clue": "Japanese maker of the Hayabusa"
+      },
+      {
+        "answer": "DUCATI",
+        "clue": "Bologna's red bikes with a desmodromic valve"
+      },
+      {
+        "answer": "APRILIA",
+        "clue": "Italian marque with a racing cabinet full of titles"
+      },
+      {
+        "answer": "TRIUMPH",
+        "clue": "British marque of the Bonneville"
+      },
+      {
+        "answer": "HARLEY",
+        "clue": "Davidson, and that unmistakable rumble"
+      },
+      {
+        "answer": "INDIAN",
+        "clue": "America's oldest motorcycle marque, Harley's old rival"
+      },
+      {
+        "answer": "KTM",
+        "clue": "Austrian orange, and ready to race"
+      },
+      {
+        "answer": "BENELLI",
+        "clue": "Old Italian marque now under Chinese ownership"
+      },
+      {
+        "answer": "NORTON",
+        "clue": "British marque of the Commando"
+      },
+      {
+        "answer": "BSA",
+        "clue": "Birmingham Small Arms, once Britain's biggest"
+      },
+      {
+        "answer": "ROYAL",
+        "clue": "Enfield, made in India, oldest name still in production"
+      },
+      {
+        "answer": "HUSQVARNA",
+        "clue": "Swedish-born marque that also makes chainsaws"
+      },
+      {
+        "answer": "BAJAJ",
+        "clue": "Indian maker of the Pulsar and a lot of rickshaws"
+      },
+      {
+        "answer": "HERO",
+        "clue": "India's biggest two-wheeler maker, once tied to Honda"
+      },
+      {
+        "answer": "TVS",
+        "clue": "Indian maker from Chennai, and the Apache"
+      },
+      {
+        "answer": "VESPA",
+        "clue": "The wasp, and Rome's favourite scooter"
+      },
+      {
+        "answer": "PIAGGIO",
+        "clue": "Italian group behind the Vespa"
+      },
+      {
+        "answer": "KAWASAKI",
+        "clue": "Green Japanese marque of the Ninja"
+      }
+    ]
+  }
 ]

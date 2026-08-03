@@ -1,182 +1,1534 @@
 [
-{
-  "slug": "marvel", "name": "Marvel", "category": "movies & tv", "region": "en",
-  "icon": "🦸", "featured": true, "sortOrder": 11,
-  "blurb": "Heroes, villains and the wider Marvel universe.",
-  "items": [
-    {"answer":"THOR","clue":"God of thunder"},{"answer":"HULK","clue":"Big and green"},
-    {"answer":"LOKI","clue":"God of mischief"},{"answer":"STARK","clue":"Iron Man's surname"},
-    {"answer":"TONY","clue":"Iron Man's first name"},{"answer":"STEVE","clue":"Captain America"},
-    {"answer":"ROGERS","clue":"Cap's surname"},{"answer":"NATASHA","clue":"Black Widow"},
-    {"answer":"CLINT","clue":"Hawkeye"},{"answer":"VISION","clue":"Born of the Mind Stone"},
-    {"answer":"WANDA","clue":"Scarlet Witch"},{"answer":"PIETRO","clue":"Quicksilver"},
-    {"answer":"THANOS","clue":"The Mad Titan"},{"answer":"GAMORA","clue":"Deadliest woman in the galaxy"},
-    {"answer":"NEBULA","clue":"Gamora's sister"},{"answer":"DRAX","clue":"The Destroyer"},
-    {"answer":"GROOT","clue":"I am ___"},{"answer":"ROCKET","clue":"The raccoon"},
-    {"answer":"BUCKY","clue":"Winter Soldier"},{"answer":"SAM","clue":"Falcon"},
-    {"answer":"SHURI","clue":"Wakandan princess"},{"answer":"OKOYE","clue":"Dora Milaje general"},
-    {"answer":"WAKANDA","clue":"T'Challa's nation"},{"answer":"ASGARD","clue":"Thor's realm"},
-    {"answer":"HYDRA","clue":"Cut off one head…"},{"answer":"SHIELD","clue":"Fury's agency"},
-    {"answer":"FURY","clue":"The man with the eyepatch"},{"answer":"ULTRON","clue":"Stark's mistake"},
-    {"answer":"MJOLNIR","clue":"Worthy only"},{"answer":"XAVIER","clue":"Professor X"},
-    {"answer":"LOGAN","clue":"Wolverine"},{"answer":"STORM","clue":"Weather-controlling X-Man"},
-    {"answer":"CYCLOPS","clue":"Visor and optic blasts"},{"answer":"MAGNETO","clue":"Master of magnetism"},
-    {"answer":"DEADPOOL","clue":"The merc with a mouth"},{"answer":"MYSTIQUE","clue":"Blue shapeshifter"}
-  ]
-},
-{
-  "slug": "harry-potter", "name": "Harry Potter", "category": "movies & tv", "region": "en",
-  "icon": "⚡", "featured": true, "sortOrder": 12,
-  "blurb": "Wizards, spells and places from the wizarding world.",
-  "items": [
-    {"answer":"HARRY"},{"answer":"POTTER"},{"answer":"RON"},{"answer":"WEASLEY"},
-    {"answer":"HERMIONE"},{"answer":"GRANGER"},{"answer":"HAGRID"},{"answer":"SNAPE"},
-    {"answer":"DRACO"},{"answer":"MALFOY"},{"answer":"SIRIUS"},{"answer":"REMUS"},
-    {"answer":"LUPIN"},{"answer":"NEVILLE"},{"answer":"LUNA"},{"answer":"GINNY"},
-    {"answer":"FRED"},{"answer":"GEORGE"},{"answer":"CEDRIC"},{"answer":"HEDWIG","clue":"Harry's owl"},
-    {"answer":"DOBBY","clue":"A free elf"},{"answer":"FAWKES","clue":"The phoenix"},
-    {"answer":"HOGWARTS"},{"answer":"GRYFFINDOR"},{"answer":"SLYTHERIN"},
-    {"answer":"QUIDDITCH","clue":"The broomstick sport"},{"answer":"SNITCH","clue":"Worth 150 points"},
-    {"answer":"WAND"},{"answer":"MUGGLE","clue":"Non-magical folk"},{"answer":"HORCRUX"},
-    {"answer":"PATRONUS"},{"answer":"AZKABAN","clue":"The wizard prison"},
-    {"answer":"DIAGON","clue":"___ Alley"},{"answer":"GRINGOTTS","clue":"The goblin bank"}
-  ]
-},
-{
-  "slug": "star-wars", "name": "Star Wars", "category": "movies & tv", "region": "en",
-  "icon": "🌌", "featured": true, "sortOrder": 13,
-  "blurb": "A galaxy far, far away.",
-  "items": [
-    {"answer":"LUKE"},{"answer":"LEIA"},{"answer":"HAN"},{"answer":"SOLO"},
-    {"answer":"VADER"},{"answer":"YODA"},{"answer":"ANAKIN"},{"answer":"PADME"},
-    {"answer":"OBIWAN"},{"answer":"KENOBI"},{"answer":"REY"},{"answer":"FINN"},
-    {"answer":"POE"},{"answer":"KYLO"},{"answer":"CHEWIE"},{"answer":"JABBA"},
-    {"answer":"BOBA"},{"answer":"FETT"},{"answer":"MAUL"},{"answer":"DOOKU"},
-    {"answer":"GRIEVOUS"},{"answer":"PALPATINE"},{"answer":"ACKBAR"},{"answer":"LANDO"},
-    {"answer":"JEDI"},{"answer":"SITH"},{"answer":"FORCE"},{"answer":"SABER"},
-    {"answer":"EWOK"},{"answer":"WOOKIEE"},{"answer":"DROID"},{"answer":"TATOOINE"},
-    {"answer":"HOTH"},{"answer":"ENDOR"},{"answer":"NABOO"},{"answer":"CORUSCANT"},
-    {"answer":"FALCON","clue":"Millennium ___"},{"answer":"XWING"}
-  ]
-},
-{
-  "slug": "the-simpsons", "name": "The Simpsons", "category": "movies & tv", "region": "en",
-  "icon": "🍩", "featured": false, "sortOrder": 21,
-  "blurb": "Everyone in Springfield.",
-  "items": [
-    {"answer":"HOMER"},{"answer":"MARGE"},{"answer":"BART"},{"answer":"LISA"},
-    {"answer":"MAGGIE"},{"answer":"SIMPSON"},{"answer":"NED"},{"answer":"FLANDERS"},
-    {"answer":"MOE"},{"answer":"APU"},{"answer":"BARNEY"},{"answer":"KRUSTY"},
-    {"answer":"MILHOUSE"},{"answer":"NELSON"},{"answer":"RALPH"},{"answer":"SKINNER"},
-    {"answer":"BURNS"},{"answer":"SMITHERS"},{"answer":"LENNY"},{"answer":"CARL"},
-    {"answer":"SELMA"},{"answer":"PATTY"},{"answer":"ABE"},{"answer":"OTTO"},
-    {"answer":"WILLIE"},{"answer":"QUIMBY"},{"answer":"WIGGUM"},{"answer":"DUFF","clue":"The beer"},
-    {"answer":"SPRINGFIELD"},{"answer":"DONUT"}
-  ]
-},
-{
-  "slug": "friends", "name": "Friends", "category": "movies & tv", "region": "en",
-  "icon": "☕", "featured": false, "sortOrder": 22,
-  "blurb": "The one with the word game.",
-  "items": [
-    {"answer":"ROSS"},{"answer":"RACHEL"},{"answer":"MONICA"},{"answer":"CHANDLER"},
-    {"answer":"JOEY"},{"answer":"PHOEBE"},{"answer":"GUNTHER"},{"answer":"JANICE"},
-    {"answer":"GELLER"},{"answer":"GREEN"},{"answer":"BING"},{"answer":"BUFFAY"},
-    {"answer":"CENTRAL","clue":"___ Perk"},{"answer":"PERK"},{"answer":"SMELLY","clue":"___ Cat"},
-    {"answer":"EMMA"},{"answer":"BEN"},{"answer":"MIKE"},{"answer":"RICHARD"},
-    {"answer":"CAROL"},{"answer":"SUSAN"},{"answer":"MARCEL","clue":"Ross's monkey"},
-    {"answer":"UGLY","clue":"___ Naked Guy"},{"answer":"PIVOT"}
-  ]
-},
-{
-  "slug": "disney", "name": "Disney", "category": "movies & tv", "region": "en",
-  "icon": "🏰", "featured": true, "sortOrder": 14,
-  "blurb": "Classic and modern Disney characters.",
-  "items": [
-    {"answer":"MICKEY"},{"answer":"MINNIE"},{"answer":"DONALD"},{"answer":"GOOFY"},
-    {"answer":"PLUTO"},{"answer":"DAISY"},{"answer":"ELSA"},{"answer":"ANNA"},
-    {"answer":"OLAF"},{"answer":"SVEN"},{"answer":"KRISTOFF"},{"answer":"MOANA"},
-    {"answer":"MAUI"},{"answer":"ARIEL"},{"answer":"BELLE"},{"answer":"AURORA"},
-    {"answer":"JASMINE"},{"answer":"ALADDIN"},{"answer":"GENIE"},{"answer":"JAFAR"},
-    {"answer":"SIMBA"},{"answer":"NALA"},{"answer":"MUFASA"},{"answer":"SCAR"},
-    {"answer":"TIMON"},{"answer":"PUMBAA"},{"answer":"RAFIKI"},{"answer":"ZAZU"},
-    {"answer":"WOODY"},{"answer":"BUZZ"},{"answer":"JESSIE"},{"answer":"NEMO"},
-    {"answer":"DORY"},{"answer":"MULAN"},{"answer":"TIANA"},{"answer":"RAPUNZEL"},
-    {"answer":"CINDERELLA"},{"answer":"BAMBI"},{"answer":"DUMBO"},{"answer":"STITCH"}
-  ]
-},
-{
-  "slug": "game-of-thrones", "name": "Game of Thrones", "category": "movies & tv", "region": "en",
-  "icon": "🐉", "featured": false, "sortOrder": 23,
-  "blurb": "Houses, characters and places of Westeros.",
-  "items": [
-    {"answer":"STARK"},{"answer":"ARYA"},{"answer":"SANSA"},{"answer":"BRAN"},
-    {"answer":"ROBB"},{"answer":"NED"},{"answer":"CATELYN"},{"answer":"JON"},
-    {"answer":"SNOW"},{"answer":"DAENERYS"},{"answer":"TARGARYEN"},{"answer":"VISERYS"},
-    {"answer":"TYRION"},{"answer":"CERSEI"},{"answer":"JAIME"},{"answer":"TYWIN"},
-    {"answer":"JOFFREY"},{"answer":"TOMMEN"},{"answer":"MYRCELLA"},{"answer":"SAMWELL"},
-    {"answer":"BRIENNE"},{"answer":"BRONN"},{"answer":"VARYS"},{"answer":"PETYR"},
-    {"answer":"MELISANDRE"},{"answer":"DAVOS"},{"answer":"STANNIS"},{"answer":"RENLY"},
-    {"answer":"HODOR"},{"answer":"GHOST"},{"answer":"DROGON"},{"answer":"DOTHRAKI"},
-    {"answer":"WINTERFELL"},{"answer":"DORNE"},{"answer":"BRAAVOS"},{"answer":"VALYRIA"},
-    {"answer":"LANNISTER"},{"answer":"BARATHEON"},{"answer":"GREYJOY"},{"answer":"TULLY"}
-  ]
-},
-{
-  "slug": "stranger-things", "name": "Stranger Things", "category": "movies & tv", "region": "en",
-  "icon": "🔦", "featured": false, "sortOrder": 24,
-  "blurb": "Hawkins and the Upside Down.",
-  "items": [
-    {"answer":"ELEVEN"},{"answer":"MIKE"},{"answer":"DUSTIN"},{"answer":"LUCAS"},
-    {"answer":"WILL"},{"answer":"MAX"},{"answer":"NANCY"},{"answer":"JONATHAN"},
-    {"answer":"STEVE"},{"answer":"ROBIN"},{"answer":"HOPPER"},{"answer":"JOYCE"},
-    {"answer":"EDDIE"},{"answer":"BILLY"},{"answer":"ERICA"},{"answer":"MURRAY"},
-    {"answer":"BRENNER"},{"answer":"VECNA"},{"answer":"DEMOGORGON"},{"answer":"HAWKINS"},
-    {"answer":"WHEELER"},{"answer":"BYERS"},{"answer":"SINCLAIR"},{"answer":"HENDERSON"},
-    {"answer":"WAFFLE"},{"answer":"MINDFLAYER"}
-  ]
-},
-{
-  "slug": "breaking-bad", "name": "Breaking Bad", "category": "movies & tv", "region": "en",
-  "icon": "⚗️", "featured": false, "sortOrder": 25,
-  "blurb": "Say my name.",
-  "items": [
-    {"answer":"WALTER"},{"answer":"WHITE"},{"answer":"JESSE"},{"answer":"PINKMAN"},
-    {"answer":"SKYLER"},{"answer":"HANK"},{"answer":"MARIE"},{"answer":"SAUL"},
-    {"answer":"GOODMAN"},{"answer":"MIKE"},{"answer":"GUS"},{"answer":"FRING"},
-    {"answer":"TUCO"},{"answer":"HECTOR"},{"answer":"LYDIA"},{"answer":"TODD"},
-    {"answer":"BADGER"},{"answer":"SKINNY","clue":"___ Pete"},{"answer":"GALE"},
-    {"answer":"HEISENBERG"},{"answer":"POLLOS","clue":"Los ___ Hermanos"},{"answer":"CRYSTAL"},
-    {"answer":"RICIN"},{"answer":"WINNEBAGO"}
-  ]
-},
-{
-  "slug": "pixar", "name": "Pixar", "category": "movies & tv", "region": "en",
-  "icon": "💡", "featured": false, "sortOrder": 26,
-  "blurb": "Characters from the Pixar films.",
-  "items": [
-    {"answer":"WOODY"},{"answer":"BUZZ"},{"answer":"NEMO"},{"answer":"DORY"},
-    {"answer":"MARLIN"},{"answer":"CRUSH"},{"answer":"SULLEY"},{"answer":"MIKE"},
-    {"answer":"BOO"},{"answer":"RANDALL"},{"answer":"REMY"},{"answer":"LINGUINI"},
-    {"answer":"WALLE"},{"answer":"EVE"},{"answer":"CARL"},{"answer":"RUSSELL"},
-    {"answer":"DUG"},{"answer":"KEVIN"},{"answer":"MERIDA"},{"answer":"RILEY"},
-    {"answer":"JOY"},{"answer":"SADNESS"},{"answer":"ANGER"},{"answer":"FEAR"},
-    {"answer":"DISGUST"},{"answer":"MIGUEL"},{"answer":"HECTOR"},{"answer":"LUCA"},
-    {"answer":"MCQUEEN"},{"answer":"MATER"},{"answer":"SALLY"},{"answer":"BONNIE"}
-  ]
-},
-{
-  "slug": "batman", "name": "Batman", "category": "movies & tv", "region": "en",
-  "icon": "🦇", "featured": false, "sortOrder": 27,
-  "blurb": "Gotham's heroes and rogues.",
-  "items": [
-    {"answer":"BRUCE"},{"answer":"WAYNE"},{"answer":"ALFRED"},{"answer":"ROBIN"},
-    {"answer":"GORDON"},{"answer":"BARBARA"},{"answer":"JOKER"},{"answer":"PENGUIN"},
-    {"answer":"RIDDLER"},{"answer":"BANE"},{"answer":"CATWOMAN"},{"answer":"SELINA"},
-    {"answer":"HARLEY"},{"answer":"QUINN"},{"answer":"SCARECROW"},{"answer":"FREEZE"},
-    {"answer":"CLAYFACE"},{"answer":"DEATHSTROKE"},{"answer":"GOTHAM"},{"answer":"ARKHAM"},
-    {"answer":"BATCAVE"},{"answer":"BATMOBILE"},{"answer":"DICK"},{"answer":"GRAYSON"},
-    {"answer":"TIMDRAKE"},{"answer":"RAS"}
-  ]
-}
+  {
+    "slug": "marvel",
+    "name": "Marvel",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "🦸",
+    "featured": true,
+    "sortOrder": 11,
+    "blurb": "Heroes, villains and the wider Marvel universe.",
+    "items": [
+      {
+        "answer": "THOR",
+        "clue": "God of thunder"
+      },
+      {
+        "answer": "HULK",
+        "clue": "Big and green"
+      },
+      {
+        "answer": "LOKI",
+        "clue": "God of mischief"
+      },
+      {
+        "answer": "STARK",
+        "clue": "Iron Man's surname"
+      },
+      {
+        "answer": "TONY",
+        "clue": "Iron Man's first name"
+      },
+      {
+        "answer": "STEVE",
+        "clue": "Captain America"
+      },
+      {
+        "answer": "ROGERS",
+        "clue": "Cap's surname"
+      },
+      {
+        "answer": "NATASHA",
+        "clue": "Black Widow"
+      },
+      {
+        "answer": "CLINT",
+        "clue": "Hawkeye"
+      },
+      {
+        "answer": "VISION",
+        "clue": "Born of the Mind Stone"
+      },
+      {
+        "answer": "WANDA",
+        "clue": "Scarlet Witch"
+      },
+      {
+        "answer": "PIETRO",
+        "clue": "Quicksilver"
+      },
+      {
+        "answer": "THANOS",
+        "clue": "The Mad Titan"
+      },
+      {
+        "answer": "GAMORA",
+        "clue": "Deadliest woman in the galaxy"
+      },
+      {
+        "answer": "NEBULA",
+        "clue": "Gamora's sister"
+      },
+      {
+        "answer": "DRAX",
+        "clue": "The Destroyer"
+      },
+      {
+        "answer": "GROOT",
+        "clue": "I am ___"
+      },
+      {
+        "answer": "ROCKET",
+        "clue": "The raccoon"
+      },
+      {
+        "answer": "BUCKY",
+        "clue": "Winter Soldier"
+      },
+      {
+        "answer": "SAM",
+        "clue": "Falcon"
+      },
+      {
+        "answer": "SHURI",
+        "clue": "Wakandan princess"
+      },
+      {
+        "answer": "OKOYE",
+        "clue": "Dora Milaje general"
+      },
+      {
+        "answer": "WAKANDA",
+        "clue": "T'Challa's nation"
+      },
+      {
+        "answer": "ASGARD",
+        "clue": "Thor's realm"
+      },
+      {
+        "answer": "HYDRA",
+        "clue": "Cut off one head…"
+      },
+      {
+        "answer": "SHIELD",
+        "clue": "Fury's agency"
+      },
+      {
+        "answer": "FURY",
+        "clue": "The man with the eyepatch"
+      },
+      {
+        "answer": "ULTRON",
+        "clue": "Stark's mistake"
+      },
+      {
+        "answer": "MJOLNIR",
+        "clue": "Worthy only"
+      },
+      {
+        "answer": "XAVIER",
+        "clue": "Professor X"
+      },
+      {
+        "answer": "LOGAN",
+        "clue": "Wolverine"
+      },
+      {
+        "answer": "STORM",
+        "clue": "Weather-controlling X-Man"
+      },
+      {
+        "answer": "CYCLOPS",
+        "clue": "Visor and optic blasts"
+      },
+      {
+        "answer": "MAGNETO",
+        "clue": "Master of magnetism"
+      },
+      {
+        "answer": "DEADPOOL",
+        "clue": "The merc with a mouth"
+      },
+      {
+        "answer": "MYSTIQUE",
+        "clue": "Blue shapeshifter"
+      }
+    ]
+  },
+  {
+    "slug": "harry-potter",
+    "name": "Harry Potter",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "⚡",
+    "featured": true,
+    "sortOrder": 12,
+    "blurb": "Wizards, spells and places from the wizarding world.",
+    "items": [
+      {
+        "answer": "HARRY",
+        "clue": "The boy who lived"
+      },
+      {
+        "answer": "POTTER",
+        "clue": "The boy who lived, surname"
+      },
+      {
+        "answer": "RON",
+        "clue": "The best friend with the hand-me-down robes"
+      },
+      {
+        "answer": "WEASLEY",
+        "clue": "The red-haired family's surname"
+      },
+      {
+        "answer": "HERMIONE",
+        "clue": "It's leviOsa, not levioSA"
+      },
+      {
+        "answer": "GRANGER",
+        "clue": "The cleverest witch of her age, surname"
+      },
+      {
+        "answer": "HAGRID",
+        "clue": "The half-giant gamekeeper who loves dangerous creatures"
+      },
+      {
+        "answer": "SNAPE",
+        "clue": "Always"
+      },
+      {
+        "answer": "DRACO",
+        "clue": "The pale Slytherin rival"
+      },
+      {
+        "answer": "MALFOY",
+        "clue": "The pale Slytherin rival's surname"
+      },
+      {
+        "answer": "SIRIUS",
+        "clue": "The godfather who turns into a big black dog"
+      },
+      {
+        "answer": "REMUS",
+        "clue": "The werewolf professor's first name"
+      },
+      {
+        "answer": "LUPIN",
+        "clue": "The werewolf professor's surname"
+      },
+      {
+        "answer": "NEVILLE",
+        "clue": "The forgetful boy who pulls the sword from the hat"
+      },
+      {
+        "answer": "LUNA",
+        "clue": "The dreamy one who sees thestrals"
+      },
+      {
+        "answer": "GINNY",
+        "clue": "The youngest Weasley, and Harry's wife"
+      },
+      {
+        "answer": "FRED",
+        "clue": "The twin who does not make it"
+      },
+      {
+        "answer": "GEORGE",
+        "clue": "The twin who loses an ear"
+      },
+      {
+        "answer": "CEDRIC",
+        "clue": "The Hufflepuff champion killed in the graveyard"
+      },
+      {
+        "answer": "HEDWIG",
+        "clue": "Harry's snowy owl"
+      },
+      {
+        "answer": "DOBBY",
+        "clue": "The free elf with a sock"
+      },
+      {
+        "answer": "FAWKES",
+        "clue": "Dumbledore's phoenix"
+      },
+      {
+        "answer": "HOGWARTS",
+        "clue": "The school itself"
+      },
+      {
+        "answer": "GRYFFINDOR",
+        "clue": "The house of the brave, in red and gold"
+      },
+      {
+        "answer": "SLYTHERIN",
+        "clue": "The house of ambition, in green and silver"
+      },
+      {
+        "answer": "QUIDDITCH",
+        "clue": "Played on broomsticks with four balls"
+      },
+      {
+        "answer": "SNITCH",
+        "clue": "The tiny golden ball worth a hundred and fifty"
+      },
+      {
+        "answer": "WAND",
+        "clue": "It chooses the wizard"
+      },
+      {
+        "answer": "MUGGLE",
+        "clue": "A person with no magic at all"
+      },
+      {
+        "answer": "HORCRUX",
+        "clue": "A hidden piece of a split soul"
+      },
+      {
+        "answer": "PATRONUS",
+        "clue": "Expecto, and it drives away dementors"
+      },
+      {
+        "answer": "AZKABAN",
+        "clue": "The wizard prison guarded by dementors"
+      },
+      {
+        "answer": "DIAGON",
+        "clue": "Alley, reached by tapping the right brick"
+      },
+      {
+        "answer": "GRINGOTTS",
+        "clue": "The goblin bank with a dragon in the vaults"
+      }
+    ]
+  },
+  {
+    "slug": "star-wars",
+    "name": "Star Wars",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "🌌",
+    "featured": true,
+    "sortOrder": 13,
+    "blurb": "A galaxy far, far away.",
+    "items": [
+      {
+        "answer": "LUKE",
+        "clue": "The farm boy who becomes a Jedi"
+      },
+      {
+        "answer": "LEIA",
+        "clue": "The princess with the buns, and our only hope"
+      },
+      {
+        "answer": "HAN",
+        "clue": "The smuggler who knows the odds and ignores them"
+      },
+      {
+        "answer": "SOLO",
+        "clue": "The smuggler's surname"
+      },
+      {
+        "answer": "VADER",
+        "clue": "The breathing, the cape, and I am your father"
+      },
+      {
+        "answer": "YODA",
+        "clue": "Small, green, and speaks in a strange order he does"
+      },
+      {
+        "answer": "ANAKIN",
+        "clue": "The chosen one before the mask"
+      },
+      {
+        "answer": "PADME",
+        "clue": "The queen of Naboo who becomes a senator"
+      },
+      {
+        "answer": "OBIWAN",
+        "clue": "Hello there, and the high ground"
+      },
+      {
+        "answer": "KENOBI",
+        "clue": "Ben's real surname"
+      },
+      {
+        "answer": "REY",
+        "clue": "The scavenger from Jakku"
+      },
+      {
+        "answer": "FINN",
+        "clue": "The stormtrooper who walks away, FN-2187"
+      },
+      {
+        "answer": "POE",
+        "clue": "The best pilot in the Resistance"
+      },
+      {
+        "answer": "KYLO",
+        "clue": "Ren, and Han's son in the mask"
+      },
+      {
+        "answer": "CHEWIE",
+        "clue": "The walking carpet who never needs subtitles"
+      },
+      {
+        "answer": "JABBA",
+        "clue": "The slug crime lord of Tatooine"
+      },
+      {
+        "answer": "BOBA",
+        "clue": "The bounty hunter's first name"
+      },
+      {
+        "answer": "FETT",
+        "clue": "The bounty hunter's surname, father and son"
+      },
+      {
+        "answer": "MAUL",
+        "clue": "Red and black horned Sith with a double blade"
+      },
+      {
+        "answer": "DOOKU",
+        "clue": "The count played by Christopher Lee"
+      },
+      {
+        "answer": "GRIEVOUS",
+        "clue": "The coughing general with four lightsabers"
+      },
+      {
+        "answer": "PALPATINE",
+        "clue": "The Emperor, and somehow he returned"
+      },
+      {
+        "answer": "ACKBAR",
+        "clue": "It's a trap"
+      },
+      {
+        "answer": "LANDO",
+        "clue": "The smooth administrator of Cloud City"
+      },
+      {
+        "answer": "JEDI",
+        "clue": "The order of the light side"
+      },
+      {
+        "answer": "SITH",
+        "clue": "The order of the dark side, always two"
+      },
+      {
+        "answer": "FORCE",
+        "clue": "May it be with you"
+      },
+      {
+        "answer": "SABER",
+        "clue": "An elegant weapon, for a more civilised age"
+      },
+      {
+        "answer": "EWOK",
+        "clue": "The small furry ones who beat an empire on Endor"
+      },
+      {
+        "answer": "WOOKIEE",
+        "clue": "Chewbacca's species"
+      },
+      {
+        "answer": "DROID",
+        "clue": "These are not the ones you are looking for"
+      },
+      {
+        "answer": "TATOOINE",
+        "clue": "The twin-sunned desert planet"
+      },
+      {
+        "answer": "HOTH",
+        "clue": "The ice planet with the tauntauns"
+      },
+      {
+        "answer": "ENDOR",
+        "clue": "The forest moon of the furry ones"
+      },
+      {
+        "answer": "NABOO",
+        "clue": "Padme's green home world"
+      },
+      {
+        "answer": "CORUSCANT",
+        "clue": "The city that covers an entire planet"
+      },
+      {
+        "answer": "FALCON",
+        "clue": "The Millennium ship that made the Kessel Run"
+      },
+      {
+        "answer": "XWING",
+        "clue": "The Rebel fighter with wings that open into an X"
+      }
+    ]
+  },
+  {
+    "slug": "the-simpsons",
+    "name": "The Simpsons",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "🍩",
+    "featured": false,
+    "sortOrder": 21,
+    "blurb": "Everyone in Springfield.",
+    "items": [
+      {
+        "answer": "HOMER",
+        "clue": "D'oh, and he works at the nuclear plant"
+      },
+      {
+        "answer": "MARGE",
+        "clue": "The blue tower of hair and the steady hand"
+      },
+      {
+        "answer": "BART",
+        "clue": "Eat my shorts, and he writes lines on the board"
+      },
+      {
+        "answer": "LISA",
+        "clue": "The saxophone-playing conscience of the family"
+      },
+      {
+        "answer": "MAGGIE",
+        "clue": "The baby with the dummy who shot Mr Burns"
+      },
+      {
+        "answer": "SIMPSON",
+        "clue": "The family's surname"
+      },
+      {
+        "answer": "NED",
+        "clue": "Okily dokily, the neighbour"
+      },
+      {
+        "answer": "FLANDERS",
+        "clue": "The neighbour's surname"
+      },
+      {
+        "answer": "MOE",
+        "clue": "Runs the tavern and takes the prank calls"
+      },
+      {
+        "answer": "APU",
+        "clue": "Thank you, come again, at the Kwik-E-Mart"
+      },
+      {
+        "answer": "BARNEY",
+        "clue": "The town drunk with a very loud burp"
+      },
+      {
+        "answer": "KRUSTY",
+        "clue": "The clown with the TV show"
+      },
+      {
+        "answer": "MILHOUSE",
+        "clue": "Blue hair, glasses, and everything's coming up"
+      },
+      {
+        "answer": "NELSON",
+        "clue": "Ha ha, the school bully"
+      },
+      {
+        "answer": "RALPH",
+        "clue": "My cat's breath smells like cat food"
+      },
+      {
+        "answer": "SKINNER",
+        "clue": "The principal who still lives with his mother"
+      },
+      {
+        "answer": "BURNS",
+        "clue": "Excellent, and he owns the power plant"
+      },
+      {
+        "answer": "SMITHERS",
+        "clue": "The utterly devoted assistant"
+      },
+      {
+        "answer": "LENNY",
+        "clue": "One of Homer's two plant workmates"
+      },
+      {
+        "answer": "CARL",
+        "clue": "The other of Homer's two plant workmates"
+      },
+      {
+        "answer": "SELMA",
+        "clue": "One of Marge's chain-smoking twin sisters"
+      },
+      {
+        "answer": "PATTY",
+        "clue": "The other of Marge's chain-smoking twin sisters"
+      },
+      {
+        "answer": "ABE",
+        "clue": "Grampa, and he'll tell you a long story"
+      },
+      {
+        "answer": "OTTO",
+        "clue": "The school bus driver who loves metal"
+      },
+      {
+        "answer": "WILLIE",
+        "clue": "The Scottish groundskeeper"
+      },
+      {
+        "answer": "QUIMBY",
+        "clue": "The mayor with the sash"
+      },
+      {
+        "answer": "WIGGUM",
+        "clue": "The chief of police who loves a doughnut"
+      },
+      {
+        "answer": "DUFF",
+        "clue": "The beer of Springfield"
+      },
+      {
+        "answer": "SPRINGFIELD",
+        "clue": "The town, in a state never named"
+      },
+      {
+        "answer": "DONUT",
+        "clue": "Mmm, and Homer's great weakness"
+      }
+    ]
+  },
+  {
+    "slug": "friends",
+    "name": "Friends",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "☕",
+    "featured": false,
+    "sortOrder": 22,
+    "blurb": "The one with the word game.",
+    "items": [
+      {
+        "answer": "ROSS",
+        "clue": "The palaeontologist, and they were on a break"
+      },
+      {
+        "answer": "RACHEL",
+        "clue": "Ran out on her wedding and became a waitress"
+      },
+      {
+        "answer": "MONICA",
+        "clue": "The competitive one who cannot stop cleaning"
+      },
+      {
+        "answer": "CHANDLER",
+        "clue": "Could he BE any more sarcastic"
+      },
+      {
+        "answer": "JOEY",
+        "clue": "How you doin', and he does not share food"
+      },
+      {
+        "answer": "PHOEBE",
+        "clue": "Smelly Cat's songwriter"
+      },
+      {
+        "answer": "GUNTHER",
+        "clue": "The bleach-blond manager quietly in love with Rachel"
+      },
+      {
+        "answer": "JANICE",
+        "clue": "Oh. My. God."
+      },
+      {
+        "answer": "GELLER",
+        "clue": "Ross and Monica's surname"
+      },
+      {
+        "answer": "GREEN",
+        "clue": "Rachel's surname"
+      },
+      {
+        "answer": "BING",
+        "clue": "Chandler's surname"
+      },
+      {
+        "answer": "BUFFAY",
+        "clue": "Phoebe's surname"
+      },
+      {
+        "answer": "CENTRAL",
+        "clue": "The first word of the coffee house"
+      },
+      {
+        "answer": "PERK",
+        "clue": "The second word of the coffee house"
+      },
+      {
+        "answer": "SMELLY",
+        "clue": "The first word of Phoebe's signature song"
+      },
+      {
+        "answer": "EMMA",
+        "clue": "Ross and Rachel's daughter"
+      },
+      {
+        "answer": "BEN",
+        "clue": "Ross's son with Carol"
+      },
+      {
+        "answer": "MIKE",
+        "clue": "Phoebe's husband, played by Paul Rudd"
+      },
+      {
+        "answer": "RICHARD",
+        "clue": "Monica's much older boyfriend with the moustache"
+      },
+      {
+        "answer": "CAROL",
+        "clue": "Ross's first wife, who left him for a woman"
+      },
+      {
+        "answer": "SUSAN",
+        "clue": "Carol's partner"
+      },
+      {
+        "answer": "MARCEL",
+        "clue": "Ross's pet monkey"
+      },
+      {
+        "answer": "UGLY",
+        "clue": "The first word of the naked guy across the street's nickname"
+      },
+      {
+        "answer": "PIVOT",
+        "clue": "What Ross screams on the staircase"
+      }
+    ]
+  },
+  {
+    "slug": "disney",
+    "name": "Disney",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "🏰",
+    "featured": true,
+    "sortOrder": 14,
+    "blurb": "Classic and modern Disney characters.",
+    "items": [
+      {
+        "answer": "MICKEY",
+        "clue": "The mouse who started it all"
+      },
+      {
+        "answer": "MINNIE",
+        "clue": "The mouse with the polka-dot bow"
+      },
+      {
+        "answer": "DONALD",
+        "clue": "The duck in a sailor suit with a temper"
+      },
+      {
+        "answer": "GOOFY",
+        "clue": "Tall, clumsy dog in a waistcoat and hat"
+      },
+      {
+        "answer": "PLUTO",
+        "clue": "Mickey's dog, and he does not talk"
+      },
+      {
+        "answer": "DAISY",
+        "clue": "Donald's girlfriend, with a bow on her head"
+      },
+      {
+        "answer": "ELSA",
+        "clue": "Let it go, and everything turns to ice"
+      },
+      {
+        "answer": "ANNA",
+        "clue": "The sister who goes after the queen"
+      },
+      {
+        "answer": "OLAF",
+        "clue": "The snowman who dreams of summer"
+      },
+      {
+        "answer": "SVEN",
+        "clue": "Kristoff's reindeer"
+      },
+      {
+        "answer": "KRISTOFF",
+        "clue": "The ice harvester who helps Anna"
+      },
+      {
+        "answer": "MOANA",
+        "clue": "Sails past the reef to save her island"
+      },
+      {
+        "answer": "MAUI",
+        "clue": "Demigod with a magical fishhook, you're welcome"
+      },
+      {
+        "answer": "ARIEL",
+        "clue": "The mermaid who trades her voice for legs"
+      },
+      {
+        "answer": "BELLE",
+        "clue": "The bookworm who tames a beast"
+      },
+      {
+        "answer": "AURORA",
+        "clue": "Sleeping Beauty, pricked by a spindle"
+      },
+      {
+        "answer": "JASMINE",
+        "clue": "Agrabah's princess with a pet tiger"
+      },
+      {
+        "answer": "ALADDIN",
+        "clue": "Street rat who finds a lamp"
+      },
+      {
+        "answer": "GENIE",
+        "clue": "Phenomenal cosmic power, itty bitty living space"
+      },
+      {
+        "answer": "JAFAR",
+        "clue": "The vizier with a snake staff and a parrot"
+      },
+      {
+        "answer": "SIMBA",
+        "clue": "The cub who becomes king"
+      },
+      {
+        "answer": "NALA",
+        "clue": "Simba's childhood friend and queen"
+      },
+      {
+        "answer": "MUFASA",
+        "clue": "The king whose son had to run"
+      },
+      {
+        "answer": "SCAR",
+        "clue": "The brother with the scarred eye and the hyenas"
+      },
+      {
+        "answer": "TIMON",
+        "clue": "The meerkat half of hakuna matata"
+      },
+      {
+        "answer": "PUMBAA",
+        "clue": "The warthog half of hakuna matata"
+      },
+      {
+        "answer": "RAFIKI",
+        "clue": "The mandrill who lifts the cub aloft"
+      },
+      {
+        "answer": "ZAZU",
+        "clue": "The hornbill who reports the morning news"
+      },
+      {
+        "answer": "WOODY",
+        "clue": "The pull-string cowboy in the toy box"
+      },
+      {
+        "answer": "BUZZ",
+        "clue": "To infinity and beyond"
+      },
+      {
+        "answer": "JESSIE",
+        "clue": "The cowgirl with a yodel and a red hat"
+      },
+      {
+        "answer": "NEMO",
+        "clue": "The clownfish who gets lost"
+      },
+      {
+        "answer": "DORY",
+        "clue": "Just keep swimming, and she forgets everything"
+      },
+      {
+        "answer": "MULAN",
+        "clue": "Takes her father's place in the army"
+      },
+      {
+        "answer": "TIANA",
+        "clue": "New Orleans cook who kisses a frog"
+      },
+      {
+        "answer": "RAPUNZEL",
+        "clue": "Seventy feet of magical hair"
+      },
+      {
+        "answer": "CINDERELLA",
+        "clue": "Loses a glass slipper at midnight"
+      },
+      {
+        "answer": "BAMBI",
+        "clue": "The fawn who learns to walk on ice"
+      },
+      {
+        "answer": "DUMBO",
+        "clue": "The elephant whose ears let him fly"
+      },
+      {
+        "answer": "STITCH",
+        "clue": "Experiment 626, blue and destructive"
+      }
+    ]
+  },
+  {
+    "slug": "game-of-thrones",
+    "name": "Game of Thrones",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "🐉",
+    "featured": false,
+    "sortOrder": 23,
+    "blurb": "Houses, characters and places of Westeros.",
+    "items": [
+      {
+        "answer": "STARK",
+        "clue": "Winter is coming, and the direwolf is their sigil"
+      },
+      {
+        "answer": "ARYA",
+        "clue": "The girl with the sword Needle and a very long list"
+      },
+      {
+        "answer": "SANSA",
+        "clue": "The eldest Stark daughter, later Queen in the North"
+      },
+      {
+        "answer": "BRAN",
+        "clue": "The boy who fell from a tower and became the Three-Eyed Raven"
+      },
+      {
+        "answer": "ROBB",
+        "clue": "The young wolf, King in the North"
+      },
+      {
+        "answer": "NED",
+        "clue": "Lord of Winterfell who loses his head in season one"
+      },
+      {
+        "answer": "CATELYN",
+        "clue": "Tully mother of the Stark children"
+      },
+      {
+        "answer": "JON",
+        "clue": "Knows nothing, and ends up beyond the Wall"
+      },
+      {
+        "answer": "SNOW",
+        "clue": "The surname given to a northern bastard"
+      },
+      {
+        "answer": "DAENERYS",
+        "clue": "Mother of dragons, breaker of chains"
+      },
+      {
+        "answer": "TARGARYEN",
+        "clue": "The silver-haired house that rode dragons"
+      },
+      {
+        "answer": "VISERYS",
+        "clue": "The brother who got a golden crown, molten"
+      },
+      {
+        "answer": "TYRION",
+        "clue": "The clever Lannister who drinks and knows things"
+      },
+      {
+        "answer": "CERSEI",
+        "clue": "The queen who blew up the Sept"
+      },
+      {
+        "answer": "JAIME",
+        "clue": "The Kingslayer who loses a hand"
+      },
+      {
+        "answer": "TYWIN",
+        "clue": "The Lannister patriarch, killed on the privy"
+      },
+      {
+        "answer": "JOFFREY",
+        "clue": "The boy king poisoned at his own wedding"
+      },
+      {
+        "answer": "TOMMEN",
+        "clue": "The gentler boy king who steps out of a window"
+      },
+      {
+        "answer": "MYRCELLA",
+        "clue": "The Lannister daughter sent to Dorne"
+      },
+      {
+        "answer": "SAMWELL",
+        "clue": "The kind maester-in-training of the Night's Watch"
+      },
+      {
+        "answer": "BRIENNE",
+        "clue": "The tall knight of Tarth sworn to the Starks"
+      },
+      {
+        "answer": "BRONN",
+        "clue": "The sellsword who keeps rising in station"
+      },
+      {
+        "answer": "VARYS",
+        "clue": "The Spider, master of whisperers"
+      },
+      {
+        "answer": "PETYR",
+        "clue": "Littlefinger, and chaos is a ladder"
+      },
+      {
+        "answer": "MELISANDRE",
+        "clue": "The red priestess who serves the Lord of Light"
+      },
+      {
+        "answer": "DAVOS",
+        "clue": "The onion knight and smuggler"
+      },
+      {
+        "answer": "STANNIS",
+        "clue": "The rightful king by the letter of the law"
+      },
+      {
+        "answer": "RENLY",
+        "clue": "The youngest Baratheon brother, killed by a shadow"
+      },
+      {
+        "answer": "HODOR",
+        "clue": "Hold the door"
+      },
+      {
+        "answer": "GHOST",
+        "clue": "Jon's white direwolf"
+      },
+      {
+        "answer": "DROGON",
+        "clue": "The largest black dragon, named for a khal"
+      },
+      {
+        "answer": "DOTHRAKI",
+        "clue": "The horse lords of the great grass sea"
+      },
+      {
+        "answer": "WINTERFELL",
+        "clue": "The Stark seat in the North"
+      },
+      {
+        "answer": "DORNE",
+        "clue": "The hot southern kingdom of spears and vipers"
+      },
+      {
+        "answer": "BRAAVOS",
+        "clue": "Free city of the Iron Bank and the faceless men"
+      },
+      {
+        "answer": "VALYRIA",
+        "clue": "The doomed peninsula that forged the steel"
+      },
+      {
+        "answer": "LANNISTER",
+        "clue": "A lion, and they always pay their debts"
+      },
+      {
+        "answer": "BARATHEON",
+        "clue": "The stag house of the fat king"
+      },
+      {
+        "answer": "GREYJOY",
+        "clue": "We do not sow, and they take the iron price"
+      },
+      {
+        "answer": "TULLY",
+        "clue": "Family, duty, honour, at Riverrun"
+      }
+    ]
+  },
+  {
+    "slug": "stranger-things",
+    "name": "Stranger Things",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "🔦",
+    "featured": false,
+    "sortOrder": 24,
+    "blurb": "Hawkins and the Upside Down.",
+    "items": [
+      {
+        "answer": "ELEVEN",
+        "clue": "The girl with the shaved head and a nosebleed"
+      },
+      {
+        "answer": "MIKE",
+        "clue": "The one who hides her in the basement"
+      },
+      {
+        "answer": "DUSTIN",
+        "clue": "The one with the cap, the lisp and Dart"
+      },
+      {
+        "answer": "LUCAS",
+        "clue": "The one with the wrist rocket and a bandana"
+      },
+      {
+        "answer": "WILL",
+        "clue": "The boy who disappears in season one"
+      },
+      {
+        "answer": "MAX",
+        "clue": "The skater girl saved by Running Up That Hill"
+      },
+      {
+        "answer": "NANCY",
+        "clue": "The older sister who picks up a shotgun"
+      },
+      {
+        "answer": "JONATHAN",
+        "clue": "The photographer brother"
+      },
+      {
+        "answer": "STEVE",
+        "clue": "The hair, the nail bat, and everyone's babysitter"
+      },
+      {
+        "answer": "ROBIN",
+        "clue": "The sarcastic one from the ice cream parlour"
+      },
+      {
+        "answer": "HOPPER",
+        "clue": "The gruff Hawkins police chief"
+      },
+      {
+        "answer": "JOYCE",
+        "clue": "The mother with the Christmas lights on the wall"
+      },
+      {
+        "answer": "EDDIE",
+        "clue": "The Hellfire Club leader who plays Master of Puppets"
+      },
+      {
+        "answer": "BILLY",
+        "clue": "Max's violent stepbrother, the lifeguard"
+      },
+      {
+        "answer": "ERICA",
+        "clue": "Dustin's sharp-tongued young sidekick"
+      },
+      {
+        "answer": "MURRAY",
+        "clue": "The conspiracy theorist with the soundproof basement"
+      },
+      {
+        "answer": "BRENNER",
+        "clue": "Papa, who ran the lab"
+      },
+      {
+        "answer": "VECNA",
+        "clue": "The clock-ticking villain of season four"
+      },
+      {
+        "answer": "DEMOGORGON",
+        "clue": "The faceless flower-headed monster"
+      },
+      {
+        "answer": "HAWKINS",
+        "clue": "The Indiana town where all of it happens"
+      },
+      {
+        "answer": "WHEELER",
+        "clue": "Mike and Nancy's family name"
+      },
+      {
+        "answer": "BYERS",
+        "clue": "Will and Jonathan's family name"
+      },
+      {
+        "answer": "SINCLAIR",
+        "clue": "Lucas and Erica's family name"
+      },
+      {
+        "answer": "HENDERSON",
+        "clue": "Dustin's family name"
+      },
+      {
+        "answer": "WAFFLE",
+        "clue": "Eleven's favourite frozen breakfast"
+      },
+      {
+        "answer": "MINDFLAYER",
+        "clue": "The vast shadow spider over the town"
+      }
+    ]
+  },
+  {
+    "slug": "breaking-bad",
+    "name": "Breaking Bad",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "⚗️",
+    "featured": false,
+    "sortOrder": 25,
+    "blurb": "Say my name.",
+    "items": [
+      {
+        "answer": "WALTER",
+        "clue": "The chemistry teacher's first name"
+      },
+      {
+        "answer": "WHITE",
+        "clue": "The chemistry teacher's surname"
+      },
+      {
+        "answer": "JESSE",
+        "clue": "Yeah, science, and his first name"
+      },
+      {
+        "answer": "PINKMAN",
+        "clue": "Jesse's surname"
+      },
+      {
+        "answer": "SKYLER",
+        "clue": "Walt's wife"
+      },
+      {
+        "answer": "HANK",
+        "clue": "The DEA agent brother-in-law"
+      },
+      {
+        "answer": "MARIE",
+        "clue": "The sister-in-law who wears purple and shoplifts"
+      },
+      {
+        "answer": "SAUL",
+        "clue": "Better call him"
+      },
+      {
+        "answer": "GOODMAN",
+        "clue": "The lawyer's surname, and it's all good, man"
+      },
+      {
+        "answer": "MIKE",
+        "clue": "The quiet ex-cop fixer with a granddaughter"
+      },
+      {
+        "answer": "GUS",
+        "clue": "The chicken restaurateur with a very calm voice"
+      },
+      {
+        "answer": "FRING",
+        "clue": "Gus's surname"
+      },
+      {
+        "answer": "TUCO",
+        "clue": "The manic cartel dealer with a bell-ringing uncle"
+      },
+      {
+        "answer": "HECTOR",
+        "clue": "The old man in the wheelchair who rings a bell"
+      },
+      {
+        "answer": "LYDIA",
+        "clue": "The nervous Madrigal executive who takes stevia"
+      },
+      {
+        "answer": "TODD",
+        "clue": "The polite young man who does terrible things"
+      },
+      {
+        "answer": "BADGER",
+        "clue": "One of Jesse's stoner friends, and a striped animal"
+      },
+      {
+        "answer": "SKINNY",
+        "clue": "Pete's first name, one of Jesse's friends"
+      },
+      {
+        "answer": "GALE",
+        "clue": "The chemist who loved his coffee and karaoke"
+      },
+      {
+        "answer": "HEISENBERG",
+        "clue": "The hat, the glasses, and the name he knocks under"
+      },
+      {
+        "answer": "POLLOS",
+        "clue": "Los Hermanos, the chicken chain"
+      },
+      {
+        "answer": "CRYSTAL",
+        "clue": "The blue kind he cooks"
+      },
+      {
+        "answer": "RICIN",
+        "clue": "The poison hidden in a cigarette"
+      },
+      {
+        "answer": "WINNEBAGO",
+        "clue": "The rolling lab in the desert"
+      }
+    ]
+  },
+  {
+    "slug": "pixar",
+    "name": "Pixar",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "💡",
+    "featured": false,
+    "sortOrder": 26,
+    "blurb": "Characters from the Pixar films.",
+    "items": [
+      {
+        "answer": "WOODY",
+        "clue": "The cowboy doll with a pull string"
+      },
+      {
+        "answer": "BUZZ",
+        "clue": "The space ranger who thought he was real"
+      },
+      {
+        "answer": "NEMO",
+        "clue": "The little clownfish who gets taken"
+      },
+      {
+        "answer": "DORY",
+        "clue": "Blue tang with no short-term memory"
+      },
+      {
+        "answer": "MARLIN",
+        "clue": "The anxious father who crosses an ocean"
+      },
+      {
+        "answer": "CRUSH",
+        "clue": "The surfer turtle riding the current"
+      },
+      {
+        "answer": "SULLEY",
+        "clue": "Big blue monster covered in purple spots"
+      },
+      {
+        "answer": "MIKE",
+        "clue": "The one-eyed green monster"
+      },
+      {
+        "answer": "BOO",
+        "clue": "The little girl who wanders into Monstropolis"
+      },
+      {
+        "answer": "RANDALL",
+        "clue": "The lizard monster who turns invisible"
+      },
+      {
+        "answer": "REMY",
+        "clue": "The rat who can cook"
+      },
+      {
+        "answer": "LINGUINI",
+        "clue": "The clumsy kitchen boy with a rat under his hat"
+      },
+      {
+        "answer": "WALLE",
+        "clue": "The last robot left tidying up Earth"
+      },
+      {
+        "answer": "EVE",
+        "clue": "The sleek white probe robot sent to find life"
+      },
+      {
+        "answer": "CARL",
+        "clue": "The widower who flies his house away"
+      },
+      {
+        "answer": "RUSSELL",
+        "clue": "The wilderness explorer who stows away on the porch"
+      },
+      {
+        "answer": "DUG",
+        "clue": "The dog with a collar that lets him talk"
+      },
+      {
+        "answer": "KEVIN",
+        "clue": "The big colourful bird, despite the name"
+      },
+      {
+        "answer": "MERIDA",
+        "clue": "The Scottish princess with a bow and wild red hair"
+      },
+      {
+        "answer": "RILEY",
+        "clue": "The girl whose emotions we watch"
+      },
+      {
+        "answer": "JOY",
+        "clue": "The bright yellow emotion in charge"
+      },
+      {
+        "answer": "SADNESS",
+        "clue": "The blue emotion who turns out to matter most"
+      },
+      {
+        "answer": "ANGER",
+        "clue": "The red brick of an emotion whose head catches fire"
+      },
+      {
+        "answer": "FEAR",
+        "clue": "The tall purple emotion who checks for danger"
+      },
+      {
+        "answer": "DISGUST",
+        "clue": "The green emotion who rejects the broccoli"
+      },
+      {
+        "answer": "MIGUEL",
+        "clue": "The boy who crosses into the Land of the Dead with a guitar"
+      },
+      {
+        "answer": "HECTOR",
+        "clue": "The forgotten musician in the Land of the Dead"
+      },
+      {
+        "answer": "LUCA",
+        "clue": "Sea monster boy who becomes human on land"
+      },
+      {
+        "answer": "MCQUEEN",
+        "clue": "Number 95, and ka-chow"
+      },
+      {
+        "answer": "MATER",
+        "clue": "The rusty tow truck who is not much of a talker, actually he is"
+      },
+      {
+        "answer": "SALLY",
+        "clue": "The blue Porsche who runs the motel in Radiator Springs"
+      },
+      {
+        "answer": "BONNIE",
+        "clue": "The child the toys go to after Andy"
+      }
+    ]
+  },
+  {
+    "slug": "batman",
+    "name": "Batman",
+    "category": "movies & tv",
+    "region": "en",
+    "icon": "🦇",
+    "featured": false,
+    "sortOrder": 27,
+    "blurb": "Gotham's heroes and rogues.",
+    "items": [
+      {
+        "answer": "BRUCE",
+        "clue": "The billionaire's first name"
+      },
+      {
+        "answer": "WAYNE",
+        "clue": "The billionaire's surname, and the Manor"
+      },
+      {
+        "answer": "ALFRED",
+        "clue": "The butler who raised him"
+      },
+      {
+        "answer": "ROBIN",
+        "clue": "The boy wonder sidekick"
+      },
+      {
+        "answer": "GORDON",
+        "clue": "The commissioner who lights the signal"
+      },
+      {
+        "answer": "BARBARA",
+        "clue": "The commissioner's daughter, and Batgirl"
+      },
+      {
+        "answer": "JOKER",
+        "clue": "Green hair, white face, and why so serious"
+      },
+      {
+        "answer": "PENGUIN",
+        "clue": "Top hat, monocle and a trick umbrella"
+      },
+      {
+        "answer": "RIDDLER",
+        "clue": "Question marks, and he cannot resist a puzzle"
+      },
+      {
+        "answer": "BANE",
+        "clue": "Broke the Bat, and breathes through a mask"
+      },
+      {
+        "answer": "CATWOMAN",
+        "clue": "The cat burglar in the mask and whip"
+      },
+      {
+        "answer": "SELINA",
+        "clue": "Catwoman's real first name"
+      },
+      {
+        "answer": "HARLEY",
+        "clue": "The Joker's girlfriend, first name"
+      },
+      {
+        "answer": "QUINN",
+        "clue": "The Joker's girlfriend, surname"
+      },
+      {
+        "answer": "SCARECROW",
+        "clue": "Doses his victims with fear toxin"
+      },
+      {
+        "answer": "FREEZE",
+        "clue": "Mister who needs the cold, and a wife in stasis"
+      },
+      {
+        "answer": "CLAYFACE",
+        "clue": "Shapeshifting villain made of living mud"
+      },
+      {
+        "answer": "DEATHSTROKE",
+        "clue": "One-eyed mercenary in orange and black"
+      },
+      {
+        "answer": "GOTHAM",
+        "clue": "The city that needs him"
+      },
+      {
+        "answer": "ARKHAM",
+        "clue": "The asylum where the villains end up"
+      },
+      {
+        "answer": "BATCAVE",
+        "clue": "The lair under the manor"
+      },
+      {
+        "answer": "BATMOBILE",
+        "clue": "The car with the fins"
+      },
+      {
+        "answer": "DICK",
+        "clue": "The first Robin's first name"
+      },
+      {
+        "answer": "GRAYSON",
+        "clue": "The first Robin's surname, of the flying trapeze"
+      },
+      {
+        "answer": "TIMDRAKE",
+        "clue": "The third Robin, the detective one"
+      },
+      {
+        "answer": "RAS",
+        "clue": "Al Ghul, the immortal of the Lazarus Pit"
+      }
+    ]
+  }
 ]

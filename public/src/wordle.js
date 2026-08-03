@@ -82,6 +82,7 @@
     chInviteTime: " You’ll have {0}!",
     lvlWord: "Level", statWins: "wins", statPlayed: "played", toNext: "to next", maxRank: "MAX",
     lvlUp: "LEVEL UP", memberSince: "Playing since {0}", rankTitle: "Your rank",
+    nextTier: "{0} at level {1}",
     /* topic mode */
     tpPick: "Choose a topic", tpSearch: "Search topics…", tpAll: "All",
     tpNone: "No topics match that search.",
@@ -375,53 +376,105 @@
     }
     return { level: lvl, floor: floor, next: floor + need, into: wins - floor, span: need };
   }
+  /* Badge emblems, drawn in the badge's own 64-wide coordinate space. Each tier
+     gets its own mark so a rank is recognisable at a glance rather than being
+     the same star in a different colour. */
+  var EMBLEM = {
+    spark: '<path d="M32 17 L35.5 28.5 L47 32 L35.5 35.5 L32 47 L28.5 35.5 L17 32 L28.5 28.5 Z"/>',
+    chevron:
+      '<path d="M32 18 L45 30 L39.4 30 L32 23.2 L24.6 30 L19 30 Z"/>' +
+      '<path d="M32 30 L45 42 L39.4 42 L32 35.2 L24.6 42 L19 42 Z"/>',
+    star: '<path d="M32 17.5 l4.3 9.3 10.1 1.2 -7.5 6.9 2.1 10 -9-5.1 -9 5.1 2.1-10 -7.5-6.9 10.1-1.2 z"/>',
+    gem:
+      '<path d="M22.5 23 h19 l6.5 8.5 -16 16.5 -16-16.5 z"/>' +
+      '<path d="M22.5 23 l3 8.5 h13 l3-8.5 M15 31.5 h34" fill="none" stroke="#000" stroke-opacity=".18" stroke-width="1.6"/>',
+    diamond:
+      '<path d="M32 17 L47 32 L32 47 L17 32 Z"/>' +
+      '<path d="M32 17 L32 47 M17 32 L47 32" fill="none" stroke="#000" stroke-opacity=".18" stroke-width="1.6"/>',
+    crown:
+      '<path d="M19 40 L17 23 L25 31.5 L32 20 L39 31.5 L47 23 L45 40 Z"/>' +
+      '<rect x="19" y="42" width="26" height="4.4" rx="1.6"/>',
+    laurel:
+      '<path d="M32 19 l3.6 7.8 8.4 .9 -6.3 5.7 1.8 8.3 -7.5-4.3 -7.5 4.3 1.8-8.3 -6.3-5.7 8.4-.9 z"/>' +
+      '<path d="M14 28 c0 9 4 15 10 18 M50 28 c0 9-4 15-10 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
+    flame:
+      '<path d="M32 16 c6 7 2 11 4.5 14 c4-1 3.5-6.5 3.5-6.5 c4.5 5.5 5.5 9.5 5.5 12.5 a13.5 13.5 0 0 1-27 0 c0-5.5 3.5-10.5 7-12.5 c0 4.5 2.5 6 4.5 6 c-2.5-6.5 -1.5-10.5 -2-13.5 z"/>',
+    bolt: '<path d="M36 16 L21.5 35.5 h8.5 l-3 12.5 L44 28 h-9 z"/>',
+  };
+
+  /* Nine tiers rather than seven, so the climb keeps producing something new
+     for longer, and each one carries its own emblem and colourway. */
   var TIERS = [
-    { min: 1, name: "Bronze", c1: "#e08b4c", c2: "#a0561f", rim: "#7a3f14", ic: "star" },
-    { min: 5, name: "Silver", c1: "#d8dde2", c2: "#8f97a0", rim: "#767e87", ic: "star" },
-    { min: 10, name: "Gold", c1: "#ffd75e", c2: "#e0991e", rim: "#b3781a", ic: "star" },
-    { min: 16, name: "Platinum", c1: "#7fe3e8", c2: "#2f9aa3", rim: "#1f6f77", ic: "crown" },
-    { min: 23, name: "Diamond", c1: "#8fd0ff", c2: "#3b74e0", rim: "#274db0", ic: "crown" },
-    { min: 32, name: "Master", c1: "#d59bff", c2: "#7b2cbf", rim: "#551d87", ic: "crown", glow: true },
-    { min: 43, name: "Legend", c1: "#ffb04d", c2: "#e03131", rim: "#a01c1c", ic: "crown", flame: true },
+    { min: 1, name: "Bronze", c1: "#e6a15f", c2: "#a0561f", rim: "#6f3812", ic: "spark" },
+    { min: 5, name: "Silver", c1: "#e2e7ec", c2: "#8f97a0", rim: "#6e767f", ic: "chevron" },
+    { min: 10, name: "Gold", c1: "#ffdc73", c2: "#e0991e", rim: "#a86f14", ic: "star" },
+    { min: 16, name: "Emerald", c1: "#8ff0b5", c2: "#1f9d55", rim: "#146b3a", ic: "gem" },
+    { min: 23, name: "Sapphire", c1: "#93c9ff", c2: "#2f6fe0", rim: "#1e4aa0", ic: "gem" },
+    { min: 31, name: "Diamond", c1: "#a8e9ff", c2: "#2aa5c9", rim: "#177a95", ic: "diamond", glow: true },
+    { min: 40, name: "Master", c1: "#dda6ff", c2: "#7b2cbf", rim: "#521a83", ic: "crown", glow: true },
+    { min: 50, name: "Grandmaster", c1: "#ffc4a3", c2: "#d0483a", rim: "#932c22", ic: "laurel", glow: true },
+    { min: 62, name: "Legend", c1: "#ffd76b", c2: "#e03131", rim: "#981818", ic: "flame", flame: true },
   ];
   function tierFor(level) { var tr = TIERS[0], i; for (i = 0; i < TIERS.length; i++) if (level >= TIERS[i].min) tr = TIERS[i]; return tr; }
+  function nextTier(level) { for (var i = 0; i < TIERS.length; i++) if (TIERS[i].min > level) return TIERS[i]; return null; }
   function hasRank() { return getProfile().wins > 0; }
 
   var _bid = 0;
   function badgeSVG(level) {
     var tier = tierFor(level), id = "wb" + ++_bid;
     var hex = "M32 2 L60 16 L60 48 L32 70 L4 48 L4 16 Z";
-    var emblem =
-      tier.ic === "crown"
-        ? '<path d="M20 41 L18 24 L26 33 L32 21 L38 33 L46 24 L44 41 Z" fill="#fff" fill-opacity=".92"/><rect x="20" y="43" width="24" height="4" rx="1.5" fill="#fff" fill-opacity=".92"/>'
-        : '<path d="M32 20 l3.6 7.8 8.4 .9 -6.3 5.7 1.8 8.3 -7.5-4.3 -7.5 4.3 1.8-8.3 -6.3-5.7 8.4-.9 z" fill="#fff" fill-opacity=".92"/>';
+    var emblem = '<g fill="#fff" fill-opacity=".95" color="#fff">' + (EMBLEM[tier.ic] || EMBLEM.star) + "</g>";
     var flame = tier.flame
       ? '<g class="wu-badge-flame"><path d="M32 -4 c7 8 2 13 5 17 c5-1 4-8 4-8 c5 6 6 11 6 15 a15 15 0 0 1-30 0 c0-6 4-12 8-15 c0 5 3 7 5 7 c-3-7 -2-12 -3-16 z" fill="url(#' + id + 'f)"/></g>'
       : "";
     return (
       '<svg class="wu-badge' + (tier.glow ? " wu-badge-glow" : "") + (tier.flame ? " wu-badge-fire" : "") +
-      '" viewBox="-6 -14 76 92" xmlns="http://www.w3.org/2000/svg">' +
+      '" viewBox="-6 -14 76 96" xmlns="http://www.w3.org/2000/svg">' +
       '<defs><linearGradient id="' + id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + tier.c1 + '"/><stop offset="1" stop-color="' + tier.c2 + '"/></linearGradient>' +
+      '<linearGradient id="' + id + 's" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient>' +
       '<linearGradient id="' + id + 'f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset=".5" stop-color="#ff9a3c"/><stop offset="1" stop-color="#e03131"/></linearGradient></defs>' +
       flame +
       '<path d="' + hex + '" fill="url(#' + id + ')" stroke="' + tier.rim + '" stroke-width="3" stroke-linejoin="round"/>' +
+      // A single highlight across the top faces reads as a bevel without a second shape.
+      '<path d="M32 2 L60 16 L60 30 L32 44 L4 30 L4 16 Z" fill="url(#' + id + 's)"/>' +
       emblem +
-      '<text x="32" y="61" text-anchor="middle" font-size="14" font-weight="800" fill="#fff" font-family="Arial, sans-serif">' + level + "</text></svg>"
+      // The level sits in its own plate so a three-digit number stays readable.
+      '<rect x="16" y="50" width="32" height="16" rx="8" fill="' + tier.rim + '" fill-opacity=".92"/>' +
+      '<text x="32" y="62" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff" font-family="system-ui,-apple-system,Segoe UI,Arial,sans-serif">' + level + "</text></svg>"
     );
   }
   function fmtSince(ts) { try { return new Date(ts).toLocaleDateString(undefined, { month: "short", year: "numeric" }); } catch (e) { return ""; } }
   function rankChip() {
-    var pr = getProfile(), li = levelInfo(pr.wins), tier = tierFor(li.level);
+    var pr = getProfile(), li = levelInfo(pr.wins), tier = tierFor(li.level), nt = nextTier(li.level);
     var pct = li.span > 0 ? Math.round((li.into / li.span) * 100) : 100;
-    var sub = pr.wins + " " + t("statWins") + " · " + pr.played + " " + t("statPlayed") + " · " +
-      (li.level >= 999 ? t("maxRank") : li.next - pr.wins + " " + t("toNext"));
-    return (
-      '<div class="wu-rank"><div class="wu-rank-badge">' + badgeSVG(li.level) + "</div>" +
-      '<div class="wu-rank-main"><div class="wu-rank-top"><span class="wu-rank-lvl">' + t("lvlWord") + " " + li.level +
-      '</span><span class="wu-rank-tier" style="color:' + tier.c2 + '">' + tier.name + "</span></div>" +
-      '<div class="wu-rank-bar"><i style="width:' + pct + "%;background:linear-gradient(90deg," + tier.c1 + "," + tier.c2 + ')"></i></div>' +
-      '<div class="wu-rank-sub">' + sub + "</div></div></div>"
-    );
+    var maxed = li.level >= 999;
+    var toGo = Math.max(0, li.next - pr.wins);
+
+    // Card, not a chip: the badge and tier lead, the bar shows exactly how far
+    // into the level you are, and the stats sit underneath as their own tiles.
+    var h = '<div class="wu-rank" style="--t1:' + tier.c1 + ";--t2:" + tier.c2 + '">';
+    h += '<div class="wu-rank-head">';
+    h += '<div class="wu-rank-badge">' + badgeSVG(li.level) + "</div>";
+    h += '<div class="wu-rank-id">' +
+      '<div class="wu-rank-tier">' + esc(tier.name) + "</div>" +
+      '<div class="wu-rank-lvl">' + t("lvlWord") + " <b>" + li.level + "</b></div>" +
+      "</div></div>";
+
+    h += '<div class="wu-rank-prog">' +
+      '<div class="wu-rank-bar"><i style="width:' + pct + '%"></i></div>' +
+      '<div class="wu-rank-meta"><span>' + li.into + " / " + li.span + " " + t("statWins") + "</span>" +
+      "<span>" + (maxed ? t("maxRank") : toGo + " " + t("toNext")) + "</span></div>";
+    if (nt && !maxed) {
+      h += '<div class="wu-rank-next">' + t("nextTier", nt.name, nt.min) + "</div>";
+    }
+    h += "</div>";
+
+    h += '<div class="wu-rank-tiles">' +
+      '<div class="wu-tile"><b>' + pr.wins + "</b><span>" + t("statWins") + "</span></div>" +
+      '<div class="wu-tile"><b>' + pr.played + "</b><span>" + t("statPlayed") + "</span></div>" +
+      '<div class="wu-tile"><b>' + li.level + "</b><span>" + t("lvlWord") + "</span></div>" +
+      "</div></div>";
+    return h;
   }
   function updateStatsIcon() {
     var btn = document.getElementById("statsBtn");
@@ -1216,13 +1269,14 @@
     }
     controls.innerHTML = h;
 
+    // Clues are a Versus feature: there they are always on and there is no hint
+    // button, which is what makes a fast 20-player room readable. Single-player
+    // keeps the hint button instead, so a clue here would give it away twice.
     var clueEl = document.getElementById("tpClue");
-    if (clueEl) {
-      if (game.mode === "topic" && game.clue) {
-        clueEl.innerHTML = '<span class="hint-inner"></span>';
-        clueEl.firstChild.textContent = t("tpClue", game.clue);
-        clueEl.classList.add("show");
-      } else { clueEl.classList.remove("show"); clueEl.innerHTML = ""; }
+    var mpOwnsClue = window.WU && window.WU.isMultiplayerActive && window.WU.isMultiplayerActive();
+    if (clueEl && !mpOwnsClue) {
+      clueEl.classList.remove("show");
+      clueEl.innerHTML = "";
     }
   }
   function renderEnd() {

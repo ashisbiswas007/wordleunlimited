@@ -151,6 +151,99 @@ export async function seedTopics() {
   return { seeded, skipped: false };
 }
 
+/**
+ * Hand-written clues straight off disk, keyed slug -> answer -> clue.
+ *
+ * Read from the raw JSON rather than a normalised pack because normalising
+ * fills in a generated clue, which would make a real clue indistinguishable
+ * from a placeholder.
+ */
+async function readWrittenClues() {
+  let files;
+  try {
+    files = (await readdir(PACKS_DIR)).filter((f) => f.endsWith(".json"));
+  } catch {
+    return new Map();
+  }
+
+  const out = new Map();
+  for (const file of files) {
+    if (file === "index.json") continue;
+    let parsed;
+    try {
+      parsed = JSON.parse(await readFile(join(PACKS_DIR, file), "utf8"));
+    } catch {
+      continue;
+    }
+    for (const pack of Array.isArray(parsed) ? parsed : [parsed]) {
+      if (!pack || !pack.slug || !Array.isArray(pack.items)) continue;
+      const slug = String(pack.slug).toLowerCase().replace(/[^a-z0-9-]/g, "");
+      const byAnswer = out.get(slug) || new Map();
+      for (const raw of pack.items) {
+        if (!raw || typeof raw === "string") continue;
+        const clue = raw.clue == null ? "" : String(raw.clue).trim();
+        if (!clue) continue;
+        const answer = String(raw.answer || "")
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, "")
+          .toUpperCase()
+          .replace(/[^A-Z]/g, "");
+        if (answer) byAnswer.set(answer, clue.slice(0, 120));
+      }
+      if (byAnswer.size) out.set(slug, byAnswer);
+    }
+  }
+  return out;
+}
+
+/**
+ * Pushes clue rewrites from the packs into topics that are already in the
+ * database.
+ *
+ * seedTopics only ever inserts new topics, so without this a clue written after
+ * a topic was first seeded would never reach a live deployment. Only the clue
+ * column is touched, and only where the pack actually has a written clue, so
+ * answers and admin edits are left alone.
+ */
+export async function syncClues() {
+  if (!isDbEnabled()) return { updated: 0, skipped: true };
+
+  const written = await readWrittenClues();
+  if (!written.size) return { updated: 0, skipped: false };
+
+  const { rows, ok } = await query("SELECT id, slug FROM topics");
+  if (!ok) return { updated: 0, skipped: false };
+
+  let updated = 0;
+  for (const { id, slug } of rows) {
+    const clues = written.get(slug);
+    if (!clues) continue;
+    const answers = [...clues.keys()];
+    const texts = answers.map((a) => clues.get(a));
+    try {
+      // One statement per topic: join the incoming pairs against the rows and
+      // write only the ones whose text actually differs.
+      const res = await query(
+        `UPDATE topic_items i
+            SET clue = v.clue
+           FROM (SELECT * FROM unnest($2::text[], $3::text[]) AS t(answer, clue)) v
+          WHERE i.topic_id = $1 AND i.answer = v.answer
+            AND (i.clue IS DISTINCT FROM v.clue)`,
+        [id, answers, texts]
+      );
+      updated += res.rowCount || 0;
+    } catch (err) {
+      console.warn(`[topics] clue sync failed for ${slug}: ${err.message}`);
+    }
+  }
+
+  if (updated) {
+    invalidate();
+    console.log(`[topics] refreshed ${updated} clue(s) from the packs`);
+  }
+  return { updated, skipped: false };
+}
+
 /* ---------- reads ---------- */
 
 export async function listTopics({ region = null, force = false } = {}) {
