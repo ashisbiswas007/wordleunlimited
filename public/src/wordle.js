@@ -1030,7 +1030,13 @@
       if (tpFilter.q) { try { si.focus(); si.setSelectionRange(si.value.length, si.value.length); } catch (e) {} }
     }
   }
-  function chooseTopic(slug) {
+  /** The slug this page is the landing page for, if it is one. */
+  function pageTopic() {
+    return typeof window.WU_TOPIC === "string" ? window.WU_TOPIC : null;
+  }
+
+  /** Loads a pack and plays it on the page we are already on. */
+  function playTopic(slug) {
     closeAll();
     fetchTopic(slug)
       .then(function (tp) {
@@ -1041,6 +1047,21 @@
         startGame("topic", tp.items[0].answer.length, { topic: tp });
       })
       .catch(function () { toast(t("tpFailed")); });
+  }
+
+  /**
+   * Picking a topic goes to that topic's own page instead of swapping the board
+   * in place, so every pack is a real, linkable, indexable URL rather than a
+   * state change nobody can bookmark.
+   *
+   * The one exception is the pack this page already is — navigating there would
+   * be a round trip to where we are, so just deal a fresh run instead.
+   */
+  function chooseTopic(slug) {
+    if (!slug) return;
+    if (slug === pageTopic()) { playTopic(slug); return; }
+    closeAll();
+    location.href = "/topics/" + encodeURIComponent(slug) + "/";
   }
 
   /* ===================== rendering ===================== */
@@ -1492,8 +1513,10 @@
       var mode = el.getAttribute("data-mode");
       closeAll(); challengeNotice = null;
       if (mode === "topic") {
-        if (currentTopic) startGame("topic", currentTopic.items[0].answer.length, { topic: currentTopic });
-        else openTopicPicker();
+        // The Topics tab is how you browse to another pack — including from a
+        // topic page, where resuming the pack you are already playing would do
+        // nothing visible.
+        openTopicPicker();
       } else if (mode === "multiplayer") {
         if (window.WU.openMultiplayer) window.WU.openMultiplayer();
       } else {
@@ -1613,6 +1636,7 @@
     evaluate: evaluate,
     actions: {},
     startTopic: chooseTopic,
+    playTopic: playTopic,
     openTopicPicker: openTopicPicker,
     startGame: function (mode) { switchLength(mode, settings.length); },
     /** Hands the board over to another controller (multiplayer). */
@@ -1661,7 +1685,7 @@
       // Show a playable board immediately, then swap to the topic once its
       // answers arrive — the page should never sit empty while we fetch.
       startGame("unlimited", settings.length);
-      chooseTopic(_bootTopic);
+      playTopic(_bootTopic);
     } else {
       if (_bootLen !== settings.length) loadCore(settings.length);
       var pend = loadPendingChallenge();

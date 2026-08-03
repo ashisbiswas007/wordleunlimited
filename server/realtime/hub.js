@@ -209,12 +209,14 @@ function tick() {
     /* Open rooms run a continuous clock:  play -> results+vote -> play.
        Custom rooms wait in a lobby until the host starts. */
     if (room.phase === PHASE.LOBBY) {
-      const minPlayers = room.kind === "open" ? 1 : 2;
-      if (room.players.size >= minPlayers) {
-        if (room.kind === "open") {
-          // Public rooms never wait on a lobby countdown.
-          room.startRound(null).catch(logRoomError);
-        } else if (!room.phaseEndsAt) {
+      if (room.kind === "open") {
+        // Public rooms never wait on a lobby countdown or a ready check.
+        if (room.players.size >= 1) room.startRound(null).catch(logRoomError);
+      } else if (room.players.size >= 2 && room.allReady()) {
+        // The countdown only runs while the whole room is ready. Previously it
+        // began as soon as a second player arrived and then sat expired at zero
+        // until everyone readied, which looked like the room had hung.
+        if (!room.phaseEndsAt) {
           room.phaseEndsAt = now + room.lobbySeconds * 1000;
           room.broadcast({
             t: "lobby",
@@ -224,12 +226,19 @@ function tick() {
             room: room.describe(),
             playerList: room.lobbyList(),
           });
-        } else if (now >= room.phaseEndsAt && room.allReady()) {
+        } else if (now >= room.phaseEndsAt) {
           room.startRound(room.topicSlug ? { slug: room.topicSlug } : null).catch(logRoomError);
         }
       } else if (room.phaseEndsAt) {
+        // Someone left or un-readied — cancel the countdown rather than letting
+        // it run down to a start that cannot happen.
         room.phaseEndsAt = 0;
-        room.broadcast({ t: "lobby_hold", players: room.players.size });
+        room.broadcast({
+          t: "lobby_hold",
+          players: room.players.size,
+          room: room.describe(),
+          playerList: room.lobbyList(),
+        });
       }
     } else if (room.phase === PHASE.PLAYING) {
       // Only the clock ends a round. A player who clears every word waits.
@@ -420,7 +429,16 @@ export async function registerRealtime(app) {
             isHost: res.player.id === room.hostId,
           });
 
-          if (room.phase === PHASE.PLAYING) room.sendWord(res.player);
+          if (room.phase === PHASE.PLAYING) {
+            if (res.player.playing) room.sendWord(res.player);
+            else {
+              safeSend(socket, {
+                t: "spectating",
+                reason: "round_in_progress",
+                endsAt: room.phaseEndsAt,
+              });
+            }
+          }
           room.boardDirty = true;
           break;
         }

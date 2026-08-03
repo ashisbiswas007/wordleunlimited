@@ -109,6 +109,11 @@ export async function setSetting(key, value) {
   if (!Object.prototype.hasOwnProperty.call(DEFAULTS, key)) {
     throw new Error(`Unknown setting: ${key}`);
   }
+  // JSON.stringify(undefined) is undefined, which pg binds as NULL and the
+  // NOT NULL constraint then rejects. Fail with a readable message instead.
+  if (value === undefined) {
+    throw new Error(`Setting "${key}" was sent without a value.`);
+  }
   await queryStrict(
     `INSERT INTO admin_settings (key, value, updated_at)
      VALUES ($1, $2::jsonb, now())

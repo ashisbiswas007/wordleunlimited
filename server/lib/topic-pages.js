@@ -5,9 +5,12 @@ import { listTopics, getTopic } from "./topics.js";
 /**
  * Server-rendered pages for /topics/ and /topics/<slug>/.
  *
- * These exist for search: a crawler must see the topic name, a real
- * description and the answers rendered as HTML, not injected later by
- * JavaScript. The playable board is the same markup as the static pages.
+ * These exist for search: a crawler must see the topic name and a real
+ * description as HTML, not injected later by JavaScript. The playable board is
+ * the same markup as the static pages.
+ *
+ * Topic pages deliberately carry no article copy and no answer list — the page
+ * is the game plus a route on to the next topic.
  */
 
 const PAGE_TTL_MS = 10 * 60 * 1000;
@@ -220,9 +223,9 @@ export async function renderTopicPage(slug) {
   const fallbackRelated = all.filter((t) => t.slug !== topic.slug).slice(0, 6);
   const relatedList = related.length ? related : fallbackRelated;
 
-  const byLength = {};
-  for (const it of items) (byLength[it.length] ||= []).push(it.answer);
-  const lengths = Object.keys(byLength).map(Number).sort((a, b) => a - b);
+  // Only the range is shown now (the badges); the answers themselves are
+  // deliberately not listed on the page.
+  const lengths = [...new Set(items.map((it) => it.length))].sort((a, b) => a - b);
 
   const title = `Wordle ${topic.name} — Play the ${topic.name} Word Game Free`;
   const description =
@@ -277,33 +280,9 @@ ${gameShell(topic.name)}
   </div>
 
   <div class="wrap prose">
-    <section style="border-top:none">
-      <h2>How the ${esc(topic.name)} Wordle works</h2>
-      <p>This is ordinary Wordle with one difference: instead of a random dictionary word, every
-      answer is a name from ${esc(topic.name)}. You get six guesses per answer. Green means the
-      letter is in the right place, orange means it is in the answer but somewhere else, and grey
-      means it is not there at all.</p>
-      <p>Solve one and the next loads straight away &mdash; and because names are not all the same
-      length, the grid resizes as you move through the pack. Guessing another name from this same
-      topic always counts as a valid guess, even when it is not a dictionary word.</p>
-    </section>
-
-    <section>
-      <h2>Answers in this pack</h2>
-      <p>All ${items.length} answers, grouped by length. Look away now if you would rather not know.</p>
-      <ul class="tlist">
-        ${lengths
-          .map(
-            (len) =>
-              `<li><b>${len} letters</b> &mdash; ${byLength[len].map((w) => esc(w)).join(", ")}</li>`
-          )
-          .join("\n        ")}
-      </ul>
-    </section>
-
     ${
       relatedList.length
-        ? `<section>
+        ? `<section style="border-top:none">
       <h2>More topics like this</h2>
       <div class="topicstrip">
         ${relatedList

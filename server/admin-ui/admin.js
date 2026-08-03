@@ -142,7 +142,9 @@
     $("mpPlayers").value = s.multiplayer.maxPlayersPerRoom;
     $("mpReveal").value = s.multiplayer.revealNextAtPercent;
     $("mpRound").value = s.multiplayer.roundSeconds;
-    $("mpVote").value = s.multiplayer.voteSeconds;
+    // The "vote length" box drives the results/vote phase, which the server
+    // calls resultsSeconds.
+    $("mpVote").value = s.multiplayer.resultsSeconds;
     $("mpWords").value = s.multiplayer.wordsToWin;
     $("annOn").checked = s.announcement.enabled;
     $("annText").value = s.announcement.text || "";
@@ -218,14 +220,22 @@
       .catch(function (err) { notice(esc(err.message), "err"); });
   });
 
+  /* A blank or non-numeric box must not overwrite a good value with NaN —
+     JSON.stringify turns NaN into null and the server would store it. */
+  function num(id, fallback) {
+    var n = parseInt($(id).value, 10);
+    return Number.isFinite(n) ? n : fallback;
+  }
+
   $("saveMp").addEventListener("click", function () {
-    var v = Object.assign({}, state.settings.multiplayer, {
-      maxOpenRooms: +$("mpRooms").value,
-      maxPlayersPerRoom: +$("mpPlayers").value,
-      revealNextAtPercent: +$("mpReveal").value,
-      roundSeconds: +$("mpRound").value,
-      voteSeconds: +$("mpVote").value,
-      wordsToWin: +$("mpWords").value,
+    var cur = state.settings.multiplayer;
+    var v = Object.assign({}, cur, {
+      maxOpenRooms: num("mpRooms", cur.maxOpenRooms),
+      maxPlayersPerRoom: num("mpPlayers", cur.maxPlayersPerRoom),
+      revealNextAtPercent: num("mpReveal", cur.revealNextAtPercent),
+      roundSeconds: num("mpRound", cur.roundSeconds),
+      resultsSeconds: num("mpVote", cur.resultsSeconds),
+      wordsToWin: num("mpWords", cur.wordsToWin),
     });
     post("/settings", { key: "multiplayer", value: v })
       .then(function (r) { state.settings = r.settings; notice("Multiplayer settings saved. New rooms use them immediately."); })

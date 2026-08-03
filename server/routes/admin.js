@@ -206,7 +206,14 @@ export default async function registerAdminRoutes(app) {
           type: "object",
           required: ["key", "value"],
           additionalProperties: false,
-          properties: { key: { type: "string", maxLength: 64 } },
+          properties: {
+            key: { type: "string", maxLength: 64 },
+            // `value` must be declared even though any JSON type is allowed:
+            // Fastify's AJV runs with removeAdditional, so an undeclared
+            // property is silently deleted from the body and the handler would
+            // write NULL. setSetting() validates the key against DEFAULTS.
+            value: {},
+          },
         },
       },
     },

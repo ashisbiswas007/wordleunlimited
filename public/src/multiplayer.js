@@ -57,6 +57,9 @@
   var voteState = null, phaseEndsAt = 0, skew = 0;
   var tick = null, reconnect = null, lastRooms = [], suggested = "", active = false;
   var view = "lobby", finished = false, topicsCache = null;
+  // Set when the server deals us out of a round — either we did not ready up
+  // or we arrived after it started. Spectators watch but cannot guess.
+  var spectating = false;
 
   var els = {
     modal: document.getElementById("mpModal"),
@@ -174,9 +177,10 @@
           view = "room";
           openPanel();
         } else if (room.kind === "custom") {
+          // A round is already running; the server follows up with either a
+          // word or a "spectating" message, which supplies its own explanation.
           view = "room";
           openPanel();
-          WU.toast("Round in progress — press Close to jump in");
         } else {
           view = "board";
           WU.closeAll();
@@ -204,6 +208,8 @@
       case "round_start":
         if (room) { room.phase = "playing"; room.topicName = m.topicName; room.matchId = m.matchId; room.round = m.round; }
         phaseEndsAt = m.endsAt; voteState = null; board = null; finished = false;
+        // A "word" or "spectating" message follows immediately and settles this.
+        spectating = false;
         saveSession();
         if (els.endwrap) els.endwrap.classList.remove("show");
         view = "board";
@@ -212,17 +218,30 @@
         break;
 
       case "word":
+        spectating = false;
         board = { index: m.index, length: m.length, clue: m.clue, rows: [], current: "",
                   max: m.maxGuesses || MAX_GUESSES, total: m.total, keys: {} };
         renderClue();
         renderBoard(); renderKeys(); renderControls();
         break;
 
+      case "spectating":
+        // Dealt out of this round — watch it, then ready up for the next one.
+        spectating = true; board = null; finished = false;
+        if (m.endsAt) phaseEndsAt = m.endsAt;
+        renderClue();
+        paintAll();
+        WU.toast(m.reason === "round_in_progress"
+          ? "Round already running — you are in for the next one"
+          : "You did not ready up, so you are watching this round");
+        break;
+
       case "result": applyResult(m); break;
 
       case "reject": {
         var msg = { not_in_list: t("notInList"), wrong_length: t("notEnough"),
-                    out_of_guesses: "No guesses left on this word.", not_playing: "The round is not running." };
+                    out_of_guesses: "No guesses left on this word.", not_playing: "The round is not running.",
+                    spectating: "You are watching this round — ready up for the next one." };
         WU.toast(msg[m.code] || t("notInList"));
         if (board) { board.shake = true; renderBoard(); }
         break;
@@ -253,6 +272,7 @@
 
       case "round_end":
         if (room) room.phase = "results";
+        spectating = false;
         standings = m.standings || [];
         phaseEndsAt = m.endsAt || 0;
         voteState = (m.voteOptions && m.voteOptions.length)
@@ -356,7 +376,7 @@
     if (notify !== false) send({ t: "leave" });
     clearSession();
     active = false; room = null; board = null; standings = []; players = [];
-    voteState = null; finished = false; view = "lobby";
+    voteState = null; finished = false; spectating = false; view = "lobby";
     clearInterval(tick); tick = null;
     if (els.banner) els.banner.innerHTML = "";
     renderClue();
@@ -411,6 +431,12 @@
   function renderBoard() {
     if (!els.grid) return;
     if (!board) {
+      if (spectating) {
+        els.grid.innerHTML = '<div class="mp-wait">' +
+          S('<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>') +
+          "<b>Watching this round</b><span>Ready up in the room panel to play the next one</span></div>";
+        return;
+      }
       els.grid.innerHTML = finished
         ? '<div class="mp-wait">' + S('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>') +
           "<b>All words cleared</b><span>Waiting for the round to finish</span></div>"
@@ -441,7 +467,8 @@
 
   function renderKeys() {
     if (!els.kb) return;
-    if (finished && !board) { els.kb.innerHTML = ""; return; }
+    // No board means nothing to type into — a spectator gets no keyboard at all.
+    if ((finished || spectating) && !board) { els.kb.innerHTML = ""; return; }
     var cls = ["absent", "present", "correct"], keys = (board && board.keys) || {}, html = "";
     [["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["ENTER","Z","X","C","V","B","N","M","BACK"]]
       .forEach(function (row) {
@@ -461,15 +488,19 @@
     if (!els.controls || !room) return;
     var mine = standings.filter(function (p) { return me && p.id === me.id; })[0];
     var lbl = "";
-    if (room.phase === "playing") {
+    if (room.phase === "playing" && spectating) {
+      lbl = WU.icons.clock + '<b id="mpClock">' + clock(left()) + "</b>" +
+        '<span class="dot">&bull;</span>Watching';
+    } else if (room.phase === "playing") {
       lbl = WU.icons.clock + '<b id="mpClock">' + clock(left()) + "</b>" +
         '<span class="dot">&bull;</span>' + t("solvedLbl") + " <b>" + (mine ? mine.solved : 0) + "</b>" +
         (mine ? '<span class="dot">&bull;</span>#<b>' + mine.rank + "</b>" : "");
     } else if (room.phase === "results") {
       lbl = WU.icons.clock + "Next round in <b id=\"mpClock\">" + clock(left()) + "</b>";
     } else {
-      lbl = phaseEndsAt ? WU.icons.clock + "Starting in <b id=\"mpClock\">" + clock(left()) + "</b>"
-                        : "Waiting for players";
+      lbl = phaseEndsAt
+        ? WU.icons.clock + "Starting in <b id=\"mpClock\">" + clock(left()) + "</b>"
+        : players.length < 2 ? "Waiting for players" : "Waiting for everyone to ready up";
     }
     els.controls.innerHTML =
       '<div class="tmode"><div class="tm-left"><div class="tm-info">' + lbl + "</div>" +
@@ -602,9 +633,10 @@
     var url = location.origin + "/?room=" + room.code;
     var isHost = me && room.hostId === me.id;
     var meP = players.filter(function (p) { return me && p.id === me.id; })[0];
-    var others = players.filter(function (p) { return !p.isHost; });
-    var readyOthers = others.filter(function (p) { return p.ready; }).length;
-    var canStart = players.length >= 2 && readyOthers === others.length;
+    // The host plays the round too, so they ready up like everyone else rather
+    // than being counted ready automatically.
+    var readyCount = players.filter(function (p) { return p.ready; }).length;
+    var canStart = players.length >= 2 && readyCount === players.length;
 
     var h = '<div class="mp-wrap"><div class="mp-hero"><h3>' + esc(room.label || ("Room " + room.code)) + "</h3>" +
       '<p>' + esc(room.topicName || "Random words") + " &middot; " +
@@ -619,20 +651,25 @@
     }
 
     h += '<div class="mp-status">' + (room.phase !== "lobby"
-      ? "Round in progress"
+      ? (spectating ? "Watching this round — ready up to play the next one" : "Round in progress")
       : players.length < 2
         ? "Waiting for one more player"
         : canStart
-          ? (isHost ? "Everyone is ready — start when you like" : "Waiting for the host to start")
-          : readyOthers + " of " + others.length + " ready") + "</div>";
+          ? "Everyone is ready — starting shortly"
+          : readyCount + " of " + players.length + " ready") + "</div>";
 
     h += '<div class="mp-players">' + players.map(function (p) {
-      var ready = p.isHost || p.ready;
+      // In a running round the meaningful state is who is actually playing;
+      // in the lobby it is who has readied up.
+      var ready = room.phase === "lobby" ? p.ready : p.playing;
+      var label = room.phase === "lobby"
+        ? (p.ready ? "Ready" : "Not ready")
+        : (p.playing ? "Playing" : "Watching");
       return '<div class="mp-pl' + (ready ? " ready" : "") + '">' +
         '<span class="av">' + avatar(p.avatar, 16) + "</span>" +
         '<span class="nk">' + esc(p.nick) + (p.isHost ? ' <em class="host">host</em>' : "") +
         (me && p.id === me.id ? ' <em class="you">you</em>' : "") + "</span>" +
-        '<span class="st">' + (ready ? "Ready" : "Not ready") + "</span>" +
+        '<span class="st">' + label + "</span>" +
         (isHost && !p.isHost ? '<button class="mp-kick" data-mpkick="' + esc(p.id) +
           '" title="Remove ' + esc(p.nick) + '" aria-label="Remove ' + esc(p.nick) + '">' +
           WU.icons.close + "</button>" : "") + "</div>";
@@ -640,12 +677,13 @@
 
     if (room.phase === "lobby") {
       h += '<div class="mp-actions">';
+      // Everyone readies up, host included — readying is what deals you into
+      // the round, so the host skipping it would deal them out of their own match.
+      h += '<button class="cbtn' + (meP && meP.ready ? " ghost" : "") + '" data-act="mpready">' +
+        (meP && meP.ready ? "Cancel ready" : "Ready up") + "</button>";
       if (isHost) {
         h += '<button class="cbtn" data-act="mpstart"' + (canStart ? "" : " disabled") + ">" +
-          (players.length < 2 ? "Need 2 players" : canStart ? "Start match" : "Waiting for ready") + "</button>";
-      } else {
-        h += '<button class="cbtn' + (meP && meP.ready ? " ghost" : "") + '" data-act="mpready">' +
-          (meP && meP.ready ? "Cancel ready" : "Ready up") + "</button>";
+          (players.length < 2 ? "Need 2 players" : canStart ? "Start now" : "Waiting for ready") + "</button>";
       }
       h += "</div>";
       // Always a way out of this panel, even while nothing can be started.
