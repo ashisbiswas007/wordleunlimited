@@ -14,16 +14,20 @@
 
   var clientId = null, tokenClient = null, token = null, tokenExpiry = 0;
   var fileId = null, busy = false, saveTimer = null, lastSyncAt = 0;
-  var row = document.getElementById("cloudRow");
+  var rows = ["cloudRow"];
+  function eachRow(fn){ rows.forEach(function(id){ var el=document.getElementById(id); if(el) fn(el); }); }
 
   function status(text, sub) {
-    if (!row) return;
-    row.innerHTML =
+    lastStatus = { text: text, sub: sub || "" };
+    eachRow(function (row) {
+      row.innerHTML =
       '<div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
       'stroke-linecap="round" stroke-linejoin="round" class="lblico"><path d="M18 10h-1.3A7 7 0 1 0 6 16h12a4 4 0 0 0 0-8z"/></svg>Cloud save</div>' +
       '<div class="desc" style="margin:4px 0 8px">' + text + "</div>" + (sub || "");
-    row.style.display = "";
+      row.style.display = "";
+    });
   }
+  var lastStatus = null;
 
   function signedOutUI() {
     status(
@@ -229,7 +233,7 @@
     s.async = true;
     s.defer = true;
     s.onload = initGis;
-    s.onerror = function () { if (row) row.style.display = "none"; };
+    s.onerror = function () { eachRow(function (r) { r.style.display = "none"; }); };
     document.head.appendChild(s);
   }
 
@@ -252,16 +256,21 @@
     if (token && saveTimer) { clearTimeout(saveTimer); sync(false); }
   });
 
+  WU.renderCloudRow = function (id) {
+    if (rows.indexOf(id) < 0) rows.push(id);
+    if (lastStatus) status(lastStatus.text, lastStatus.sub);
+  };
+
   fetch("/api/status")
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (j) {
       if (!j || !j.cloudSave || !j.googleClientId) {
-        if (row) row.style.display = "none";
+        eachRow(function (r) { r.style.display = "none"; });
         return;
       }
       clientId = j.googleClientId;
       signedOutUI();
       loadGis();
     })
-    .catch(function () { if (row) row.style.display = "none"; });
+    .catch(function () { eachRow(function (r) { r.style.display = "none"; }); });
 })();

@@ -11,7 +11,7 @@ COPY . .
 
 # gen-words writes public/src/dict/**, build-assets writes .br/.gz siblings next to
 # every static file so the running server never has to compress anything at runtime.
-RUN node scripts/gen-words.mjs && node scripts/build-assets.mjs
+RUN node scripts/gen-words.mjs && node scripts/build-assets.mjs --minify
 
 # ---------- runtime stage ----------
 FROM node:24-alpine AS runtime

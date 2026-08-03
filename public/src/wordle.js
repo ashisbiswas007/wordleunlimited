@@ -1352,7 +1352,11 @@
     var el = document.getElementById(id);
     if (!el) return;
     el.classList.add("show");
-    if (id === "statsModal") fillStats();
+    if (id === "statsModal") {
+      fillStats();
+      // Cloud save lives here too, where players look for their progress.
+      if (window.WU && window.WU.renderCloudRow) window.WU.renderCloudRow("statsCloud");
+    }
     if (id === "topicModal") { if (topicIndexCache) renderTopicPicker(); }
     if (id === "challengeModal") {
       loadExtended(settings.length);
@@ -1378,7 +1382,12 @@
   function fillStats() {
     var title = document.getElementById("statsTitle"), body = document.getElementById("statsBody");
     var pr = getProfile();
-    var head = rankChip() + '<div class="wu-since">' + t("memberSince", fmtSince(pr.since)) + "</div>";
+    // No rank until the first win — an empty Level 1 badge means nothing.
+    var head = hasRank()
+      ? rankChip() + '<div class="wu-since">' + t("memberSince", fmtSince(pr.since)) + "</div>"
+      : '<div class="wu-norank">' + ICON.target + "<b>Win your first word to start ranking</b>" +
+        "<span>Levels, tiers and badges unlock as you play.</span></div>";
+    head += '<div class="setrow col" id="statsCloud"></div>';
     if (game.mode === "challenge") { title.textContent = t("stCh"); body.innerHTML = head + '<p class="muted">' + t("stChNote") + "</p>"; return; }
     if (game.mode === "topic") {
       title.textContent = esc(game.topic.name);

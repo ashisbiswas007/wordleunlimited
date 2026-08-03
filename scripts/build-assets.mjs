@@ -91,6 +91,82 @@ async function collectCspHashes(htmlFiles) {
   return [...hashes];
 }
 
+/**
+ * Strips comments and collapses whitespace in the shipped copies. Source files
+ * keep their comments; only what leaves the server is stripped. This is a size
+ * and tidiness measure, not a security one — anything the browser runs can be
+ * read by whoever wants to.
+ */
+function minifyCss(src) {
+  return src
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\s*([{}:;,>~])\s*/g, "$1")
+    .replace(/;\}/g, "}")
+    .replace(/\s+/g, " ")
+    .replace(/\s*\n\s*/g, "")
+    .trim();
+}
+
+/** Conservative: only removes whole-line // and /* *\/ comments outside strings. */
+function minifyJs(src) {
+  let out = "";
+  let i = 0;
+  const n = src.length;
+  let quote = null;
+  while (i < n) {
+    const c = src[i];
+    const next = src[i + 1];
+    if (quote) {
+      out += c;
+      if (c === "\\") { out += src[i + 1] ?? ""; i += 2; continue; }
+      if (c === quote) quote = null;
+      i++;
+      continue;
+    }
+    if (c === '"' || c === "'" || c === "`") { quote = c; out += c; i++; continue; }
+    if (c === "/" && next === "/") { while (i < n && src[i] !== "\n") i++; continue; }
+    if (c === "/" && next === "*") { i += 2; while (i < n && !(src[i] === "*" && src[i + 1] === "/")) i++; i += 2; continue; }
+    out += c;
+    i++;
+  }
+  return out
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .join("\n");
+}
+
+async function minify(files) {
+  let before = 0;
+  let after = 0;
+  for (const file of files) {
+    const ext = extname(file);
+    if (ext !== ".css" && ext !== ".js") continue;
+    if (/\.min\./.test(file)) continue;
+
+    const src = await readFile(file, "utf8");
+    const out = ext === ".css" ? minifyCss(src) : minifyJs(src);
+    if (!out.length) continue;
+
+    if (ext === ".js") {
+      try {
+        new Function(out);
+      } catch (err) {
+        throw new Error(`minifying ${relative(ROOT, file)} broke it: ${err.message}`);
+      }
+    }
+    before += Buffer.byteLength(src);
+    after += Buffer.byteLength(out);
+    await writeFile(file, out, "utf8");
+  }
+  if (before) {
+    console.log(
+      `[assets] minified ${((1 - after / before) * 100).toFixed(0)}% off js/css ` +
+        `(${(before / 1024).toFixed(0)} KB -> ${(after / 1024).toFixed(0)} KB)`
+    );
+  }
+}
+
 async function compress(files) {
   let count = 0;
   let saved = 0;
@@ -180,6 +256,10 @@ async function main() {
     "utf8"
   );
   console.log(`[assets] ${hashes.length} inline script hash(es) written for CSP`);
+
+  // Rewrites files in place, so it must never run against a working tree.
+  // The Dockerfile passes --minify; the repo keeps its readable source.
+  if (process.argv.includes("--minify")) await minify(files);
 
   const { count, saved } = await compress(files);
   console.log(
