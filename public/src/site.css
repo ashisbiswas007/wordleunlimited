@@ -31,6 +31,36 @@ p{margin:0 0 14px}
 .topnav nav a:hover{background:var(--bg2);color:var(--text)}
 .topnav nav a[aria-current]{color:var(--accent)}
 
+.navbtn{display:grid;place-items:center;width:38px;height:38px;border:0;background:none;
+color:var(--muted);border-radius:9px;cursor:pointer;flex:none}
+.navbtn:hover{background:var(--bg2);color:var(--text)}
+.navbtn:active{transform:scale(.94)}
+.ico-moon{display:none}
+[data-theme=dark] .ico-sun{display:none}
+[data-theme=dark] .ico-moon{display:block}
+.navburger{display:none}
+.navscrim{position:fixed;inset:0;background:rgba(8,10,14,.5);z-index:60;opacity:0;
+transition:opacity .22s;backdrop-filter:blur(2px)}
+.navscrim.open{opacity:1}
+.navpanel{position:fixed;top:0;left:0;bottom:0;width:min(78vw,300px);background:var(--bg);
+border-right:1px solid var(--border);z-index:61;padding:14px;transform:translateX(-100%);
+transition:transform .26s cubic-bezier(.2,.7,.3,1);display:flex;flex-direction:column;gap:6px}
+.navpanel.open{transform:none}
+.navpanel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.navpanel-title{font-weight:800;font-size:15px}
+.navpanel-links{display:flex;flex-direction:column;gap:2px}
+.navpanel-links a{padding:12px 12px;border-radius:9px;text-decoration:none;color:var(--text);
+font-weight:600;font-size:15px}
+.navpanel-links a:hover{background:var(--bg2)}
+.navpanel-links a[aria-current]{color:var(--accent);background:var(--bg2)}
+
+.ad-slot{margin:18px auto;max-width:760px;padding:0 18px;text-align:center;overflow:hidden}
+.ad-slot:empty{display:none}
+
+/* the game leads the page; the article starts below it with real breathing room */
+.gamehost+.ad-slot,.gamehost{margin-bottom:0}
+.hero-below{padding-top:38px!important;margin-top:26px;border-top:1px solid var(--border)}
+
 .hero{padding:26px 0 4px;text-align:center}
 .hero p{color:var(--muted);max-width:56ch;margin:0 auto 6px}
 .badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0 0}
@@ -101,8 +131,13 @@ details.faq p{margin:0 0 14px;color:var(--muted);font-size:14.5px}
 .prose ul{padding-left:20px}
 .prose li{margin-bottom:7px}
 
+@media (max-width:760px){
+  .topnav nav a{display:none}
+  .navburger{display:grid}
+}
 @media (max-width:560px){
   .toc ol{columns:1}
   section{padding:26px 0}
   .wrap{padding:0 14px}
+  .hero-below{padding-top:28px!important;margin-top:20px}
 }

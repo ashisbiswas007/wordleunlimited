@@ -115,25 +115,22 @@ white-space:nowrap;position:relative;}
 #wu-root .tm-right{display:flex;gap:6px;flex:none;}
 
 /* ---- hint line: height reserved so revealing never shifts the board ---- */
-/* flex:none matters — these are items in a flex column and would otherwise be
-   shrunk below their reserved height, which is what let the board move. */
-#wu-root .hintline{flex:none;position:relative;z-index:var(--z-hint);height:26px;display:flex;
-align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:750;
-letter-spacing:5px;text-transform:uppercase;opacity:0;transition:opacity .2s;pointer-events:none;}
-#wu-root .hintline.on{opacity:1;}
+#wu-root .hintline,#wu-root .tp-clue{flex:none;height:0;position:relative;
+z-index:var(--z-hint);pointer-events:none;}
+#wu-root .hintline .hint-inner,#wu-root .tp-clue .hint-inner{position:absolute;left:50%;bottom:2px;
+transform:translateX(-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;
+opacity:0;transition:opacity .2s;}
+#wu-root .hintline.on .hint-inner,#wu-root .tp-clue.show .hint-inner{opacity:1;}
+#wu-root .hintline .hint-inner{font-size:15px;font-weight:750;letter-spacing:5px;text-transform:uppercase;}
+#wu-root .tp-clue .hint-inner{font-size:13px;color:var(--muted);letter-spacing:0;}
 #wu-root .hintline .hintlabel{font-size:10px;letter-spacing:1px;color:var(--accent);
-background:color-mix(in srgb,var(--accent) 14%,transparent);padding:3px 8px;border-radius:99px;
-line-height:1.4;}
-#wu-root .tp-clue{flex:none;height:20px;display:flex;align-items:center;justify-content:center;
-font-size:13px;color:var(--muted);opacity:0;transition:opacity .2s;text-align:center;
-overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-#wu-root .tp-clue.show{opacity:1;}
+background:color-mix(in srgb,var(--accent) 14%,transparent);padding:3px 8px;border-radius:99px;line-height:1.4;}
 
 /* ================= BOARD =================
    Sized entirely in CSS from --len. Nothing measures the DOM, so the grid
    never reflows or jumps as the word length changes. */
 #wu-root .boardwrap{position:relative;z-index:var(--z-board);display:grid;place-items:center;
-height:var(--board-h);padding:2px 0;}
+height:var(--board-h);padding:2px 0;margin-top:12px;}
 #wu-root .grid{--len:5;display:grid;gap:var(--gap);grid-template-rows:repeat(6,1fr);
 width:100%;
 max-width:calc(var(--len) * var(--tile-max) + (var(--len) - 1) * var(--gap));

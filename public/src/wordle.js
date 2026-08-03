@@ -518,6 +518,11 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () { toastEl.style.display = "none"; }, 1500);
   }
+  function scrollToBoard() {
+    if (!root) return;
+    try { root.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    catch (e) { root.scrollIntoView(); }
+  }
   function doAnim(el, cls) {
     if (!el) return;
     el.classList.add(cls);
@@ -547,44 +552,33 @@
   }
   function deviceTarget() { var w = window.innerWidth; if (w <= 480) return 660; if (w <= 1024) return 700; return 720; }
   var vv = window.visualViewport, _raf = 0, _lockedH = 0;
+  /* The app sizes itself from its content. Only the on-screen-keyboard and
+     immersive modes pin it, because those genuinely need the visual viewport.
+     Locking a pixel height in normal flow made the keyboard overflow the
+     container and sit on top of the article below it. */
   function applyVV() {
     var h = vv ? vv.height : window.innerHeight;
     if (root) root.style.setProperty("--vvh", h + "px");
-    if (appEl) {
-      if (deviceKbd && vv) {
-        appEl.style.position = "fixed"; appEl.style.top = (vv.offsetTop || 0) + "px";
-        appEl.style.left = "0"; appEl.style.right = "0"; appEl.style.margin = "0 auto";
-        appEl.style.maxWidth = "520px"; appEl.style.height = h + "px"; appEl.style.minHeight = "0";
-        if (root) root.style.minHeight = "0";
-      } else if (immersive) {
-        appEl.style.position = ""; appEl.style.top = ""; appEl.style.left = ""; appEl.style.right = "";
-        appEl.style.margin = ""; appEl.style.maxWidth = "";
-        appEl.style.height = "100%"; appEl.style.minHeight = "0";
-        if (root) root.style.minHeight = "";
-      } else {
-        appEl.style.position = ""; appEl.style.top = ""; appEl.style.left = ""; appEl.style.right = "";
-        appEl.style.margin = ""; appEl.style.maxWidth = "";
-        if (IS_TOUCH) {
-          appEl.style.height = "auto"; appEl.style.minHeight = "0";
-          if (root) root.style.minHeight = "0";
-        } else {
-          if (!_lockedH) {
-            var top = 0;
-            try { top = appEl.getBoundingClientRect().top; } catch (e) {}
-            if (top < 0) top = 0;
-            var avail = h - top + 100;
-            var gh = Math.min(avail, deviceTarget());
-            if (gh < 360) gh = avail;
-            _lockedH = Math.round(Math.max(320, gh));
-          }
-          appEl.style.height = _lockedH + "px"; appEl.style.minHeight = "0";
-          if (root) root.style.minHeight = _lockedH + "px";
-        }
-      }
+    if (!appEl) return;
+
+    if (deviceKbd && vv) {
+      appEl.style.position = "fixed";
+      appEl.style.top = (vv.offsetTop || 0) + "px";
+      appEl.style.left = "0";
+      appEl.style.right = "0";
+      appEl.style.margin = "0 auto";
+      appEl.style.height = h + "px";
+    } else {
+      appEl.style.position = "";
+      appEl.style.top = "";
+      appEl.style.left = "";
+      appEl.style.right = "";
+      appEl.style.margin = "";
+      appEl.style.height = "";
     }
-    sizeBoardSoon();
+    if (root) root.style.minHeight = "";
   }
-  function relock() { _lockedH = 0; applyVV(); }
+  function relock() { applyVV(); }
   /* The board is sized purely in CSS from --len. Measuring the DOM and writing
      pixel sizes back was what made the grid jump on every render. All this does
      now is publish the word length. */
@@ -1104,7 +1098,8 @@
       s += game.revealed.indexOf(i) > -1 ? game.answer[i] : "·";
       s += i < game.length - 1 ? " " : "";
     }
-    hintEl.innerHTML = '<span class="hintlabel">' + t("hintTag") + "</span>" + s;
+    hintEl.innerHTML = '<span class="hint-inner"><span class="hintlabel">' + t("hintTag") +
+      "</span>" + s + "</span>";
     hintEl.classList.add("on");
   }
   function cbtn(act, icon, label, ghost) {
@@ -1192,8 +1187,11 @@
 
     var clueEl = document.getElementById("tpClue");
     if (clueEl) {
-      if (game.mode === "topic" && game.clue) { clueEl.textContent = t("tpClue", game.clue); clueEl.classList.add("show"); }
-      else clueEl.classList.remove("show");
+      if (game.mode === "topic" && game.clue) {
+        clueEl.innerHTML = '<span class="hint-inner"></span>';
+        clueEl.firstChild.textContent = t("tpClue", game.clue);
+        clueEl.classList.add("show");
+      } else { clueEl.classList.remove("show"); clueEl.innerHTML = ""; }
     }
   }
   function renderEnd() {
@@ -1460,6 +1458,14 @@
       if (a === "hint") { doAnim(el, "pulse-anim"); setTimeout(useHint, 180); el.blur(); return; }
       if (a === "swap") { doAnim(el, "swap-anim"); setTimeout(swapWord, 180); el.blur(); return; }
       if (a === "picktopic") { openTopicPicker(); el.blur(); return; }
+      if (a === "playnow") {
+        closeAll();
+        if (endwrap) endwrap.classList.remove("show");
+        if (!game || game.status !== "playing") switchLength("unlimited", settings.length);
+        scrollToBoard();
+        el.blur();
+        return;
+      }
       if (a === "openchallenge") { closeAll(); openModal("challengeModal"); }
       else if (a === "acceptchallenge") acceptChallenge();
       else if (a === "rejectchallenge" || a === "closechallenge" || a === "cancelchallenge") leaveToHome();

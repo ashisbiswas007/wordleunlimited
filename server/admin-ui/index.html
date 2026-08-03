@@ -116,6 +116,7 @@ code{background:var(--bg);padding:2px 5px;border-radius:4px;font-size:12.5px}
       <button data-tab="overview" class="on">Overview</button>
       <button data-tab="settings">Settings</button>
       <button data-tab="topics">Topics</button>
+      <button data-tab="code">Scripts &amp; Ads</button>
       <button data-tab="security">Security</button>
       <button data-tab="audit">Audit log</button>
     </div>
@@ -212,6 +213,41 @@ code{background:var(--bg);padding:2px 5px;border-radius:4px;font-size:12.5px}
           <textarea id="importBox" spellcheck="false" placeholder='[{"slug":"marvel","name":"Marvel","category":"movies &amp; tv","icon":"🦸","items":[{"answer":"THOR"},{"answer":"HULK","clue":"Big and green"}]}]'></textarea>
         </div>
         <div class="row"><button id="importBtn">Import</button><span id="importOut" style="font-size:13px;color:var(--muted)"></span></div>
+      </div>
+    </section>
+
+    <!-- SCRIPTS & ADS -->
+    <section data-panel="code" class="hidden">
+      <div class="card">
+        <h2>Header &amp; footer code</h2>
+        <p style="font-size:13px;color:var(--muted);margin-top:0">
+          Pasted verbatim into every public page. Use it for analytics, verification tags
+          or ad loader scripts. Header code goes before <code>&lt;/head&gt;</code>, footer
+          code before <code>&lt;/body&gt;</code>.</p>
+        <div class="msg warn" style="font-size:13px">
+          This runs on your visitors' browsers exactly as written, and enabling it relaxes
+          the site's script security policy so third-party tags can load. Only paste code
+          you trust.
+        </div>
+        <div class="field">
+          <label for="headCode">Header code</label>
+          <textarea id="headCode" spellcheck="false" placeholder="&lt;script async src=&quot;https://...&quot;&gt;&lt;/script&gt;"></textarea>
+        </div>
+        <div class="field">
+          <label for="footCode">Footer code</label>
+          <textarea id="footCode" spellcheck="false"></textarea>
+        </div>
+        <button id="saveCode">Save code</button>
+      </div>
+
+      <div class="card">
+        <h2>Ads</h2>
+        <div class="toggle">
+          <div><div class="t">Show ads</div><div class="d">Master switch. Every slot below stays hidden while this is off.</div></div>
+          <label class="sw"><input type="checkbox" id="adsOn"><span></span></label>
+        </div>
+        <div id="adSlots" style="margin-top:8px"></div>
+        <button id="saveAds" style="margin-top:14px">Save ad slots</button>
       </div>
     </section>
 

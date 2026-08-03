@@ -170,7 +170,9 @@ export async function build() {
   /* ---------- static ---------- */
   await app.register(fastifyStatic, {
     root: PUBLIC_DIR,
-    index: ["index.html"],
+    // The HTML pages are served by registerPageRoutes so admin head/footer code
+    // and ad slots can be injected. Letting static also claim them collides.
+    index: false,
     // Serves the .br / .gz sibling written at build time when the client
     // accepts it, so the CPU cost of compression is paid once, not per request.
     preCompressed: true,

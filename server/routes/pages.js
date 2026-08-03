@@ -8,11 +8,52 @@ import {
   inlineScriptHashes,
   extendCsp,
 } from "../lib/topic-pages.js";
+import { renderPage, hasCustomCode, invalidatePages } from "../lib/inject.js";
 
 const SITEMAP_TTL_MS = 60 * 60 * 1000;
 let sitemapCache = { at: 0, xml: "" };
 
 export default async function registerPageRoutes(app) {
+  /* The static HTML pages are served through here rather than by the static
+     plugin so admin-authored head/footer code and ad slots can be injected.
+     Results are cached per settings version, so this stays a memory read. */
+  const STATIC_PAGES = {
+    "/": "index.html",
+    "/wordle-uk/": "wordle-uk/index.html",
+    "/id/": "id/index.html",
+    "/privacy-policy/": "privacy-policy/index.html",
+    "/disclaimer/": "disclaimer/index.html",
+  };
+
+  for (const [route, file] of Object.entries(STATIC_PAGES)) {
+    app.get(route, { logLevel: "silent" }, async (req, reply) => {
+      let html;
+      try {
+        html = await renderPage(file);
+      } catch {
+        return reply.callNotFound();
+      }
+      reply.type("text/html; charset=utf-8");
+      reply.header("Cache-Control", "public, max-age=0, must-revalidate");
+      // Ad and analytics tags cannot run under a hash-based policy, so the
+      // strict CSP is relaxed only while the admin has custom code enabled.
+      if (hasCustomCode()) {
+        const csp = reply.getHeader("content-security-policy");
+        if (typeof csp === "string") {
+          reply.header(
+            "content-security-policy",
+            csp
+              .replace(/script-src ([^;]*)/, "script-src $1 'unsafe-inline' https: data:")
+              .replace(/img-src ([^;]*)/, "img-src $1 https: data:")
+              .replace(/frame-src ([^;]*)/, "frame-src $1 https:")
+              .replace(/connect-src ([^;]*)/, "connect-src $1 https:")
+          );
+        }
+      }
+      return html;
+    });
+  }
+
   /* Canonical trailing slashes — /wordle-uk and /wordle-uk/ must not both rank. */
   const slashRedirects = ["/wordle-uk", "/id", "/topics", "/privacy-policy", "/disclaimer"];
   for (const from of slashRedirects) {
@@ -169,6 +210,7 @@ ${entries.join("\n")}
 
 export function invalidateSitemap() {
   sitemapCache = { at: 0, xml: "" };
-  // Topic edits change both the sitemap and the rendered landing pages.
+  // Topic edits change the sitemap, the landing pages and the injected pages.
   invalidateTopicPages();
+  invalidatePages();
 }

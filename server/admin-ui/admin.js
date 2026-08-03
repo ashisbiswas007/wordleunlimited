@@ -152,6 +152,54 @@
     $("maintPill").className = "pill " + (s.maintenance ? "bad" : "ok");
   }
 
+  /* ---------- scripts & ads ---------- */
+
+  var AD_SLOTS = [
+    ["beforeGame", "Above the game", "Between the page header and the board"],
+    ["afterGame", "Below the game", "Under the keyboard, before the article"],
+    ["afterResult", "After a result", "Inside the win/lose card"],
+    ["afterVersusStats", "After Versus scores", "On the multiplayer scoreboard"],
+    ["inContent", "In the article", "Part way down the written content"],
+  ];
+
+  function renderCode() {
+    var s = state.settings;
+    $("headCode").value = s.inject.headScripts || "";
+    $("footCode").value = s.inject.footScripts || "";
+    $("adsOn").checked = Boolean(s.ads.enabled);
+
+    $("adSlots").innerHTML = AD_SLOTS.map(function (p) {
+      var k = p[0], slot = s.ads[k] || { enabled: false, html: "" };
+      return '<div class="toggle"><div><div class="t">' + esc(p[1]) + "</div>" +
+        '<div class="d">' + esc(p[2]) + "</div></div>" +
+        '<label class="sw"><input type="checkbox" data-adon="' + k + '"' +
+        (slot.enabled ? " checked" : "") + "><span></span></label></div>" +
+        '<div class="field"><textarea data-adhtml="' + k + '" spellcheck="false" ' +
+        'style="min-height:80px" placeholder="Ad code for this slot">' + esc(slot.html) + "</textarea></div>";
+    }).join("");
+  }
+
+  $("saveCode").addEventListener("click", function () {
+    post("/settings", { key: "inject", value: {
+      headScripts: $("headCode").value, footScripts: $("footCode").value } })
+      .then(function (r) { state.settings = r.settings; notice("Header and footer code saved. Reload the site to see it."); })
+      .catch(function (err) { notice(esc(err.message), "err"); });
+  });
+
+  $("saveAds").addEventListener("click", function () {
+    var value = { enabled: $("adsOn").checked };
+    AD_SLOTS.forEach(function (p) {
+      var k = p[0];
+      value[k] = {
+        enabled: document.querySelector('[data-adon="' + k + '"]').checked,
+        html: document.querySelector('[data-adhtml="' + k + '"]').value,
+      };
+    });
+    post("/settings", { key: "ads", value: value })
+      .then(function (r) { state.settings = r.settings; notice("Ad slots saved."); })
+      .catch(function (err) { notice(esc(err.message), "err"); });
+  });
+
   $("setMaint").addEventListener("change", function () {
     var on = $("setMaint").checked;
     if (on && !confirm("Take the whole site offline for visitors?\n\n/admin will stay reachable so you can turn it back on.")) {
@@ -248,7 +296,7 @@
           (t.enabled ? " checked" : "") + "><span></span></label></td>" +
           '<td><label class="sw"><input type="checkbox" data-tslug="' + esc(t.slug) + '" data-tfield="featured"' +
           (t.featured ? " checked" : "") + "><span></span></label></td>" +
-          '<td><button class="ghost danger" data-tdel="' + esc(t.slug) + '" style="padding:6px 10px;font-size:12px">Delete</button></td></tr>";
+          '<td><button class="ghost danger" data-tdel="' + esc(t.slug) + '" style="padding:6px 10px;font-size:12px">Delete</button></td></tr>';
       }).join("");
       $("topicTable").querySelector("tbody").innerHTML =
         rows || '<tr><td colspan="9" style="color:var(--muted)">No topics yet. Import some below.</td></tr>';
@@ -339,7 +387,11 @@
   /* ---------- boot ---------- */
 
   function loadSettings() {
-    return api("/settings").then(function (j) { state.settings = j.settings; renderToggles(); });
+    return api("/settings").then(function (j) {
+      state.settings = j.settings;
+      renderToggles();
+      renderCode();
+    });
   }
   function loadStats() {
     return api("/stats").then(function (j) { state.stats = j; renderStats(); });

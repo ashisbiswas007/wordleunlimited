@@ -43,6 +43,22 @@ export const DEFAULTS = {
   },
 
   announcement: { enabled: false, text: "", href: "" },
+
+  // Raw markup injected into every public page. Admin-authored only.
+  inject: { headScripts: "", footScripts: "" },
+
+  // Ad slots. Each holds raw ad markup and is rendered only when enabled.
+  ads: {
+    enabled: false,
+    beforeGame: { enabled: false, html: "" },
+    afterGame: { enabled: false, html: "" },
+    afterResult: { enabled: false, html: "" },
+    afterVersusStats: { enabled: false, html: "" },
+    inContent: { enabled: false, html: "" },
+  },
+
+  // Topics pinned to the front of the picker and the article grid.
+  trendingTopics: [],
 };
 
 let cache = structuredClone(DEFAULTS);

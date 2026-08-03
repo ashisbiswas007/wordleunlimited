@@ -33,6 +33,8 @@ export default async function registerApiRoutes(app) {
         announcement: s.announcement.enabled ? s.announcement : null,
         googleClientId: config.google.clientId || null,
         cloudSave: s.features.cloudSave && Boolean(config.google.clientId),
+        ads: s.ads.enabled ? s.ads : null,
+        trendingTopics: s.trendingTopics,
       };
     }
   );

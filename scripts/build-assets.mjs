@@ -127,12 +127,39 @@ async function compress(files) {
   return { count, saved };
 }
 
+/**
+ * Parse every shipped script. A syntax error in one file silently blanks the
+ * page that loads it, which is almost impossible to spot from the server side —
+ * the file serves with a 200 and the right byte count either way.
+ */
+async function checkScripts(files) {
+  const scripts = [
+    ...files.filter((f) => extname(f) === ".js"),
+    ...(await walk(join(ROOT, "server", "admin-ui"))).filter((f) => extname(f) === ".js"),
+  ];
+  const broken = [];
+  for (const file of scripts) {
+    const src = await readFile(file, "utf8");
+    try {
+      new Function(src);
+    } catch (err) {
+      broken.push(`${relative(ROOT, file)}: ${err.message}`);
+    }
+  }
+  if (broken.length) {
+    throw new Error(`refusing to build, ${broken.length} script(s) will not parse:\n  ` + broken.join("\n  "));
+  }
+  console.log(`[assets] ${scripts.length} script(s) parse cleanly`);
+}
+
 async function main() {
   const files = await walk(PUBLIC);
   if (!files.length) {
     console.warn("[assets] public/ is empty — nothing to do");
     return;
   }
+
+  await checkScripts(files);
 
   const htmlFiles = files.filter((f) => extname(f) === ".html");
 
