@@ -81,9 +81,11 @@
   function av() { var a = WU.lsGet(WU.K("mp_avatar"), null); return Number.isInteger(a) ? a : (Math.random() * AV.length) | 0; }
   function setAv(i) { WU.lsSet(WU.K("mp_avatar"), i); }
 
+  // Saved as soon as we are in a room. The match id only exists once a round
+  // starts, so a refresh while still in the lobby has to rejoin on code alone.
   function saveSession() {
-    if (!room || !room.matchId) return;
-    WU.lsSet(WU.K(REJOIN_KEY), { code: room.code, matchId: room.matchId, at: Date.now() });
+    if (!room || !room.code) return;
+    WU.lsSet(WU.K(REJOIN_KEY), { code: room.code, matchId: room.matchId || null, at: Date.now() });
   }
   function clearSession() { WU.lsSet(WU.K(REJOIN_KEY), null); }
   function readSession() {
@@ -163,8 +165,15 @@
         setNick(me.nick);
         saveSession();
         takeOver();
-        view = room.phase === "lobby" && room.kind === "custom" ? "room" : "board";
-        WU.closeAll();
+        // Straight to the board if a round is running; the room panel only
+        // opens when there is actually something to do there.
+        if (room.phase === "lobby" && room.kind === "custom") {
+          view = "room";
+          openPanel();
+        } else {
+          view = "board";
+          WU.closeAll();
+        }
         paintAll();
         break;
 
@@ -571,37 +580,55 @@
     if (!room) return lobbyView();
     var url = location.origin + "/?room=" + room.code;
     var isHost = me && room.hostId === me.id;
-    var h = '<div class="mp-wrap"><div class="mp-hero"><h3>' + esc(room.label || ("Room " + room.code)) + "</h3>" +
-      "<p>" + players.length + " / " + room.maxPlayers + " players &middot; " +
-      Math.round(room.durationSeconds / 60) + " min &middot; " +
-      esc(room.topicName || "Random words") + "</p></div>";
+    var meP = players.filter(function (p) { return me && p.id === me.id; })[0];
+    var others = players.filter(function (p) { return !p.isHost; });
+    var readyOthers = others.filter(function (p) { return p.ready; }).length;
+    var canStart = players.length >= 2 && readyOthers === others.length;
 
-    if (room.kind === "custom") {
-      h += '<div class="mp-code"><span>' + esc(room.code) + "</span>" +
-        '<button class="cbtn ghost" data-copy="' + esc(url) + '">Copy link</button></div>';
+    var h = '<div class="mp-wrap"><div class="mp-hero"><h3>' + esc(room.label || ("Room " + room.code)) + "</h3>" +
+      '<p>' + esc(room.topicName || "Random words") + " &middot; " +
+      Math.round(room.durationSeconds / 60) + " min &middot; " +
+      players.length + "/" + room.maxPlayers + " players</p></div>";
+
+    if (room.kind === "custom" && room.phase === "lobby") {
+      h += '<div class="mp-share"><div class="mp-lab">Invite your friends</div>' +
+        '<div class="mp-code"><span>' + esc(room.code) + "</span>" +
+        '<button class="cbtn ghost" data-copy="' + esc(room.code) + '">Copy code</button>' +
+        '<button class="cbtn" data-copy="' + esc(url) + '">Copy link</button></div></div>';
     }
 
+    h += '<div class="mp-status">' + (room.phase !== "lobby"
+      ? "Round in progress"
+      : players.length < 2
+        ? "Waiting for one more player"
+        : canStart
+          ? (isHost ? "Everyone is ready — start when you like" : "Waiting for the host to start")
+          : readyOthers + " of " + others.length + " ready") + "</div>";
+
     h += '<div class="mp-players">' + players.map(function (p) {
-      return '<div class="mp-pl' + (p.ready ? " ready" : "") + '">' +
+      var ready = p.isHost || p.ready;
+      return '<div class="mp-pl' + (ready ? " ready" : "") + '">' +
         '<span class="av">' + avatar(p.avatar, 16) + "</span>" +
-        '<span class="nk">' + esc(p.nick) + (p.isHost ? ' <em class="host">host</em>' : "") + "</span>" +
-        '<span class="st">' + (p.ready || p.isHost ? "Ready" : "Waiting") + "</span>" +
-        (isHost && !p.isHost ? '<button class="mp-kick" data-mpkick="' + esc(p.id) + '" title="Remove">' +
+        '<span class="nk">' + esc(p.nick) + (p.isHost ? ' <em class="host">host</em>' : "") +
+        (me && p.id === me.id ? ' <em class="you">you</em>' : "") + "</span>" +
+        '<span class="st">' + (ready ? "Ready" : "Not ready") + "</span>" +
+        (isHost && !p.isHost ? '<button class="mp-kick" data-mpkick="' + esc(p.id) +
+          '" title="Remove ' + esc(p.nick) + '" aria-label="Remove ' + esc(p.nick) + '">' +
           WU.icons.close + "</button>" : "") + "</div>";
     }).join("") + "</div>";
 
     if (room.phase === "lobby") {
-      var meP = players.filter(function (p) { return me && p.id === me.id; })[0];
       h += '<div class="mp-actions">';
-      if (!isHost) {
-        h += '<button class="cbtn' + (meP && meP.ready ? " ghost" : "") + '" data-act="mpready">' +
-          (meP && meP.ready ? "Not ready" : "I'm ready") + "</button>";
+      if (isHost) {
+        h += '<button class="cbtn" data-act="mpstart"' + (canStart ? "" : " disabled") + ">" +
+          (players.length < 2 ? "Need 2 players" : canStart ? "Start match" : "Waiting for ready") + "</button>";
       } else {
-        h += '<button class="cbtn" data-act="mpstart">Start now</button>';
+        h += '<button class="cbtn' + (meP && meP.ready ? " ghost" : "") + '" data-act="mpready">' +
+          (meP && meP.ready ? "Cancel ready" : "Ready up") + "</button>";
       }
       h += '<button class="cbtn ghost" data-act="mpleave">Leave</button></div>';
     } else {
-      h += '<div class="mp-actions"><button class="cbtn ghost" data-act="mpclose">Back to game</button>' +
+      h += '<div class="mp-actions"><button class="cbtn" data-act="mpclose">Back to game</button>' +
         '<button class="cbtn ghost" data-act="mpleave">Leave</button></div>';
     }
 
@@ -781,8 +808,23 @@
   refreshRooms();
   startPoll();
 
-  var sess = readSession();
-  if (sess && !isBlocked(sess.matchId)) joinRoom(sess.code, sess.matchId);
+  // An invite link joins straight away and opens the board. Reading the param
+  // here rather than waiting to be told avoids a load-order race with the
+  // engine, which was why shared links did nothing.
+  var param = new URLSearchParams(location.search).get("room");
+  if (param) {
+    var code = String(param).trim().toUpperCase();
+    if (/^[A-Z0-9]{3,12}$/.test(code)) {
+      if (!nick()) setNick(suggested || "Player" + (((Math.random() * 900) | 0) + 100));
+      joinRoom(code);
+      try {
+        history.replaceState(null, "", location.pathname + location.hash);
+      } catch (e) {}
+    }
+  } else {
+    var sess = readSession();
+    if (sess && !isBlocked(sess.matchId)) joinRoom(sess.code, sess.matchId);
+  }
 
   document.dispatchEvent(new CustomEvent("wu:multiplayer-ready"));
 })();

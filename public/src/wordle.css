@@ -47,6 +47,9 @@ display:flex;flex-direction:column;gap:10px;background:var(--bg);}
 #wu-root .wu-brand{display:inline-flex;align-items:baseline;gap:5px;font-weight:800;
 font-size:clamp(17px,4.4vw,20px);letter-spacing:-.3px;}
 #wu-root .wu-brand-1{color:var(--accent);}
+#wu-root .wu-flag{display:inline-flex;width:22px;height:15px;border-radius:3px;overflow:hidden;
+margin-left:7px;align-self:center;box-shadow:0 0 0 1px rgba(0,0,0,.16);}
+#wu-root .wu-flag svg{width:22px;height:15px;}
 #wu-root .icons{display:flex;gap:2px;margin-left:auto;}
 #wu-root .icon{display:grid;place-items:center;width:38px;height:38px;border:0;background:none;
 color:var(--muted);cursor:pointer;border-radius:var(--r-sm);padding:0;transition:background .15s,color .15s;}
@@ -76,8 +79,12 @@ display:inline-block;animation:wuDot 1.8s ease-in-out infinite;}
 
 /* ---- status strip ---- */
 #wu-root #banner:empty{display:none;}
+/* No reserved height — an empty control row collapses instead of leaving a
+   gap between the mode tabs and the board. */
 #wu-root .controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;justify-content:center;
-min-height:38px;font-size:14px;}
+font-size:14px;}
+#wu-root .controls:empty{display:none;}
+#wu-root #banner:empty{display:none;}
 #wu-root .muted{color:var(--muted);font-size:13px;}
 #wu-root .count{font-variant-numeric:tabular-nums;font-weight:700;}
 #wu-root .cbtn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:var(--r-sm);
@@ -115,8 +122,10 @@ white-space:nowrap;position:relative;}
 #wu-root .tm-right{display:flex;gap:6px;flex:none;}
 
 /* ---- hint line: height reserved so revealing never shifts the board ---- */
+/* Zero height, and the negative margin cancels the flex gap they would
+   otherwise still contribute — so an empty hint row costs no space at all. */
 #wu-root .hintline,#wu-root .tp-clue{flex:none;height:0;position:relative;
-z-index:var(--z-hint);pointer-events:none;}
+z-index:var(--z-hint);pointer-events:none;margin-top:-10px;}
 #wu-root .hintline .hint-inner,#wu-root .tp-clue .hint-inner{position:absolute;left:50%;bottom:2px;
 transform:translateX(-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;
 opacity:0;transition:opacity .2s;}
@@ -130,7 +139,7 @@ background:color-mix(in srgb,var(--accent) 14%,transparent);padding:3px 8px;bord
    Sized entirely in CSS from --len. Nothing measures the DOM, so the grid
    never reflows or jumps as the word length changes. */
 #wu-root .boardwrap{position:relative;z-index:var(--z-board);display:grid;place-items:center;
-height:var(--board-h);padding:2px 0;margin-top:12px;}
+height:var(--board-h);padding:0;margin-top:4px;}
 #wu-root .grid{--len:5;display:grid;gap:var(--gap);grid-template-rows:repeat(6,1fr);
 width:100%;
 max-width:calc(var(--len) * var(--tile-max) + (var(--len) - 1) * var(--gap));
@@ -456,10 +465,21 @@ color:var(--muted);margin-top:8px;}
 #wu-root .mp-select{width:100%;padding:11px;border:1px solid var(--border);border-radius:var(--r-sm);
 background:var(--bg2);color:var(--text);font-size:14px;}
 
-#wu-root .mp-code{display:flex;align-items:center;gap:10px;padding:12px;border-radius:var(--r-md);
-background:var(--bg2);border:1px dashed var(--border);}
-#wu-root .mp-code span{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:20px;font-weight:800;
-letter-spacing:3px;flex:1;}
+#wu-root .mp-share{padding:12px;border-radius:var(--r-md);background:var(--bg2);
+border:1px dashed var(--border);}
+#wu-root .mp-share .mp-lab{margin:0 0 8px;}
+#wu-root .mp-code{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+#wu-root .mp-code span{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:22px;font-weight:800;
+letter-spacing:3px;flex:1;min-width:110px;color:var(--accent);}
+#wu-root .mp-code .cbtn{padding:8px 12px;min-height:34px;font-size:12px;}
+#wu-root .mp-status{text-align:center;font-size:13px;font-weight:700;padding:10px;
+border-radius:var(--r-sm);background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);}
+#wu-root .mp-pl .you{font-style:normal;font-size:9.5px;font-weight:800;text-transform:uppercase;
+letter-spacing:.5px;color:var(--muted);background:var(--modal);padding:2px 6px;border-radius:99px;margin-left:4px;}
+#wu-root .cbtn.gsi{background:#fff;color:#3c4043;border:1px solid #dadce0;font-weight:600;}
+#wu-root .cbtn.gsi:hover{background:#f7f8f8;filter:none;}
+#wu-root .cbtn[disabled]{opacity:.45;cursor:not-allowed;}
+#wu-root .cbtn[disabled]:hover{filter:none;}
 
 #wu-root .mp-players{display:flex;flex-direction:column;gap:4px;}
 #wu-root .mp-pl{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:var(--r-sm);
@@ -543,7 +563,15 @@ text-align:center;padding:30px 10px;}
 @media (max-width:600px){
 #wu-root .mp-vote{grid-template-columns:1fr;}
 #wu-root .mp-sr,#wu-root .mp-scorekey{grid-template-columns:22px 26px 1fr 40px 48px;gap:6px;}
-#wu-root .app{padding:8px 10px 12px;}
+/* The keyboard runs nearly edge to edge like a real phone keyboard. Everything
+   else keeps its padding, so only the keys widen. */
+#wu-root .app{padding:8px 4px 10px;}
+#wu-root .topbar,#wu-root .tabs,#wu-root .controls,#wu-root #banner,
+#wu-root .hintline,#wu-root .tp-clue,#wu-root .boardwrap{margin-left:6px;margin-right:6px;}
+#wu-root .keyboard{gap:5px;}
+#wu-root .kb-row{gap:4px;}
+#wu-root .key{height:clamp(44px,6.8vh,54px);border-radius:6px;font-size:15px;}
+#wu-root .key.wide{font-size:11px;}
 #wu-root .modal{padding:18px;border-radius:var(--r-md);}
 #wu-root .tab>span:not(.tab-live){display:none;}
 #wu-root .tab{gap:4px;}

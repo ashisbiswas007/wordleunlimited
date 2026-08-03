@@ -47,6 +47,10 @@ function head({ title, description, canonical, extra = "" }) {
 <link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/src/wordle.css?v=${b}">
 <link rel="stylesheet" href="/src/site.css?v=${b}">
 ${extra}
@@ -60,9 +64,18 @@ ${extra}
       <a href="/wordle-uk/">UK</a>
       <a href="/id/">Indonesia</a>
       <a href="/topics/" aria-current="page">Topics</a>
+      <button class="navbtn" id="themeBtn" aria-label="Toggle dark mode" title="Light / dark">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" class="ico-sun"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" class="ico-moon"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="navbtn navburger" id="menuBtn" aria-label="Menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </nav>
   </div>
-</header>`;
+</header>
+<div class="navscrim" id="navScrim" hidden></div>
+<aside class="navpanel" id="navPanel" hidden aria-label="Menu"></aside>`;
 }
 
 function foot(scripts = "") {
@@ -82,6 +95,7 @@ function foot(scripts = "") {
 </footer>
 <script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
 ${scripts}
+<script src="/src/nav.js?v=${b}" defer></script>
 <script src="/src/wordle.js?v=${b}" defer></script>
 <script src="/src/multiplayer.js?v=${b}" defer></script>
 <script src="/src/cloudsave.js?v=${b}" defer></script>
@@ -244,7 +258,14 @@ export async function renderTopicPage(slug) {
 
   const html = `${head({ title, description, canonical })}
 <main>
-  <div class="wrap hero">
+  <!--ad:before-game-->
+  <div class="wrap gamehost">
+${gameShell(topic.name)}
+  </div>
+
+  <!--ad:after-game-->
+
+  <div class="wrap hero hero-below">
     <p class="eyebrow">Topic mode &middot; ${esc(topic.category)}</p>
     <h1>Wordle ${esc(topic.name)}</h1>
     <p>${esc(topic.blurb || `Guess your way through every name in ${topic.name}.`)} There ${items.length === 1 ? "is" : "are"} <b>${items.length}</b> answer${items.length === 1 ? "" : "s"} in this pack, and the word length changes as you go.</p>
@@ -253,10 +274,6 @@ export async function renderTopicPage(slug) {
       <span>${lengths.length ? lengths[0] + "&ndash;" + lengths[lengths.length - 1] + " letters" : "3&ndash;7 letters"}</span>
       <span>No login</span><span>Free forever</span>
     </div>
-  </div>
-
-  <div class="wrap gamehost">
-${gameShell(topic.name)}
   </div>
 
   <div class="wrap prose">
