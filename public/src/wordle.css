@@ -113,27 +113,33 @@ cursor:pointer;font-weight:650;font-size:12.5px;border-radius:6px;transition:bac
 #wu-root .seg button:hover:not(.active){color:var(--text);}
 #wu-root .seg button.active{background:var(--modal);color:var(--text);box-shadow:var(--sh-1);}
 
-#wu-root .tmode{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;}
-#wu-root .tm-left{display:flex;flex-direction:column;gap:7px;min-width:0;}
+/* Wraps to a second line rather than letting a long topic name run under the
+   buttons beside it. */
+#wu-root .tmode{display:flex;align-items:center;justify-content:space-between;gap:10px;
+width:100%;flex-wrap:wrap;}
+#wu-root .tm-left{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1 1 190px;}
 #wu-root .tm-info{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:650;
-white-space:nowrap;position:relative;}
+position:relative;flex-wrap:wrap;min-width:0;}
 #wu-root .tm-info svg{width:16px;height:16px;color:var(--muted);}
 #wu-root .tm-info .dot{color:var(--border);}
-#wu-root .tm-right{display:flex;gap:6px;flex:none;}
+#wu-root .tm-right{display:flex;gap:6px;flex:none;margin-left:auto;}
 
 /* ---- hint line: height reserved so revealing never shifts the board ---- */
-/* Zero height, and the negative margin cancels the flex gap they would
-   otherwise still contribute — so an empty hint row costs no space at all. */
-#wu-root .hintline,#wu-root .tp-clue{flex:none;height:0;position:relative;
-z-index:var(--z-hint);pointer-events:none;margin-top:-10px;}
-#wu-root .hintline .hint-inner,#wu-root .tp-clue .hint-inner{position:absolute;left:50%;bottom:2px;
-transform:translateX(-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;
-opacity:0;transition:opacity .2s;}
-#wu-root .hintline.on .hint-inner,#wu-root .tp-clue.show .hint-inner{opacity:1;}
-#wu-root .hintline .hint-inner{font-size:15px;font-weight:750;letter-spacing:5px;text-transform:uppercase;}
-#wu-root .tp-clue .hint-inner{font-size:13px;color:var(--muted);letter-spacing:0;}
+/* These rows take no space at all while empty, and take exactly the space
+   their content needs once there is a tip or clue to show. Nothing overlaps
+   because they sit in normal flow. */
+#wu-root .hintline:empty,#wu-root .tp-clue:empty{display:none;}
+#wu-root .hintline,#wu-root .tp-clue{flex:none;position:relative;z-index:var(--z-hint);}
+#wu-root .hint-inner{display:flex;align-items:center;justify-content:center;gap:8px;
+flex-wrap:wrap;text-align:center;animation:wuTip .22s var(--ease);}
+@keyframes wuTip{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+#wu-root .hintline .hint-inner{font-size:clamp(14px,4.4vw,17px);font-weight:750;
+letter-spacing:4px;text-transform:uppercase;padding:6px 0;overflow-wrap:anywhere;}
+#wu-root .tp-clue .hint-inner{font-size:13px;color:var(--muted);letter-spacing:0;
+line-height:1.4;padding:4px 0;overflow-wrap:anywhere;white-space:normal;}
 #wu-root .hintline .hintlabel{font-size:10px;letter-spacing:1px;color:var(--accent);
-background:color-mix(in srgb,var(--accent) 14%,transparent);padding:3px 8px;border-radius:99px;line-height:1.4;}
+background:color-mix(in srgb,var(--accent) 14%,transparent);padding:3px 8px;border-radius:99px;
+line-height:1.4;flex:none;}
 
 /* ================= BOARD =================
    Sized entirely in CSS from --len. Nothing measures the DOM, so the grid
@@ -383,15 +389,18 @@ animation:wuLuPop .5s cubic-bezier(.2,1.3,.4,1);}
 .wu-lvlup-lv{font:750 19px/1.2 system-ui,sans-serif;color:#fff;}
 
 /* ---- topic picker ---- */
-#wu-root .tp-bar{display:flex;align-items:center;gap:10px;width:100%;justify-content:space-between;}
-#wu-root .tp-now{display:flex;align-items:center;gap:10px;min-width:0;}
+#wu-root .tp-bar{display:flex;align-items:center;gap:10px;width:100%;
+justify-content:space-between;flex-wrap:wrap;}
+#wu-root .tp-now{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 180px;}
 #wu-root .tp-ico{width:34px;height:34px;border-radius:var(--r-sm);
 background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent);
 display:grid;place-items:center;flex:none;}
 #wu-root .tp-ico svg{width:18px;height:18px;}
 #wu-root .tp-meta{min-width:0;}
-#wu-root .tp-name{font-weight:750;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-#wu-root .tp-prog{font-size:11.5px;color:var(--muted);}
+#wu-root .tp-name{font-weight:750;font-size:14px;line-height:1.25;overflow-wrap:anywhere;}
+#wu-root .tp-prog{font-size:11.5px;color:var(--muted);line-height:1.3;}
+#wu-root .mp-note{overflow-wrap:anywhere;}
+#wu-root .mp-hero p{overflow-wrap:anywhere;}
 #wu-root .tp-pick{max-height:min(60vh,460px);overflow:auto;margin:0 -4px;padding:0 4px;}
 #wu-root .tp-search{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--r-sm);
 background:var(--bg2);color:var(--text);font-size:16px;margin-bottom:12px;}
@@ -457,6 +466,8 @@ padding:3px 8px;border-radius:99px;background:var(--bg2);color:var(--muted);}
 
 #wu-root .mp-actions{display:flex;gap:8px;flex-wrap:wrap;}
 #wu-root .mp-actions .cbtn{flex:1;justify-content:center;min-width:120px;}
+#wu-root .mp-actions-sub{margin-top:-6px;}
+#wu-root .mp-actions-sub .cbtn{min-height:34px;font-size:12.5px;}
 
 #wu-root .mp-form{display:flex;flex-direction:column;gap:6px;}
 #wu-root .mp-lab{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;

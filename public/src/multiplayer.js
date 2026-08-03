@@ -90,7 +90,8 @@
   function clearSession() { WU.lsSet(WU.K(REJOIN_KEY), null); }
   function readSession() {
     var s = WU.lsGet(WU.K(REJOIN_KEY), null);
-    if (!s || !s.code || !s.matchId) return null;
+    // A lobby session has no match id yet, so the code alone is enough.
+    if (!s || !s.code) return null;
     if (Date.now() - (s.at || 0) > 6 * 3600 * 1000) { clearSession(); return null; }
     return s;
   }
@@ -167,9 +168,15 @@
         takeOver();
         // Straight to the board if a round is running; the room panel only
         // opens when there is actually something to do there.
+        // Joining a running round still asks you to confirm you are ready, so
+        // nobody is dropped mid-word without noticing.
         if (room.phase === "lobby" && room.kind === "custom") {
           view = "room";
           openPanel();
+        } else if (room.kind === "custom") {
+          view = "room";
+          openPanel();
+          WU.toast("Round in progress — press Close to jump in");
         } else {
           view = "board";
           WU.closeAll();
@@ -207,6 +214,7 @@
       case "word":
         board = { index: m.index, length: m.length, clue: m.clue, rows: [], current: "",
                   max: m.maxGuesses || MAX_GUESSES, total: m.total, keys: {} };
+        renderClue();
         renderBoard(); renderKeys(); renderControls();
         break;
 
@@ -338,8 +346,7 @@
   function takeOver() {
     WU.suspend();
     if (els.hint) { els.hint.classList.remove("on"); els.hint.innerHTML = ""; }
-    var c = document.getElementById("tpClue");
-    if (c) { c.classList.remove("show"); c.innerHTML = ""; }
+    renderClue();
     document.querySelectorAll(".tab").forEach(function (b) {
       b.classList.toggle("active", b.getAttribute("data-mode") === "multiplayer");
     });
@@ -352,6 +359,7 @@
     voteState = null; finished = false; view = "lobby";
     clearInterval(tick); tick = null;
     if (els.banner) els.banner.innerHTML = "";
+    renderClue();
     try { if (ws) ws.close(); } catch (e) {}
     ws = null;
     WU.resume();
@@ -386,6 +394,19 @@
     else if (e.key === "Backspace") { e.stopPropagation(); key("BACK"); }
     else { var k = e.key.toUpperCase(); if (/^[A-Z]$/.test(k)) { e.stopPropagation(); key(k); } }
   }, true);
+
+  function renderClue() {
+    var el = document.getElementById("tpClue");
+    if (!el) return;
+    if (board && board.clue) {
+      el.innerHTML = '<span class="hint-inner"></span>';
+      el.firstChild.textContent = board.clue;
+      el.classList.add("show");
+    } else {
+      el.classList.remove("show");
+      el.innerHTML = "";
+    }
+  }
 
   function renderBoard() {
     if (!els.grid) return;
@@ -626,10 +647,14 @@
         h += '<button class="cbtn' + (meP && meP.ready ? " ghost" : "") + '" data-act="mpready">' +
           (meP && meP.ready ? "Cancel ready" : "Ready up") + "</button>";
       }
-      h += '<button class="cbtn ghost" data-act="mpleave">Leave</button></div>';
+      h += "</div>";
+      // Always a way out of this panel, even while nothing can be started.
+      h += '<div class="mp-actions mp-actions-sub">' +
+        '<button class="cbtn ghost" data-act="mpclose">Close</button>' +
+        '<button class="cbtn ghost" data-act="mpleave">Leave room</button></div>';
     } else {
       h += '<div class="mp-actions"><button class="cbtn" data-act="mpclose">Back to game</button>' +
-        '<button class="cbtn ghost" data-act="mpleave">Leave</button></div>';
+        '<button class="cbtn ghost" data-act="mpleave">Leave room</button></div>';
     }
 
     if (feed.length) {

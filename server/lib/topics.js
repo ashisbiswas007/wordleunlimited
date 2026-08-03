@@ -58,10 +58,14 @@ function normalisePack(pack) {
     if (seen.has(answer)) continue;
     seen.add(answer);
 
+    // Every answer carries a clue. Hand-written ones win; the rest get a
+    // generated one, because a name you have never heard of with no hint at
+    // all is not a puzzle, it is a wall.
+    const written = entry.clue ? String(entry.clue).slice(0, 120) : null;
     items.push({
       answer,
       length: answer.length,
-      clue: entry.clue ? String(entry.clue).slice(0, 120) : null,
+      clue: written || `Starts with ${answer[0]} · ${answer.length} letters`,
     });
   }
 
