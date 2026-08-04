@@ -764,7 +764,11 @@
       game.wordStart = game.duration;
       game.timerId = setInterval(timeTick, 1000);
     } else if (mode === "topic") {
-      game.topic = opts.topic || currentTopic;
+      var tp = opts.topic || currentTopic;
+      // A fresh shuffle every run, so a pack does not deal the same answers in
+      // the same order every time. The set of answers is unchanged, only the
+      // order, so the count and the accepted-guess list are unaffected.
+      game.topic = shuffledTopic(tp);
       game.topicIndex = 0;
       game.topicSolved = 0;
       buildTopicWordSet(game.topic);
@@ -1014,6 +1018,21 @@
   function buildTopicWordSet(tp) {
     topicWordSet = {};
     (tp.items || []).forEach(function (it) { topicWordSet[String(it.answer).toUpperCase()] = true; });
+  }
+
+  /** A copy of the pack with its answers in a random order. */
+  function shuffledTopic(tp) {
+    if (!tp || !Array.isArray(tp.items)) return tp;
+    var items = tp.items.slice(), i, j, tmp;
+    for (i = items.length - 1; i > 0; i--) {
+      j = (Math.random() * (i + 1)) | 0;
+      tmp = items[i]; items[i] = items[j]; items[j] = tmp;
+    }
+    // Shallow copy so the cached pack from the API keeps its original order.
+    var out = {}, k;
+    for (k in tp) if (Object.prototype.hasOwnProperty.call(tp, k)) out[k] = tp[k];
+    out.items = items;
+    return out;
   }
 
   function applyTopicWord() {

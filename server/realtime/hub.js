@@ -366,7 +366,12 @@ export async function registerRealtime(app) {
       else ipCounts.set(ip, n);
 
       if (joined) {
-        joined.room.removePlayer(joined.player.id);
+        // A reconnect hands this player to a new socket. The old socket's close
+        // arrives afterwards, and must not evict the seat that replaced it.
+        const current = joined.room.players.get(joined.player.id);
+        if (!current || current.socket === socket) {
+          joined.room.removePlayer(joined.player.id);
+        }
         joined = null;
       }
     };
@@ -421,6 +426,9 @@ export async function registerRealtime(app) {
             socket,
             nick: msg.nick,
             avatar: Number(msg.avatar),
+            // Stable per-browser id, so coming back after a closed tab reclaims
+            // the same seat, name and score instead of minting a new player.
+            clientId: typeof msg.cid === "string" ? msg.cid.slice(0, 64) : null,
           });
           if (res.error) {
             safeSend(socket, { t: "error", code: res.error });

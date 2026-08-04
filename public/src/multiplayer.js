@@ -97,6 +97,18 @@
 
   function nick() { return WU.lsGet(WU.K("mp_nick"), ""); }
   function setNick(n) { WU.lsSet(WU.K("mp_nick"), n); }
+
+  /* Stable id for this browser. The server uses it to hand a reconnecting
+     player back their own seat, so closing a tab and returning keeps the name
+     and score instead of producing "abcd2". */
+  function clientId() {
+    var id = WU.lsGet(WU.K("mp_cid"), null);
+    if (typeof id !== "string" || id.length < 8) {
+      id = "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+      WU.lsSet(WU.K("mp_cid"), id);
+    }
+    return id;
+  }
   function av() { var a = WU.lsGet(WU.K("mp_avatar"), null); return Number.isInteger(a) ? a : (Math.random() * AV.length) | 0; }
   function setAv(i) { WU.lsSet(WU.K("mp_avatar"), i); }
 
@@ -148,7 +160,7 @@
       if (active && room) {
         clearTimeout(reconnect);
         reconnect = setTimeout(function () {
-          connect(function () { send({ t: "join", room: room.code, matchId: room.matchId, nick: nick(), avatar: av() }); });
+          connect(function () { send({ t: "join", room: room.code, matchId: room.matchId, nick: nick(), avatar: av(), cid: clientId() }); });
         }, 1500);
       }
       paint();
@@ -603,12 +615,9 @@
 
     h += '<div class="mp-actions"><button class="cbtn" data-act="mpquick">Quick play</button>' +
       '<button class="cbtn ghost" data-act="mpcreate">Create room</button>' +
-      '<button class="cbtn ghost" data-act="mpjoincode">Join by code</button></div>';
-    // Sign-in lives here too: this is where players care about keeping a level
-    // and a name across devices. Hides itself when cloud save is not configured.
-    h += '<div class="setrow col mp-cloud" id="mpCloud"></div></div>';
+      '<button class="cbtn ghost" data-act="mpjoincode">Join by code</button></div></div>';
+    // Google sign-in deliberately lives only in Settings and Stats, not here.
     els.body.innerHTML = h;
-    if (WU.renderCloudRow) WU.renderCloudRow("mpCloud");
   }
 
   function createView() {
@@ -783,7 +792,7 @@
 
   function joinRoom(code, matchId) {
     var n = readNick(), a = av();
-    connect(function () { send({ t: "join", room: code, matchId: matchId || null, nick: n, avatar: a }); });
+    connect(function () { send({ t: "join", room: code, matchId: matchId || null, nick: n, avatar: a, cid: clientId() }); });
   }
 
   function refreshRooms() {

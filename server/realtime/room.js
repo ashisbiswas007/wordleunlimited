@@ -264,7 +264,31 @@ export class Room {
 
   /* ---------- membership ---------- */
 
-  addPlayer({ socket, nick, avatar }) {
+  addPlayer({ socket, nick, avatar, clientId }) {
+    /* A reconnect from the same browser reclaims its own seat.
+       Closing a tab does not always deliver a close frame, so the old player
+       can still be sitting in the room when you come back. Without this, the
+       returning player is a stranger whose name is already taken, so they
+       become "abcd2", then "abcd3", and their score is left behind on a ghost. */
+    if (clientId) {
+      for (const existing of this.players.values()) {
+        if (existing.clientId !== clientId) continue;
+        if (existing.socket && existing.socket !== socket) {
+          try {
+            existing.socket.close(4004, "reconnected");
+          } catch {
+            /* already gone */
+          }
+        }
+        existing.socket = socket;
+        if (Number.isInteger(avatar)) existing.avatar = Math.abs(avatar) % AVATAR_COUNT;
+        this.lastActivityAt = Date.now();
+        this.emptySince = 0;
+        this.boardDirty = true;
+        return { player: existing, resumed: true };
+      }
+    }
+
     if (this.isFull) return { error: "room_full" };
 
     const id = `p${++playerSeq}${randomBytes(3).toString("hex")}`;
@@ -280,6 +304,7 @@ export class Room {
 
     const player = {
       id,
+      clientId: clientId || null,
       socket,
       nick: name,
       avatar: Number.isInteger(avatar)
