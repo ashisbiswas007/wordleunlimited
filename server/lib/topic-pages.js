@@ -263,13 +263,6 @@ export async function renderTopicPage(slug) {
 
   const html = `${head({ title, description, canonical })}
 <main>
-  <!--ad:before-game-->
-  <div class="wrap gamehost">
-${gameShell(topic.name)}
-  </div>
-
-  <!--ad:after-game-->
-
   <div class="wrap hero hero-below">
     <p class="eyebrow">Topic mode &middot; ${esc(topic.category)}</p>
     <h1>Wordle ${esc(topic.name)}</h1>
@@ -280,6 +273,13 @@ ${gameShell(topic.name)}
       <span>No login</span><span>Free forever</span>
     </div>
   </div>
+
+  <!--ad:before-game-->
+  <div class="wrap gamehost">
+${gameShell(topic.name)}
+  </div>
+
+  <!--ad:after-game-->
 
   <div class="wrap prose">
     ${

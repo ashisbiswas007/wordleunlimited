@@ -21,6 +21,15 @@ p{margin:0 0 14px}
   backdrop-filter:saturate(1.6) blur(10px);-webkit-backdrop-filter:saturate(1.6) blur(10px);
   border-bottom:1px solid var(--border)}
 .topnav .wrap{display:flex;align-items:center;gap:12px;height:56px}
+/* The board is the first thing a player wants and the last thing a machine
+   should have to wade through. So the page is written heading-first — h1, then
+   what the site is — and the game is pulled back to the top visually here.
+   Reading order for parsers, visual order for people, one markup. */
+main{display:flex;flex-direction:column;}
+main>.ad-beforeGame{order:-3;}
+main>.gamehost{order:-2;}
+main>.ad-afterGame{order:-1;}
+
 /* Not inline-flex with a gap: that renders the gap but leaves the text content
    as "WordleUnlimited", so anything reading the page — crawlers, screen
    readers, Google's OAuth brand check — sees a different name to the one we
