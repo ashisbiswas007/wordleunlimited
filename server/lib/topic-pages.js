@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import config from "../config.js";
 import { listTopics, getTopic } from "./topics.js";
+import { siteVerificationTag } from "./inject.js";
 
 /**
  * Server-rendered pages for /topics/ and /topics/<slug>/.
@@ -35,6 +36,7 @@ function head({ title, description, canonical, extra = "" }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+${siteVerificationTag()}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical)}">

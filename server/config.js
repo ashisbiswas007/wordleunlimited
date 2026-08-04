@@ -49,6 +49,9 @@ export const config = {
 
   google: {
     clientId: process.env.GOOGLE_CLIENT_ID || "",
+    // Search Console token, rendered as a <meta> tag on every page. Google's
+    // OAuth review requires the home page to be a domain you have verified.
+    siteVerification: (process.env.GOOGLE_SITE_VERIFICATION || "").trim(),
   },
 
   // Multiplayer caps. Admin can lower these at runtime; these are the ceilings.
