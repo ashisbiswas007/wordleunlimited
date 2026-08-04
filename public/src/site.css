@@ -21,7 +21,11 @@ p{margin:0 0 14px}
   backdrop-filter:saturate(1.6) blur(10px);-webkit-backdrop-filter:saturate(1.6) blur(10px);
   border-bottom:1px solid var(--border)}
 .topnav .wrap{display:flex;align-items:center;gap:12px;height:56px}
-.logo{display:inline-flex;align-items:baseline;gap:4px;font-weight:800;font-size:17px;text-decoration:none;color:inherit;flex:none}
+/* Not inline-flex with a gap: that renders the gap but leaves the text content
+   as "WordleUnlimited", so anything reading the page — crawlers, screen
+   readers, Google's OAuth brand check — sees a different name to the one we
+   publish. A real space in the markup keeps them the same. */
+.logo{display:inline-block;font-weight:800;font-size:17px;text-decoration:none;color:inherit;flex:none;white-space:nowrap}
 .logo b{color:var(--green)}
 .topnav nav{margin-left:auto;display:flex;gap:2px;align-items:center;min-width:0;overflow-x:auto;
   scrollbar-width:none}

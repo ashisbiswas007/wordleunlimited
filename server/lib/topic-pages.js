@@ -63,7 +63,7 @@ ${extra}
 <body>
 <header class="topnav">
   <div class="wrap">
-    <a class="logo" href="/"><b>Wordle</b>Unlimited</a>
+    <a class="logo" href="/"><b>Wordle</b> Unlimited</a>
     <nav>
       <a href="/">English</a>
       <a href="/wordle-uk/">UK</a>
@@ -113,7 +113,7 @@ function gameShell(brandSuffix) {
   return `<div id="wu-root">
   <div class="app">
     <div class="topbar">
-      <div class="wu-brand"><span class="wu-brand-1">Wordle</span><span class="wu-brand-2">${esc(brandSuffix)}</span></div>
+      <div class="wu-brand"><span class="wu-brand-1">Wordle</span> <span class="wu-brand-2">${esc(brandSuffix)}</span></div>
       <div class="icons">
         <button class="icon" id="helpBtn" data-open="howtoModal" aria-label="How to play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></button>
         <button class="icon" id="statsBtn" data-open="statsModal" aria-label="Statistics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></button>

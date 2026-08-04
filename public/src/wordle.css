@@ -44,7 +44,9 @@ display:flex;flex-direction:column;gap:10px;background:var(--bg);}
 /* ---- header ---- */
 #wu-root .app>*{flex:none;}
 #wu-root .topbar{display:flex;align-items:center;gap:10px;}
-#wu-root .wu-brand{display:inline-flex;align-items:baseline;gap:5px;font-weight:800;
+/* Inline-block, not flex with a gap — see .logo in site.css. The space between
+   the two words has to be a real character, not layout. */
+#wu-root .wu-brand{display:inline-block;font-weight:800;
 font-size:clamp(17px,4.4vw,20px);letter-spacing:-.3px;}
 #wu-root .wu-brand-1{color:var(--accent);}
 #wu-root .wu-flag{display:inline-flex;width:22px;height:15px;border-radius:3px;overflow:hidden;
