@@ -118,6 +118,23 @@
     );
   }
 
+  /**
+   * Drive answered, and said no for a reason the player cannot do anything
+   * about. Showing Google's own sentence is the fastest route to a fix, since
+   * it names the project and the API that needs switching on.
+   */
+  function configErrorUI(err) {
+    var detail = (err && err.detail) || "";
+    status(
+      "Signed in, but Google Drive refused the request. This is a setting on the app's " +
+        "Google Cloud project, not your account." +
+        (detail ? "<br><br><b>Google said:</b> " + WU.esc(detail) : ""),
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+        '<button class="cbtn ghost" data-act="cloudsync">Try again</button>' +
+        '<button class="cbtn ghost" data-act="cloudout">Sign out</button></div>'
+    );
+  }
+
   /** Whichever of the three states currently applies. */
   function paintCloud() {
     if (token && Date.now() < tokenExpiry) signedInUI();
@@ -216,6 +233,29 @@
   /* ---------- Drive REST ---------- */
   function authHeaders() { return { Authorization: "Bearer " + token }; }
 
+  /**
+   * Carries Google's own explanation forward instead of just a status code.
+   *
+   * A disabled Drive API and a dead token both arrive as a 4xx, and reporting
+   * them the same way sends the player round a Reconnect loop that cannot
+   * possibly help. The reason string is what tells the two apart.
+   */
+  function driveError(label, r) {
+    return r.text().then(function (body) {
+      var reason = "", detail = "";
+      try {
+        var e = (JSON.parse(body) || {}).error || {};
+        detail = e.message || "";
+        reason = (e.errors && e.errors[0] && e.errors[0].reason) || e.status || "";
+      } catch (x) { /* not JSON */ }
+      var err = new Error(label + " " + r.status + (reason ? " " + reason : ""));
+      err.status = r.status;
+      err.reason = reason;
+      err.detail = detail;
+      throw err;
+    });
+  }
+
   function findFile() {
     if (fileId) return Promise.resolve(fileId);
     return fetch(
@@ -223,7 +263,7 @@
         encodeURIComponent("name='" + FILE_NAME + "'"),
       { headers: authHeaders() }
     )
-      .then(function (r) { if (!r.ok) throw new Error("list " + r.status); return r.json(); })
+      .then(function (r) { if (!r.ok) return driveError("list", r); return r.json(); })
       .then(function (j) {
         fileId = j.files && j.files.length ? j.files[0].id : null;
         return fileId;
@@ -236,7 +276,7 @@
       return fetch("https://www.googleapis.com/drive/v3/files/" + id + "?alt=media", {
         headers: authHeaders(),
       })
-        .then(function (r) { if (!r.ok) throw new Error("get " + r.status); return r.json(); })
+        .then(function (r) { if (!r.ok) return driveError("get", r); return r.json(); })
         .catch(function () { return null; });
     });
   }
@@ -247,7 +287,7 @@
       return fetch(
         "https://www.googleapis.com/upload/drive/v3/files/" + fileId + "?uploadType=media",
         { method: "PATCH", headers: Object.assign({ "Content-Type": "application/json" }, authHeaders()), body: body }
-      ).then(function (r) { if (!r.ok) throw new Error("patch " + r.status); return r.json(); });
+      ).then(function (r) { if (!r.ok) return driveError("patch", r); return r.json(); });
     }
 
     // Multipart create so metadata and content go in one request.
@@ -263,7 +303,7 @@
       headers: Object.assign({ "Content-Type": "multipart/related; boundary=" + boundary }, authHeaders()),
       body: multipart,
     })
-      .then(function (r) { if (!r.ok) throw new Error("create " + r.status); return r.json(); })
+      .then(function (r) { if (!r.ok) return driveError("create", r); return r.json(); })
       .then(function (j) { fileId = j.id; return j; });
   }
 
@@ -293,15 +333,28 @@
         if (showToast) WU.toast("Progress saved to Drive");
       })
       .catch(function (err) {
-        // Drive rejected the token: drop it and wait for a click. Never open a
-        // window the player did not ask for.
-        if (/40[13]/.test(String(err.message))) {
+        var code = err && err.status;
+
+        // 401 is the only one that actually means the token is finished. Drop
+        // it and wait for a click; never open a window unasked.
+        if (code === 401) {
           dropToken(false);
           paintCloud();
           if (showToast) WU.toast("Drive session expired — press Reconnect");
-        } else if (showToast) {
-          WU.toast("Could not reach Drive — try again");
+          return;
         }
+
+        // 403 is almost always the Google Cloud project, not the player: the
+        // Drive API switched off, or the scope missing from the consent screen.
+        // Reconnecting cannot fix either, so keep the token and say what Google
+        // actually said.
+        if (code === 403) {
+          configErrorUI(err);
+          if (showToast) WU.toast("Google Drive refused the request");
+          return;
+        }
+
+        if (showToast) WU.toast("Could not reach Drive — try again");
       })
       .finally(function () { busy = false; });
   }
