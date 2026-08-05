@@ -5,6 +5,8 @@
   if (!WU || !document.getElementById("mpModal")) return;
 
   var MAX_GUESSES = 6;
+  // Rows of the live scoreboard before it collapses to "…and you".
+  var SCOREBOARD_ROWS = 5;
   var REJOIN_KEY = "mp_session";
   var BLOCK_KEY = "mp_blocked";
 
@@ -12,40 +14,46 @@
     return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + "</svg>";
   };
 
-  /* Player avatars. Must stay the same length as AVATAR_COUNT on the server,
-     which is what picks the index — a shorter list here would silently collapse
-     several avatars onto the same glyph. */
-  var AV = [
-    '<circle cx="12" cy="12" r="9"/><path d="M8 10h.01M16 10h.01M9 15c1.5 1.2 4.5 1.2 6 0"/>',
-    '<path d="m12 3 2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L12 17.3 6.2 20.8l1.6-6.6L2.6 9.8l6.8-.5z"/>',
-    '<path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6z"/>',
-    '<path d="M13 2 4.1 13.4a1 1 0 0 0 .8 1.6H11l-1 7 8.9-11.4a1 1 0 0 0-.8-1.6H12z"/>',
-    '<path d="M12 21s-7-4.6-7-9.6A4.4 4.4 0 0 1 12 8a4.4 4.4 0 0 1 7 3.4c0 5-7 9.6-7 9.6z"/>',
-    '<path d="M3 12h4l3-8 4 16 3-8h4"/>',
-    '<rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M16.5 12h.01M18.5 14h.01"/>',
-    '<path d="M14.5 2 6 12h5l-1.5 10L18 12h-5z"/>',
-    '<circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z"/><path d="M12 2v7M12 15v7M2 12h7M15 12h7"/>',
-    '<path d="M5 20V9l7-6 7 6v11z"/><circle cx="12" cy="13" r="2.4"/>',
-    '<path d="M6 4h12v6a6 6 0 0 1-12 0z"/><path d="M9 20h6M12 16v4"/><path d="M18 5h2a2 2 0 0 1 0 4h-2M6 5H4a2 2 0 0 0 0 4h2"/>',
-    '<circle cx="12" cy="7" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
-    '<path d="M4.9 4.9a10 10 0 0 1 14.2 0M7.8 7.8a6 6 0 0 1 8.4 0M10.6 10.6a2 2 0 0 1 2.8 0"/><circle cx="12" cy="17" r="1.4"/>',
-    '<path d="M12 2 2 22h20z"/><path d="M12 9v6M12 18h.01"/>',
-    '<circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18zM3 12h18"/>',
-    '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
-    '<path d="M20 12a8 8 0 1 1-8-8"/><path d="M12 2a10 10 0 0 1 10 10"/><circle cx="12" cy="12" r="2"/>',
-    '<path d="M2 12h3l2-7 4 14 3-9 2 4h6"/><circle cx="12" cy="12" r="10"/>',
-    '<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 9h.01M15 9h.01M9 15h6"/>',
-    '<path d="M12 2 9 9l-7 1 5 5-1 7 6-3.5 6 3.5-1-7 5-5-7-1z"/>',
-    '<path d="M17 3a4 4 0 0 1 0 8H7a4 4 0 0 1 0-8z"/><path d="M7 21a4 4 0 0 1 0-8h10a4 4 0 0 1 0 8z"/>',
-    '<circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/>',
-    '<path d="M3 7h18l-2 13H5z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/>',
-    '<path d="M12 22a9 9 0 0 0 9-9c0-4-3-7-4-9 0 3-2 4-3 4 0-3-2-5-4-6 .5 4-2 5-3 8a9 9 0 0 0 5 12z"/>',
-  ];
-  var AVATAR_COUNT = AV.length;
+  /* Player avatars are the game-icons.net pack, vendored in src/avatars.js and
+     fetched the first time the Versus panel opens — 49KB that the pages which
+     never show an avatar should not have to carry. AVATAR_COUNT must match the
+     server, which is what picks the index; a shorter list here would quietly
+     collapse several players onto the same glyph. */
+  var AVATAR_COUNT = 24;
+  var avLoading = false;
+
+  function assetVersion() {
+    var s = document.querySelector('script[src*="/src/multiplayer.js"]');
+    var m = s && String(s.getAttribute("src")).match(/[?&]v=([^&]+)/);
+    return m ? m[1] : "1";
+  }
+
+  /** Loads the icon pack once, then repaints so the placeholders swap out. */
+  function ensureAvatars(done) {
+    if (window.WU_AVATARS) { if (done) done(); return; }
+    if (avLoading) return;
+    avLoading = true;
+    var el = document.createElement("script");
+    el.src = "/src/avatars.js?v=" + assetVersion();
+    el.async = true;
+    el.onload = function () { avLoading = false; if (done) done(); };
+    el.onerror = function () { avLoading = false; };
+    document.head.appendChild(el);
+  }
+
+  function avIndex(i) { return (((i | 0) % AVATAR_COUNT) + AVATAR_COUNT) % AVATAR_COUNT; }
+
   function avatar(i, size) {
-    var d = AV[((i | 0) % AVATAR_COUNT + AVATAR_COUNT) % AVATAR_COUNT];
-    return '<svg viewBox="0 0 24 24" width="' + (size || 18) + '" height="' + (size || 18) +
-      '" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + "</svg>";
+    var px = size || 18, pack = window.WU_AVATARS;
+    if (!pack) {
+      // Neutral stand-in until the pack lands, same box so nothing reflows.
+      return '<svg viewBox="0 0 24 24" width="' + px + '" height="' + px + '" fill="none" ' +
+        'stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8.5" r="3.4"/>' +
+        '<path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg>';
+    }
+    var ic = pack[avIndex(i) % pack.length];
+    return '<svg class="av-ic" viewBox="0 0 512 512" width="' + px + '" height="' + px +
+      '" fill="currentColor" role="img" aria-label="' + esc(ic[0]) + '"><path d="' + ic[1] + '"/></svg>';
   }
 
   var CAT = {
@@ -109,7 +117,7 @@
     }
     return id;
   }
-  function av() { var a = WU.lsGet(WU.K("mp_avatar"), null); return Number.isInteger(a) ? a : (Math.random() * AV.length) | 0; }
+  function av() { var a = WU.lsGet(WU.K("mp_avatar"), null); return Number.isInteger(a) ? a : (Math.random() * AVATAR_COUNT) | 0; }
   function setAv(i) { WU.lsSet(WU.K("mp_avatar"), i); }
 
   // Saved as soon as we are in a room. The match id only exists once a round
@@ -188,6 +196,9 @@
         break;
 
       case "joined":
+        // Avatars appear on the in-game scoreboard as well as in the panel, so
+        // fetch the pack as soon as we are in a room even if the panel is shut.
+        ensureAvatars(paintAll);
         me = m.you; room = m.room; players = m.playerList || [];
         standings = (m.board && m.board.players) || []; feed = m.feed || [];
         finished = false; active = true;
@@ -319,7 +330,11 @@
         break;
 
       case "vote_update":
-        if (voteState) { voteState.tally = m.tally || {}; if (view === "results") paint(); }
+        if (voteState) {
+          voteState.tally = m.tally || {};
+          renderStandings();
+          if (view === "results") paint();
+        }
         break;
 
       case "vote_result":
@@ -554,22 +569,70 @@
     }
   }
 
+  /**
+   * The scoreboard that sits above the grid while you play.
+   *
+   * This is the only thing most players look at during a round, so it shows the
+   * real board rather than a three-line teaser: the leaders, your own row
+   * wherever you are on it, and — once the round ends — the topic vote inline,
+   * so nobody has to open a panel to have a say in what is played next.
+   */
   function renderStandings() {
     if (!els.banner || !active) return;
-    var top = standings.slice(0, 3);
+
+    var voting = room && room.phase === "results" && voteState && voteState.options.length;
+    if (!standings.length && !voting) { els.banner.innerHTML = ""; return; }
+
     var mine = standings.filter(function (p) { return me && p.id === me.id; })[0];
-    if (mine && mine.rank > 3) top.push(mine);
-    if (!top.length) { els.banner.innerHTML = ""; return; }
-    els.banner.innerHTML = '<div class="mp-board">' + top.map(function (p) {
-      return '<div class="mp-p' + (me && p.id === me.id ? " me" : "") + (p.done ? " done" : "") + '">' +
-        '<span class="rk">' + p.rank + '</span><span class="av">' + avatar(p.avatar, 15) + "</span>" +
-        '<span class="nk">' + esc(p.nick) + "</span>" +
-        '<span class="sc">' + p.solved + "</span></div>";
+    var shown = standings.slice(0, SCOREBOARD_ROWS);
+    var gap = mine && mine.rank > SCOREBOARD_ROWS;
+    if (gap) shown = shown.concat([mine]);
+
+    var h = '<div class="mp-sb' + (voting ? " voting" : "") + '">';
+    h += '<div class="mp-sb-top"><span class="mp-sb-ttl">' +
+      (voting ? "Final scores" : "Scoreboard") + "</span>" +
+      '<span class="mp-sb-n">' + standings.length + " playing</span></div>";
+
+    h += '<div class="mp-sb-rows">' + shown.map(function (p, i) {
+      var isMe = me && p.id === me.id;
+      var sep = gap && i === shown.length - 1 && p.rank > SCOREBOARD_ROWS + 1;
+      return (sep ? '<div class="mp-sb-gap"></div>' : "") +
+        '<div class="mp-sb-r' + (isMe ? " me" : "") + (p.rank === 1 ? " lead" : "") +
+        (p.done ? " done" : "") + '">' +
+        '<span class="rk">' + p.rank + "</span>" +
+        '<span class="av">' + avatar(p.avatar, 18) + "</span>" +
+        '<span class="nk">' + esc(p.nick) + (isMe ? ' <em>you</em>' : "") + "</span>" +
+        '<span class="sv">' + p.solved + "</span>" +
+        '<span class="pt">' + (p.points || 0) + "</span></div>";
     }).join("") + "</div>";
+
+    if (voting) h += voteMarkup("Vote the next topic");
+    h += "</div>";
+    els.banner.innerHTML = h;
+  }
+
+  /** Shared by the in-grid scoreboard and the results panel. */
+  function voteMarkup(title) {
+    if (!voteState || !voteState.options.length) return "";
+    var total = 0, k;
+    for (k in voteState.tally) total += voteState.tally[k];
+    var h = '<div class="mp-secttl"><span>' + esc(title) + '</span><span class="mp-note">' +
+      total + " vote" + (total === 1 ? "" : "s") + "</span></div>";
+    h += '<div class="mp-vote">' + voteState.options.map(function (o) {
+      var n = voteState.tally[o.slug] || 0;
+      var pct = total ? Math.round((n / total) * 100) : 0;
+      return '<button class="mp-vopt' + (voteState.picked === o.slug ? " picked" : "") +
+        '" data-mpvote="' + esc(o.slug) + '">' +
+        '<span class="vbar" style="width:' + pct + '%"></span>' +
+        '<span class="vico">' + catIcon(o.category, 18) + "</span>" +
+        '<span class="vn">' + esc(o.name) + "</span>" +
+        '<span class="vc">' + n + "</span></button>";
+    }).join("") + "</div>";
+    return h;
   }
 
   function paintAll() { renderStandings(); renderControls(); renderBoard(); renderKeys(); paint(); }
-  function openPanel() { WU.openModal("mpModal"); paint(); }
+  function openPanel() { WU.openModal("mpModal"); ensureAvatars(paintAll); paint(); }
 
   function paint() {
     if (!els.body) return;
@@ -757,20 +820,7 @@
     h += '<div class="mp-scorekey"><span>#</span><span>Player</span><span>Solved</span><span>Points</span></div>';
 
     if (voteState && voteState.options.length) {
-      var total = 0;
-      for (var k in voteState.tally) total += voteState.tally[k];
-      h += '<div class="mp-secttl"><span>Vote the next topic</span><span class="mp-note">' +
-        total + " vote" + (total === 1 ? "" : "s") + "</span></div>";
-      h += '<div class="mp-vote">' + voteState.options.map(function (o) {
-        var n = voteState.tally[o.slug] || 0;
-        var pct = total ? Math.round((n / total) * 100) : 0;
-        return '<button class="mp-vopt' + (voteState.picked === o.slug ? " picked" : "") +
-          '" data-mpvote="' + esc(o.slug) + '">' +
-          '<span class="vbar" style="width:' + pct + '%"></span>' +
-          '<span class="vico">' + catIcon(o.category, 18) + "</span>" +
-          '<span class="vn">' + esc(o.name) + "</span>" +
-          '<span class="vc">' + n + "</span></button>";
-      }).join("") + "</div>";
+      h += voteMarkup("Vote the next topic");
     }
     h += '<div class="mp-actions"><button class="cbtn ghost" data-act="mpleave">Leave room</button></div></div>';
     els.body.innerHTML = h;
@@ -838,7 +888,7 @@
   };
   WU.actions.mpstart = function () { send({ t: "start" }); };
   WU.actions.mpavatar = function (el) {
-    var next = (av() + 1) % AV.length;
+    var next = (av() + 1) % AVATAR_COUNT;
     setAv(next);
     el.innerHTML = avatar(next, 22);
   };
@@ -874,7 +924,10 @@
     if (v && voteState) {
       voteState.picked = v.getAttribute("data-mpvote");
       send({ t: "vote", topic: voteState.picked });
+      // The vote exists in two places now — the panel and the board above the
+      // grid — and both have to reflect the choice.
       paint();
+      renderStandings();
       return;
     }
 

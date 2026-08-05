@@ -539,17 +539,46 @@ display:grid;place-items:center;cursor:pointer;flex:none;}
 #wu-root .mp-kick svg{width:13px;height:13px;}
 #wu-root .mp-kick:hover{background:var(--danger);color:#fff;}
 
-#wu-root .mp-board{display:flex;flex-direction:column;gap:3px;}
-#wu-root .mp-p{display:flex;align-items:center;gap:9px;padding:6px 9px;border-radius:var(--r-sm);
-background:var(--bg2);font-size:13px;}
-#wu-root .mp-p.me{background:var(--accent);color:var(--on-accent);}
-#wu-root .mp-p.done .sc{color:var(--gold);}
-#wu-root .mp-p .rk{width:18px;font-weight:800;font-variant-numeric:tabular-nums;text-align:right;flex:none;}
-#wu-root .mp-p .av{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;
-background:var(--modal);color:var(--accent);flex:none;}
-#wu-root .mp-p.me .av{background:rgba(255,255,255,.2);color:#fff;}
-#wu-root .mp-p .nk{flex:1;min-width:0;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-#wu-root .mp-p .sc{font-weight:800;font-variant-numeric:tabular-nums;flex:none;}
+/* ---- live scoreboard above the grid ---- */
+#wu-root .mp-sb{border:1px solid var(--border);border-radius:var(--r-md);background:var(--bg2);
+padding:8px;display:flex;flex-direction:column;gap:6px;}
+#wu-root .mp-sb-top{display:flex;align-items:center;justify-content:space-between;gap:8px;
+padding:0 2px;}
+#wu-root .mp-sb-ttl{font-size:11px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;
+color:var(--muted);}
+#wu-root .mp-sb-n{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;}
+#wu-root .mp-sb-rows{display:flex;flex-direction:column;gap:2px;}
+#wu-root .mp-sb-gap{height:9px;background:
+repeating-linear-gradient(90deg,var(--border) 0 3px,transparent 3px 7px);
+background-position:center;background-size:100% 1px;background-repeat:no-repeat;}
+#wu-root .mp-sb-r{display:grid;grid-template-columns:20px 26px 1fr auto auto;align-items:center;
+gap:8px;padding:5px 7px;border-radius:var(--r-sm);font-size:13px;background:var(--modal);
+transition:background .2s var(--ease);}
+#wu-root .mp-sb-r.lead{background:color-mix(in srgb,var(--gold) 16%,var(--modal));}
+#wu-root .mp-sb-r.me{background:var(--accent);color:var(--on-accent);}
+#wu-root .mp-sb-r .rk{font-weight:800;font-variant-numeric:tabular-nums;text-align:right;
+color:var(--muted);}
+#wu-root .mp-sb-r.lead .rk{color:var(--gold);}
+#wu-root .mp-sb-r.me .rk{color:inherit;opacity:.85;}
+#wu-root .mp-sb-r .av{display:grid;place-items:center;width:26px;height:26px;border-radius:7px;
+background:var(--bg2);color:var(--accent);}
+#wu-root .mp-sb-r.me .av{background:rgba(255,255,255,.22);color:#fff;}
+#wu-root .mp-sb-r .av svg{display:block;}
+#wu-root .mp-sb-r .nk{min-width:0;font-weight:650;white-space:nowrap;overflow:hidden;
+text-overflow:ellipsis;}
+#wu-root .mp-sb-r .nk em{font-style:normal;font-size:10px;font-weight:800;opacity:.75;
+text-transform:uppercase;letter-spacing:.5px;}
+/* Solved leads, points follow in a quieter weight — the race is about words. */
+#wu-root .mp-sb-r .sv{font-weight:800;font-variant-numeric:tabular-nums;min-width:18px;
+text-align:right;}
+#wu-root .mp-sb-r.done .sv{color:var(--gold);}
+#wu-root .mp-sb-r.me.done .sv{color:#fff;}
+#wu-root .mp-sb-r .pt{font-size:11px;font-variant-numeric:tabular-nums;color:var(--muted);
+min-width:34px;text-align:right;}
+#wu-root .mp-sb-r.me .pt{color:inherit;opacity:.8;}
+/* The vote rides along under the final scores so nobody has to open a panel. */
+#wu-root .mp-sb.voting .mp-secttl{margin-top:2px;}
+#wu-root .mp-sb .mp-vote{grid-template-columns:1fr 1fr;}
 
 #wu-root .mp-scorehead{display:flex;align-items:center;justify-content:space-between;gap:10px;}
 #wu-root .mp-scorehead h3{margin:0;font-size:18px;font-weight:800;}
@@ -603,6 +632,10 @@ text-align:center;padding:30px 10px;}
 
 @media (max-width:600px){
 #wu-root .mp-vote{grid-template-columns:1fr;}
+/* The board above the grid is narrow on a phone; one vote per row. */
+#wu-root .mp-sb .mp-vote{grid-template-columns:1fr;}
+#wu-root .mp-sb-r{grid-template-columns:18px 24px 1fr auto auto;gap:7px;padding:5px 6px;}
+#wu-root .mp-sb-r .pt{min-width:30px;}
 #wu-root .mp-sr,#wu-root .mp-scorekey{grid-template-columns:22px 26px 1fr 40px 48px;gap:6px;}
 /* The keyboard runs nearly edge to edge like a real phone keyboard. Everything
    else keeps its padding, so only the keys widen. */

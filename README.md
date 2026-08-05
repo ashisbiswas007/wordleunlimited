@@ -201,6 +201,19 @@ Choices made specifically to keep CPU low under traffic:
 
 ---
 
+## Credits
+
+Versus player avatars are the [game-icons.net](https://game-icons.net/) pack — by Lorc,
+Delapouite, Faithtoken, Caro Asercion and DarkZaitzev — used under
+[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) and credited on `/disclaimer/`.
+
+They are vendored into `public/src/avatars.js` rather than hotlinked, because the site
+ships no third-party requests and runs under a strict CSP. That file is ~49KB, so it is
+fetched on demand the first time the Versus panel opens; pages that never show an avatar
+never download it.
+
+---
+
 ## Multiplayer
 
 Answers live **on the server**. Clients receive the word's length and any clue,
