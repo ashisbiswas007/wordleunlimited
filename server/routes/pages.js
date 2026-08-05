@@ -8,10 +8,29 @@ import {
   inlineScriptHashes,
   extendCsp,
 } from "../lib/topic-pages.js";
-import { renderPage, hasCustomCode, invalidatePages } from "../lib/inject.js";
+import { renderPage, applyInjections, hasCustomCode, invalidatePages } from "../lib/inject.js";
 
 const SITEMAP_TTL_MS = 60 * 60 * 1000;
 let sitemapCache = { at: 0, xml: "" };
+
+/**
+ * Ad and analytics tags cannot run under a hash-based policy, so the strict CSP
+ * is relaxed only while the admin actually has custom code enabled. Applied to
+ * every HTML route, because admin code is injected into every HTML route.
+ */
+function relaxCspForCustomCode(reply) {
+  if (!hasCustomCode()) return;
+  const csp = reply.getHeader("content-security-policy");
+  if (typeof csp !== "string") return;
+  reply.header(
+    "content-security-policy",
+    csp
+      .replace(/script-src ([^;]*)/, "script-src $1 'unsafe-inline' https: data:")
+      .replace(/img-src ([^;]*)/, "img-src $1 https: data:")
+      .replace(/frame-src ([^;]*)/, "frame-src $1 https:")
+      .replace(/connect-src ([^;]*)/, "connect-src $1 https:")
+  );
+}
 
 export default async function registerPageRoutes(app) {
   /* The static HTML pages are served through here rather than by the static
@@ -35,21 +54,7 @@ export default async function registerPageRoutes(app) {
       }
       reply.type("text/html; charset=utf-8");
       reply.header("Cache-Control", "public, max-age=0, must-revalidate");
-      // Ad and analytics tags cannot run under a hash-based policy, so the
-      // strict CSP is relaxed only while the admin has custom code enabled.
-      if (hasCustomCode()) {
-        const csp = reply.getHeader("content-security-policy");
-        if (typeof csp === "string") {
-          reply.header(
-            "content-security-policy",
-            csp
-              .replace(/script-src ([^;]*)/, "script-src $1 'unsafe-inline' https: data:")
-              .replace(/img-src ([^;]*)/, "img-src $1 https: data:")
-              .replace(/frame-src ([^;]*)/, "frame-src $1 https:")
-              .replace(/connect-src ([^;]*)/, "connect-src $1 https:")
-          );
-        }
-      }
+      relaxCspForCustomCode(reply);
       return html;
     });
   }
@@ -179,10 +184,18 @@ ${entries.join("\n")}
 
   app.get("/topics/", { logLevel: "silent" }, async (req, reply) => {
     if (!getSettings().modes.topic) return reply.callNotFound();
-    const html = await renderTopicIndex();
+    // Injected after the page cache, so admin head/footer code and ad slots
+    // reach these pages too and a change in /admin shows up immediately.
+    const html = applyInjections(await renderTopicIndex());
     reply.type("text/html; charset=utf-8");
-    reply.header("Cache-Control", "public, max-age=600, stale-while-revalidate=3600");
+    reply.header(
+      "Cache-Control",
+      hasCustomCode()
+        ? "public, max-age=0, must-revalidate"
+        : "public, max-age=600, stale-while-revalidate=3600"
+    );
     extendCsp(reply, inlineScriptHashes(html));
+    relaxCspForCustomCode(reply);
     return html;
   });
 
@@ -191,12 +204,19 @@ ${entries.join("\n")}
     const slug = String(req.params.slug || "").toLowerCase();
     if (!/^[a-z0-9-]{1,64}$/.test(slug)) return reply.callNotFound();
 
-    const html = await renderTopicPage(slug);
-    if (!html) return reply.callNotFound();
+    const page = await renderTopicPage(slug);
+    if (!page) return reply.callNotFound();
+    const html = applyInjections(page);
 
     reply.type("text/html; charset=utf-8");
-    reply.header("Cache-Control", "public, max-age=600, stale-while-revalidate=3600");
+    reply.header(
+      "Cache-Control",
+      hasCustomCode()
+        ? "public, max-age=0, must-revalidate"
+        : "public, max-age=600, stale-while-revalidate=3600"
+    );
     extendCsp(reply, inlineScriptHashes(html));
+    relaxCspForCustomCode(reply);
     return html;
   });
 

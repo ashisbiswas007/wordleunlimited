@@ -48,13 +48,16 @@ export function hasCustomCode() {
   );
 }
 
-export async function renderPage(relPath) {
+/**
+ * Applies every server-side injection to a finished page.
+ *
+ * Shared by the static landing pages and the server-rendered topic pages, so
+ * analytics, ad slots and the verification tag reach every HTML route rather
+ * than only the handful read off disk. Pure string work on an already-built
+ * page, so it is cheap enough to run per request.
+ */
+export function applyInjections(html) {
   const s = getSettings();
-  const key = relPath + "|" + settingsLoadedAt();
-  const hit = cache.get(key);
-  if (hit) return hit;
-
-  let html = await readFile(join(PUBLIC, relPath), "utf8");
 
   for (const [slot, mark] of Object.entries(SLOT_MARK)) {
     html = html.replace(mark, slotHtml(s.ads, slot));
@@ -63,13 +66,25 @@ export async function renderPage(relPath) {
   // Search Console proof of ownership. Google will not approve an OAuth consent
   // screen whose home page sits on an unverified domain.
   const verify = siteVerificationTag();
-  if (verify) html = html.replace("</head>", verify + "\n</head>");
+  if (verify && !html.includes("google-site-verification")) {
+    html = html.replace("</head>", verify + "\n</head>");
+  }
 
   const head = s.inject.headScripts.trim();
   if (head) html = html.replace("</head>", head + "\n</head>");
 
   const foot = s.inject.footScripts.trim();
   if (foot) html = html.replace("</body>", foot + "\n</body>");
+
+  return html;
+}
+
+export async function renderPage(relPath) {
+  const key = relPath + "|" + settingsLoadedAt();
+  const hit = cache.get(key);
+  if (hit) return hit;
+
+  const html = applyInjections(await readFile(join(PUBLIC, relPath), "utf8"));
 
   if (cache.size > 40) cache.clear();
   cache.set(key, html);

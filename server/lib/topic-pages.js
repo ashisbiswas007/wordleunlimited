@@ -299,6 +299,8 @@ ${gameShell(topic.name)}
         : ""
     }
 
+    <!--ad:in-content-->
+
     <div class="cta">
       <h2>Play more</h2>
       <p>Unlimited words, a Daily puzzle, Time mode and live multiplayer rooms.</p>
