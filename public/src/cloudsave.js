@@ -15,6 +15,40 @@
   var clientId = null, tokenClient = null, token = null, tokenExpiry = 0;
   var fileId = null, busy = false, saveTimer = null, lastSyncAt = 0;
   var rows = ["cloudRow"];
+
+  /* The access token is kept in this browser so that reloading a page, or
+     following a link to another topic, does not need a fresh sign-in window.
+     Google's browser flow issues no refresh token, so without this every
+     navigation would reopen the popup. The token lasts about an hour and can
+     only reach this app's own hidden Drive folder — it grants nothing else. */
+  var TOKEN_KEY = "cloud_tok";
+
+  function storeToken(value, expiresInSeconds) {
+    token = value;
+    // Expire two minutes early so a sync never starts on a token about to die.
+    tokenExpiry = Date.now() + (Number(expiresInSeconds || 3600) - 120) * 1000;
+    WU.lsSet(WU.K(TOKEN_KEY), { t: token, e: tokenExpiry });
+    WU.lsSet(WU.K("cloud_on"), true);
+  }
+
+  /** Restores a still-valid token from a previous page. */
+  function restoreToken() {
+    var s = WU.lsGet(WU.K(TOKEN_KEY), null);
+    if (!s || typeof s.t !== "string" || typeof s.e !== "number") return false;
+    if (Date.now() >= s.e) { WU.lsSet(WU.K(TOKEN_KEY), null); return false; }
+    token = s.t;
+    tokenExpiry = s.e;
+    return true;
+  }
+
+  /** `forget` also drops the "this player uses cloud save" flag. */
+  function dropToken(forget) {
+    token = null;
+    tokenExpiry = 0;
+    fileId = null;
+    WU.lsSet(WU.K(TOKEN_KEY), null);
+    if (forget) WU.lsSet(WU.K("cloud_on"), false);
+  }
   function eachRow(fn){ rows.forEach(function(id){ var el=document.getElementById(id); if(el) fn(el); }); }
 
   function status(text, sub) {
@@ -44,17 +78,74 @@
     );
   }
 
+  /** "How long ago", because an absolute clock time tells you nothing at a glance. */
+  function agoText(ts) {
+    if (!ts) return "not yet";
+    var s = Math.max(0, Math.round((Date.now() - ts) / 1000));
+    if (s < 10) return "just now";
+    if (s < 60) return s + " seconds ago";
+    var m = Math.round(s / 60);
+    if (m < 60) return m + (m === 1 ? " minute ago" : " minutes ago");
+    var h = Math.round(m / 60);
+    if (h < 24) return h + (h === 1 ? " hour ago" : " hours ago");
+    try { return new Date(ts).toLocaleDateString(); } catch (e) { return "a while ago"; }
+  }
+
   function signedInUI() {
-    var when = lastSyncAt ? new Date(lastSyncAt).toLocaleTimeString() : "not yet";
     status(
-      "Your progress is syncing to Google Drive. Last saved: " + when + ".",
+      "Your progress is saved to Google Drive. Last synced: <b>" + agoText(lastSyncAt) + "</b>.",
       '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
         '<button class="cbtn ghost" data-act="cloudsync">Sync now</button>' +
         '<button class="cbtn ghost" data-act="cloudout">Sign out</button></div>'
     );
   }
 
+  /**
+   * Connected before, but the hour-long access token has run out.
+   *
+   * Google's browser token flow has no silent refresh — asking for a new token
+   * always opens a window, and a window that opens without the player clicking
+   * anything is exactly the thing that made this feel broken. So we ask, and
+   * wait for a click.
+   */
+  function reconnectUI() {
+    status(
+      "Signed in, but the Drive session has expired — that happens about once an hour. " +
+        "Your progress is safe in this browser. Last synced: <b>" + agoText(lastSyncAt) + "</b>.",
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+        '<button class="cbtn gsi" data-act="cloudin">' + GOOGLE_MARK + "<span>Reconnect Drive</span></button>" +
+        '<button class="cbtn ghost" data-act="cloudout">Sign out</button></div>'
+    );
+  }
+
+  /** Whichever of the three states currently applies. */
+  function paintCloud() {
+    if (token && Date.now() < tokenExpiry) signedInUI();
+    else if (WU.lsGet(WU.K("cloud_on"), false)) reconnectUI();
+    else signedOutUI();
+  }
+
   /* ---------- the save payload ---------- */
+
+  /**
+   * Keys that belong to this browser and must never leave it.
+   *
+   * The access token above all: it lives under the same wu_ prefix as
+   * everything else, so a plain sweep would upload the credential to Drive and
+   * then push it onto every other device, where it would overwrite a good
+   * token with one that is already expiring. The multiplayer identity is
+   * per-browser by design too — syncing it would give two devices the same
+   * seat in a room.
+   */
+  var NEVER_SYNC = ["cloud_tok", "cloud_on", "cloud_last", "mp_session", "mp_cid", "pending_ch"];
+
+  function isLocalOnly(key) {
+    for (var i = 0; i < NEVER_SYNC.length; i++) {
+      if (key.indexOf(NEVER_SYNC[i]) > -1) return true;
+    }
+    return false;
+  }
+
   function collect() {
     var out = { v: 1, at: Date.now(), settings: WU.lsGet("wu_settings", {}), keys: {} };
     // Everything this site owns is namespaced, so a prefix sweep is exact.
@@ -62,7 +153,7 @@
       var k = localStorage.key(i);
       if (!k || k.indexOf("wu_") !== 0) continue;
       if (k === "wu_settings") continue;
-      if (k.indexOf("pending_ch") > -1) continue; // transient, do not sync
+      if (isLocalOnly(k)) continue;
       try { out.keys[k] = JSON.parse(localStorage.getItem(k)); } catch (e) {}
     }
     return out;
@@ -81,6 +172,8 @@
     }
 
     Object.keys(remote.keys || {}).forEach(function (k) {
+      // Defends against save files written before the exclusion list existed.
+      if (isLocalOnly(k)) return;
       var incoming = remote.keys[k];
       var current = WU.lsGet(k, null);
       if (current == null) { WU.lsSet(k, incoming); return; }
@@ -176,9 +269,16 @@
 
   /* ---------- sync ---------- */
   function sync(showToast) {
-    if (!token || busy) return Promise.resolve();
-    // Expired: refresh silently and let the callback resume the sync.
-    if (Date.now() > tokenExpiry) { requestToken(false); return Promise.resolve(); }
+    if (busy) return Promise.resolve();
+
+    // No usable token. Say so instead of doing nothing, which is what made
+    // "Sync now" look broken, and offer the button that fixes it.
+    if (!token || Date.now() >= tokenExpiry) {
+      dropToken(false);
+      paintCloud();
+      if (showToast) WU.toast("Drive session expired — press Reconnect");
+      return Promise.resolve();
+    }
     busy = true;
 
     return download()
@@ -189,14 +289,19 @@
       .then(function () {
         lastSyncAt = Date.now();
         WU.lsSet(WU.K("cloud_last"), lastSyncAt);
-        signedInUI();
+        paintCloud();
         if (showToast) WU.toast("Progress saved to Drive");
       })
       .catch(function (err) {
-        // Drive rejected the token: refresh silently, never escalate to a
-        // consent screen the player did not ask for.
-        if (/40[13]/.test(String(err.message))) { tokenExpiry = 0; requestToken(false); }
-        else if (showToast) WU.toast("Could not reach Drive — try again");
+        // Drive rejected the token: drop it and wait for a click. Never open a
+        // window the player did not ask for.
+        if (/40[13]/.test(String(err.message))) {
+          dropToken(false);
+          paintCloud();
+          if (showToast) WU.toast("Drive session expired — press Reconnect");
+        } else if (showToast) {
+          WU.toast("Could not reach Drive — try again");
+        }
       })
       .finally(function () { busy = false; });
   }
@@ -227,30 +332,26 @@
   /* ---------- auth ---------- */
 
   /**
-   * One token request at a time, and never a popup the player did not ask for.
+   * A sign-in window opens only when the player clicks.
    *
-   * Access tokens last an hour. The background sync ticks every minute, so
-   * without a guard an expired token meant a fresh sign-in prompt every single
-   * minute — and because a failed refresh cleared the token first, each one
-   * escalated to a full consent screen. A returning player has already
-   * consented, so a refresh is always silent; only a deliberate click on
-   * "Sign in with Google" is allowed to prompt.
+   * Google's browser token flow has no silent mode: requestAccessToken always
+   * opens a window, `prompt: ""` included. Calling it on page load — which is
+   * what used to happen for a returning player — meant a popup on every single
+   * page, and following a topic link is a page. So nothing here is automatic;
+   * an expired session shows a Reconnect button and waits.
    */
   var authPending = false;
-  var authInteractive = false;
-  var authBlockedUntil = 0;
-  var SILENT_RETRY_MS = 10 * 60 * 1000;
 
-  function requestToken(interactive) {
+  function requestToken() {
     if (!tokenClient || authPending) return;
-    if (!interactive && Date.now() < authBlockedUntil) return;
-    var consented = WU.lsGet(WU.K("cloud_on"), false);
     authPending = true;
-    authInteractive = Boolean(interactive);
+    // Already granted once, so skip the consent screen and just re-issue.
+    var consented = WU.lsGet(WU.K("cloud_on"), false);
     try {
-      tokenClient.requestAccessToken({ prompt: interactive && !consented ? "consent" : "" });
+      tokenClient.requestAccessToken({ prompt: consented ? "" : "consent" });
     } catch (e) {
       authPending = false;
+      paintCloud();
     }
   }
 
@@ -260,38 +361,31 @@
       client_id: clientId,
       scope: SCOPE,
       callback: function (resp) {
-        var wasInteractive = authInteractive;
         authPending = false;
-        authInteractive = false;
-
         if (resp.error || !resp.access_token) {
-          // A silent refresh can fail for reasons the player cannot act on —
-          // an expired Google session, blocked third-party cookies. Back off
-          // rather than letting the next sync tick reopen the popup.
-          token = null;
-          tokenExpiry = 0;
-          if (!wasInteractive) authBlockedUntil = Date.now() + SILENT_RETRY_MS;
-          signedOutUI();
+          // Dismissed or refused. Keep the cloud_on flag so the row offers
+          // Reconnect rather than pretending they were never signed in.
+          dropToken(false);
+          paintCloud();
+          WU.toast("Google sign-in was not completed");
           return;
         }
-
-        token = resp.access_token;
-        // Google returns expires_in seconds; refresh a minute early.
-        tokenExpiry = Date.now() + (Number(resp.expires_in || 3600) - 60) * 1000;
-        authBlockedUntil = 0;
-        WU.lsSet(WU.K("cloud_on"), true);
-        signedInUI();
-        // Only announce a save the player actually initiated; a background
-        // token refresh should be invisible.
-        sync(wasInteractive);
+        storeToken(resp.access_token, resp.expires_in);
+        paintCloud();
+        sync(true);
         startAutoSync();
       },
     });
 
-    // Returning user who has already granted access: reconnect silently.
-    if (WU.lsGet(WU.K("cloud_on"), false)) {
+    // Pick up a session from an earlier page. No window, no interruption.
+    if (restoreToken()) {
       lastSyncAt = WU.lsGet(WU.K("cloud_last"), 0);
-      requestToken(false);
+      paintCloud();
+      startAutoSync();
+      sync(false);
+    } else {
+      lastSyncAt = WU.lsGet(WU.K("cloud_last"), 0);
+      paintCloud();
     }
   }
 
@@ -307,20 +401,19 @@
   }
 
   /* ---------- wiring ---------- */
-  // The only path allowed to show a prompt.
-  WU.actions.cloudin = function () { requestToken(true); };
+  // The one and only path that may open a Google window.
+  WU.actions.cloudin = function () { requestToken(); };
   WU.actions.cloudsync = function () { sync(true); };
   WU.actions.cloudout = function () {
     if (token && window.google && google.accounts && google.accounts.oauth2) {
       try { google.accounts.oauth2.revoke(token); } catch (e) {}
     }
-    token = null; fileId = null; lastSyncAt = 0; tokenExpiry = 0;
-    // Signing out is deliberate, so clear the back-off: the next click should
-    // prompt immediately rather than being swallowed by it.
-    authPending = false; authInteractive = false; authBlockedUntil = 0;
+    dropToken(true);
+    lastSyncAt = 0;
+    authPending = false;
     stopAutoSync();
-    WU.lsSet(WU.K("cloud_on"), false);
-    signedOutUI();
+    WU.lsSet(WU.K("cloud_last"), 0);
+    paintCloud();
     WU.toast("Signed out of Drive");
   };
 
@@ -354,7 +447,8 @@
         return;
       }
       clientId = j.googleClientId;
-      signedOutUI();
+      lastSyncAt = WU.lsGet(WU.K("cloud_last"), 0);
+      paintCloud();
       loadGis();
     })
     .catch(function () {
