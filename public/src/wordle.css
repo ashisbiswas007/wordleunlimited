@@ -1,7 +1,11 @@
 :root{
 --bg:#fff;--bg2:#f7f8f9;--bg3:#eef0f2;--text:#14161a;--muted:#6b7280;--border:#dcdfe3;
 --key:#d7dade;--key-text:#14161a;--tile-border:#d0d4d9;--tile-filled:#8d939b;
---accent:#5fa055;--accent-2:#6fb865;--on-accent:#fff;
+/* --accent fills buttons with white text on them; --accent-ink colours text
+   and icons. Both clear WCAG AA (4.5:1). The old #5fa055 gave white text
+   3.16:1, so every green button and link failed. The tile greens are separate
+   (--green) and stay the colours players know. */
+--accent:#3d7a36;--accent-2:#4a8a42;--on-accent:#fff;--accent-ink:#3d7a36;
 --green:#5fa055;--yellow:#c9a83f;--absent:#787c7e;--key-absent:#787c7e;
 --modal:#fff;--switch-off:#cfd3d8;--danger:#d64545;--gold:#e0a020;
 --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:22px;
@@ -19,13 +23,14 @@ color-scheme:light;
 [data-theme=dark]{
 --bg:#0f1115;--bg2:#171a20;--bg3:#1f232b;--text:#e7eaee;--muted:#949aa4;--border:#2b303a;
 --key:#3a4049;--key-text:#e7eaee;--tile-border:#333944;--tile-filled:#4a515c;
---accent:#4e8a48;--accent-2:#5da055;--on-accent:#fff;
+--accent:#3f7a39;--accent-2:#4a8a43;--on-accent:#fff;--accent-ink:#7cc272;
 --green:#4e8a48;--yellow:#b0932f;--absent:#33383f;--key-absent:#33383f;
 --modal:#171a20;--switch-off:#333944;--danger:#e06b6b;
 --sh-1:0 1px 2px rgba(0,0,0,.4);--sh-2:0 4px 16px rgba(0,0,0,.45);--sh-3:0 20px 56px rgba(0,0,0,.6);
 color-scheme:dark;
 }
-body.high-contrast{--green:#e8791f;--yellow:#5f9ff2;--accent:#e8791f;--accent-2:#f08c33;}
+body.high-contrast{--green:#e8791f;--yellow:#5f9ff2;--accent:#b85a0e;--accent-2:#c96a1a;--accent-ink:#b85a0e;}
+[data-theme=dark] body.high-contrast,body.high-contrast[data-theme=dark]{--accent-ink:#f0a35a;}
 
 html.wu-lock,body.wu-lock{overflow:hidden!important;}
 body.wu-lock{position:fixed;width:100%;left:0;right:0;}
@@ -48,7 +53,7 @@ display:flex;flex-direction:column;gap:10px;background:var(--bg);}
    the two words has to be a real character, not layout. */
 #wu-root .wu-brand{display:inline-block;font-weight:800;
 font-size:clamp(17px,4.4vw,20px);letter-spacing:-.3px;}
-#wu-root .wu-brand-1{color:var(--accent);}
+#wu-root .wu-brand-1{color:var(--accent-ink);}
 #wu-root .wu-flag{display:inline-flex;width:22px;height:15px;border-radius:3px;overflow:hidden;
 margin-left:7px;align-self:center;box-shadow:0 0 0 1px rgba(0,0,0,.16);}
 #wu-root .wu-flag svg{width:22px;height:15px;}
@@ -70,7 +75,7 @@ position:relative;min-width:0;}
 #wu-root .tab svg{width:17px;height:17px;}
 #wu-root .tab:hover:not(.active){background:var(--bg3);color:var(--text);}
 #wu-root .tab.active{background:var(--modal);color:var(--text);box-shadow:var(--sh-1);}
-#wu-root .tab.active svg{color:var(--accent);}
+#wu-root .tab.active svg{color:var(--accent-ink);}
 #wu-root .tab>span:not(.tab-live){overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 #wu-root .tab-live{display:none;align-items:center;gap:3px;font-size:10px;font-weight:800;
 background:var(--green);color:#fff;border-radius:99px;padding:1px 5px;line-height:1.6;flex:none;}
@@ -81,11 +86,13 @@ display:inline-block;animation:wuDot 1.8s ease-in-out infinite;}
 
 /* ---- status strip ---- */
 #wu-root #banner:empty{display:none;}
-/* No reserved height — an empty control row collapses instead of leaving a
-   gap between the mode tabs and the board. */
+/* The row is reserved before the script fills it: it arrives empty in the HTML
+   and every mode then puts buttons in it, so collapsing it until then pushed
+   the board down 48px after first paint (CLS 0.19 on phones). It collapses
+   only when the engine says there is nothing to show (.is-empty). */
 #wu-root .controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;justify-content:center;
-font-size:14px;}
-#wu-root .controls:empty{display:none;}
+font-size:14px;min-height:38px;}
+#wu-root .controls.is-empty{display:none;}
 #wu-root #banner:empty{display:none;}
 #wu-root .muted{color:var(--muted);font-size:13px;}
 #wu-root .count{font-variant-numeric:tabular-nums;font-weight:700;}
@@ -139,7 +146,7 @@ flex-wrap:wrap;text-align:center;animation:wuTip .22s var(--ease);}
 letter-spacing:4px;text-transform:uppercase;padding:6px 0;overflow-wrap:anywhere;}
 #wu-root .tp-clue .hint-inner{font-size:13px;color:var(--muted);letter-spacing:0;
 line-height:1.4;padding:4px 0;overflow-wrap:anywhere;white-space:normal;}
-#wu-root .hintline .hintlabel{font-size:10px;letter-spacing:1px;color:var(--accent);
+#wu-root .hintline .hintlabel{font-size:10px;letter-spacing:1px;color:var(--accent-ink);
 background:color-mix(in srgb,var(--accent) 14%,transparent);padding:3px 8px;border-radius:99px;
 line-height:1.4;flex:none;}
 
@@ -154,7 +161,7 @@ max-width:calc(var(--len) * var(--tile-max) + (var(--len) - 1) * var(--gap));
 max-height:var(--board-h);margin-inline:auto;}
 #wu-root .row{display:grid;grid-template-columns:repeat(var(--len),1fr);gap:var(--gap);}
 #wu-root .tile{aspect-ratio:1;display:grid;place-items:center;border:2px solid var(--tile-border);
-border-radius:5px;font-size:clamp(18px,6.4vw,30px);font-weight:750;text-transform:uppercase;
+border-radius:6px;font-size:clamp(18px,6.4vw,30px);font-weight:750;text-transform:uppercase;
 line-height:1;background:transparent;transition:border-color .12s,background-color .12s;}
 #wu-root .tile.filled{border-color:var(--tile-filled);animation:wuPop .12s var(--ease);}
 #wu-root .tile.correct{background:var(--green);border-color:var(--green);color:#fff;}
@@ -181,7 +188,7 @@ animation:wuCard .26s var(--ease);}
 @keyframes wuCard{from{transform:scale(.94) translateY(8px);opacity:0}to{transform:none;opacity:1}}
 #wu-root .endcard .et{font-size:19px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px;}
 #wu-root .endcard .em{font-size:14px;line-height:1.5;color:var(--muted);margin-bottom:14px;}
-#wu-root .endcard .reveal-word{color:var(--accent);text-transform:uppercase;letter-spacing:1px;font-weight:800;}
+#wu-root .endcard .reveal-word{color:var(--accent-ink);text-transform:uppercase;letter-spacing:1px;font-weight:800;}
 #wu-root .endcard .ebtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px;}
 #wu-root .endcard .ebtn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:var(--r-sm);
 padding:11px 15px;font-weight:700;font-size:13px;cursor:pointer;background:var(--key);color:var(--key-text);}
@@ -191,13 +198,18 @@ padding:11px 15px;font-weight:700;font-size:13px;cursor:pointer;background:var(-
 
 /* ---- keyboard ---- */
 #wu-root .keyboard{display:flex;flex-direction:column;gap:6px;}
+/* Holds the keyboard's three rows open until the script draws them, so the
+   guide below the game does not jump down a screen after first paint. */
+#wu-root .keyboard:empty:not(.kb-ready){min-height:calc(3 * clamp(46px,7.2vh,56px) + 12px);}
 #wu-root .kb-row{display:flex;justify-content:center;gap:5px;}
 #wu-root .key{flex:1 1 0;min-width:0;height:clamp(46px,7.2vh,56px);border:0;border-radius:7px;
 background:var(--key);color:var(--key-text);font-size:14px;font-weight:750;text-transform:uppercase;
 cursor:pointer;display:grid;place-items:center;padding:0;transition:filter .12s,transform .06s;}
 #wu-root .key svg{width:20px;height:20px;}
 #wu-root .key:hover{filter:brightness(1.06);}
-#wu-root .key:active{transform:translateY(2px);}
+#wu-root .key:active{transform:scale(.94);filter:brightness(.92);}
+#wu-root .key:focus-visible,#wu-root .tab:focus-visible,#wu-root .cbtn:focus-visible,
+#wu-root .ibtn:focus-visible,#wu-root .icon:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px;}
 #wu-root .key.wide{flex:1.6 1 0;font-size:11.5px;}
 #wu-root .key.correct{background:var(--green);color:#fff;}
 #wu-root .key.present{background:var(--yellow);color:#fff;}
@@ -231,7 +243,7 @@ background:none;cursor:pointer;color:var(--muted);display:grid;place-items:cente
 #wu-root .ch-card .close:hover{background:var(--bg3);color:var(--text);}
 #wu-root .ch-card .crow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-right:28px;}
 #wu-root .ch-card .ico{display:grid;place-items:center;width:40px;height:40px;border-radius:var(--r-sm);
-background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent);flex:none;}
+background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent-ink);flex:none;}
 #wu-root .ch-card .ico svg{width:22px;height:22px;}
 #wu-root .ch-card .who{font-weight:750;font-size:15px;}
 #wu-root .ch-card .sub{font-size:12.5px;color:var(--muted);}
@@ -243,7 +255,7 @@ border:0;border-radius:var(--r-sm);padding:10px 16px;font-weight:700;cursor:poin
 padding:10px 16px;font-weight:700;cursor:pointer;font-size:13.5px;}
 #wu-root .ch-mini{display:flex;align-items:center;gap:8px;justify-content:center;font-size:13px;
 color:var(--muted);font-weight:650;padding:6px 0;}
-#wu-root .ch-mini .ico{color:var(--accent);display:grid;place-items:center;}
+#wu-root .ch-mini .ico{color:var(--accent-ink);display:grid;place-items:center;}
 #wu-root .ch-mini .ico svg{width:16px;height:16px;}
 #wu-root .ch-x{border:0;background:var(--key);color:var(--key-text);width:26px;height:26px;
 border-radius:6px;display:grid;place-items:center;cursor:pointer;flex:none;}
@@ -283,7 +295,7 @@ width:32px;height:32px;border-radius:50%;display:grid;place-items:center;margin:
 #wu-root .modal .x svg{width:16px;height:16px;}
 #wu-root .modal .x:hover{background:var(--bg3);color:var(--text);}
 #wu-root .howsite{text-align:center;color:var(--muted);font-size:13px;margin-top:14px;}
-#wu-root .howsite b{color:var(--accent);}
+#wu-root .howsite b{color:var(--accent-ink);}
 #wu-root .ex{display:flex;gap:5px;margin:10px 0;}
 #wu-root .ex .tile{width:38px;height:38px;aspect-ratio:auto;font-size:18px;}
 
@@ -292,7 +304,7 @@ border-bottom:1px solid var(--border);gap:14px;}
 #wu-root .setrow:last-of-type{border-bottom:0;}
 #wu-root .setrow.col{flex-direction:column;align-items:stretch;}
 #wu-root .label{font-weight:650;font-size:14px;display:flex;align-items:center;gap:8px;}
-#wu-root .label svg,#wu-root .label .lblico{width:17px;height:17px;color:var(--accent);flex:none;}
+#wu-root .label svg,#wu-root .label .lblico{width:17px;height:17px;color:var(--accent-ink);flex:none;}
 #wu-root .desc{font-size:12.5px;color:var(--muted);margin-top:2px;}
 #wu-root .regions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
 #wu-root .regbtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);
@@ -412,7 +424,7 @@ animation:wuLuPop .5s cubic-bezier(.2,1.3,.4,1);}
 justify-content:space-between;flex-wrap:wrap;}
 #wu-root .tp-now{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 180px;}
 #wu-root .tp-ico{width:34px;height:34px;border-radius:var(--r-sm);
-background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent);
+background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent-ink);
 display:grid;place-items:center;flex:none;}
 #wu-root .tp-ico svg{width:18px;height:18px;}
 /* Name above, counts below. These are spans, so without an explicit block they
@@ -443,7 +455,7 @@ background:var(--modal);color:var(--text);border-radius:var(--r-sm);padding:11px
 text-align:left;transition:border-color .15s,transform .1s;}
 #wu-root .tp-item:hover{border-color:var(--accent);transform:translateY(-1px);}
 #wu-root .tp-item .e{display:grid;place-items:center;width:30px;height:30px;border-radius:7px;
-background:var(--bg2);color:var(--accent);flex:none;}
+background:var(--bg2);color:var(--accent-ink);flex:none;}
 #wu-root .tp-item .e svg{width:16px;height:16px;}
 #wu-root .tp-item .t{min-width:0;display:flex;flex-direction:column;gap:2px;}
 #wu-root .tp-item .n{display:block;font-weight:700;font-size:13px;line-height:1.3;
@@ -481,7 +493,7 @@ padding:12px;cursor:pointer;transition:border-color .15s,transform .1s,backgroun
 #wu-root .mp-room:hover:not([disabled]){border-color:var(--accent);transform:translateY(-1px);}
 #wu-root .mp-room[disabled]{opacity:.45;cursor:not-allowed;}
 #wu-root .mp-room-ico{display:grid;place-items:center;width:40px;height:40px;flex:none;
-border-radius:var(--r-sm);background:var(--bg2);color:var(--accent);}
+border-radius:var(--r-sm);background:var(--bg2);color:var(--accent-ink);}
 #wu-root .mp-room-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;}
 #wu-root .mp-room .rn{font-weight:750;font-size:14px;}
 #wu-root .mp-room .rs{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -511,10 +523,10 @@ border:1px dashed var(--border);}
 #wu-root .mp-share .mp-lab{margin:0 0 8px;}
 #wu-root .mp-code{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 #wu-root .mp-code span{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:22px;font-weight:800;
-letter-spacing:3px;flex:1;min-width:110px;color:var(--accent);}
+letter-spacing:3px;flex:1;min-width:110px;color:var(--accent-ink);}
 #wu-root .mp-code .cbtn{padding:8px 12px;min-height:34px;font-size:12px;}
 #wu-root .mp-status{text-align:center;font-size:13px;font-weight:700;padding:10px;
-border-radius:var(--r-sm);background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);}
+border-radius:var(--r-sm);background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent-ink);}
 #wu-root .mp-pl .you{font-style:normal;font-size:9.5px;font-weight:800;text-transform:uppercase;
 letter-spacing:.5px;color:var(--muted);background:var(--modal);padding:2px 6px;border-radius:99px;margin-left:4px;}
 #wu-root .cbtn.gsi{background:#fff;color:#3c4043;border:1px solid #dadce0;font-weight:600;}
@@ -527,10 +539,10 @@ letter-spacing:.5px;color:var(--muted);background:var(--modal);padding:2px 6px;b
 background:var(--bg2);font-size:13.5px;}
 #wu-root .mp-pl.ready{background:color-mix(in srgb,var(--green) 14%,transparent);}
 #wu-root .mp-pl .av{display:grid;place-items:center;width:26px;height:26px;border-radius:7px;
-background:var(--modal);color:var(--accent);flex:none;}
+background:var(--modal);color:var(--accent-ink);flex:none;}
 #wu-root .mp-pl .nk{flex:1;min-width:0;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #wu-root .mp-pl .host{font-style:normal;font-size:9.5px;font-weight:800;text-transform:uppercase;
-letter-spacing:.5px;color:var(--accent);background:color-mix(in srgb,var(--accent) 16%,transparent);
+letter-spacing:.5px;color:var(--accent-ink);background:color-mix(in srgb,var(--accent) 16%,transparent);
 padding:2px 6px;border-radius:99px;margin-left:4px;}
 #wu-root .mp-pl .st{font-size:11px;color:var(--muted);font-weight:700;flex:none;}
 #wu-root .mp-pl.ready .st{color:var(--green);}
@@ -561,7 +573,7 @@ color:var(--muted);}
 #wu-root .mp-sb-r.lead .rk{color:var(--gold);}
 #wu-root .mp-sb-r.me .rk{color:inherit;opacity:.85;}
 #wu-root .mp-sb-r .av{display:grid;place-items:center;width:26px;height:26px;border-radius:7px;
-background:var(--bg2);color:var(--accent);}
+background:var(--bg2);color:var(--accent-ink);}
 #wu-root .mp-sb-r.me .av{background:rgba(255,255,255,.22);color:#fff;}
 #wu-root .mp-sb-r .av svg{display:block;}
 #wu-root .mp-sb-r .nk{min-width:0;font-weight:650;white-space:nowrap;overflow:hidden;
@@ -594,7 +606,7 @@ border-left:3px solid transparent;}
 #wu-root .mp-sr .rk{font-weight:800;font-variant-numeric:tabular-nums;text-align:right;color:var(--muted);}
 #wu-root .mp-sr.top .rk{color:var(--gold);}
 #wu-root .mp-sr .av{display:grid;place-items:center;width:28px;height:28px;border-radius:7px;
-background:var(--modal);color:var(--accent);}
+background:var(--modal);color:var(--accent-ink);}
 #wu-root .mp-sr .nk{min-width:0;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #wu-root .mp-sr .sv,#wu-root .mp-sr .pt{text-align:right;font-variant-numeric:tabular-nums;font-weight:750;}
 #wu-root .mp-sr .pt{color:var(--muted);}
@@ -614,19 +626,19 @@ padding:12px 11px;cursor:pointer;text-align:left;transition:border-color .15s,tr
 #wu-root .mp-vopt .vbar{position:absolute;inset:0 auto 0 0;background:var(--accent);opacity:.16;
 transition:width .45s var(--ease);width:0;}
 #wu-root .mp-vopt .vico{position:relative;display:grid;place-items:center;width:30px;height:30px;
-border-radius:7px;background:var(--bg2);color:var(--accent);flex:none;}
+border-radius:7px;background:var(--bg2);color:var(--accent-ink);flex:none;}
 #wu-root .mp-vopt.picked .vico{background:var(--accent);color:#fff;}
 #wu-root .mp-vopt .vn{position:relative;flex:1;min-width:0;font-weight:700;font-size:13px;
 white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #wu-root .mp-vopt .vc{position:relative;font-weight:800;font-variant-numeric:tabular-nums;
 font-size:14px;color:var(--muted);flex:none;}
-#wu-root .mp-vopt.picked .vc{color:var(--accent);}
+#wu-root .mp-vopt.picked .vc{color:var(--accent-ink);}
 
 #wu-root .mp-feed{max-height:110px;overflow:auto;font-size:11.5px;color:var(--muted);
 display:flex;flex-direction:column;gap:3px;padding-top:6px;border-top:1px solid var(--border);}
 #wu-root .mp-wait{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);
 text-align:center;padding:30px 10px;}
-#wu-root .mp-wait svg{width:32px;height:32px;color:var(--accent);}
+#wu-root .mp-wait svg{width:32px;height:32px;color:var(--accent-ink);}
 #wu-root .mp-wait b{font-size:15px;color:var(--text);}
 #wu-root .mp-wait span{font-size:12.5px;}
 
@@ -642,13 +654,25 @@ text-align:center;padding:30px 10px;}
 #wu-root .app{padding:8px 4px 10px;}
 #wu-root .topbar,#wu-root .tabs,#wu-root .controls,#wu-root #banner,
 #wu-root .hintline,#wu-root .tp-clue,#wu-root .boardwrap{margin-left:6px;margin-right:6px;}
+/* The page header right above already says "Wordle Unlimited"; repeated here
+   it wrapped to two lines beside the icons and cost the board ~50px. It comes
+   back in full screen, where the page header is gone. */
+.topnav~main #wu-root .wu-brand{display:none;}
+.topnav~main #wu-root .topbar{min-height:38px;}
+#wu-root.wu-immersive .wu-brand{display:inline-block!important;}
+:fullscreen .wu-brand{display:inline-block!important;}
 #wu-root .keyboard{gap:5px;}
+#wu-root .keyboard:empty:not(.kb-ready){min-height:calc(3 * clamp(44px,6.8vh,54px) + 10px);}
 #wu-root .kb-row{gap:4px;}
 #wu-root .key{height:clamp(44px,6.8vh,54px);border-radius:6px;font-size:15px;}
 #wu-root .key.wide{font-size:11px;}
 #wu-root .modal{padding:18px;border-radius:var(--r-md);}
-#wu-root .tab>span:not(.tab-live){display:none;}
-#wu-root .tab{gap:4px;}
+/* Icon over a short label, like a phone tab bar. Icons alone left five
+   unnamed buttons for screen readers and made players guess what each was. */
+#wu-root .tab{flex-direction:column;gap:2px;min-height:46px;padding:5px 2px;font-size:10.5px;
+letter-spacing:.1px;line-height:1.15;}
+#wu-root .tab svg{width:18px;height:18px;}
+#wu-root .tab .tab-live{position:absolute;top:2px;right:2px;padding:0 4px;font-size:9px;}
 #wu-root .statgrid{grid-template-columns:repeat(2,1fr);}
 #wu-root .tp-grid{grid-template-columns:1fr 1fr;}
 /* On a phone the picker gets as much height as the sheet allows: the category

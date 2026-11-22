@@ -110,6 +110,7 @@ asb
 ase
 asg
 asp
+ass
 ast
 ata
 ati
@@ -135,6 +136,7 @@ awk
 awl
 awm
 awn
+axe
 ays
 ayu
 azo
@@ -341,6 +343,7 @@ dha
 dhu
 dia
 dib
+die
 dif
 dil
 dir
@@ -372,6 +375,7 @@ dsr
 dtd
 duc
 dud
+duh
 dui
 dum
 dun
@@ -393,6 +397,7 @@ edh
 edo
 edp
 eds
+eek
 een
 eer
 eff
@@ -411,6 +416,7 @@ elt
 eme
 emf
 emm
+emo
 emp
 ems
 emu
@@ -430,8 +436,8 @@ erf
 erg
 erk
 ern
-err
 ers
+ert
 esc
 esd
 ese
@@ -545,6 +551,7 @@ gin
 gio
 gip
 gis
+git
 glb
 gld
 glt
@@ -582,10 +589,10 @@ gtt
 gud
 gue
 gul
+gun
 gup
 gur
 gus
-gut
 guv
 guz
 gye
@@ -600,6 +607,7 @@ hal
 han
 hao
 hap
+has
 hau
 hav
 haw
@@ -623,7 +631,9 @@ hic
 hie
 hin
 hir
+his
 hld
+hmm
 hny
 hob
 hoc
@@ -634,6 +644,7 @@ hom
 hon
 hoo
 hor
+hos
 hox
 hoy
 hrs
@@ -707,6 +718,7 @@ isz
 ita
 itd
 ito
+its
 iud
 iva
 ive
@@ -739,6 +751,7 @@ jnd
 jnt
 joe
 jon
+jor
 jos
 jow
 jud
@@ -902,8 +915,10 @@ mea
 med
 mee
 meg
+meh
 mel
 mem
+men
 meo
 meq
 mer
@@ -922,6 +937,7 @@ mho
 mhz
 mia
 mib
+mic
 mig
 mil
 mim
@@ -936,12 +952,10 @@ mmf
 mna
 moa
 moc
-mod
 moe
 mog
 moi
 mol
-mom
 mon
 moo
 mor
@@ -972,10 +986,12 @@ mya
 myc
 myg
 mym
+mys
 naa
 nad
 nae
 naf
+nah
 nak
 nam
 nan
@@ -1110,6 +1126,7 @@ pct
 pdl
 pdn
 pdq
+pec
 ped
 pee
 peh
@@ -1149,7 +1166,7 @@ poi
 pol
 pom
 pon
-pop
+poo
 por
 pos
 pow
@@ -1189,6 +1206,7 @@ pur
 pus
 puy
 pvt
+pwn
 pwr
 pwt
 pya
@@ -1305,7 +1323,6 @@ sct
 sds
 sec
 sed
-see
 seg
 sei
 sel
@@ -1336,6 +1353,7 @@ sig
 sil
 sim
 sis
+ska
 sla
 sld
 slt
@@ -1348,6 +1366,7 @@ sog
 soh
 sok
 sol
+som
 sop
 sos
 sot
@@ -1361,6 +1380,7 @@ spt
 sqd
 sqq
 sri
+ssh
 ssi
 ssp
 ssu
@@ -1430,6 +1450,7 @@ tig
 til
 tim
 tis
+tit
 tiu
 tji
 tkt
@@ -1582,6 +1603,7 @@ waf
 wah
 wan
 wap
+was
 wat
 waw
 wea

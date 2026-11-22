@@ -1,4 +1,4 @@
-import { randomBytes } from "node:crypto";
+import { randomBytes, createHash } from "node:crypto";
 import { hashPassword, verifyPassword } from "./crypto.js";
 import { query, queryStrict, isDbEnabled } from "../db/pool.js";
 import config from "../config.js";
@@ -173,6 +173,17 @@ export async function changeAdminPassword(currentPassword, newPassword) {
   mustChange = false;
   generatedOnce = null;
   return { ok: true };
+}
+
+/**
+ * Changes whenever the password does. Signed into every session token and
+ * checked on every request, so changing the password ends every session that
+ * was opened with the old one — a stolen cookie included. Tokens are
+ * stateless, so without this a password change ended no session at all.
+ */
+export function sessionGeneration() {
+  if (!cachedHash) return "";
+  return createHash("sha256").update(cachedHash).digest("base64url").slice(0, 16);
 }
 
 export function adminAuthStatus() {

@@ -46,6 +46,10 @@ ${siteVerificationTag()}
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${esc(canonical)}">
 <meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="${esc(config.siteUrl)}/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="${esc(config.siteUrl)}/og-image.png">
 <meta name="theme-color" content="#6aaa64" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121213" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">

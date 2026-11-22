@@ -5,6 +5,18 @@ function bool(v, dflt = false) {
   return /^(1|true|yes|on)$/i.test(String(v));
 }
 
+/**
+ * TRUST_PROXY is a hop count: "1" means one proxy (Coolify's Traefik) sits in
+ * front, so req.ip is the address Traefik itself saw. Trusting every hop
+ * ("true") would let a client write its own X-Forwarded-For and choose its IP.
+ */
+function hops(v, dflt) {
+  if (v == null || v === "") return dflt;
+  const n = parseInt(v, 10);
+  if (Number.isFinite(n)) return n > 0 ? n : false;
+  return /^(true|yes|on)$/i.test(String(v)) ? 1 : false;
+}
+
 function int(v, dflt) {
   const n = parseInt(v, 10);
   return Number.isFinite(n) ? n : dflt;
@@ -31,7 +43,7 @@ export const config = {
   isProd,
   port: int(process.env.PORT, 3000),
   host: process.env.HOST || "0.0.0.0",
-  trustProxy: bool(process.env.TRUST_PROXY, isProd),
+  trustProxy: hops(process.env.TRUST_PROXY, isProd ? 1 : false),
 
   siteUrl: (process.env.SITE_URL || "https://wordleunlimited.dev").replace(/\/+$/, ""),
 
@@ -45,6 +57,13 @@ export const config = {
     passwordHash: process.env.ADMIN_PASSWORD_HASH || "",
     password: process.env.ADMIN_PASSWORD || "",
     sessionTtlMs: 12 * 60 * 60 * 1000,
+    // The admin panel has its own listener. The compose file publishes it on
+    // the server's 127.0.0.1 only, so the way in is an SSH tunnel and the
+    // public site has no /admin at all.
+    port: int(process.env.ADMIN_PORT, 3901),
+    host: process.env.ADMIN_HOST || "0.0.0.0",
+    // Puts /admin back on the public site as well. Off unless set on purpose.
+    public: bool(process.env.ADMIN_PUBLIC, false),
   },
 
   google: {

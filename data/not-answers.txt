@@ -1,0 +1,49 @@
+# Real words the game ACCEPTS as a guess but never CHOOSES as an answer.
+#
+# A Wordle answer is shown to every player, shared in results and read out in
+# Versus, and children play this game. So the answer pool leaves out crude,
+# sexual, drug, violent and religious words, proper nouns and dialect —
+# while a player who types one of them is not told it is "not in word list".
+#
+# Matching is exact. Applied to every region, Indonesian included.
+
+# --- crude or mild swearing ---
+arse arsed arses ass asses bloody bollock bollocks boob boobs booby bugger buggered bum
+bummer butt butts buttock crap crappy damn douche fart farted feck git hell hellish horny
+hump humped jerk knob knobs poo poop prick pricks pube pubes pubic shag shagged smut tit
+tits turd sissy nitwit lewd obscene slur cracker queer retard slag fatty pantie panties
+
+# --- anatomy and the body ---
+anal anus breast nipple penis rectum scrotum semen sperm teat teats testes testis
+uteri uterus vagina vomit pus pimple urine
+
+# --- sexual ---
+asexual condom erotic gay gayer kink kinky lesbian lust lusty naked nude nudes nuder
+orgasm porn sex sexes sexism sexist sexual sexy virgin harlot tramp
+
+# --- drugs and drink ---
+booze cocaine drug drugs drunk drunken drunker heroin junkie weed weedy
+
+# --- violence and death ---
+abort abuse abused abuser bomb bomber corpse corpses dead deadly death die died genocide
+gore grope groped gun gunfire gunman gunmen gunshot shotgun hang hanged kill killed
+killer killing lynch murder murdered murderer noose overdose slave slavery slay stab
+suicide terror torture tortured behead ghetto goddam goddamn assault slayer queerer
+
+# --- religion ---
+god godless ungodly satanic
+
+# --- proper nouns and demonyms that are also lowercase words ---
+april august british britain china chinese christian dutch easter english europe
+french german germany india indian irish islam italy japan jesus july june
+london march monday muslim november october roman russia russian scotland
+scottish spain spanish sunday texas tuesday wales welsh polish turkey
+
+# --- real words, but not ones to build a puzzle on ---
+cant wont gin sic ken thy huh ugh
+
+# --- Indonesian: kasar, seksual, narkoba, kekerasan ---
+seks porno ganja mabuk cabul kondom sperma vagina ereksi orgasme bordil sundal
+bunuh tewas mayat jasad jenazah teror teroris senjata pistol granat amunisi
+bangsat kampret jahanam goblok tolol bodoh idiot dungu jalang mampus kencing kentut
+pantat bokong pipis ngompol narkoba kokain heroin morfin alkohol vodka wiski

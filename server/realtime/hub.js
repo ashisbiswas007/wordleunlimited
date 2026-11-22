@@ -1,4 +1,5 @@
 import { Room, PHASE, makeRoomCode, suggestNickname, sanitiseNick } from "./room.js";
+import { clientIp } from "../lib/client-ip.js";
 import { loadDictionaries } from "../lib/words.js";
 import { listTopics, getTopic, seedTopics, syncClues } from "../lib/topics.js";
 import { getSettings } from "../lib/settings.js";
@@ -341,7 +342,9 @@ export async function registerRealtime(app) {
   await syncClues().catch((err) => console.warn("[topics] clue sync skipped:", err.message));
 
   app.get("/ws", { websocket: true }, (socket, req) => {
-    const ip = req.ip || "unknown";
+    // The player, not the Cloudflare edge: eight players behind one Mumbai
+    // edge used to fill this cap and lock the ninth out of Versus.
+    const ip = clientIp(req);
     const count = (ipCounts.get(ip) || 0) + 1;
 
     if (count > MAX_SOCKETS_PER_IP) {

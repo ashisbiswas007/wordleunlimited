@@ -749,7 +749,12 @@
       game.answer = dailyWord(len);
       game.dayNum = daysSince() + 1;
       var st = lsGet(K("daily_" + len), null);
-      if (st && st.day === daysSince()) { game.guesses = st.guesses || []; game.status = st.status || "playing"; }
+      if (st && st.day === daysSince()) {
+        // The saved answer wins: a word-list update during the day must not
+        // swap the puzzle under someone halfway through it.
+        if (typeof st.answer === "string" && st.answer.length === len && /^[A-Z]+$/.test(st.answer)) game.answer = st.answer;
+        game.guesses = st.guesses || []; game.status = st.status || "playing";
+      }
       game.dailyTimer = setInterval(dailyTick, 1000);
     } else if (mode === "unlimited") {
       game.answer = randomWord(len);
@@ -779,7 +784,7 @@
     render();
   }
 
-  function persistDaily() { lsSet(K("daily_" + game.length), { day: daysSince(), guesses: game.guesses, status: game.status }); }
+  function persistDaily() { lsSet(K("daily_" + game.length), { day: daysSince(), answer: game.answer, guesses: game.guesses, status: game.status }); }
   function timeTick() {
     game.timeLeft--;
     var el = document.getElementById("timerVal");
@@ -1185,6 +1190,7 @@
         html += "</div>";
       });
     kbEl.innerHTML = html;
+    kbEl.classList.add("kb-ready");
   }
   /* The hint row always occupies its height, so revealing a letter fades text
      in rather than pushing the board down. */
@@ -1204,11 +1210,11 @@
     return '<button class="cbtn' + (ghost ? " ghost" : "") + '" data-act="' + act + '"><span class="ic">' + ICON[icon] + "</span><span>" + label + "</span></button>";
   }
   function iBtn(act, icon, title, extra) {
-    return '<button class="ibtn' + (extra ? " " + extra : "") + '" data-act="' + act + '" title="' + title + '">' + ICON[icon] + "</button>";
+    return '<button class="ibtn' + (extra ? " " + extra : "") + '" data-act="' + act + '" title="' + title + '" aria-label="' + title + '">' + ICON[icon] + "</button>";
   }
   function hintBtnIcon() {
     var left = MAX_HINTS - game.hintsUsed;
-    return '<button class="ibtn" data-act="hint" title="' + t("hint") + '"' + (left <= 0 ? " disabled" : "") + ">" +
+    return '<button class="ibtn" data-act="hint" title="' + t("hint") + '" aria-label="' + t("hint") + '"' + (left <= 0 ? " disabled" : "") + ">" +
       ICON.bulb + '<span class="badge">' + left + "</span></button>";
   }
   function renderBanner() {
@@ -1240,9 +1246,11 @@
       '<div class="ch-actions"><button class="ch-accept" data-act="acceptchallenge">' + ICON.check + t("accept") +
       '</button><button class="ch-reject" data-act="rejectchallenge">' + t("reject") + "</button></div></div></div>";
     controls.innerHTML = "";
+    controls.classList.add("is-empty");
     hintEl.style.display = "none"; hintEl.innerHTML = "";
     if (endwrap) endwrap.classList.remove("show");
     kbEl.innerHTML = "";
+    kbEl.classList.add("kb-ready");
     game._reveal = -1;
     renderBoard();
   }
@@ -1287,6 +1295,7 @@
         '<div class="tm-right">' + rightT + "</div></div>";
     }
     controls.innerHTML = h;
+    controls.classList.toggle("is-empty", !h);
 
     // Clues are a Versus feature: there they are always on and there is no hint
     // button, which is what makes a fast 20-player room readable. Single-player

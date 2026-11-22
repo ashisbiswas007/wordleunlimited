@@ -23,6 +23,13 @@ services:
       - ADMIN_USER=${ADMIN_USER}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - ADMIN_PORT=3901
+    # The admin panel. Published on the server's loopback only, so it cannot
+    # be reached from the internet — only through an SSH tunnel:
+    #   ssh -N -L 3901:127.0.0.1:3901 control  ->  http://localhost:3901/admin
+    # Traefik picks the lowest port for the site, so the site stays on 3000.
+    ports:
+      - "127.0.0.1:3901:3901"
     depends_on:
       db:
         condition: service_healthy

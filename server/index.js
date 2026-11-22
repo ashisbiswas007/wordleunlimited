@@ -26,6 +26,7 @@ import registerApiRoutes from "./routes/api.js";
 import registerAdminRoutes from "./routes/admin.js";
 import registerPageRoutes from "./routes/pages.js";
 import { registerRealtime, shutdownRealtime } from "./realtime/hub.js";
+import { clientIp } from "./lib/client-ip.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");
@@ -114,8 +115,8 @@ export async function build() {
     global: false,
     max: 120,
     timeWindow: "1 minute",
-    // Behind Traefik, req.ip is already the real client because trustProxy is on.
-    keyGenerator: (req) => req.ip,
+    // The visitor, not the Cloudflare edge they came through — see client-ip.js.
+    keyGenerator: (req) => clientIp(req),
   });
 
   await app.register(fastifyWebsocket, {
@@ -128,14 +129,24 @@ export async function build() {
     },
   });
 
+  /* ---------- one address per page ----------
+     /index.html served the home page a second time with a 200, so search
+     engines saw two copies of it. Any folder/index.html now 301s to the folder. */
+  app.addHook("onRequest", async (req, reply) => {
+    const url = req.raw.url || "";
+    const m = /^((?:\/[A-Za-z0-9_-]+)*)\/index\.html(\?.*)?$/.exec(url);
+    if (m) return reply.redirect(`${m[1]}/${m[2] || ""}`, 301);
+  });
+
   /* ---------- maintenance gate ---------- */
   app.addHook("onRequest", async (req, reply) => {
     if (!isMaintenance()) return;
 
     const url = req.raw.url || "";
-    // Admin must stay reachable to turn maintenance back off.
+    // Admin must stay reachable to turn maintenance back off (it has its own
+    // listener unless ADMIN_PUBLIC put it back on this one).
     if (
-      url.startsWith("/admin") ||
+      (config.admin.public && url.startsWith("/admin")) ||
       url.startsWith("/healthz") ||
       url.startsWith("/src/") ||
       url.startsWith("/api/status")
@@ -163,7 +174,11 @@ export async function build() {
 
   /* ---------- application routes (registered before static) ---------- */
   await app.register(registerApiRoutes, { prefix: "/api" });
-  await app.register(registerAdminRoutes, { prefix: "/admin" });
+  // The public site has no /admin unless ADMIN_PUBLIC says otherwise; the
+  // panel lives on its own listener (buildAdmin below).
+  if (config.admin.public) {
+    await app.register(registerAdminRoutes, { prefix: "/admin" });
+  }
   await registerRealtime(app);
   await app.register(registerPageRoutes);
 
@@ -206,6 +221,65 @@ export async function build() {
     }
   );
 
+  return app;
+}
+
+/**
+ * The admin panel's own server. It shares this process — settings, topics and
+ * room stats are the same objects the game uses — but listens on a port the
+ * compose file publishes on 127.0.0.1 only, which Traefik never routes. The
+ * way in is an SSH tunnel:
+ *
+ *   ssh -N -L 3901:127.0.0.1:3901 control   then   http://localhost:3901/admin
+ *
+ * The password still applies: the tunnel is the outer door, not the only one.
+ */
+export async function buildAdmin() {
+  const app = Fastify({
+    logger: config.isProd ? { level: "warn" } : { level: "info" },
+    bodyLimit: 256 * 1024,
+    routerOptions: { ignoreTrailingSlash: false },
+  });
+
+  await app.register(fastifyHelmet, {
+    contentSecurityPolicy: {
+      useDefaults: false,
+      directives: {
+        defaultSrc: ["'self'"],
+        baseUri: ["'none'"],
+        frameAncestors: ["'none'"],
+        objectSrc: ["'none'"],
+        formAction: ["'self'"],
+        scriptSrc: ["'self'"],
+        scriptSrcAttr: ["'none'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:"],
+        connectSrc: ["'self'"],
+      },
+    },
+    crossOriginEmbedderPolicy: false,
+    // Served over http://localhost through the tunnel: HSTS there would pin
+    // localhost to https for every other local tool on the owner's machine.
+    hsts: false,
+    referrerPolicy: { policy: "no-referrer" },
+  });
+  await app.register(fastifyCookie, { secret: config.sessionSecret });
+  await app.register(fastifyRateLimit, {
+    global: false,
+    max: 120,
+    timeWindow: "1 minute",
+    keyGenerator: (req) => clientIp(req),
+  });
+
+  app.get("/", async (req, reply) => reply.redirect("/admin/"));
+  app.get("/favicon.svg", async (req, reply) => {
+    reply.type("image/svg+xml").header("Cache-Control", "public, max-age=86400");
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#538d4e"/><text x="16" y="23" font-family="Arial" font-weight="700" font-size="18" fill="#fff" text-anchor="middle">A</text></svg>';
+  });
+  app.get("/healthz", { logLevel: "silent" }, async () => ({ ok: true, admin: true }));
+  await app.register(registerAdminRoutes, { prefix: "/admin" });
+
+  app.setNotFoundHandler(async (req, reply) => reply.code(404).send({ error: "not_found" }));
   return app;
 }
 
@@ -293,6 +367,19 @@ async function start() {
     process.exit(1);
   }
 
+  // A failure here must not take the game down with it.
+  let adminApp = null;
+  try {
+    adminApp = await buildAdmin();
+    await adminApp.listen({ port: config.admin.port, host: config.admin.host });
+    console.log(
+      `[boot] admin panel on ${config.admin.host}:${config.admin.port} ` +
+        (config.admin.public ? "(and on the public site — ADMIN_PUBLIC is on)" : "(not on the public site)")
+    );
+  } catch (err) {
+    console.error("[boot] admin listener failed:", err.message);
+  }
+
   let closing = false;
   const shutdown = async (signal) => {
     if (closing) return;
@@ -304,6 +391,7 @@ async function start() {
     const force = setTimeout(() => process.exit(1), 10_000);
     force.unref();
     await app.close().catch(() => {});
+    if (adminApp) await adminApp.close().catch(() => {});
     await closePool();
     clearTimeout(force);
     process.exit(0);

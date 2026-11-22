@@ -554,8 +554,9 @@
       '<div class="mp-note">' + esc(room.label || ("Room " + room.code)) +
       (room.topicName ? " &middot; " + esc(room.topicName) : "") + "</div></div>" +
       '<div class="tm-right">' +
-      '<button class="ibtn" data-act="mppanel" title="Room">' + WU.icons.stats + "</button>" +
-      '<button class="ibtn" data-act="mpleave" title="Leave">' + WU.icons.close + "</button></div></div>";
+      '<button class="ibtn" data-act="mppanel" title="Room" aria-label="Room">' + WU.icons.stats + "</button>" +
+      '<button class="ibtn" data-act="mpleave" title="Leave" aria-label="Leave">' + WU.icons.close + "</button></div></div>";
+    els.controls.classList.remove("is-empty");
 
     clearInterval(tick);
     if (phaseEndsAt) {

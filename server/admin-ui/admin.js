@@ -418,7 +418,6 @@
     .catch(function () {
       showLogin();
       api("/auth-status").then(function (s) {
-        $("u").value = s.username || "admin";
         if (!s.configured) {
           $("loginMsg").innerHTML = '<div class="msg err">No admin password is configured. ' +
             "Set <code>ADMIN_PASSWORD</code> in the environment and redeploy.</div>";

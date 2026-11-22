@@ -64,11 +64,19 @@ plain-text lexicons in `data/`:
 
 | File | Purpose |
 |---|---|
-| `en-core.txt`, `en-core-long.txt` | curated English answers (3–7 letters) |
-| `uk-extra.txt` | British spellings and dialect the transforms can't derive |
+| `en-core.txt`, `en-core-long.txt` | hand-curated English answers (3–7 letters) |
+| `uk-extra.txt` | British dialect and the -T past tenses SCOWL lacks |
 | `id-core.txt` | Indonesian answers, KBBI *baku* forms only |
-| `en-allow.txt` | valid modern words the reference dictionary lacks |
-| `blocklist.txt` | profanity, slurs, proper nouns — never chosen or accepted |
+| `en-allow.txt` | valid modern words every reference lacks (VLOG, NOOB) |
+| `blocklist.txt` | slurs and strong profanity — never chosen, never accepted |
+| `not-answers.txt` | real words that are accepted as guesses but never chosen (crude, sexual, violent, proper nouns) |
+| `reference/en-scowl.tsv` | SCOWL: commonness level and dialect for every English word |
+
+**English answers** are SCOWL words up to level 35 (what spell-checkers ship as
+"small"; level 20 for 3 letters, the kid-mode pool) plus the curated lists — base
+forms only (no CANYONS, TUCKED, CUTER), spelled for the page: the US page never
+chooses COLOUR, the UK page never chooses COLOR. **Accepted guesses** are every
+real word in dwyl and SCOWL, both spellings on both pages.
 
 To add words, edit the relevant file and re-run:
 
@@ -131,9 +139,25 @@ Copy `.env.example` to `.env`. The values that matter:
 | `SITE_URL` | canonical origin — drives sitemap, OG tags, challenge links |
 | `DATABASE_URL` | PostgreSQL. Omit to run on defaults |
 | `SESSION_SECRET` | **required in production**; signs the admin cookie |
-| `ADMIN_USER` / `ADMIN_PASSWORD` | `/admin` login — see below |
+| `ADMIN_USER` / `ADMIN_PASSWORD` | admin login — see below |
+| `ADMIN_PORT` | the admin panel's own port (default `3901`) |
+| `ADMIN_PUBLIC` | `1` puts `/admin` back on the public site. Leave unset |
 | `GOOGLE_CLIENT_ID` | Drive appData cloud save; safe to expose |
 | `TRUST_PROXY` | `1` behind Coolify's Traefik, so rate limits see real IPs |
+
+### Reaching the admin panel
+
+The public site has no `/admin` — it answers 404 like any missing page. The
+panel listens on its own port, which the compose file publishes on the server's
+`127.0.0.1` only, so the way in is an SSH tunnel:
+
+```bash
+ssh -N -L 3901:127.0.0.1:3901 control
+```
+
+then open <http://localhost:3901/admin> on your own machine. Close the tunnel
+(Ctrl-C) when done. The password still applies behind the tunnel, and changing
+it ends every open admin session.
 
 ### Admin password
 

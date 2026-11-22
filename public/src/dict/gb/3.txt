@@ -85,7 +85,6 @@ day
 den
 dew
 did
-die
 dig
 dim
 din
@@ -110,8 +109,8 @@ elf
 elk
 elm
 end
-eon
 era
+err
 eve
 ewe
 eye
@@ -148,13 +147,12 @@ gig
 gnu
 got
 gum
-gun
+gut
 guy
 gym
 had
 hag
 ham
-has
 hat
 hay
 hem
@@ -165,7 +163,6 @@ hey
 hid
 him
 hip
-his
 hit
 hob
 hoe
@@ -188,7 +185,6 @@ inn
 ion
 ire
 irk
-its
 ivy
 jab
 jam
@@ -204,7 +200,6 @@ joy
 jug
 jut
 keg
-ken
 key
 kid
 kin
@@ -237,11 +232,11 @@ map
 mar
 mat
 may
-men
 met
 mid
 mix
 mob
+mod
 mop
 mow
 mud
@@ -301,6 +296,7 @@ pin
 pit
 ply
 pod
+pop
 pot
 pro
 pry
@@ -341,6 +337,7 @@ sat
 saw
 say
 sea
+see
 set
 sew
 she
@@ -402,7 +399,6 @@ vow
 wad
 wag
 war
-was
 wax
 way
 web

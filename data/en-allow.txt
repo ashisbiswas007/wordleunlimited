@@ -13,3 +13,6 @@ sunbed airbase carpark
 texted texting
 curated curating
 recycle recycled recycling
+
+# added 2026-11-23 — everyday words SCOWL and dwyl both still lack
+vlog vlogs vlogger ebook ebooks noob noobs upvote upvotes unmute yeet rizz

@@ -1,36 +1,26 @@
-# Words that must never be chosen as an answer or accepted as a guess.
+# Words that are never chosen as an answer AND never accepted as a guess.
 #
-# Four groups:
-#   1. Profanity and crude anatomy — this game is played by children.
-#   2. Slurs and pejoratives.
-#   3. Proper nouns that crept into the lexicon (not valid Wordle answers).
-#   4. Distressing subject matter that does not belong in a casual word game.
+# Keep this list to slurs and strong profanity. Anything that is a real,
+# printable word — KILL, MARCH, CHINA, JERK, KNOB, CRAP — belongs in
+# not-answers.txt instead: typing a real word and being told "not in word
+# list" is the complaint players make most.
 #
 # Matching is exact and case-insensitive. Applied to every region.
 
-# --- profanity / crude ---
-arse arsed arses ass asses bastard bitch bitches boob boobs bugger buggered bollock bollocks
-cock cocks crap crappy cunt damn dick dicks dildo dong douche dyke fart farted feck
-fuck fucked fucker fucking git horny hump humped jerk jizz knob knobs nude nudes
-penis piss pissed poo poop prick pricks pube pubes pubic pussy queef
-scrotum semen shag shagged shit shits shitty slut sluts smut sperm spunk
-teat teats testes testis tit tits titty turd twat vagina wank wanker whore whores
+# --- strong profanity, with the forms people type ---
+bastard bastards bitch bitches bitchy cunt cunts dildo dildos fuck fucked fucker fuckers
+fucking fucks jizz motherf piss pissed pisses pissing pussy pussies queef shit shits
+shitty shitted shitting slut sluts slutty titty twat twats wank wanked wanker wankers
+wanking whore whores cock cocks dick dicks asshole assholes fuckwit
 
 # --- slurs and pejoratives ---
-chink coon cracker darkie dago fag fags faggot gook gyp gypsy gipsy gyppo
-kike mick negro negroes nigger paki pikey queer raghead redskin retard retarded
-spastic spaz spic squaw tranny wetback wog wop yid
+chink chinks coon coons darkie dago dagos dyke dykes fag fags faggot faggots gook gooks
+gyp gypsy gipsy gyppo kike kikes mick negro negroes nigga niggas nigger niggers paki
+pakis pikey niggaz niggra faggy fagot fagots faggoty negroid negress raghead redskin retarded spastic spaz spic spics squaw tranny wetback wog wop
+yid
 
-# --- distressing subject matter ---
-abuse abused abuser bomber corpse corpses genocide grope groped hang hanged
-incest kill killed killer killing lynch molest molested murder murdered murderer
-nazi noose overdose rape raped rapist slave slavery suicide terror torture tortured
+# --- the most distressing subjects ---
+rape raped rapes rapist incest molest molested nazi nazis
 
-# --- proper nouns / demonyms that are not valid common-noun answers ---
-april august british britain china chinese christian dutch easter english europe
-french german germany india indian irish islam italy japan jesus july june
-london march monday muslim november october roman russia russian scotland
-scottish spain spanish sunday texas tuesday wales welsh
-
-# --- fragments and non-words to exclude if they slip into a lexicon file ---
-arent cant dont didnt hasnt isnt shouldnt wasnt werent wont wouldnt youre
+# --- not words: contractions with the apostrophe stripped ---
+arent dont didnt hasnt isnt shouldnt wasnt werent wouldnt youre

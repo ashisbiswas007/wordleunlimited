@@ -17,6 +17,11 @@ let sitemapCache = { at: 0, xml: "" };
  * Ad and analytics tags cannot run under a hash-based policy, so the strict CSP
  * is relaxed only while the admin actually has custom code enabled. Applied to
  * every HTML route, because admin code is injected into every HTML route.
+ *
+ * The hashes have to come OUT, not just have 'unsafe-inline' added beside
+ * them: a browser that sees any hash ignores 'unsafe-inline' (CSP level 2).
+ * Leaving them in blocked every inline tag — the gtag('config') line among
+ * them, so analytics recorded no page views at all.
  */
 function relaxCspForCustomCode(reply) {
   if (!hasCustomCode()) return;
@@ -25,7 +30,11 @@ function relaxCspForCustomCode(reply) {
   reply.header(
     "content-security-policy",
     csp
-      .replace(/script-src ([^;]*)/, "script-src $1 'unsafe-inline' https: data:")
+      .replace(/script-src ([^;]*)/, (full, body) =>
+        "script-src " +
+        body.replace(/'(?:sha256|sha384|sha512)-[^']*'/g, "").replace(/\s+/g, " ").trim() +
+        " 'unsafe-inline' https: data:"
+      )
       .replace(/img-src ([^;]*)/, "img-src $1 https: data:")
       .replace(/frame-src ([^;]*)/, "frame-src $1 https:")
       .replace(/connect-src ([^;]*)/, "connect-src $1 https:")
@@ -91,7 +100,6 @@ export default async function registerPageRoutes(app) {
     return [
       "User-agent: *",
       "Allow: /",
-      "Disallow: /admin",
       "Disallow: /api/",
       "Disallow: /ws",
       "Disallow: /*?room=",

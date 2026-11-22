@@ -6,7 +6,6 @@ abl
 abo
 abr
 abs
-abu
 aca
 ace
 aci
@@ -130,7 +129,6 @@ avo
 awa
 awi
 aya
-ayo
 ayu
 aza
 aze
@@ -313,7 +311,6 @@ deb
 def
 deg
 deh
-dek
 del
 dem
 den
@@ -326,7 +323,6 @@ deu
 dgn
 dha
 dhi
-dia
 dib
 did
 die
@@ -348,7 +344,6 @@ dkk
 dll
 dmi
 dng
-doa
 dob
 doc
 dod
@@ -356,7 +351,6 @@ doe
 dog
 doh
 doi
-dok
 dol
 dom
 don
@@ -440,7 +434,6 @@ enu
 eon
 epi
 epo
-era
 erg
 eri
 ero
@@ -491,7 +484,6 @@ fix
 fiz
 fla
 flo
-flu
 fob
 fok
 fol
@@ -550,6 +542,7 @@ gio
 gip
 gir
 gis
+git
 gla
 gle
 gli
@@ -632,7 +625,6 @@ hip
 hir
 his
 hit
-hiu
 hiv
 hlm
 hno
@@ -697,7 +689,6 @@ ind
 inf
 ing
 inh
-ini
 inj
 ino
 ins
@@ -706,10 +697,8 @@ inv
 ion
 iqa
 ira
-iri
 iro
 isa
-isi
 isk
 isl
 iso
@@ -720,10 +709,8 @@ ita
 itb
 ite
 iti
-itu
 iud
 iur
-iya
 jab
 jad
 jag
@@ -748,7 +735,6 @@ jem
 jen
 jep
 jer
-jet
 jib
 jid
 jig
@@ -756,7 +742,6 @@ jih
 jik
 jil
 jim
-jin
 jip
 jir
 jis
@@ -786,7 +771,6 @@ jul
 jum
 jun
 jur
-jus
 jut
 juz
 kab
@@ -796,7 +780,6 @@ kaf
 kag
 kah
 kai
-kak
 kal
 kam
 kan
@@ -875,7 +858,6 @@ kre
 kri
 krn
 kro
-kru
 ksa
 ksi
 kso
@@ -1030,11 +1012,9 @@ mhs
 mhz
 mia
 mid
-mie
 mig
 mih
 mik
-mil
 mim
 min
 mio
@@ -1151,7 +1131,6 @@ nog
 noh
 noi
 nok
-nol
 nom
 non
 nop
@@ -1208,7 +1187,6 @@ ohm
 oil
 oja
 oka
-oke
 oki
 okt
 oku
@@ -1256,7 +1234,6 @@ pah
 pai
 pal
 pam
-pan
 pao
 pap
 par
@@ -1278,7 +1255,6 @@ pel
 pem
 pen
 pep
-per
 pes
 pet
 peu
@@ -1321,7 +1297,7 @@ pok
 pol
 pom
 pon
-pop
+poo
 por
 ppd
 pph
@@ -1373,7 +1349,6 @@ ram
 ran
 rap
 rar
-ras
 rat
 rau
 raw
@@ -1491,7 +1466,6 @@ seh
 sei
 sek
 sem
-sen
 sep
 ser
 ses
@@ -1542,7 +1516,6 @@ soe
 sof
 soh
 soi
-sok
 sol
 som
 son
@@ -1600,7 +1573,6 @@ tag
 tah
 tai
 taj
-tak
 tal
 tam
 tan
@@ -1618,7 +1590,6 @@ tea
 teb
 ted
 teg
-teh
 tek
 tel
 tem
@@ -1626,7 +1597,6 @@ ten
 teo
 tep
 ter
-tes
 tet
 teu
 tge
@@ -1649,6 +1619,7 @@ tip
 tiq
 tir
 tis
+tit
 tiv
 tje
 tki
@@ -1666,7 +1637,6 @@ toi
 tok
 tol
 tom
-ton
 top
 tor
 tos
@@ -1692,7 +1662,6 @@ tul
 tum
 tun
 tup
-tur
 tus
 tut
 tzu
@@ -1722,7 +1691,6 @@ uir
 uis
 uit
 uja
-uji
 uju
 ukh
 uki

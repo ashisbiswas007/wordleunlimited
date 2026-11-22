@@ -440,9 +440,33 @@
       lastSyncAt = WU.lsGet(WU.K("cloud_last"), 0);
       paintCloud();
     }
+    if (signInQueued) { signInQueued = false; requestToken(); }
+  }
+
+  /* Google's sign-in script is ~100 KB and a fifth of a second of phone CPU,
+     and most players never open Drive save. So it loads up front only for a
+     player who already turned Drive save on; everyone else gets it the moment a
+     Drive-save row comes into view (Settings or the Versus panel), which is
+     before they can reach the button. A tap that still beats it is queued. */
+  var gisRequested = false, signInQueued = false, rowWatcher = null;
+
+  function armGis() {
+    if (WU.lsGet(WU.K("cloud_on"), false) || typeof IntersectionObserver === "undefined") {
+      loadGis();
+      return;
+    }
+    rowWatcher = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) { loadGis(); return; }
+      }
+    });
+    eachRow(function (r) { rowWatcher.observe(r); });
   }
 
   function loadGis() {
+    if (rowWatcher) { rowWatcher.disconnect(); rowWatcher = null; }
+    if (gisRequested) return;
+    gisRequested = true;
     if (document.querySelector('script[src="' + GIS_SRC + '"]')) { initGis(); return; }
     var s = document.createElement("script");
     s.src = GIS_SRC;
@@ -455,7 +479,10 @@
 
   /* ---------- wiring ---------- */
   // The one and only path that may open a Google window.
-  WU.actions.cloudin = function () { requestToken(); };
+  WU.actions.cloudin = function () {
+    if (!tokenClient) { signInQueued = true; loadGis(); return; }
+    requestToken();
+  };
   WU.actions.cloudsync = function () { sync(true); };
   WU.actions.cloudout = function () {
     if (token && window.google && google.accounts && google.accounts.oauth2) {
@@ -483,6 +510,7 @@
 
   WU.renderCloudRow = function (id) {
     if (rows.indexOf(id) < 0) rows.push(id);
+    if (rowWatcher) { var late = document.getElementById(id); if (late) rowWatcher.observe(late); }
     if (unavailable) {
       var el = document.getElementById(id);
       if (el) el.style.display = "none";
@@ -502,7 +530,7 @@
       clientId = j.googleClientId;
       lastSyncAt = WU.lsGet(WU.K("cloud_last"), 0);
       paintCloud();
-      loadGis();
+      armGis();
     })
     .catch(function () {
       unavailable = true;

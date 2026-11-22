@@ -4,14 +4,16 @@
  * extended-<len>.txt (additional accepted guesses) from the editable
  * lexicons in data/.
  *
- * Answers are the curated words only. The extended lists add inflected forms
- * so a player typing a legitimate plural or past tense is never told
- * "not in word list" — being slightly permissive about what we ACCEPT is far
- * less annoying than rejecting a real word, while the words we CHOOSE stay
- * tightly curated.
+ * Answers (what the game CHOOSES) are common base-form words: SCOWL's common
+ * levels plus the hand-curated lexicons, spelled for the page's dialect, with
+ * nothing from blocklist.txt or not-answers.txt.
+ *
+ * Accepted guesses (what the game ALLOWS) are every real word of the length —
+ * dwyl, all of SCOWL, the curated and allow lists — minus the blocklist only.
+ * Being generous about what we accept and strict about what we choose is what
+ * stops "not in word list" from being annoying.
  *
  *   node scripts/gen-words.mjs
- *   node scripts/gen-words.mjs --augment path/to/big-wordlist.txt
  */
 
 import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
@@ -80,198 +82,121 @@ async function readAllMatching(prefix) {
 }
 
 /* ------------------------------------------------------------------ */
-/* morphology — generates plausible inflections of a base word          */
+/* SCOWL — commonness and dialect for every English word                */
 /* ------------------------------------------------------------------ */
-
-const VOWELS = new Set(["a", "e", "i", "o", "u"]);
-const isVowel = (c) => VOWELS.has(c);
-
-/** Consonant–vowel–consonant ending (but not w/x/y) doubles: hop → hopped. */
-function doublesFinal(w) {
-  if (w.length < 3) return false;
-  const [a, b, c] = [w.at(-3), w.at(-2), w.at(-1)];
-  return !isVowel(a) && isVowel(b) && !isVowel(c) && !"wxy".includes(c);
-}
-
-function pluralOf(w) {
-  const last = w.at(-1);
-  const last2 = w.slice(-2);
-  if (["s", "x", "z"].includes(last) || ["ch", "sh", "ss"].includes(last2)) {
-    return [`${w}es`];
-  }
-  if (last === "y" && !isVowel(w.at(-2))) return [`${w.slice(0, -1)}ies`];
-  if (last === "f") return [`${w.slice(0, -1)}ves`, `${w}s`];
-  if (last2 === "fe") return [`${w.slice(0, -2)}ves`, `${w}s`];
-  if (last === "o" && !isVowel(w.at(-2))) return [`${w}es`, `${w}s`];
-  return [`${w}s`];
-}
-
-function pastOf(w) {
-  const last = w.at(-1);
-  if (last === "e") return [`${w}d`];
-  if (last === "y" && !isVowel(w.at(-2))) return [`${w.slice(0, -1)}ied`];
-  if (doublesFinal(w)) return [`${w}${last}ed`];
-  return [`${w}ed`];
-}
-
-function ingOf(w) {
-  const last = w.at(-1);
-  if (last === "e" && w.at(-2) !== "e" && w.length > 3) {
-    return [`${w.slice(0, -1)}ing`];
-  }
-  if (doublesFinal(w)) return [`${w}${last}ing`];
-  return [`${w}ing`];
-}
-
-function comparativesOf(w) {
-  // Only worth generating for short, adjective-shaped words.
-  if (w.length > 6) return [];
-  const last = w.at(-1);
-  if (last === "e") return [`${w}r`, `${w}st`];
-  if (last === "y" && !isVowel(w.at(-2))) {
-    return [`${w.slice(0, -1)}ier`, `${w.slice(0, -1)}iest`];
-  }
-  if (doublesFinal(w)) return [`${w}${last}er`, `${w}${last}est`];
-  return [`${w}er`, `${w}est`];
-}
-
-function inflect(w) {
-  const out = [];
-  out.push(...pluralOf(w), ...pastOf(w), ...ingOf(w), ...comparativesOf(w));
-  return out.filter((x) => x.length >= MIN_LEN && x.length <= MAX_LEN);
-}
-
-/* ------------------------------------------------------------------ */
-/* British English derivation                                          */
-/* ------------------------------------------------------------------ */
-
-/** Suffix rules that are safe to apply — but only to the words below. */
-const UK_SUFFIX_RULES = [
-  [/ization$/, "isation"],
-  [/izations$/, "isations"],
-  [/izing$/, "ising"],
-  [/ized$/, "ised"],
-  [/izes$/, "ises"],
-  [/ize$/, "ise"],
-  [/yzing$/, "ysing"],
-  [/yzed$/, "ysed"],
-  [/yzes$/, "yses"],
-  [/yze$/, "yse"],
-];
 
 /**
- * Words where -ize/-yze is part of the ROOT, not the verb-forming suffix.
- * Applying the rule to these produces nonsense (MAIZE -> MAISE, CAPSIZE ->
- * CAPSISE), and they are spelled with a Z in British English too.
+ * SCOWL (Spell Checker Oriented Word Lists) files every word by how common it
+ * is — level 10 is the most common thousand, 35 is what spell-checkers ship as
+ * "small", 70 is a large dictionary — and by dialect. Those two facts decide
+ * the answers: common enough to be fair, and spelled the way the page's
+ * players spell it.
+ *
+ * Built by scripts/fetch-reference.mjs into data/reference/en-scowl.tsv.
  */
-const IZE_IS_ROOT = new Set(
-  `size sizes sized sizing resize resizes resized resizing
-   downsize downsized downsizing oversize oversized
-   prize prizes prized prizing
-   maize baize assize assizes capsize capsizes capsized capsizing
-   seize seizes seized seizing
-   gaze gazes gazed gazing
-   analyzes`
-    .split(/\s+/)
-    .filter(Boolean)
-);
+const ANSWER_LEVEL = { 3: 20, 4: 35, 5: 35, 6: 35, 7: 35 };
+
+async function readScowl() {
+  let raw;
+  try {
+    raw = await readFile(join(DATA, "reference", "en-scowl.tsv"), "utf8");
+  } catch {
+    console.warn('[words] no SCOWL cache — run "node scripts/fetch-reference.mjs"');
+    return null;
+  }
+  const map = new Map();
+  for (const line of raw.split("\n")) {
+    if (!line || line.startsWith("#")) continue;
+    const [w, level, dialects] = line.split("\t");
+    map.set(w, { level: Number(level), dialects });
+  }
+  console.log(`[words] SCOWL: ${map.size.toLocaleString()} words`);
+  return map;
+}
+
+/* "e" is shared by every dialect. American answers may use e/a, British e/b. */
+const inUS = (d) => d.includes("e") || d.includes("a");
+const inUK = (d) => d.includes("e") || d.includes("b");
+const americanOnly = (d) => !inUK(d) && d.includes("a");
+const britishOnly = (d) => !inUS(d) && (d.includes("b") || d.includes("u"));
 
 /**
- * Spellings that are American-only. Removed from the UK answer pool so the
- * game never asks a British player to guess COLOR.
- * Words valid in both varieties (METER the device, CHECK the verb, CURB the
- * verb) are deliberately absent from this list.
+ * True when the word is a plural, past tense, -ing form, or -iest/-est
+ * superlative of another real word. Wordle answers are base forms: CANYON,
+ * not CANYONS; TUCK, not TUCKED. The old 6- and 7-letter lists were a third
+ * inflections because nothing checked.
+ *
+ * -er is left alone on purpose: CORNER, NUMBER, POWER and BUTTER all look like
+ * a word plus -er and are not.
+ */
+/* Base words the rules below would otherwise mistake for an inflection. */
+const NOT_INFLECTIONS = new Set(["bus", "gas", "yes", "shed", "number"]);
+
+function isInflection(w, D, { pluralsOnly = false } = {}) {
+  if (NOT_INFLECTIONS.has(w)) return false;
+  const has = (x) => x.length >= 3 && D.has(x);
+  if (!w.endsWith("ss")) {
+    // HES, UPS, INS: the 2-letter stem is not in a 3–7 letter dictionary
+    if (w.length === 3 && w.endsWith("s")) return true;
+    if (w.endsWith("ies") && has(w.slice(0, -3) + "y")) return true;
+    if (w.endsWith("es") && has(w.slice(0, -2))) return true; // CHILIES, HEROES
+    if (w.endsWith("s") && has(w.slice(0, -1))) return true;
+    if (w.endsWith("men") && has(w.slice(0, -3) + "man")) return true; // SANDMEN
+  }
+  if (pluralsOnly) return false;
+  if (w.endsWith("ied") && has(w.slice(0, -3) + "y")) return true;
+  if (w.endsWith("ed") && w.length >= 4) {
+    const b = w.slice(0, -2);
+    if (w.length > 4 && has(b)) return true;
+    // ACED -> ACE, BAKED -> BAKE, but not SEED -> SEE or FREED -> FREE
+    if (w.at(-3) !== "e" && has(w.slice(0, -1))) return true;
+    if (b.length >= 3 && b.at(-1) === b.at(-2) && has(b.slice(0, -1))) return true;
+  }
+  if (w.endsWith("ying") && has(w.slice(0, -4) + "ie")) return true;
+  if (w.endsWith("ing") && w.length > 5) {
+    const b = w.slice(0, -3);
+    if (has(b) || has(b + "e")) return true;
+    if (b.length >= 3 && b.at(-1) === b.at(-2) && has(b.slice(0, -1))) return true;
+  }
+  if (w.endsWith("ier") && w.length >= 5 && has(w.slice(0, -3) + "y")) return true;
+  if (w.endsWith("iest") && has(w.slice(0, -4) + "y")) return true;
+  // A comparative is an -ER word whose -EST form also exists: CUTER (CUTEST),
+  // FREER (FREEST), DIMMER (DIMMEST). CORNER, POWER, BUTTER have none.
+  if (w.endsWith("er") && w.length >= 5) {
+    if (D.has(w.slice(0, -2) + "est") || D.has(w.slice(0, -1) + "st")) return true;
+  }
+  if (w.endsWith("est") && w.length > 5) {
+    const b = w.slice(0, -3);
+    if (has(b) || has(b + "e")) return true;
+    if (b.length > 2 && b.at(-1) === b.at(-2) && has(b.slice(0, -1))) return true;
+  }
+  return false;
+}
+
+/**
+ * American spellings SCOWL files as shared English. Kept out of the British
+ * answer pool; still accepted as guesses there.
  */
 const AMERICAN_ONLY = new Set(
-  `color colors honor honors favor favors labor labors humor humors neighbor neighbors
-   armor armors odor odors rumor rumors vapor vapors vigor harbor harbors parlor parlors
-   savior saviors splendor endeavor behavior behaviors clamor glamor tumor tumors succor
-   center centers centered centering theater theaters liter liters fiber fibers saber sabers
-   somber luster specter specters caliber calibers meager sepulcher
-   defense defenses offense offenses pretense pretenses
-   gray grayer grayest mold molds molding molded plow plows plowed plowing
-   aluminum jewelry donut donuts airplane
-   traveled traveling traveler canceled canceling modeled modeling labeled labeling
-   signaled signaling counselor marvelous
-   skillful fulfill fulfills instill instills enroll enrolls appall appalls
-   tire tires tired program programs
-   analyze analyzed analyzing paralyze paralyzed realize realized realizing
-   organize organized apologize apologized recognize recognized criticize criticized
-   emphasize emphasized specialize specialized memorize memorized civilize civilized
-   check checks maneuver maneuvers mustache pajamas sulfur story stories
-   whiskey ax axes`
+  `color honor favor labor humor neighbor armor odor rumor vapor vigor harbor parlor
+   savior splendor endeavor behavior clamor glamor tumor center theater liter fiber
+   saber somber luster specter caliber meager defense offense pretense gray mold plow
+   aluminum jewelry donut airplane traveled traveler canceled modeled labeled
+   counselor marvelous skillful fulfill instill enroll appall analyze paralyze
+   maneuver mustache pajamas sulfur whiskey ax`
     .split(/\s+/)
     .filter(Boolean)
 );
-
-function toBritish(word) {
-  if (IZE_IS_ROOT.has(word)) return null;
-  for (const [re, rep] of UK_SUFFIX_RULES) {
-    if (!re.test(word)) continue;
-    // "size" -> stem "s" is not a real verb; require a stem worth suffixing.
-    const stem = word.replace(re, "");
-    if (stem.length < 4) return null;
-    return word.replace(re, rep);
-  }
-  return null;
-}
 
 /* ------------------------------------------------------------------ */
 /* build                                                               */
 /* ------------------------------------------------------------------ */
 
-/**
- * Files curated words by their ACTUAL length (so a word typed into the wrong
- * section still lands correctly), drops blocked words, and — when a reference
- * dictionary is available — drops anything that is not a real word.
- * `allowExtra` holds words the reference legitimately lacks (British dialect).
- */
-function bucket(words, blocked, reference, allowExtra) {
-  const byLen = Object.fromEntries(LENGTHS.map((l) => [l, new Set()]));
-  const rejected = [];
-
-  for (const w of words) {
-    if (w.length < MIN_LEN || w.length > MAX_LEN) continue;
-    if (blocked.has(w)) continue;
-    if (reference && !reference.has(w) && !(allowExtra && allowExtra.has(w))) {
-      rejected.push(w);
-      continue;
-    }
-    byLen[w.length].add(w);
-  }
-
-  return { byLen, rejected: [...new Set(rejected)].sort() };
+function emptyBuckets() {
+  return Object.fromEntries(LENGTHS.map((l) => [l, new Set()]));
 }
 
-/**
- * Accepted-guess list = every real word of that length that is not already an
- * answer. Built from the reference when present; otherwise fall back to
- * inflecting the curated list so at least plurals and past tenses are accepted.
- */
-function buildExtended(byLen, blocked, reference) {
-  const ext = Object.fromEntries(LENGTHS.map((l) => [l, new Set()]));
-
-  if (reference) {
-    for (const w of reference) {
-      if (w.length < MIN_LEN || w.length > MAX_LEN) continue;
-      if (blocked.has(w)) continue;
-      if (byLen[w.length].has(w)) continue;
-      ext[w.length].add(w);
-    }
-    return ext;
-  }
-
-  for (const len of LENGTHS) {
-    for (const w of byLen[len]) {
-      for (const form of inflect(w)) {
-        if (blocked.has(form)) continue;
-        if (byLen[form.length]?.has(form)) continue;
-        ext[form.length].add(form);
-      }
-    }
-  }
-  return ext;
-}
+const okLength = (w) => w.length >= MIN_LEN && w.length <= MAX_LEN;
 
 function sortedList(set) {
   return [...set].sort();
@@ -305,99 +230,135 @@ function table(region, report) {
   return `  ${region}\n${rows.join("\n")}`;
 }
 
-async function main() {
-  const augmentIdx = process.argv.indexOf("--augment");
-  const augmentFile = augmentIdx > -1 ? process.argv[augmentIdx + 1] : null;
+/**
+ * English answers for one dialect: common SCOWL words, the hand-curated
+ * lexicon and the allow-list — base forms only, spelled for that dialect,
+ * nothing blocked, nothing from not-answers.txt.
+ */
+function englishAnswers({ scowl, curated, trusted, trustedInflections, allow, blocked, notAnswers, dialect }) {
+  const D = new Set(scowl.keys());
+  const fits = dialect === "us" ? inUS : inUK;
+  const wrongDialect = dialect === "us" ? britishOnly : americanOnly;
+  const out = emptyBuckets();
+  const dropped = { inflection: 0, dialect: 0, unknown: 0 };
 
+  const consider = (w, { trust = false, pluralsOnly = false } = {}) => {
+    if (!okLength(w) || blocked.has(w) || notAnswers.has(w)) return;
+    const info = scowl.get(w);
+    if (info && wrongDialect(info.dialects)) return void dropped.dialect++;
+    if (dialect === "uk" && AMERICAN_ONLY.has(w)) return void dropped.dialect++;
+    // A curated word SCOWL has never heard of is almost always a typo or a
+    // truncation (FULCRU, GLACIE, CUISIN) — exactly the unguessable puzzle the
+    // spell-check exists to stop. Trusted lists (allow-list, UK dialect) skip it.
+    if (!info && !trust) return void dropped.unknown++;
+    if (isInflection(w, D, { pluralsOnly })) return void dropped.inflection++;
+    out[w.length].add(w);
+  };
+
+  for (const [w, info] of scowl) {
+    if (!okLength(w) || info.level > ANSWER_LEVEL[w.length] || !fits(info.dialects)) continue;
+    consider(w);
+  }
+  for (const w of curated) consider(w);
+  for (const w of allow) consider(w, { trust: true });
+  for (const w of trusted) consider(w, { trust: true, pluralsOnly: trustedInflections });
+  return { byLen: out, dropped };
+}
+
+/** Accepted guesses: every real word of the length that is not an answer. */
+function acceptedGuesses(sources, answers, blocked) {
+  const ext = emptyBuckets();
+  for (const src of sources) {
+    for (const w of src) {
+      if (!okLength(w) || blocked.has(w) || answers[w.length].has(w)) continue;
+      ext[w.length].add(w);
+    }
+  }
+  return ext;
+}
+
+async function main() {
   const blocked = new Set(await readWords("blocklist.txt"));
-  console.log(`[words] blocklist: ${blocked.size} entries`);
+  const notAnswers = new Set(await readWords("not-answers.txt"));
+  console.log(`[words] blocklist: ${blocked.size} · not-answers: ${notAnswers.size}`);
 
   const enReference = await readReference("en");
   const idReference = await readReference("id");
-
-  /* ---- English ---- */
-  const enBase = await readAllMatching("en-core");
-  let enWords = enBase;
-
-  if (augmentFile) {
-    try {
-      const extra = (await readFile(augmentFile, "utf8"))
-        .split(/[\s,]+/)
-        .map((w) => w.toLowerCase().replace(/[^a-z]/g, ""))
-        .filter((w) => w.length >= MIN_LEN && w.length <= MAX_LEN);
-      console.log(`[words] augmenting with ${extra.length} words from ${augmentFile}`);
-      enWords = enWords.concat(extra);
-    } catch (err) {
-      console.warn(`[words] could not read ${augmentFile}: ${err.message}`);
-    }
+  const scowl = await readScowl();
+  if (!scowl || !enReference) {
+    throw new Error("English reference missing — run node scripts/fetch-reference.mjs");
   }
 
-  // Valid words the reference is simply missing (modern vocabulary).
-  const enAllow = new Set(await readWords("en-allow.txt"));
-  enWords = enWords.concat([...enAllow]);
-
-  const en = bucket(enWords, blocked, enReference, enAllow);
-  const enExtended = buildExtended(en.byLen, blocked, enReference);
-  // The allow-list words must be accepted as guesses too, not just as answers.
-  for (const w of enAllow) {
-    if (w.length >= MIN_LEN && w.length <= MAX_LEN && !blocked.has(w)) {
-      if (!en.byLen[w.length].has(w)) enExtended[w.length].add(w);
-    }
-  }
-
-  /* ---- British ---- */
+  /* ---- English (shared inputs) ---- */
+  const curated = await readAllMatching("en-core");
+  const allow = await readWords("en-allow.txt");
   const ukExtra = await readWords("uk-extra.txt");
-  const ukExtraSet = new Set(ukExtra);
-  const gbWords = [];
 
-  for (const w of enWords) {
-    if (AMERICAN_ONLY.has(w)) {
-      const swapped = toBritish(w);
-      if (swapped) gbWords.push(swapped);
-      continue; // drop the American spelling from the UK answer pool entirely
-    }
-    gbWords.push(w);
-    const swapped = toBritish(w);
-    if (swapped) gbWords.push(swapped);
+  // A curated word that is in no dictionary at all gets a warning, not a puzzle.
+  const typos = [...new Set(curated)].filter(
+    (w) => okLength(w) && !scowl.has(w) && !enReference.has(w)
+  );
+  if (typos.length) {
+    console.log(`\n[words] en: ${typos.length} curated word(s) found in no dictionary — dropped`);
+    console.log(`  ${typos.slice(0, 40).join(" ")}${typos.length > 40 ? " …" : ""}`);
   }
-  gbWords.push(...ukExtra);
 
-  // British dialect (BAIRN, CWTCH, MARDY) is often missing from a US-built
-  // reference, so uk-extra.txt and the allow-list are trusted as-is.
-  const gbTrusted = new Set([...ukExtraSet, ...enAllow]);
-  const gb = bucket(gbWords, blocked, enReference, gbTrusted);
+  const common = { scowl, curated, allow, blocked, notAnswers };
+  const en = englishAnswers({ ...common, trusted: [], dialect: "us" });
+  // British dialect (BAIRN, CWTCH, MARDY) and the -T past tenses (BURNT,
+  // SPELT) are often missing from SCOWL or look like inflections, so
+  // uk-extra.txt is trusted — only its plurals are filtered out.
+  const gb = englishAnswers({ ...common, trusted: ukExtra, trustedInflections: true, dialect: "uk" });
 
-  // UK players may still TYPE American spellings — the FAQ promises those are
-  // accepted as guesses even though they are never chosen as answers.
-  const gbExtended = buildExtended(gb.byLen, blocked, enReference);
-  for (const w of AMERICAN_ONLY) {
-    if (w.length >= MIN_LEN && w.length <= MAX_LEN && !blocked.has(w)) {
-      if (!gb.byLen[w.length].has(w)) gbExtended[w.length].add(w);
-    }
-  }
+  // Both pages accept both spellings: a UK player typing COLOR, or a US
+  // player typing COLOUR, has typed a real word.
+  // The curated list is not a source here: every real word in it is already in
+  // a reference, and the rest are the typos reported above.
+  const enSources = [enReference, [...scowl.keys()], allow, ukExtra];
+  const enExtended = acceptedGuesses(enSources, en.byLen, blocked);
+  const gbExtended = acceptedGuesses(enSources, gb.byLen, blocked);
 
   /* ---- Indonesian ---- */
   const idWords = await readWords("id-core.txt");
-  const id = bucket(idWords, blocked, idReference, null);
+  const idAnswers = emptyBuckets();
+  const idRejected = [];
+  for (const w of idWords) {
+    if (!okLength(w) || blocked.has(w) || notAnswers.has(w)) continue;
+    if (idReference && !idReference.has(w)) {
+      idRejected.push(w);
+      continue;
+    }
+    idAnswers[w.length].add(w);
+  }
+  if (idRejected.length) {
+    console.log(`\n[words] id: ${idRejected.length} curated word(s) not in KBBI — dropped`);
+    console.log(`  ${[...new Set(idRejected)].sort().join(" ")}`);
+  }
   // Indonesian affixation changes word class, so inflecting the curated list
   // would invent nonsense. The KBBI reference supplies acceptance instead.
-  const idExtended = buildExtended(id.byLen, blocked, idReference);
+  const idExtended = acceptedGuesses([idReference || [], idWords], idAnswers, blocked);
 
-  /* ---- report rejects before writing ---- */
-  for (const [region, res] of Object.entries({ en, gb, id })) {
-    if (!res.rejected.length) continue;
+  for (const [region, r] of Object.entries({ en, gb })) {
     console.log(
-      `\n[words] ${region}: dropped ${res.rejected.length} curated word(s) not found in the reference dictionary`
+      `[words] ${region}: left out ${r.dropped.inflection} inflected forms, ` +
+        `${r.dropped.dialect} other-dialect spellings, ${r.dropped.unknown} unknown curated words`
     );
-    console.log(`  ${res.rejected.slice(0, 40).join(" ")}${res.rejected.length > 40 ? " …" : ""}`);
   }
 
   /* ---- write ---- */
   const reports = {
     en: await writeRegion("en", en.byLen, enExtended),
     gb: await writeRegion("gb", gb.byLen, gbExtended),
-    id: await writeRegion("id", id.byLen, idExtended),
+    id: await writeRegion("id", idAnswers, idExtended),
   };
+
+  // SCOWL's licence asks for its notice in every copy, and these lists are
+  // published at /src/dict/ — so the notice is published beside them.
+  await writeFile(
+    join(OUT, "SCOWL-COPYRIGHT.txt"),
+    await readFile(join(DATA, "reference", "SCOWL-COPYRIGHT.txt"), "utf8"),
+    "utf8"
+  );
 
   console.log("\n[words] dictionaries written to public/src/dict\n");
   for (const [region, report] of Object.entries(reports)) {
@@ -416,6 +377,7 @@ async function main() {
   if (problems.length) {
     console.log("\n[words] thin lists (add more words in data/):");
     for (const p of problems) console.log(`  ! ${p}`);
+    process.exitCode = 1;
   }
   console.log("");
 }

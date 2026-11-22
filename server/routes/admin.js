@@ -8,7 +8,9 @@ import {
   verifyAdminPassword,
   changeAdminPassword,
   adminAuthStatus,
+  sessionGeneration,
 } from "../lib/admin-auth.js";
+import { clientIp } from "../lib/client-ip.js";
 import { getSettings, setSetting, loadSettings, DEFAULTS } from "../lib/settings.js";
 import { query, queryStrict, isDbEnabled, isDbAvailable } from "../db/pool.js";
 import { invalidate as invalidateTopics, normalisePack, listTopics } from "../lib/topics.js";
@@ -39,7 +41,8 @@ function currentAdmin(req) {
   const raw = req.cookies?.[COOKIE];
   if (!raw) return null;
   const payload = verifyToken(raw, config.sessionSecret);
-  return payload?.u ? payload : null;
+  if (!payload?.u || payload.g !== sessionGeneration()) return null;
+  return payload;
 }
 
 async function audit(req, action, detail = {}) {
@@ -47,7 +50,7 @@ async function audit(req, action, detail = {}) {
   const admin = currentAdmin(req);
   query(
     "INSERT INTO audit_log (actor, action, detail, ip) VALUES ($1,$2,$3::jsonb,$4)",
-    [admin?.u || "anonymous", action, JSON.stringify(detail), req.ip || null]
+    [admin?.u || "anonymous", action, JSON.stringify(detail), clientIp(req)]
   ).catch(() => {});
 }
 
@@ -119,12 +122,18 @@ export default async function registerAdminRoutes(app) {
         return reply.code(401).send({ error: "invalid_credentials" });
       }
 
-      const token = signToken({ u: username }, config.sessionSecret, config.admin.sessionTtlMs);
+      const token = signToken(
+        { u: username, g: sessionGeneration() },
+        config.sessionSecret,
+        config.admin.sessionTtlMs
+      );
       reply.setCookie(COOKIE, token, {
         path: "/admin",
         httpOnly: true,
-        sameSite: "lax",
-        secure: config.isProd,
+        sameSite: "strict",
+        // Over the SSH tunnel the page is http://localhost and SSH does the
+        // encrypting; a Secure cookie there is dropped by some browsers.
+        secure: req.protocol === "https",
         maxAge: Math.floor(config.admin.sessionTtlMs / 1000),
       });
 
@@ -133,13 +142,13 @@ export default async function registerAdminRoutes(app) {
     }
   );
 
-  /* Tells the login screen whether a password even exists yet. */
+  /* Tells the login screen whether a password even exists yet. It used to
+     return the username too, and the login form filled it in for anyone. */
   app.get("/api/auth-status", { config: { rateLimit: LOGIN_LIMIT } }, async () => {
     const s = adminAuthStatus();
     return {
       configured: s.configured,
       usingGeneratedPassword: s.usingGeneratedPassword,
-      username: config.admin.user,
     };
   });
 
