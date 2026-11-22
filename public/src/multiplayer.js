@@ -524,7 +524,7 @@
           var wide = k === "ENTER" || k === "BACK";
           var label = k === "BACK" ? WU.icons.back : k === "ENTER" ? t("enterKey") : k;
           html += '<button class="key' + (wide ? " wide" : "") + (k in keys ? " " + cls[keys[k]] : "") +
-            '" data-key="' + k + '">' + label + "</button>";
+            '" data-key="' + k + '"' + (k === "BACK" ? ' aria-label="Backspace"' : "") + ">" + label + "</button>";
         });
         html += "</div>";
       });

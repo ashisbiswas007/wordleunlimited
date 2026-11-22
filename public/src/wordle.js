@@ -1185,7 +1185,8 @@
           var wide = key === "ENTER" || key === "BACK";
           var label = key === "BACK" ? ICON.back : key === "ENTER" ? t("enterKey") : key;
           var st = ks[key] ? " " + ks[key] : "";
-          html += '<button class="key' + (wide ? " wide" : "") + st + '" data-key="' + key + '">' + label + "</button>";
+          html += '<button class="key' + (wide ? " wide" : "") + st + '" data-key="' + key + '"' +
+            (key === "BACK" ? ' aria-label="Backspace"' : "") + ">" + label + "</button>";
         });
         html += "</div>";
       });
