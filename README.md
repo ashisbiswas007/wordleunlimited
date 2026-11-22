@@ -148,14 +148,20 @@ Copy `.env.example` to `.env`. The values that matter:
 ### Reaching the admin panel
 
 The public site has no `/admin` — it answers 404 like any missing page. The
-panel listens on its own port, which the compose file publishes on the server's
-`127.0.0.1` only, so the way in is an SSH tunnel:
+panel listens on port 3901 inside the container only: not published, not routed
+by the proxy, reachable from the server itself and nowhere else. The way in is
+an SSH tunnel from your own machine:
 
 ```bash
-ssh -N -L 3901:127.0.0.1:3901 control
+./scripts/admin-tunnel.sh
 ```
 
-then open <http://localhost:3901/admin> on your own machine. Close the tunnel
+then open <http://localhost:3901/admin>. It needs `ssh control` to work (or set
+`HOST=` to your SSH alias).
+
+**Never publish the admin port in the compose file.** Coolify reads a published
+port as the site's port and writes it into the proxy rules; on 2026-11-22 that
+sent every visitor to the admin login for three minutes. Close the tunnel
 (Ctrl-C) when done. The password still applies behind the tunnel, and changing
 it ends every open admin session.
 

@@ -226,11 +226,12 @@ export async function build() {
 
 /**
  * The admin panel's own server. It shares this process — settings, topics and
- * room stats are the same objects the game uses — but listens on a port the
- * compose file publishes on 127.0.0.1 only, which Traefik never routes. The
- * way in is an SSH tunnel:
+ * room stats are the same objects the game uses — but listens on a port that
+ * is never published and never routed by the proxy: only the server itself
+ * can reach it, on the container's address. The way in is an SSH tunnel,
+ * which scripts/admin-tunnel.sh opens:
  *
- *   ssh -N -L 3901:127.0.0.1:3901 control   then   http://localhost:3901/admin
+ *   ./scripts/admin-tunnel.sh   then   http://localhost:3901/admin
  *
  * The password still applies: the tunnel is the outer door, not the only one.
  */

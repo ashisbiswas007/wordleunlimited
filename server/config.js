@@ -57,9 +57,9 @@ export const config = {
     passwordHash: process.env.ADMIN_PASSWORD_HASH || "",
     password: process.env.ADMIN_PASSWORD || "",
     sessionTtlMs: 12 * 60 * 60 * 1000,
-    // The admin panel has its own listener. The compose file publishes it on
-    // the server's 127.0.0.1 only, so the way in is an SSH tunnel and the
-    // public site has no /admin at all.
+    // The admin panel has its own listener, never published and never routed
+    // by the proxy, so the public site has no /admin at all. The way in is an
+    // SSH tunnel to the container (scripts/admin-tunnel.sh).
     port: int(process.env.ADMIN_PORT, 3901),
     host: process.env.ADMIN_HOST || "0.0.0.0",
     // Puts /admin back on the public site as well. Off unless set on purpose.
