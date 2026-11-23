@@ -15,12 +15,12 @@ services:
       - ADMIN_USER=${ADMIN_USER}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      # The admin panel listens on 3901 inside the container and nowhere else.
-      # Do NOT add a `ports:` entry for it: Coolify reads a published port as
-      # the site's port and writes it into the proxy rules — on 2026-11-22 that
-      # sent the public site to the admin panel for three minutes. The way in
-      # is scripts/admin-tunnel.sh (an SSH tunnel to the container's address).
-      - ADMIN_PORT=3901
+      # The admin panel is switched off. Setting ADMIN_ENABLED=1 in Coolify's
+      # environment turns it back on, inside the container on port 3901, reached
+      # with scripts/admin-tunnel.sh. Never add a `ports:` entry for it: Coolify
+      # reads a published port as the site's port — on 2026-11-22 that sent the
+      # public site to the admin login for three minutes.
+      - ADMIN_ENABLED=${ADMIN_ENABLED}
     depends_on:
       db:
         condition: service_healthy

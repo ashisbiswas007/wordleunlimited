@@ -57,13 +57,16 @@ export const config = {
     passwordHash: process.env.ADMIN_PASSWORD_HASH || "",
     password: process.env.ADMIN_PASSWORD || "",
     sessionTtlMs: 12 * 60 * 60 * 1000,
-    // The admin panel has its own listener, never published and never routed
-    // by the proxy, so the public site has no /admin at all. The way in is an
-    // SSH tunnel to the container (scripts/admin-tunnel.sh).
+    // The admin panel is switched OFF: no listener, no login, no password.
+    // The settings it last saved (ad and analytics code, topics, game modes)
+    // stay in the database and keep working. ADMIN_ENABLED=1 in the deploy
+    // environment turns it back on — on its own listener, never published and
+    // never routed by the proxy; the way in is scripts/admin-tunnel.sh.
+    enabled: bool(process.env.ADMIN_ENABLED, false),
     port: int(process.env.ADMIN_PORT, 3901),
     host: process.env.ADMIN_HOST || "0.0.0.0",
-    // Puts /admin back on the public site as well. Off unless set on purpose.
-    public: bool(process.env.ADMIN_PUBLIC, false),
+    // With ADMIN_ENABLED, also puts /admin on the public site. Off unless set.
+    public: bool(process.env.ADMIN_PUBLIC, false) && bool(process.env.ADMIN_ENABLED, false),
   },
 
   google: {

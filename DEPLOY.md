@@ -97,7 +97,7 @@ Visit the temporary Coolify domain and confirm:
 - [ ] **Versus** tab shows a live player count and you can join a room
 - [ ] `/admin` on the public domain answers **404**
 - [ ] `/` serves the game (not a redirect to `/admin/`)
-- [ ] through the tunnel (`./scripts/admin-tunnel.sh`), <http://localhost:3901/admin> accepts your password
+- [ ] the boot log says `[admin] admin panel switched off`
 - [ ] `/healthz` returns `{"ok":true,...,"db":"up"}`
 - [ ] `/sitemap.xml` lists 52 URLs
 
@@ -182,10 +182,11 @@ the resource's settings).
 
 ## Everyday operations
 
-**Admin panel** — not on the public site. Run `./scripts/admin-tunnel.sh`
-(an SSH tunnel to the container's port 3901) and browse to
-<http://localhost:3901/admin>. Never add a `ports:` entry for 3901: Coolify
-takes a published port as the site's port.
+**Admin panel** — switched off. To use it for a while, set `ADMIN_ENABLED=1`
+in Coolify's environment, redeploy, run `./scripts/admin-tunnel.sh` and browse
+to <http://localhost:3901/admin>; remove the variable and redeploy when done.
+Never add a `ports:` entry for 3901: Coolify takes a published port as the
+site's port.
 
 **Maintenance mode** — admin panel → Settings → *Take the site offline*. Returns a
 branded 503 and tells crawlers to stay away. `/admin` stays reachable so you can

@@ -140,30 +140,29 @@ Copy `.env.example` to `.env`. The values that matter:
 | `DATABASE_URL` | PostgreSQL. Omit to run on defaults |
 | `SESSION_SECRET` | **required in production**; signs the admin cookie |
 | `ADMIN_USER` / `ADMIN_PASSWORD` | admin login — see below |
+| `ADMIN_ENABLED` | `1` switches the admin panel on (off by default) |
 | `ADMIN_PORT` | the admin panel's own port (default `3901`) |
-| `ADMIN_PUBLIC` | `1` puts `/admin` back on the public site. Leave unset |
+| `ADMIN_PUBLIC` | with `ADMIN_ENABLED`, also puts `/admin` on the public site. Leave unset |
 | `GOOGLE_CLIENT_ID` | Drive appData cloud save; safe to expose |
 | `TRUST_PROXY` | `1` behind Coolify's Traefik, so rate limits see real IPs |
 
-### Reaching the admin panel
+### Admin panel: switched off
 
-The public site has no `/admin` — it answers 404 like any missing page. The
-panel listens on port 3901 inside the container only: not published, not routed
-by the proxy, reachable from the server itself and nowhere else. The way in is
-an SSH tunnel from your own machine:
+There is no admin panel by default — no `/admin`, no login, no password, no
+listening port. The settings it last saved (ad and analytics code, topics, game
+modes, maintenance message) stay in the database and keep working.
+
+To use it for a while: add `ADMIN_ENABLED=1` in Coolify's environment and
+redeploy, then from your own machine run
 
 ```bash
 ./scripts/admin-tunnel.sh
 ```
 
-then open <http://localhost:3901/admin>. It needs `ssh control` to work (or set
-`HOST=` to your SSH alias).
-
-**Never publish the admin port in the compose file.** Coolify reads a published
-port as the site's port and writes it into the proxy rules; on 2026-11-22 that
-sent every visitor to the admin login for three minutes. Close the tunnel
-(Ctrl-C) when done. The password still applies behind the tunnel, and changing
-it ends every open admin session.
+and open <http://localhost:3901/admin>. Remove the variable and redeploy when
+done. **Never publish the admin port in the compose file:** Coolify reads a
+published port as the site's port; on 2026-11-22 that sent every visitor to the
+admin login for three minutes.
 
 ### Admin password
 

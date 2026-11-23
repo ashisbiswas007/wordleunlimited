@@ -352,8 +352,10 @@ async function start() {
   }
   await loadSettings();
   startSettingsReloader();
-  // Must run after migrations so the credentials table exists.
-  await initAdminAuth();
+  // Must run after migrations so the credentials table exists. With the panel
+  // switched off nothing is loaded and no password is ever generated.
+  if (config.admin.enabled) await initAdminAuth();
+  else console.log("[admin] admin panel switched off (ADMIN_ENABLED is not set)");
 
   const app = await build();
 
@@ -370,7 +372,7 @@ async function start() {
 
   // A failure here must not take the game down with it.
   let adminApp = null;
-  try {
+  if (config.admin.enabled) try {
     adminApp = await buildAdmin();
     await adminApp.listen({ port: config.admin.port, host: config.admin.host });
     console.log(
